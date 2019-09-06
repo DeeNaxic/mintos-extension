@@ -30,9 +30,6 @@ var $amount     = $boxAmount.querySelector('.em span').innerText;
 var $number     = $boxNumber.querySelector('.em span').innerText;
 var $toggle     = 0;
 
-
-
-
 chrome.storage.sync.get(
 {
     'setting_ow_HideZeros'          : true,
