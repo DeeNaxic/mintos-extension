@@ -1,7 +1,15 @@
 
 /*
- *  Auxiliaries:
+ *  @project >> Mintos Extension
+ *  @version >> 1.0.0
+ *  @release >> n/a
+ *  @authors >> DeeNaxic
+ *  @contact >> DeeNaxic@gmail.com
  */
+
+
+
+
 function toFloat (source)
 {
     return parseFloat(source.replace(/[€\s]/g, ''));
@@ -9,15 +17,12 @@ function toFloat (source)
 
 function setPercent (source, total, digits = 1)
 {
-    return source + ' <span style="font-family: monospace; color:blue;">(' + (toFloat(source) / total * 100.00).toFixed(digits).toString().padStart(3 + digits, '0') + '%)</span>';
+    return source + ' <span style="font-family: monospace; color:blue;">(' + (toFloat(source) / total * 100.00).toFixed(digits).toString().padStart(3 + digits, ' ') + '%)</span>';
 }
 
 
 
 
-/*
- *  References:
- */
 var $boxes      = document.querySelectorAll('table');
 var $boxAmount  = $boxes[2];
 var $boxNumber  = $boxes[3];
@@ -28,9 +33,6 @@ var $toggle     = 0;
 
 
 
-/*
- *  Runtime:
- */
 chrome.storage.sync.get(
 {
     'setting_ow_HideZeros'          : true,

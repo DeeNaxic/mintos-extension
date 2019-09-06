@@ -1,34 +1,65 @@
-var DOM = (function ()
+
+/*
+ *  @project >> Mintos Extension
+ *  @version >> 1.0.0
+ *  @release >> n/a
+ *  @authors >> DeeNaxic
+ *  @contact >> DeeNaxic@gmail.com
+ */
+
+
+
+
+var $thead      = document.querySelector('#investor-investments-table').querySelector('thead');
+var $tbody      = document.querySelector('#investor-investments-table').querySelector('tbody');
+
+
+
+
+chrome.storage.sync.get(
 {
-    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     
-    return function (obj, callback)
+},
+function (data)
+{
+    if (true)
     {
-        if (!obj || !obj.nodeType === 1)
+        var DOM = (function ()
         {
-            return;
-        }
-        
-        if (MutationObserver)
-        {
-            var obs = new MutationObserver(function(mutations, observer)
-            {
-                callback(mutations);
-            });
+            var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
             
-            obs.observe(obj,
+            return function (obj, callback)
             {
-                childList   : true,
-                subtree     : true
-            });
-        }
-        else
-        if (window.addEventListener)
+                if (!obj || !obj.nodeType === 1)
+                {
+                    return;
+                }
+                
+                if (MutationObserver)
+                {
+                    var obs = new MutationObserver(function(mutations, observer)
+                    {
+                        callback(mutations);
+                    });
+                    
+                    obs.observe(obj,
+                    {
+                        childList   : true,
+                        subtree     : true
+                    });
+                }
+                else
+                if (window.addEventListener)
+                {
+                    obj.addEventListener('DOMNodeInserted', callback, false);
+                    obj.addEventListener('DOMNodeRemoved',  callback, false);
+                }
+            }
+        })();
+        
+        DOM(document.querySelector('table'), function (change)
         {
-            obj.addEventListener('DOMNodeInserted', callback, false);
-            obj.addEventListener('DOMNodeRemoved',  callback, false);
-        }
+            console.log('Element was changed');
+        });
     }
-})();
-
-
+});
