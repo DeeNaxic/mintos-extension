@@ -77,11 +77,10 @@ function (data)
         
         DOM($dataTable, function (mutations)
         {
-            console.log("changes happened");
-            
             for (var es = $tbody.querySelectorAll('tr'), i = 0; i < es.length - 1; i++)
             {
                 var tds = es[i].querySelectorAll('td');
+                var dif = toFloat(tds[7].innerText) - toFloat(tds[3].innerText)
                 
                 if (tds.length == 10)
                 {
@@ -90,19 +89,18 @@ function (data)
                         nodeOuter.classList.add('m-labeled-col');
                         nodeOuter.classList.add('global-align-right');
                         
-                    var nodeValue = (toFloat(es[i].querySelectorAll('td')[7].innerText) - toFloat(es[i].querySelectorAll('td')[3].innerText))
-                        
                     var nodeInner = document.createElement('span');
-                        nodeInner.setAttribute ('style', 'color : ' + (nodeValue > 0.0 ? 'green' : 'red') + ';');
-                        nodeInner.innerText = '€ ' + nodeValue.toFixed(2);
                         nodeOuter.appendChild(nodeInner);
                         
                     es[i].appendChild(nodeOuter);
                 }
                 else
                 {
-                    console.log("update");
+                    var nodeInner = tds[10].querySelector('span');
                 }
+                
+                nodeInner.setAttribute('style', 'color : ' + (dif > 0.0 ? 'green' : 'red') + ';');
+                nodeInner.innerText = '€ ' + dif.toFixed(2);
             }
         });
     }
