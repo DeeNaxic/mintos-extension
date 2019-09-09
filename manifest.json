@@ -27,5 +27,7 @@
                 "js/investments.js"
             ]
         }
-    ]
+    ],
+
+    "options_page" : "options.html"
 }
