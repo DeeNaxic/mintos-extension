@@ -13,23 +13,23 @@ var $tbody          = $dataTable.querySelector('tbody');
 chrome.storage.sync.get(
 {
     'InvestmentsShowProfit'     : true,
-    'InvestmentsShowDuration'   : true
+    'InvestmentsShowDuration'   : true,
+    'InvestmentsUseTableLinks'  : true
 },
 function (data)
 {
-    if (data.InvestmentsShowDuration)
+    function $insertHeader (text)
     {
-        // Create the header cell:
-        
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('a');
-            nodeInner.innerText = 'Duration';
+            nodeInner.innerText = text;
             nodeOuter.appendChild(nodeInner);
             
-        $thead.querySelectorAll('tr')[0].appendChild(nodeOuter);
-        
-        // Create the header cell tooltip:
-        
+        return nodeOuter;
+    }
+    
+    function $insertTooltip (text)
+    {
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('i')
             nodeInner.classList.add('fas');
@@ -38,12 +38,59 @@ function (data)
             nodeInner.setAttribute ('data-tooltip-trigger', 'hover,click');
             nodeInner.setAttribute ('data-theme', 'dark');
             nodeInner.setAttribute ('data-placement', 'bottom');
-            nodeInner.setAttribute ('data-tooltip', 'The total amount of days which you held this note.');
+            nodeInner.setAttribute ('data-tooltip', text);
             nodeOuter.appendChild(nodeInner);
             
-        $thead.querySelectorAll('tr')[1].appendChild(nodeOuter);
+        return nodeOuter;
+    }
+    
+    function $createLink (k, v, results = [])
+    {
+        for (var qs = window.location.search.substr(1).split('&'), i = 0; i < qs.length; i++)
+        {
+            if (qs[i].startsWith(k) == false)
+            {
+                results.push(qs[i]);
+            }
+        }
         
-        // Monitor the datable for changes and update cells on change:
+        return window.location.pathname + '?' + results.join('&') + '&' + k + '=' + v;
+    }
+    
+    if (data.InvestmentsUseTableLinks)
+    {
+        // Monitor the data table for changes and update cells on change:
+        
+        DomMonitor($dataTable, function (mutations)
+        {
+            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            {
+                var cells   = rows[i].querySelectorAll('td');
+                var data    =
+                {
+                    'Agricultural Loan' : '7',
+                    'Business Loan'     : '32',
+                    'Car Loan'          : '2',
+                    'Invoice Financing' : '5',
+                    'Mortgage Loan'     : '1',
+                    'Pawnbroking Loan'  : '6',
+                    'Personal Loan'     : '4',
+                    'Short-Term Loan'   : '8'
+                };
+                
+                cells[4].innerHTML = '<a href="' + $createLink('pledge_groups[]', data[cells[4].innerText]) + '">' + cells[4].innerHTML + '</a>';
+            }
+        });
+    }
+    
+    if (data.InvestmentsShowDuration)
+    {
+        // Insert header and tooltip:
+        
+        $thead.querySelectorAll('tr')[0].appendChild($insertHeader ('Duration'));
+        $thead.querySelectorAll('tr')[1].appendChild($insertTooltip('The total amount of days which you held this note.'));
+        
+        // Monitor the data table for changes and update cells on change:
         
         DomMonitor($dataTable, function (mutations)
         {
@@ -68,31 +115,12 @@ function (data)
     
     if (data.InvestmentsShowProfit)
     {
-        // Create the header cell:
+        // Insert header and tooltip:
         
-        var nodeOuter = document.createElement('th');
-        var nodeInner = document.createElement('a');
-            nodeInner.innerHTML = 'Profit';
-            nodeOuter.appendChild(nodeInner);
-            
-        $thead.querySelectorAll('tr')[0].appendChild(nodeOuter);
+        $thead.querySelectorAll('tr')[0].appendChild($insertHeader ('Profit'));
+        $thead.querySelectorAll('tr')[1].appendChild($insertTooltip('The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.'));
         
-        // Create the header cell tooltip:
-        
-        var nodeOuter = document.createElement('th');
-        var nodeInner = document.createElement('i')
-            nodeInner.classList.add('fas');
-            nodeInner.classList.add('fa-info-circle');
-            nodeInner.classList.add('tooltip-color-gray');
-            nodeInner.setAttribute ('data-tooltip-trigger', 'hover,click');
-            nodeInner.setAttribute ('data-theme', 'dark');
-            nodeInner.setAttribute ('data-placement', 'bottom');
-            nodeInner.setAttribute ('data-tooltip', 'The total profit made from this note, calculated as the total received payments minus the investment amount you spend on buying it.');
-            nodeOuter.appendChild(nodeInner);
-            
-        $thead.querySelectorAll('tr')[1].appendChild(nodeOuter);
-        
-        // Monitor the datable for changes and update cells on change:
+        // Monitor the data table for changes and update cells on change:
         
         DomMonitor($dataTable, function (mutations)
         {
@@ -110,7 +138,7 @@ function (data)
                     rows[i].appendChild(node);
                 }
                 
-                node.setAttribute('style', 'color:' + (profit > 0.0 ? 'green' : 'red') + ';');
+                node.setAttribute('style', 'color:' + (profit > 0.00 ? 'green' : 'red') + ';');
                 node.innerText = '€ ' + profit.toFixed(2);
             }
         });

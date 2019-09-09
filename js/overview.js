@@ -27,7 +27,7 @@ function (data)
 {
     if (data.OverviewHideZeroes)
     {
-        // Iterate all rows in all boxes, and hide unused rows:
+        // Iterate through all rows in all boxes, and hide unused rows:
         
         for (var i = 0; i < $boxes.length; i++)
         {
@@ -75,7 +75,7 @@ function (data)
     
     if (data.OverviewShowButtonInstead)
     {
-        // This function will switch the hidden original radioboxes:
+        // This function will toggle between the hidden original radioboxes:
         
         function toggle ()
         {
