@@ -19,3 +19,35 @@ function getElementByAttribute (elements, attribute, value)
         }
     }
 }
+
+var DomMonitor = (function ()
+{
+    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    
+    return function (source, callback)
+    {
+        if (!source || !source.nodeType === 1)
+        {
+            return;
+        }
+        
+        if (MutationObserver)
+        {
+            var obs = new MutationObserver(function(mutations, observer)
+            {
+                callback(mutations);
+            });
+            
+            obs.observe(source,
+            {
+                childList   : true,
+                subtree     : false
+            });
+        }
+        else
+        if (window.addEventListener)
+        {
+            source.addEventListener('DOMNodeRemoved', callback, false);
+        }
+    }
+})();

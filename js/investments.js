@@ -1,4 +1,3 @@
-
 /*
  *  @project >> Mintos Extension
  *  @version >> 1.0.0
@@ -18,47 +17,18 @@ chrome.storage.sync.get(
 },
 function (data)
 {
-    var DOM = (function ()
-    {
-        var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-        
-        return function (source, callback)
-        {
-            if (!source || !source.nodeType === 1)
-            {
-                return;
-            }
-            
-            if (MutationObserver)
-            {
-                var obs = new MutationObserver(function(mutations, observer)
-                {
-                    callback(mutations);
-                });
-                
-                obs.observe(source,
-                {
-                    childList   : true,
-                    subtree     : false
-                });
-            }
-            else
-            if (window.addEventListener)
-            {
-                source.addEventListener('DOMNodeRemoved', callback, false);
-            }
-        }
-    })();
-    
     if (data.InvestmentsShowDuration)
     {
+        // Create the header cell:
+        
         var nodeOuter = document.createElement('th');
-            
         var nodeInner = document.createElement('a');
-            nodeInner.innerHTML = 'Duration';
+            nodeInner.innerText = 'Duration';
             nodeOuter.appendChild(nodeInner);
             
         $thead.querySelectorAll('tr')[0].appendChild(nodeOuter);
+        
+        // Create the header cell tooltip:
         
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('i')
@@ -73,7 +43,9 @@ function (data)
             
         $thead.querySelectorAll('tr')[1].appendChild(nodeOuter);
         
-        DOM($dataTable, function (mutations)
+        // Monitor the datable for changes and update cells on change:
+        
+        DomMonitor($dataTable, function (mutations)
         {
             for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
@@ -96,13 +68,16 @@ function (data)
     
     if (data.InvestmentsShowProfit)
     {
+        // Create the header cell:
+        
         var nodeOuter = document.createElement('th');
-            
         var nodeInner = document.createElement('a');
             nodeInner.innerHTML = 'Profit';
             nodeOuter.appendChild(nodeInner);
             
         $thead.querySelectorAll('tr')[0].appendChild(nodeOuter);
+        
+        // Create the header cell tooltip:
         
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('i')
@@ -117,7 +92,9 @@ function (data)
             
         $thead.querySelectorAll('tr')[1].appendChild(nodeOuter);
         
-        DOM($dataTable, function (mutations)
+        // Monitor the datable for changes and update cells on change:
+        
+        DomMonitor($dataTable, function (mutations)
         {
             for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
