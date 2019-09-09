@@ -13,11 +13,19 @@
     [
         {
             "matches"   : ["https://www.mintos.com/en/overview/"],
-            "js"        : ["cs/overview.js"]
+            "js"        :
+            [
+                "js/util.js",
+                "js/overview.js"
+            ]
         },
         {
             "matches"   : ["https://www.mintos.com/en/my-investments/finished-investments/*"],
-            "js"        : ["cs/investments.js"]
+            "js"        :
+            [
+                "js/util.js",
+                "js/investments.js"
+            ]
         }
     ]
 }
