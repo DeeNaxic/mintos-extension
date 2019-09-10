@@ -12,7 +12,8 @@ var $tbody          = $dataTable.querySelector('tbody');
 
 chrome.storage.sync.get(
 {
-    'InvestmentsShowDaysToNext' : true
+    'InvestmentsShowDaysToNext' : true,
+    'InvestmentsHighlightLate'  : true
 },
 function (data)
 {
@@ -33,10 +34,28 @@ function (data)
         // if either of them is already a date type, skip the toDate call.
         // write the value days + ' days' to innerText
     }
+    
+    if (data.InvestmentsHighlightLate)
+    {
+        DomMonitor($dataTable, function (mutations)
+        {
+            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            {
+                if (getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Term').innerText.indexOf('Late') + 1 > 0)
+                {
+                    rows[i].style.background = '#d4574e22';
+                }
+                else
+                {
+                    rows[i].style.background = 'white';
+                }
+            }
+        });
+    }
 });
 
 
 /*
  *
- *  Example of a row:   <td data-m-label="Next Payment Date" class="m-loan-issued m-labeled-col"><span>09.09.2019</span></td>
+ *  Example of a cell:   <td data-m-label="Next Payment Date" class="m-loan-issued m-labeled-col"><span>09.09.2019</span></td>
  */
