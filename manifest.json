@@ -24,6 +24,22 @@
             "js"        :
             [
                 "js/util.js",
+                "js/investments finished.js"
+            ]
+        },
+        {
+            "matches"   : ["https://www.mintos.com/en/my-investments/current-investments/*"],
+            "js"        :
+            [
+                "js/util.js",
+                "js/investments current.js"
+            ]
+        },
+        {
+            "matches"   : ["https://www.mintos.com/en/my-investments/*"],
+            "js"        :
+            [
+                "js/util.js",
                 "js/investments.js"
             ]
         }
