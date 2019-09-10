@@ -1,3 +1,4 @@
+
 /*
  *  @project >> Mintos Extension
  *  @version >> 1.0.0
@@ -17,7 +18,11 @@ chrome.storage.sync.get(
 },
 function (data)
 {
-    function $insertHeader (text)
+    /*
+     *  This creates a header cell, according to the ones used in the investment
+     *  data table. It uses the same styles, and takes as input the headers text
+     */
+    function $createHeader (text)
     {
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('a');
@@ -27,7 +32,13 @@ function (data)
         return nodeOuter;
     }
     
-    function $insertTooltip (text)
+    /*
+     *  This creates a new element, to use in the data table header row. This is
+     *  the tooltip part of the header row. It creates both the icon and tooltip
+     *  box, which appears when hovering or clicking on the icon. For styling it
+     *  uses the same style classes, as the built-in ones, so it appears similar
+     */
+    function $createTooltip (text)
     {
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('i')
@@ -43,14 +54,17 @@ function (data)
         return nodeOuter;
     }
     
+    /*
+     *  This will add a column with total duration to the end of each row in the
+     *  data table, for finished investments. It starts by inserting the headers
+     *  of the table, and then registers a DomListener. This listener trigger on
+     *  both sorting and filtering actions, and if the cell already exists, then
+     *  it will simply update it. If it does not, then it inserts the data cells
+     */
     if (data.InvestmentsShowDuration)
     {
-        // Insert header and tooltip:
-        
-        $thead.querySelectorAll('tr')[0].appendChild($insertHeader ('Duration'));
-        $thead.querySelectorAll('tr')[1].appendChild($insertTooltip('The total amount of days which you held this note.'));
-        
-        // Monitor the data table for changes and update cells on change:
+        $thead.querySelectorAll('tr')[0].appendChild($createHeader ('Duration'));
+        $thead.querySelectorAll('tr')[1].appendChild($createTooltip('The total amount of days which you held this note.'));
         
         DomMonitor($dataTable, function (mutations)
         {
@@ -73,14 +87,17 @@ function (data)
         });
     }
     
+    /*
+     *  This will add a column with assumed profit to the end of each row in the
+     *  data table, for finished investments. It starts by inserting the headers
+     *  of the table, and then registers a DomListener. This listener trigger on
+     *  both sorting and filtering actions, and if the cell already exists, then
+     *  it will simply update it. If it does not, then it inserts the data cells
+     */
     if (data.InvestmentsShowProfit)
     {
-        // Insert header and tooltip:
-        
-        $thead.querySelectorAll('tr')[0].appendChild($insertHeader ('Profit'));
-        $thead.querySelectorAll('tr')[1].appendChild($insertTooltip('The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.'));
-        
-        // Monitor the data table for changes and update cells on change:
+        $thead.querySelectorAll('tr')[0].appendChild($createHeader ('Profit'));
+        $thead.querySelectorAll('tr')[1].appendChild($createTooltip('The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.'));
         
         DomMonitor($dataTable, function (mutations)
         {

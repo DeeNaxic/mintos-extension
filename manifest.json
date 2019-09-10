@@ -4,6 +4,8 @@
     "version"           : "1.0.0",
     "manifest_version"  : 2,
     
+    "options_page"      : "options.html",
+    
     "permissions"       :
     [
         "storage"
@@ -12,38 +14,24 @@
     "content_scripts"   :
     [
         {
+            "matches"   : ["https://www.mintos.com/*"],
+            "js"        : ["js/util.js"]
+        },
+        {
             "matches"   : ["https://www.mintos.com/en/overview/"],
-            "js"        :
-            [
-                "js/util.js",
-                "js/overview.js"
-            ]
-        },
-        {
-            "matches"   : ["https://www.mintos.com/en/my-investments/finished-investments/*"],
-            "js"        :
-            [
-                "js/util.js",
-                "js/investments finished.js"
-            ]
-        },
-        {
-            "matches"   : ["https://www.mintos.com/en/my-investments/current-investments/*"],
-            "js"        :
-            [
-                "js/util.js",
-                "js/investments current.js"
-            ]
+            "js"        : ["js/overview.js"]
         },
         {
             "matches"   : ["https://www.mintos.com/en/my-investments/*"],
-            "js"        :
-            [
-                "js/util.js",
-                "js/investments.js"
-            ]
+            "js"        : ["js/investments.js"]
+        },
+        {
+            "matches"   : ["https://www.mintos.com/en/my-investments/finished-investments/*"],
+            "js"        : ["js/investments finished.js"]
+        },
+        {
+            "matches"   : ["https://www.mintos.com/en/my-investments/current-investments/*" ],
+            "js"        : ["js/investments current.js" ]
         }
-    ],
-
-    "options_page" : "options.html"
+    ]
 }

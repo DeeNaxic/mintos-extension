@@ -1,3 +1,4 @@
+
 /*
  *  @project >> Mintos Extension
  *  @version >> 1.0.0
@@ -16,41 +17,53 @@ chrome.storage.sync.get(
 },
 function (data)
 {
-	function $createLink (k, v, results = [])
+    /*
+     *  This takes the current query string, splits it up into components and it
+     *  then iterates through all the key, value pairs. If there is any existing
+     *  keys, which matches the one we are trying to insert, it is removed. This
+     *  means that any existing query parameters are kept intact, such that, the
+     *  final path returned, always have the same path with the new key appended
+     */
+    function $createLink (key, target)
     {
-        for (var qs = window.location.search.substr(1).split('&'), i = 0; i < qs.length; i++)
+        for (var queries = window.location.search.substr(1).split('&'), results = [], i = 0; i < queries.length; i++)
         {
-            if (qs[i].startsWith(k) == false)
+            if (queries[i].startsWith(key) == false)
             {
-                results.push(qs[i]);
+                results.push(queries[i]);
             }
         }
         
-        return window.location.pathname + '?' + results.join('&') + '&' + k + '=' + v;
+        return window.location.pathname + '?' + results.join('&') + '&' + key + '=' + target;
     }
-	
-	if (data.InvestmentsUseTableLinks)
+    
+    /*
+     *  This registers a DomMonitor which listens for changes, in the data table
+     *  and on any change including initially, it runs this code. It iterates on
+     *  all rows in the investment table and inserts on the loan type cells, the
+     *  link, to the current page, with the same query parameters, but filtering
+     *  on the selected loan type only. This's done simply by reloading the page
+     */
+    if (data.InvestmentsUseTableLinks)
     {
-        // Monitor the data table for changes and update cells on change:
-        
         DomMonitor($dataTable, function (mutations)
         {
             for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
-                var cells   = rows[i].querySelectorAll('td');
-                var data    =
+                var cells = rows[i].querySelectorAll('td');
+                var data  =
                 {
-                    'Agricultural Loan' : '7',
-                    'Business Loan'     : '32',
-                    'Car Loan'          : '2',
-                    'Invoice Financing' : '5',
                     'Mortgage Loan'     : '1',
-                    'Pawnbroking Loan'  : '6',
+                    'Car Loan'          : '2',
                     'Personal Loan'     : '4',
-                    'Short-Term Loan'   : '8'
+                    'Invoice Financing' : '5',
+                    'Pawnbroking Loan'  : '6',
+                    'Agricultural Loan' : '7',
+                    'Short-Term Loan'   : '8',
+                    'Business Loan'     : '32'
                 };
                 
-                cells[4].innerHTML = '<a href="' + $createLink('pledge_groups[]', data[cells[4].innerText]) + '">' + cells[4].innerHTML + '</a>';
+                cells[4].innerHTML = '<a href="' + $createLink('pledge_groups[]', data[cells[4].innerText]) + '">' + cells[4].innerText + '</a>';
             }
         });
     }
