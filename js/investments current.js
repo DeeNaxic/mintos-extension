@@ -36,4 +36,28 @@ function (data)
             }
         });
     }
+
+    /* 
+     *  This will register a listener for the data table, and on any changes, it 
+     *  will go through all rows, and if the 'Term' column is 'Late'. Then it'll 
+     *  change the background to a slight red color, to highlight late loans. If 
+     *  they are not late, it sets the default white background, on each re-draw 
+     */ 
+    if (data.InvestmentsHighlightLate) 
+    { 
+        DomMonitor($dataTable, function (mutations) 
+        { 
+            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++) 
+            { 
+                if (getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Term').innerText.indexOf('Late') + 1 > 0) 
+                { 
+                    rows[i].style.background = '#d4574e22'; 
+                } 
+                else 
+                { 
+                    rows[i].style.background = 'white'; 
+                } 
+            } 
+        }); 
+    } 
 });
