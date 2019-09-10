@@ -19,10 +19,10 @@ var $toggle         = 0;
 
 chrome.storage.sync.get(
 {
-    'OverviewHideZeroes'        : true,
-    'OverviewShowPercentages'   : true,
-    'OverviewShowButtonInstead' : true,
-    'OverviewNegativeNumbers'   : true
+    'OverviewHideZeroes'        : false,
+    'OverviewShowPercentages'   : false,
+    'OverviewShowButtonInstead' : false,
+    'OverviewNegativeNumbers'   : false
 },
 function (data)
 {

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    
+    <title>
+        Settings
+    </title>
+    
+    <style>
+        *
+        {
+            box-sizing:             border-box;
+            margin:                 0px;
+            padding:                0px;
+        }
+        body
+        {
+            overflow-y:             hidden;
+        }
+        main
+        {
+            height:                 600px;
+            width:                  800px;
+            background-color:       #ebebeb;
+        }
+        .list
+        {
+            position:               absolute;
+            top:                    0%;
+            left:                   0%;
+            right:                  60%;
+            bottom:                 2.00em;
+            overflow-y:             auto;
+            border-top-style:       solid;
+            border-width:           1px;
+            border-color:           black;
+            padding:                1.00em;
+        }
+        .list p
+        {
+            font-weight:            bold;
+            border-bottom-style:    solid;
+            border-bottom-width:    1px;
+            line-height:            2.00em;
+            margin-bottom:          0.50em;
+        }
+        table
+        {
+            width:                  100%;
+            margin-bottom:          2.00em;
+            border-collapse:        collapse;
+        }
+        table:last-child
+        {
+            margin-bottom:          0.00em;
+        }
+        table tr td:nth-child(1)
+        {
+            text-align:             center;
+            vertical-align:         middle;
+            width:                  1px;
+            padding-top:            5px;
+        }
+        table tr td:nth-child(2)
+        {
+            padding-left:           5px;
+        }
+        table tr td:nth-child(3)
+        {
+            text-align:             right;
+            color:                  blue;
+        }
+        .demo
+        {
+            position:               absolute;
+            top:                    0%;
+            left:                   40%;
+            right:                  0%;
+            bottom:                 2.00em;
+            border-top-style:       solid;
+            border-width:           1px;
+            border-color:           black;
+        }
+        .demo .top
+        {
+            position:               absolute;
+            left:                   2.50%;
+            top:                    2.50%;
+            right:                  2.50%;
+            height:                 46.25%;
+            background-color:       white;
+            box-shadow:             0px 0px 5px 2px rgba(0.00, 0.00, 0.00, 0.50);
+        }
+        .demo .bot
+        {
+            position:               absolute;
+            left:                   2.50%;
+            bottom:                 2.50%;
+            right:                  2.50%;
+            height:                 46.25%;
+            background-color:       white;
+            box-shadow:             0px 0px 5px 2px rgba(0.00, 0.00, 0.00, 0.50);
+        }
+        img
+        {
+            width:                  100%;
+        }
+        .info
+        {
+            position:               absolute;
+            left:                   0%;
+            right:                  0%;
+            bottom:                 0%;
+            background-color:       white;
+            border-top-style:       solid;
+            border-width:           1px;
+            border-color:           black;
+            line-height:            2.00em;
+        }
+    </style>
+    
+</head>
+<body>
+<main>
+    
+    <div class="list">
+        
+        <p>Overview</p>
+        <table>
+            <tr id="OverviewHideZeroes"         ><td><input type="checkbox"></td><td>Hide unused rows.                      </td><td>example</td></tr>
+            <tr id="OverviewShowPercentages"    ><td><input type="checkbox"></td><td>Show percentage columns.               </td><td>example</td></tr>
+            <tr id="OverviewShowButtonInstead"  ><td><input type="checkbox"></td><td>Replace radio buttons.                 </td><td>example</td></tr>
+            <tr id="OverviewNegativeNumbers"    ><td><input type="checkbox"></td><td>Highlight negative numbers.            </td><td>example</td></tr>
+        </table>
+        
+        <p>Investments</p>
+        <table>
+            <tr id="InvestmentsUseTableLinks"   ><td><input type="checkbox"></td><td>Enable loan type filter links.         </td><td>example</td></tr>
+        </table>
+        
+        <p>Current Investments</p>
+        <table>
+            <tr id="InvestmentsShowDaysToNext"  ><td><input type="checkbox"></td><td>Show days to next payment instead.     </td><td>example</td></tr>
+            <tr id="InvestmentsHighlightLate"   ><td><input type="checkbox"></td><td>Highlight loans that are late.         </td><td>example</td></tr>
+        </table>
+        
+        <p>Finished Investments</p>
+        <table>
+            <tr id="InvestmentsShowDuration"    ><td><input type="checkbox"></td><td>Show loan duration column.             </td><td>example</td></tr>
+            <tr id="InvestmentsShowProfit"      ><td><input type="checkbox"></td><td>Show loan profit column.               </td><td>example</td></tr>
+        </table>
+        
+    </div>
+    
+    <div class="demo">
+        <div class="top">
+            <img src="img/OverviewHideZeroes_0.png">
+        </div>
+        <div class="bot">
+            <img src="img/OverviewHideZeroes_1.png">
+        </div>
+    </div>
+    
+    <div class="info">
+        xx
+    </div>
+    
+</main>
+</body>
+</html>
