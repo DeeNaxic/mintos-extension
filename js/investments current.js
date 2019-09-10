@@ -2,7 +2,7 @@
  *  @project >> Mintos Extension
  *  @version >> 1.0.0
  *  @release >> n/a
- *  @authors >> DeeNaxic
+ *  @authors >> DeeNaxic, o1-steve
  *  @contact >> DeeNaxic@gmail.com
  */
 
@@ -17,27 +17,38 @@ chrome.storage.sync.get(
 },
 function (data)
 {
+    /*
+     *
+     */
     if (data.InvestmentsShowDaysToNext)
     {
         DomMonitor($dataTable, function (mutations)
         {
-            for (var rows = $tbody.querySelectorAll('tr.m-loan-entry'), i = 0; i < rows.length - 1; i++)
+            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
-                var cells   = rows[i].querySelectorAll('td');
-
-                if (cells[5].innerText === '-' || cells[5].innerText.split(' ')[1] === 'days')
+                var cell  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Next Payment Date');
+                var time  = cell.querySelectorAll('span')[0];
+                var node  = cell.querySelectorAll('span')[1];
+                
+                if (node == undefined)
                 {
-                    continue;
+                    cell.appendChild(node = document.createElement('span'));
+                    cell.classList.add('global-align-right');
+                    time.style.display = 'none';
                 }
-
-                var days    = Math.floor(Math.abs((toDate(cells[5].innerText).getTime() - new Date().getTime()) / 86400000));
-                var node    = getElementByAttribute(cells, "data-m-label", 'Next Payment Date');
-
-                node.innerText = days + ' days';
+                
+                if (time.innerText.trim() == '-')
+                {
+                    node.innerText = '-';
+                }
+                else
+                {
+                    node.innerText = Math.floor(Math.abs((toDate(time.innerText).getTime() - new Date().getTime()) / 86400000)) + ' days';
+                }
             }
         });
     }
-
+    
     /* 
      *  This will register a listener for the data table, and on any changes, it 
      *  will go through all rows, and if the 'Term' column is 'Late'. Then it'll 
