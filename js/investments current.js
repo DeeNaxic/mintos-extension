@@ -35,6 +35,12 @@ function (data)
         // write the value days + ' days' to innerText
     }
     
+    /*
+     *  This will register a listener for the data table, and on any changes, it
+     *  will go through all rows, and if the 'Term' column is 'Late'. Then it'll
+     *  change the background to a slight red color, to highlight late loans. If
+     *  they are not late, it sets the default white background, on each re-draw
+     */
     if (data.InvestmentsHighlightLate)
     {
         DomMonitor($dataTable, function (mutations)
