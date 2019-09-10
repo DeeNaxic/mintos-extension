@@ -12,7 +12,8 @@ var $tbody          = $dataTable.querySelector('tbody');
 
 chrome.storage.sync.get(
 {
-    'InvestmentsShowDaysToNext' : true
+    'InvestmentsShowDaysToNext' : true,
+    'InvestmentsHighlightLate'  : true
 },
 function (data)
 {
