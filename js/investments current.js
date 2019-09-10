@@ -18,6 +18,19 @@ function (data)
 {
     if (data.InvestmentsShowDaysToNext)
     {
+        DomMonitor($dataTable, function (mutations)
+        {
+            for (var rows = $tbody.querySelectorAll('tr.m-loan-entry'), i = 0; i < rows.length - 1; i++)
+            {
+                var cells   = rows[i].querySelectorAll('td');
+                var days    = Math.floor(Math.abs((toDate(cells[5].innerText).getTime() - new Date().getTime()) / 86400000));
+                var node    = getElementByAttribute(cells, "data-m-label", 'Next Payment Date');
+
+                console.log(days)
+                node.innerText = days + ' days';
+            }
+        });
+
         // 1: Register a dom listener (see finished investments)
         // 2: Get reference to all rows
         //  - See an example of how a row like this looks like in the button.
@@ -34,9 +47,3 @@ function (data)
         // write the value days + ' days' to innerText
     }
 });
-
-
-/*
- *
- *  Example of a row:   <td data-m-label="Next Payment Date" class="m-loan-issued m-labeled-col"><span>09.09.2019</span></td>
- */
