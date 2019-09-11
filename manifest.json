@@ -12,9 +12,9 @@
     
     "icons"             : 
     { 
-        "16"            : "icon/icon-16.png",
-        "48"            : "icon/icon-48.png",
-       "128"            : "icon/icon-128.png" 
+        "16"            : "icons/icon-16.png",
+        "48"            : "icons/icon-48.png",
+        "128"           : "icons/icon-128.png" 
     },
     
     "permissions"       :
@@ -26,23 +26,23 @@
     [
         {
             "matches"   : ["https://www.mintos.com/*"],
-            "js"        : ["js/util.js"]
+            "js"        : ["pages/util.js"]
         },
         {
             "matches"   : ["https://www.mintos.com/en/overview/"],
-            "js"        : ["js/overview.js"]
+            "js"        : ["pages/overview.js"]
         },
         {
             "matches"   : ["https://www.mintos.com/en/my-investments/*"],
-            "js"        : ["js/investments.js"]
+            "js"        : ["pages/investments.js"]
         },
         {
             "matches"   : ["https://www.mintos.com/en/my-investments/finished-investments/*"],
-            "js"        : ["js/investments finished.js"]
+            "js"        : ["pages/investments finished.js"]
         },
         {
             "matches"   : ["https://www.mintos.com/en/my-investments/current-investments/*" ],
-            "js"        : ["js/investments current.js" ]
+            "js"        : ["pages/investments current.js" ]
         }
     ]
 }

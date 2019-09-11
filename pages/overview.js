@@ -21,8 +21,8 @@ chrome.storage.sync.get(
 {
     'OverviewHideZeroes'        : false,
     'OverviewShowPercentages'   : false,
-    'OverviewShowButtonInstead' : false,
-    'OverviewNegativeNumbers'   : false
+    'OverviewShowButtonInstead' : true,
+    'OverviewNegativeNumbers'   : true
 },
 function (data)
 {

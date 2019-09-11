@@ -22,7 +22,7 @@
         {
             height:                 600px;
             width:                  800px;
-            background-color:       #ebebeb;
+            background-color:       #d6d6d6;
         }
         .list
         {
@@ -54,6 +54,10 @@
         table:last-child
         {
             margin-bottom:          0.00em;
+        }
+        table a
+        {
+            cursor:                 pointer;
         }
         table tr td:nth-child(1)
         {
@@ -117,6 +121,7 @@
             border-width:           1px;
             border-color:           black;
             line-height:            2.00em;
+            text-align:             right;
         }
     </style>
     
@@ -128,27 +133,27 @@
         
         <p>Overview</p>
         <table>
-            <tr id="OverviewHideZeroes"         ><td><input type="checkbox"></td><td>Hide unused rows.                      </td><td>example</td></tr>
-            <tr id="OverviewShowPercentages"    ><td><input type="checkbox"></td><td>Show percentage columns.               </td><td>example</td></tr>
-            <tr id="OverviewShowButtonInstead"  ><td><input type="checkbox"></td><td>Replace radio buttons.                 </td><td>example</td></tr>
-            <tr id="OverviewNegativeNumbers"    ><td><input type="checkbox"></td><td>Highlight negative numbers.            </td><td>example</td></tr>
+            <tr id="OverviewHideZeroes"         ><td><input type="checkbox"></td><td>Hide all unused rows.                  </td><td><a>example</a></td></tr>
+            <tr id="OverviewShowPercentages"    ><td><input type="checkbox"></td><td>Show percentage column.                </td><td><a>example</a></td></tr>
+            <tr id="OverviewShowButtonInstead"  ><td><input type="checkbox"></td><td>Replace radio buttons style.           </td><td><a>example</a></td></tr>
+            <tr id="OverviewNegativeNumbers"    ><td><input type="checkbox"></td><td>Highlight negative numbers in red.     </td><td><a>example</a></td></tr>
         </table>
         
         <p>Investments</p>
         <table>
-            <tr id="InvestmentsUseTableLinks"   ><td><input type="checkbox"></td><td>Enable loan type filter links.         </td><td>example</td></tr>
+            <tr id="InvestmentsUseTableLinks"   ><td><input type="checkbox"></td><td>Enable loan type filter links.         </td><td><a>example</a></td></tr>
         </table>
         
         <p>Current Investments</p>
         <table>
-            <tr id="InvestmentsShowDaysToNext"  ><td><input type="checkbox"></td><td>Show days to next payment instead.     </td><td>example</td></tr>
-            <tr id="InvestmentsHighlightLate"   ><td><input type="checkbox"></td><td>Highlight loans that are late.         </td><td>example</td></tr>
+            <tr id="InvestmentsShowDaysToNext"  ><td><input type="checkbox"></td><td>Show days to next payment instead.     </td><td><a>example</a></td></tr>
+            <tr id="InvestmentsHighlightLate"   ><td><input type="checkbox"></td><td>Highlight loans that are late.         </td><td><a>example</a></td></tr>
         </table>
         
         <p>Finished Investments</p>
         <table>
-            <tr id="InvestmentsShowDuration"    ><td><input type="checkbox"></td><td>Show loan duration column.             </td><td>example</td></tr>
-            <tr id="InvestmentsShowProfit"      ><td><input type="checkbox"></td><td>Show loan profit column.               </td><td>example</td></tr>
+            <tr id="InvestmentsShowDuration"    ><td><input type="checkbox"></td><td>Show loan duration column.             </td><td><a>example</a></td></tr>
+            <tr id="InvestmentsShowProfit"      ><td><input type="checkbox"></td><td>Show loan profit column.               </td><td><a>example</a></td></tr>
         </table>
         
     </div>
@@ -163,8 +168,10 @@
     </div>
     
     <div class="info">
-        xx
+        ?
     </div>
+    
+    <script src="options.js"></script>
     
 </main>
 </body>

@@ -13,7 +13,7 @@ var $tbody          = $dataTable.querySelector('tbody');
 
 chrome.storage.sync.get(
 {
-    'InvestmentsUseTableLinks'  : true
+    'InvestmentsUseTableLinks'  : false
 },
 function (data)
 {

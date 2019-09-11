@@ -13,8 +13,8 @@ var $tbody          = $dataTable.querySelector('tbody');
 
 chrome.storage.sync.get(
 {
-    'InvestmentsShowProfit'     : true,
-    'InvestmentsShowDuration'   : true
+    'InvestmentsShowProfit'     : false,
+    'InvestmentsShowDuration'   : false
 },
 function (data)
 {
