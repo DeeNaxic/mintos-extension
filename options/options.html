@@ -17,12 +17,12 @@
         body
         {
             overflow-y:             hidden;
-        }
-        main
-        {
             height:                 600px;
             width:                  800px;
             background-color:       #d6d6d6;
+            border-top-style:       solid;
+            border-width:           1px;
+            border-color:           black;
         }
         .list
         {
@@ -32,9 +32,6 @@
             right:                  60%;
             bottom:                 2.00em;
             overflow-y:             auto;
-            border-top-style:       solid;
-            border-width:           1px;
-            border-color:           black;
             padding:                1.00em;
         }
         .list p
@@ -45,35 +42,32 @@
             line-height:            2.00em;
             margin-bottom:          0.50em;
         }
-        table
+        .list table
         {
             width:                  100%;
             margin-bottom:          2.00em;
             border-collapse:        collapse;
         }
-        table:last-child
+        .list table:last-child
         {
             margin-bottom:          0.00em;
         }
-        table a
-        {
-            cursor:                 pointer;
-        }
-        table tr td:nth-child(1)
+        .list table tr td:nth-child(1)
         {
             text-align:             center;
             vertical-align:         middle;
             width:                  1px;
             padding-top:            5px;
         }
-        table tr td:nth-child(2)
+        .list table tr td:nth-child(2)
         {
             padding-left:           5px;
         }
-        table tr td:nth-child(3)
+        .list table tr td:nth-child(3)
         {
             text-align:             right;
             color:                  blue;
+            cursor:                 pointer;
         }
         .demo
         {
@@ -82,9 +76,6 @@
             left:                   40%;
             right:                  0%;
             bottom:                 2.00em;
-            border-top-style:       solid;
-            border-width:           1px;
-            border-color:           black;
         }
         .demo .top
         {
@@ -106,7 +97,7 @@
             background-color:       white;
             box-shadow:             0px 0px 5px 2px rgba(0.00, 0.00, 0.00, 0.50);
         }
-        img
+        .demo img
         {
             width:                  100%;
         }
@@ -121,13 +112,13 @@
             border-width:           1px;
             border-color:           black;
             line-height:            2.00em;
-            text-align:             right;
+            text-align:             center;
+            color:                  #ccccccff;
         }
     </style>
     
 </head>
 <body>
-<main>
     
     <div class="list">
         
@@ -160,19 +151,18 @@
     
     <div class="demo">
         <div class="top">
-            <img src="img/OverviewHideZeroes_0.png">
+            <img src="img/OverviewHideZeroes_0.png" />
         </div>
         <div class="bot">
-            <img src="img/OverviewHideZeroes_1.png">
+            <img src="img/OverviewHideZeroes_1.png" />
         </div>
     </div>
     
     <div class="info">
-        ?
+        version 1.0.0
     </div>
     
     <script src="options.js"></script>
     
-</main>
 </body>
 </html>

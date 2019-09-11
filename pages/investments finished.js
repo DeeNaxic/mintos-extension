@@ -7,10 +7,6 @@
  *  @contact >> DeeNaxic@gmail.com
  */
 
-var $dataTable      = document.querySelector('#investor-investments-table');
-var $thead          = $dataTable.querySelector('thead');
-var $tbody          = $dataTable.querySelector('tbody');
-
 chrome.storage.sync.get(
 {
     'InvestmentsShowProfit'     : false,
@@ -18,6 +14,10 @@ chrome.storage.sync.get(
 },
 function (data)
 {
+    var $dataTable      = document.querySelector('#investor-investments-table');
+    var $thead          = $dataTable.querySelector('thead');
+    var $tbody          = $dataTable.querySelector('tbody');
+    
     /*
      *  This creates a header cell, according to the ones used in the investment
      *  data table. It uses the same styles, and takes as input the headers text

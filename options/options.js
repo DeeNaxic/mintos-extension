@@ -1,53 +1,53 @@
 
-// Overview:
+/*
+ *  @project >> Mintos Extension
+ *  @version >> 1.0.0
+ *  @release >> n/a
+ *  @authors >> DeeNaxic, o1-steve
+ *  @contact >> DeeNaxic@gmail.com
+ */
 
-document.querySelector('#OverviewHideZeroes a').addEventListener('click', function () {
-    document.querySelector('.top img').src = 'img/OverviewHideZeroes_0.png';
-    document.querySelector('.bot img').src = 'img/OverviewHideZeroes_1.png';
-});
-
-document.querySelector('#OverviewShowPercentages a').addEventListener('click', function () {
-    document.querySelector('.top img').src = 'img/OverviewShowPercentages_0.png';
-    document.querySelector('.bot img').src = 'img/OverviewShowPercentages_1.png';
-});
-
-document.querySelector('#OverviewShowButtonInstead a').addEventListener('click', function () {
-    document.querySelector('.top img').src = 'img/OverviewShowButtonInstead_0.png';
-    document.querySelector('.bot img').src = 'img/OverviewShowButtonInstead_1.png';
-});
-
-document.querySelector('#OverviewNegativeNumbers a').addEventListener('click', function () {
-    document.querySelector('.top img').src = 'img/OverviewNegativeNumbers_0.png';
-    document.querySelector('.bot img').src = 'img/OverviewNegativeNumbers_1.png';
-});
-
-// Investments:
-
-document.querySelector('#InvestmentsUseTableLinks a').addEventListener('click', function () {
-    document.querySelector('.top img').src = 'img/InvestmentsUseTableLinks_0.png';
-    document.querySelector('.bot img').src = 'img/InvestmentsUseTableLinks_1.png';
-});
-
-// Investments current:
-
-document.querySelector('#InvestmentsShowDaysToNext a').addEventListener('click', function () {
-    document.querySelector('.top img').src = 'img/InvestmentsShowDaysToNext_0.png';
-    document.querySelector('.bot img').src = 'img/InvestmentsShowDaysToNext_1.png';
-});
-
-document.querySelector('#InvestmentsHighlightLate a').addEventListener('click', function () {
-    document.querySelector('.top img').src = 'img/InvestmentsHighlightLate_0.png';
-    document.querySelector('.bot img').src = 'img/InvestmentsHighlightLate_1.png';
-});
-
-// Investments finished:
-
-document.querySelector('#InvestmentsShowProfit a').addEventListener('click', function () {
-    document.querySelector('.top img').src = 'img/InvestmentsShowProfit_0.png';
-    document.querySelector('.bot img').src = 'img/InvestmentsShowProfit_1.png';
-});
-
-document.querySelector('#InvestmentsShowDuration a').addEventListener('click', function () {
-    document.querySelector('.top img').src = 'img/InvestmentsShowDuration_0.png';
-    document.querySelector('.bot img').src = 'img/InvestmentsShowDuration_1.png';
+chrome.storage.sync.get(
+{
+    'OverviewHideZeroes'        : true,
+    'OverviewShowPercentages'   : true,
+    'OverviewShowButtonInstead' : true,
+    'OverviewNegativeNumbers'   : true,
+    'InvestmentsUseTableLinks'  : true,
+    'InvestmentsShowDaysToNext' : true,
+    'InvestmentsHighlightLate'  : true,
+    'InvestmentsShowProfit'     : true,
+    'InvestmentsShowDuration'   : true
+},
+function (data)
+{
+    /*
+     *  This takes in all the values from the data object and then tries to find
+     *  an ID with that name, which is the rows in the settings tables. On these
+     *  it tries to find the input checkbox, and set the checked box value as so
+     */
+    for (let k in data)
+    {
+        document.querySelector('#' + k + ' input').checked = data[k];
+    }
+    
+    /*
+     *  This adds eventlisteners to all rows of the data table. It adds an event
+     *  to the checkbox, so when changing the value, it instantly stored the new
+     *  configuration to the chrome sync storage. It also adds a click behaviour
+     *  to the 'example' link, so when clicking it it will switch the images out
+     */
+    for (let k in data)
+    {
+        document.querySelector('#' + k + ' input').addEventListener('change', function ()
+        {
+            chrome.storage.sync.set({ [k] : this.checked }, null);
+        });
+        
+        document.querySelector('#' + k + ' a').addEventListener('click', function ()
+        {
+            document.querySelector('.top img').src = 'img/' + k + '_0.png';
+            document.querySelector('.bot img').src = 'img/' + k + '_1.png';
+        });
+    }
 });

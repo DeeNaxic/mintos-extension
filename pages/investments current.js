@@ -7,10 +7,6 @@
  *  @contact >> DeeNaxic@gmail.com
  */
 
-var $dataTable      = document.querySelector('#investor-investments-table');
-var $thead          = $dataTable.querySelector('thead');
-var $tbody          = $dataTable.querySelector('tbody');
-
 chrome.storage.sync.get(
 {
     'InvestmentsShowDaysToNext' : false,
@@ -18,6 +14,10 @@ chrome.storage.sync.get(
 },
 function (data)
 {
+    var $dataTable      = document.querySelector('#investor-investments-table');
+    var $thead          = $dataTable.querySelector('thead');
+    var $tbody          = $dataTable.querySelector('tbody');
+    
     /*
      *  This will replace the 'next payment date' columns, so instead of showing
      *  the date of the next payment, it shows the amount of days instead. Those

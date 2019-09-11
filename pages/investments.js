@@ -7,16 +7,16 @@
  *  @contact >> DeeNaxic@gmail.com
  */
 
-var $dataTable      = document.querySelector('#investor-investments-table');
-var $thead          = $dataTable.querySelector('thead');
-var $tbody          = $dataTable.querySelector('tbody');
-
 chrome.storage.sync.get(
 {
     'InvestmentsUseTableLinks'  : false
 },
 function (data)
 {
+    var $dataTable      = document.querySelector('#investor-investments-table');
+    var $thead          = $dataTable.querySelector('thead');
+    var $tbody          = $dataTable.querySelector('tbody');
+    
     /*
      *  This takes the current query string, splits it up into components and it
      *  then iterates through all the key, value pairs. If there is any existing

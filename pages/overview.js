@@ -7,16 +7,6 @@
  *  @contact >> DeeNaxic@gmail.com
  */
 
-var $boxes          = document.querySelectorAll('table');
-var $boxBalance     = $boxes[0];
-var $boxReturns     = $boxes[1];
-var $boxAmount      = $boxes[2];
-var $boxNumber      = $boxes[3];
-var $balance        = toFloat($boxBalance.querySelector('.em span').innerText);
-var $amount         = toFloat($boxAmount .querySelector('.em span').innerText);
-var $number         = toFloat($boxNumber .querySelector('.em span').innerText);
-var $toggle         = 0;
-
 chrome.storage.sync.get(
 {
     'OverviewHideZeroes'        : false,
@@ -26,6 +16,16 @@ chrome.storage.sync.get(
 },
 function (data)
 {
+    var $boxes          = document.querySelectorAll('table');
+    var $boxBalance     = $boxes[0];
+    var $boxReturns     = $boxes[1];
+    var $boxAmount      = $boxes[2];
+    var $boxNumber      = $boxes[3];
+    var $balance        = toFloat($boxBalance.querySelector('.em span').innerText);
+    var $amount         = toFloat($boxAmount .querySelector('.em span').innerText);
+    var $number         = toFloat($boxNumber .querySelector('.em span').innerText);
+    var $toggle         = 0;
+    
     /*
      *  This goes through all of the four boxes, on the overview page, including
      *  the initially hidden one. It then iterate through all rows, in the boxes
