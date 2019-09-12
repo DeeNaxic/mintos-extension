@@ -1,16 +1,13 @@
-
 /*
  *  @project >> Mintos Extension
  *  @version >> 1.0.0
- *  @release >> n/a
  *  @authors >> DeeNaxic
  *  @contact >> DeeNaxic@gmail.com
  */
 
 chrome.storage.sync.get(
 {
-    'InvestmentsUseTableLinks'  : true,
-	'InvestmentsUseCountryNames': true
+    'InvestmentsUseLoanTypeLinks'       : true
 },
 function (data)
 {
@@ -45,7 +42,7 @@ function (data)
      *  link, to the current page, with the same query parameters, but filtering
      *  on the selected loan type only. This's done simply by reloading the page
      */
-    if (data.InvestmentsUseTableLinks)
+    if (data.InvestmentsUseLoanTypeLinks)
     {
         DomMonitor($dataTable, function (mutations)
         {

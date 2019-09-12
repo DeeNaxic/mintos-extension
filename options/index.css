@@ -1,0 +1,125 @@
+*
+{
+    box-sizing:             border-box;
+    margin:                 0px;
+    padding:                0px;
+}
+
+body
+{
+    overflow-y:             hidden;
+    height:                 600px;
+    width:                  800px;
+    background-color:       #d6d6d6;
+    border-top-style:       solid;
+    border-width:           1px;
+    border-color:           black;
+}
+
+.list
+{
+    position:               absolute;
+    top:                    0%;
+    left:                   0%;
+    right:                  60%;
+    bottom:                 2.00em;
+    overflow-y:             auto;
+    padding:                1.00em;
+}
+
+.list p
+{
+    font-weight:            bold;
+    border-bottom-style:    solid;
+    border-bottom-width:    1px;
+    line-height:            2.00em;
+    margin-bottom:          0.50em;
+}
+
+.list table
+{
+    width:                  100%;
+    margin-bottom:          2.00em;
+    border-collapse:        collapse;
+}
+
+.list table:last-child
+{
+    margin-bottom:          0.00em;
+}
+
+.list table tr td:nth-child(1)
+{
+    text-align:             center;
+    vertical-align:         middle;
+    width:                  1px;
+    padding-top:            5px;
+}
+
+.list table tr td:nth-child(1) input
+{
+    cursor:                 pointer;
+}
+
+.list table tr td:nth-child(2)
+{
+    padding-left:           5px;
+}
+
+.list table tr td:nth-child(3)
+{
+    text-align:             right;
+    color:                  blue;
+    cursor:                 pointer;
+}
+
+.demo
+{
+    position:               absolute;
+    top:                    0%;
+    left:                   40%;
+    right:                  0%;
+    bottom:                 2.00em;
+}
+
+.demo .top
+{
+    position:               absolute;
+    left:                   2.50%;
+    top:                    2.50%;
+    right:                  2.50%;
+    height:                 46.25%;
+    background-color:       white;
+    box-shadow:             0px 0px 5px 2px rgba(0.00, 0.00, 0.00, 0.50);
+}
+
+.demo .bot
+{
+    position:               absolute;
+    left:                   2.50%;
+    bottom:                 2.50%;
+    right:                  2.50%;
+    height:                 46.25%;
+    background-color:       white;
+    box-shadow:             0px 0px 5px 2px rgba(0.00, 0.00, 0.00, 0.50);
+}
+
+.demo img
+{
+    width:                  100%;
+}
+
+.info
+{
+    position:               absolute;
+    left:                   0%;
+    right:                  0%;
+    bottom:                 0%;
+    background-color:       white;
+    border-top-style:       solid;
+    border-width:           1px;
+    border-color:           black;
+    line-height:            2.00em;
+    text-align:             center;
+    color:                  #ccccccff;
+}

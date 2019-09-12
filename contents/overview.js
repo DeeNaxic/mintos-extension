@@ -1,18 +1,16 @@
-
 /*
  *  @project >> Mintos Extension
  *  @version >> 1.0.0
- *  @release >> n/a
  *  @authors >> DeeNaxic
  *  @contact >> DeeNaxic@gmail.com
  */
 
 chrome.storage.sync.get(
 {
-    'OverviewHideZeroes'        : true,
-    'OverviewShowPercentages'   : true,
-    'OverviewShowButtonInstead' : true,
-    'OverviewNegativeNumbers'   : true
+    'OverviewHideEmptyRows'             : true,
+    'OverviewShowPercentages'           : true,
+    'OverviewShowButtonInstead'         : true,
+    'OverviewHighlightNegativeNumbers'  : true
 },
 function (data)
 {
@@ -32,7 +30,7 @@ function (data)
      *  and picks the value column. If this value when cast to a float, and then
      *  to a string is zero, an inline display style of none is added to hide it
      */
-    if (data.OverviewHideZeroes)
+    if (data.OverviewHideEmptyRows)
     {
         for (var i = 0; i < $boxes.length; i++)
         {
@@ -118,7 +116,7 @@ function (data)
      *  the second cell in each of them, which is the value that hold the number
      *  and then checks the value. Note that it only checks the box returns rows
      */
-    if (data.OverviewNegativeNumbers)
+    if (data.OverviewHighlightNegativeNumbers)
     {
         for (var rows = $boxReturns.querySelectorAll('tr'), i = 0; i < rows.length; i++)
         {

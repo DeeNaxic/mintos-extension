@@ -1,23 +1,21 @@
-
 /*
  *  @project >> Mintos Extension
  *  @version >> 1.0.0
- *  @release >> n/a
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> DeeNaxic@gmail.com
  */
 
 chrome.storage.sync.get(
 {
-    'OverviewHideZeroes'        : true,
-    'OverviewShowPercentages'   : true,
-    'OverviewShowButtonInstead' : true,
-    'OverviewNegativeNumbers'   : true,
-    'InvestmentsUseTableLinks'  : true,
-    'InvestmentsShowDaysToNext' : true,
-    'InvestmentsHighlightLate'  : true,
-    'InvestmentsShowProfit'     : true,
-    'InvestmentsShowDuration'   : true
+    'OverviewHideEmptyRows'             : true,
+    'OverviewShowPercentages'           : true,
+    'OverviewShowButtonInstead'         : true,
+    'OverviewHighlightNegativeNumbers'  : true,
+    'InvestmentsUseLoanTypeLinks'       : true,
+    'InvestmentsShowDaysToNextPayment'  : true,
+    'InvestmentsHighlightLateLoans'     : true,
+    'InvestmentsShowProfitColumn'       : true,
+    'InvestmentsShowDurationColumn'     : true
 },
 function (data)
 {

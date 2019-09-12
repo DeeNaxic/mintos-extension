@@ -1,16 +1,14 @@
-
 /*
  *  @project >> Mintos Extension
  *  @version >> 1.0.0
- *  @release >> n/a
  *  @authors >> DeeNaxic
  *  @contact >> DeeNaxic@gmail.com
  */
 
 chrome.storage.sync.get(
 {
-    'InvestmentsShowProfit'     : true,
-    'InvestmentsShowDuration'   : true
+    'InvestmentsShowProfitColumn'       : true,
+    'InvestmentsShowDurationColumn'     : true
 },
 function (data)
 {
@@ -61,7 +59,7 @@ function (data)
      *  both sorting and filtering actions, and if the cell already exists, then
      *  it will simply update it. If it does not, then it inserts the data cells
      */
-    if (data.InvestmentsShowDuration)
+    if (data.InvestmentsShowProfitColumn)
     {
         $thead.querySelectorAll('tr')[0].appendChild($createHeader ('Duration'));
         $thead.querySelectorAll('tr')[1].appendChild($createTooltip('The total amount of days which you held this note.'));
@@ -94,7 +92,7 @@ function (data)
      *  both sorting and filtering actions, and if the cell already exists, then
      *  it will simply update it. If it does not, then it inserts the data cells
      */
-    if (data.InvestmentsShowProfit)
+    if (data.InvestmentsShowDurationColumn)
     {
         $thead.querySelectorAll('tr')[0].appendChild($createHeader ('Profit'));
         $thead.querySelectorAll('tr')[1].appendChild($createTooltip('The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.'));
