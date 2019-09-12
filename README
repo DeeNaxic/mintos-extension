@@ -1,0 +1,5 @@
+Changelog:
+- Fixed header for 'Next Payment Date' to 'Days To Next Loan'.
+- Added a feature to show discount or premium on loans for sale.
+- Added 'cursor:not-allowed;' to Profit and Duration column.
+- Fixed an error where 'Days To Next Payment' would be off by one.

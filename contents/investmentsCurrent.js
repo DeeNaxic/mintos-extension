@@ -48,7 +48,7 @@ function (data)
                 }
                 else
                 {
-                    node.innerText = Math.floor((toDate(time.innerText).getTime() - new Date().getTime()) / 86400000) + ' days';
+                    node.innerText = Math.floor((toDate(time.innerText) - new Date().setHours(0, 0, 0, 0)) / 86400000) + ' days';
                 }
             }
         });
