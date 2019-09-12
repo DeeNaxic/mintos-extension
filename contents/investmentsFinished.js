@@ -25,6 +25,7 @@ function (data)
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('a');
             nodeInner.innerText = text;
+            nodeInner.setAttribute ('style', 'cursor:not-allowed;');
             nodeOuter.appendChild(nodeInner);
             
         return nodeOuter;

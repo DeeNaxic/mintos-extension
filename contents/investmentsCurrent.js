@@ -8,7 +8,8 @@
 chrome.storage.sync.get(
 {
     'InvestmentsShowDaysToNextPayment'  : true,
-    'InvestmentsHighlightLateLoans'     : true
+    'InvestmentsHighlightLateLoans'     : true,
+    'InvestmentsShowPremiumDiscount'    : true
 },
 function (data)
 {
@@ -24,6 +25,8 @@ function (data)
      */
     if (data.InvestmentsShowDaysToNextPayment)
     {
+        getElementByAttribute(document.querySelector('thead tr').querySelectorAll('th'), 'data-sort-field', 'next_planned_payment_date').querySelector('span').innerHTML = 'Days To<br>Next Payment';
+        
         DomMonitor($dataTable, function (mutations)
         {
             for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
@@ -48,10 +51,6 @@ function (data)
                     node.innerText = Math.floor((toDate(time.innerText).getTime() - new Date().getTime()) / 86400000) + ' days';
                 }
             }
-
-            var column = getElementByAttribute($thead.querySelectorAll('tr')[0].querySelectorAll('th'), 'data-sort-field', 'next_planned_payment_date');        
-            column.querySelector('a').innerHTML = "<span>Days To<br>Next Payment</span>";
-
         });
     }
     
@@ -74,6 +73,40 @@ function (data)
                 else
                 {
                     rows[i].style.background = 'white';
+                }
+            }
+        });
+    }
+    
+    /*
+     *  This adds a percentage counter after each note, that is for sale showing
+     *  the added premium as a + number or discount as some negative number. The
+     *  original number is still shown, but it becomes easier to see which notes
+     *  have been set on sale with a premium / discount, no change is also shown
+     */
+    if (data.InvestmentsShowPremiumDiscount)
+    {
+        function $getPercentage (input) 
+        {
+            return parseFloat(/(-?\d+\.\d+)%/g.exec(input)[0]);
+        }
+        
+        DomMonitor($dataTable, function (mutations)
+        {
+            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            {
+                var cell    = rows[i].lastElementChild;
+                var span    = cell.querySelectorAll('span')[1];
+                var percent = $getPercentage(span.getAttribute('data-tooltip'));
+                
+                if (cell.innerText != 'Sell')
+                {
+                    if (span.hasAttribute('data-value') == false)
+                    {
+                        span.setAttribute('data-value', span.innerText);
+                    }
+                    
+                    span.innerHTML = span.getAttribute('data-value') + ' <span style="color:' + (percent < 0.0 ? 'green' : (percent > 0.0 ? 'red' : 'black')) + ';">' + (percent < 0.0 ? ' - ' : ' + ') + Math.abs(percent).toFixed(1) + '%</span>';
                 }
             }
         });
