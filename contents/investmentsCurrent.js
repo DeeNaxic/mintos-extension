@@ -48,6 +48,10 @@ function (data)
                     node.innerText = Math.floor((toDate(time.innerText).getTime() - new Date().getTime()) / 86400000) + ' days';
                 }
             }
+
+            var column = getElementByAttribute($thead.querySelectorAll('tr')[0].querySelectorAll('th'), 'data-sort-field', 'next_planned_payment_date');        
+            column.querySelector('a').innerHTML = "<span>Days To<br>Next Payment</span>";
+
         });
     }
     
