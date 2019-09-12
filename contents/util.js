@@ -20,6 +20,12 @@ function getElementByAttribute (elements, attribute, value)
     }
 }
 
+function getPercentage(input) 
+{
+    var myRegex = /(-?\d+\.\d+)%/g
+    return parseFloat(myRegex.exec(input)[0]);
+}
+
 var DomMonitor = (function ()
 {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
