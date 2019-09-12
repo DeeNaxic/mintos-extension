@@ -9,8 +9,8 @@
 
 chrome.storage.sync.get(
 {
-    'InvestmentsShowProfit'     : false,
-    'InvestmentsShowDuration'   : false
+    'InvestmentsShowProfit'     : true,
+    'InvestmentsShowDuration'   : true
 },
 function (data)
 {

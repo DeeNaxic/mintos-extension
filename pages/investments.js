@@ -9,7 +9,8 @@
 
 chrome.storage.sync.get(
 {
-    'InvestmentsUseTableLinks'  : false
+    'InvestmentsUseTableLinks'  : true,
+	'InvestmentsUseCountryNames': true
 },
 function (data)
 {

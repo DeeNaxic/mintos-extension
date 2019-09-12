@@ -9,8 +9,8 @@
 
 chrome.storage.sync.get(
 {
-    'InvestmentsShowDaysToNext' : false,
-    'InvestmentsHighlightLate'  : false
+    'InvestmentsShowDaysToNext' : true,
+    'InvestmentsHighlightLate'  : true
 },
 function (data)
 {
@@ -47,7 +47,7 @@ function (data)
                 }
                 else
                 {
-                    node.innerText = Math.floor(Math.abs((toDate(time.innerText).getTime() - new Date().getTime()) / 86400000)) + ' days';
+                    node.innerText = Math.floor((toDate(time.innerText).getTime() - new Date().getTime()) / 86400000) + ' days';
                 }
             }
         });

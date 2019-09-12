@@ -9,8 +9,8 @@
 
 chrome.storage.sync.get(
 {
-    'OverviewHideZeroes'        : false,
-    'OverviewShowPercentages'   : false,
+    'OverviewHideZeroes'        : true,
+    'OverviewShowPercentages'   : true,
     'OverviewShowButtonInstead' : true,
     'OverviewNegativeNumbers'   : true
 },
