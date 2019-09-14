@@ -71,6 +71,7 @@ body
     text-align:             right;
     color:                  blue;
     cursor:                 pointer;
+    user-select:            none;
 }
 
 .demo

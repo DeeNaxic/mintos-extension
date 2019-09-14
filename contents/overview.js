@@ -53,14 +53,14 @@ function (data)
      */
     if (data.OverviewShowPercentages)
     {
-        function insertPercentageCell (original, total)
+        function insertPercentageCell (source, total)
         {
-            var percent         = toFloat(original.innerText) / total * 100.00;
+            var percent         = toFloat(source.innerText) / total * 100.00;
             var node            = document.createElement('td');
                 node.innerText  = percent.toFixed(2) + '%';
                 
-            original.setAttribute('style', 'text-align:right;');
-            original.parentNode.insertBefore(node, original.nextSibling);
+            source.style.textAlign = 'right';
+            source.parentNode.insertBefore(node, source.nextSibling);
         }
         
         for (var rows = $boxBalance.querySelector('tbody').querySelectorAll('tr'), i = 0; i < rows.length; i++)
@@ -88,11 +88,6 @@ function (data)
      */
     if (data.OverviewShowButtonInstead)
     {
-        function toggle ()
-        {
-            document.querySelector('.radios').querySelectorAll('label')[$toggle == 1 ? ($toggle = 0) : ($toggle = 1)].click();
-        }
-        
         document.querySelectorAll('.radios label')[0].style.display = 'none';
         document.querySelectorAll('.radios label')[1].style.display = 'none';
         
@@ -104,8 +99,11 @@ function (data)
             nodeInner.classList.add('btn');
             nodeInner.classList.add('btn-primary');
             nodeInner.innerText = 'Switch Metric';
-            nodeInner.addEventListener('click', toggle, false);
             nodeOuter.appendChild(nodeInner);
+            nodeInner.addEventListener('click', function ()
+            {
+                document.querySelector('.radios').querySelectorAll('label')[$toggle == 1 ? ($toggle = 0) : ($toggle = 1)].click();
+            });
             
         document.querySelector('.radios').appendChild(nodeOuter);
     }
@@ -122,7 +120,7 @@ function (data)
         {
             if (toFloat(rows[i].querySelectorAll('td')[1].innerText) < 0.00)
             {
-                rows[i].querySelectorAll('td')[1].setAttribute('style', 'color:red;');
+                rows[i].querySelectorAll('td')[1].style.color = 'red';
             }
         }
     }

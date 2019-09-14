@@ -12,15 +12,26 @@ chrome.storage.sync.get(
     'OverviewShowButtonInstead'         : true,
     'OverviewHighlightNegativeNumbers'  : true,
     'InvestmentsUseLoanTypeLinks'       : true,
+    'InvestmentsShowCountryName'        : true,
     'InvestmentsShowDaysToNextPayment'  : true,
     'InvestmentsHighlightLateLoans'     : true,
     'InvestmentsShowPremiumDiscount'    : true,
     'InvestmentsShowProfitColumn'       : true,
-    'InvestmentsShowDurationColumn'     : true,
-    'InvestmentsShowCountryName'        : true
+    'InvestmentsShowDurationColumn'     : true
 },
 function (data)
 {
+    function $initialize ()
+    {
+        document.querySelector('tr').style.background   = '#b5ffb377';
+        document.querySelector('.top img').src          = 'img/' + document.querySelector('tr').id + '_0.png';
+        document.querySelector('.bot img').src          = 'img/' + document.querySelector('tr').id + '_1.png';
+        
+        return document.querySelector('tr').id;
+    }
+    
+    var $previous = $initialize();
+    
     /*
      *  This takes in all the values from the data object and then tries to find
      *  an ID with that name, which is the rows in the settings tables. On these
@@ -48,6 +59,12 @@ function (data)
         {
             document.querySelector('.top img').src = 'img/' + k + '_0.png';
             document.querySelector('.bot img').src = 'img/' + k + '_1.png';
+        });
+        
+        document.querySelector('#' + k + ' a').addEventListener('click', function ()
+        {
+            document.querySelector('#' +  $previous     ).style.background = 'none';
+            document.querySelector('#' + ($previous = k)).style.background = '#b5ffb377';
         });
     }
 });

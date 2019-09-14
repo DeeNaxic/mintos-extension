@@ -25,7 +25,7 @@ function (data)
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('a');
             nodeInner.innerText = text;
-            nodeInner.setAttribute ('style', 'cursor:not-allowed;');
+            nodeInner.style.cursor = 'not-allowed';
             nodeOuter.appendChild(nodeInner);
             
         return nodeOuter;
@@ -48,7 +48,7 @@ function (data)
             nodeInner.setAttribute ('data-theme', 'dark');
             nodeInner.setAttribute ('data-placement', 'bottom');
             nodeInner.setAttribute ('data-tooltip', text);
-            nodeOuter.appendChild(nodeInner);
+            nodeOuter.appendChild  (nodeInner);
             
         return nodeOuter;
     }
@@ -69,15 +69,15 @@ function (data)
         {
             for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
-                var cells   = rows[i].querySelectorAll('td');
-                var days    = Math.floor(Math.abs((toDate(cells[2].innerText).getTime() - toDate(cells[9].innerText).getTime()) / 86400000));
-                var node    = getElementByAttribute(cells, "data-m-label", 'Duration');
+                var cells = rows[i].querySelectorAll('td');
+                var days  = Math.floor(Math.abs((toDate(rows[i].querySelector('td.m-loan-issued').innerText).getTime() - toDate(getElementByAttribute(cells, 'data-m-label', 'Finished').innerText).getTime()) / 86400000));
+                var node  = getElementByAttribute(cells, "data-m-label", 'Duration');
                 
                 if (node === undefined)
                 {
-                    node = document.createElement('td');
-                    node.setAttribute ('data-m-label', 'Duration');
-                    node.classList.add('global-align-right');
+                    node  = document.createElement('td');
+                    node.setAttribute  ('data-m-label', 'Duration');
+                    node.classList.add ('global-align-right');
                     rows[i].appendChild(node);
                 }
                 
@@ -103,19 +103,19 @@ function (data)
             for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
                 var cells   = rows[i].querySelectorAll('td');
-                var profit  = toFloat(cells[7].innerText) - toFloat(cells[3].innerText);
+                var profit  = toFloat(getElementByAttribute(cells, 'data-m-label', 'Received Payments').innerText) - toFloat(getElementByAttribute(cells, 'data-m-label', 'My Investment').innerText);
                 var node    = getElementByAttribute(cells, "data-m-label", 'Profit');
                 
                 if (node === undefined)
                 {
                     node = document.createElement('td');
-                    node.setAttribute ('data-m-label', 'Profit');
-                    node.classList.add('global-align-right');
+                    node.setAttribute  ('data-m-label', 'Profit');
+                    node.classList.add ('global-align-right');
                     rows[i].appendChild(node);
                 }
                 
-                node.setAttribute('style', 'color:' + (profit > 0.00 ? 'green' : 'red') + ';');
-                node.innerText = '€ ' + profit.toFixed(2);
+                node.style.color = profit > 0.00 ? 'green' : 'red';
+                node.innerText   = getCurrencySymbol(getElementByAttribute(cells, 'data-m-label', 'Received Payments').innerText) + ' ' + profit.toFixed(2);
             }
         });
     }
