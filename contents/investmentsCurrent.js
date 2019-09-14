@@ -9,7 +9,8 @@ chrome.storage.sync.get(
 {
     'InvestmentsShowDaysToNextPayment'  : true,
     'InvestmentsHighlightLateLoans'     : true,
-    'InvestmentsShowPremiumDiscount'    : true
+    'InvestmentsShowPremiumDiscount'    : true,
+    'InvestmentsShowCountryName'        : true
 },
 function (data)
 {
@@ -108,6 +109,32 @@ function (data)
                     
                     span.innerHTML = span.getAttribute('data-value') + ' <span style="color:' + (percent < 0.0 ? 'green' : (percent > 0.0 ? 'red' : 'black')) + ';">' + (percent < 0.0 ? ' - ' : ' + ') + Math.abs(percent).toFixed(1) + '%</span>';
                 }
+            }
+        });
+    }
+
+    /*
+     * This replaces the flag of a given country and replaces it with the country name
+     */
+    if (data.InvestmentsShowCountryName)
+    {
+        DomMonitor($dataTable, function (mutations)
+        {
+            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            {
+                var cell    = rows[i].querySelectorAll('td')[0];
+                var node    = cell.querySelector('a');
+                var image   = node.querySelector('img');
+                var country = cell.querySelector('span');
+
+                if (country == undefined)
+                {
+                    country = document.createElement('span')
+                    cell.insertBefore(country, node);
+                    image.style.display = 'none';
+                }
+                
+                country.innerText = image.title;  
             }
         });
     }

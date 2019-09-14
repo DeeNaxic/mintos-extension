@@ -51,3 +51,38 @@ var DomMonitor = (function ()
         }
     }
 })();
+
+
+var countries = {
+    "Albania"               : "ALB",
+    "Armenia"               : "ARM",
+    "Botswana"              : "BWA",
+    "Bulgaria"              : "BGR",
+    "Colombia"              : "COL",
+    "Czech Republic"        : "CZE",
+    "Denmark"               : "DNK",
+    "Estonia"               : "EST",
+    "Finland"               : "FIN",
+    "Georgia"               : "GEO",
+    "Indonesia"             : "IDN",
+    "Kazakhstan"            : "KAZ",
+    "Kenya"                 : "KEN",
+    "Kosovo"                : "UNK",
+    "Latvia"                : "LVA",
+    "Lithuania"             : "LTU",
+    "Mexico"                : "MEX",
+    "Moldova"               : "MDA",
+    "Namibia"               : "NAM",
+    "North Macedonia"       : "MKD",
+    "Philippines"           : "PHL",
+    "Poland"                : "POL",
+    "Romania"               : "ROU",
+    "Russian Federation"    : "RUS",
+    "South Africa"          : "ZAF",
+    "Spain"                 : "ESP",
+    "Sweden"                : "SWE",
+    "Ukraine"               : "UKR",
+    "United Kingdom"        : "GBR",
+    "Vietnam"               : "VNM",
+    "Zambia"                : "ZMB"
+};
