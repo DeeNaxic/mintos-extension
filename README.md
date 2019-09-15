@@ -24,11 +24,15 @@
 - Make scrollbar in filter boxes better?
 - Add the option to hide entire filter types?
 - Compare loans?
+- Allow link filtering on countries.
 
 ##### Investments Current
 - Show a world map of investments, weighted maybe?
 - Button for 'Cancel sale' on notes instead of just text.
 - Show percentage of stock for sale instead of the currency number.
+
+##### Account Statement
+- Add a filter to show 'Alltime'
 
 ##### Bugs
 - What if you have 0 cash? does our calculations go NaN?

@@ -8,7 +8,7 @@
 chrome.storage.sync.get(
 {
     'InvestmentsUseLoanTypeLinks'       : true,
-    'InvestmentsShowCountryName'        : true
+    'InvestmentsShowCountryNameInstead' : true,
 },
 function (data)
 {
@@ -105,9 +105,12 @@ function (data)
     }
     
     /*
-     *  Experimental
+     *  This will hide the country flag which is currently being shown inside of
+     *  the loan ID. Instead of having it here, this will create an entirely new
+     *  column, at the beginning of the line which has both the country flag and
+     *  the country name. This is not sortable, and shows full country name text
      */
-    if (true)
+    if (data.InvestmentsShowCountryNameInstead)
     {
         $thead.querySelectorAll('tr')[0].insertBefore($createHeader ('Country'                                   ), $thead.querySelectorAll('tr')[0].firstChild);
         $thead.querySelectorAll('tr')[1].insertBefore($createTooltip('The country where this loan was taken out.'), $thead.querySelectorAll('tr')[1].firstChild);

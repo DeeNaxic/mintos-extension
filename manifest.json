@@ -1,6 +1,6 @@
 {
-    "name"              : "www.mintos.com",
-    "description"       : "www.mintos.com",
+    "name"              : "<name>",
+    "description"       : "<description>",
     "version"           : "1.0.0",
     "manifest_version"  : 2,
     
@@ -25,24 +25,30 @@
     "content_scripts"   :
     [
         {
-            "matches"   : ["https://www.mintos.com/*"],
-            "js"        : ["contents/util.js"]
-        },
-        {
             "matches"   : ["https://www.mintos.com/en/overview/"],
-            "js"        : ["contents/overview.js"]
-        },
-        {
-            "matches"   : ["https://www.mintos.com/en/my-investments/*"],
-            "js"        : ["contents/investments.js"]
+            "js"        :
+            [
+                "scripts/util.js",
+                "scripts/overview.js"
+            ]
         },
         {
             "matches"   : ["https://www.mintos.com/en/my-investments/finished-investments/*"],
-            "js"        : ["contents/investmentsFinished.js"]
+            "js"        :
+            [
+                "scripts/util.js",
+                "scripts/investments.js",
+                "scripts/investmentsFinished.js"
+            ]
         },
         {
             "matches"   : ["https://www.mintos.com/en/my-investments/current-investments/*"],
-            "js"        : ["contents/investmentsCurrent.js"]
+            "js"        :
+            [
+                "scripts/util.js",
+                "scripts/investments.js",
+                "scripts/investmentsCurrent.js"
+            ]
         }
     ]
 }
