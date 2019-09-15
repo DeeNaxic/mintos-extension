@@ -55,16 +55,16 @@ function (data)
             chrome.storage.sync.set({ [k] : this.checked }, null);
         });
         
-        document.querySelector('#' + k + ' a').addEventListener('click', function ()
+        document.querySelectorAll('#' + k + ' p').forEach(function (element)
         {
-            document.querySelector('.top img').src = 'img/' + k + '_0.png';
-            document.querySelector('.bot img').src = 'img/' + k + '_1.png';
-        });
-        
-        document.querySelector('#' + k + ' a').addEventListener('click', function ()
-        {
-            document.querySelector('#' +  $previous     ).style.background = 'none';
-            document.querySelector('#' + ($previous = k)).style.background = '#b5ffb377';
+            element.addEventListener('click', function ()
+            {
+                document.querySelector('.top img').src                          = 'img/' + k + '_0.png';
+                document.querySelector('.bot img').src                          = 'img/' + k + '_1.png';
+                
+                document.querySelector('#' +  $previous     ).style.background  = 'none';
+                document.querySelector('#' + ($previous = k)).style.background  = '#b5ffb377';
+            });
         });
     }
 });
