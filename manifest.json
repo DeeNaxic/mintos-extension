@@ -49,6 +49,13 @@
                 "scripts/investments.js",
                 "scripts/investmentsCurrent.js"
             ]
+        },
+        {
+            "matches"   : ["https://www.mintos.com/en/*"],
+            "js"        :
+            [
+                "scripts/loan.js"
+            ]
         }
     ]
 }
