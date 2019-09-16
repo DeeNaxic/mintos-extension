@@ -14,15 +14,15 @@ chrome.storage.sync.get(
 },
 function (data)
 {
-    var $boxes          = document.querySelectorAll('table');
-    var $boxBalance     = $boxes[0];
-    var $boxReturns     = $boxes[1];
-    var $boxAmount      = $boxes[2];
-    var $boxNumber      = $boxes[3];
-    var $balance        = toFloat($boxBalance.querySelector('.em span').innerText);
-    var $amount         = toFloat($boxAmount .querySelector('.em span').innerText);
-    var $number         = toFloat($boxNumber .querySelector('.em span').innerText);
-    var $toggle         = 0;
+    var boxes           = document.querySelectorAll('table');
+    var boxBalance      = boxes[0];
+    var boxReturns      = boxes[1];
+    var boxAmount       = boxes[2];
+    var boxNumber       = boxes[3];
+    var balance         = toFloat(boxBalance.querySelector('.em span').innerText);
+    var amount          = toFloat(boxAmount .querySelector('.em span').innerText);
+    var number          = toFloat(boxNumber .querySelector('.em span').innerText);
+    var toggle          = 0;
     
     /*
      *  This goes through all of the four boxes, on the overview page, including
@@ -32,16 +32,16 @@ function (data)
      */
     if (data.OverviewHideEmptyRows)
     {
-        for (var i = 0; i < $boxes.length; i++)
+        boxes.forEach(function (box)
         {
-            for (var rows = $boxes[i].querySelector('tbody').querySelectorAll('tr'), j = 0; j < rows.length - 1; j++)
+            for (var rows = box.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
-                if (toFloat(rows[j].querySelectorAll('td')[1].innerText).toFixed(2) == '0.00')
+                if (toFloat(rows[i].lastChild.innerText).toFixed(2) == '0.00')
                 {
-                    rows[j].style.display = 'none';
+                    rows[i].style.display = 'none';
                 }
             }
-        }
+        });
     }
     
     /*
@@ -53,7 +53,7 @@ function (data)
      */
     if (data.OverviewShowPercentages)
     {
-        function insertPercentageCell (source, total)
+        function $insertCell (source, total)
         {
             var percent         = toFloat(source.innerText) / total * 100.00;
             var node            = document.createElement('td');
@@ -63,20 +63,20 @@ function (data)
             source.parentNode.insertBefore(node, source.nextSibling);
         }
         
-        for (var rows = $boxBalance.querySelector('tbody').querySelectorAll('tr'), i = 0; i < rows.length; i++)
+        boxBalance.querySelectorAll('tr').forEach(function (row)
         {
-            insertPercentageCell(rows[i].querySelectorAll('td')[1], $balance);
-        }
+            $insertCell(row.lastChild, balance);
+        });
         
-        for (var rows = $boxAmount .querySelector('tbody').querySelectorAll('tr'), i = 0; i < rows.length; i++)
+        boxAmount .querySelectorAll('tr').forEach(function (row)
         {
-            insertPercentageCell(rows[i].querySelectorAll('td')[1], $amount );
-        }
+            $insertCell(row.lastChild, amount);
+        });
         
-        for (var rows = $boxNumber .querySelector('tbody').querySelectorAll('tr'), i = 0; i < rows.length; i++)
+        boxNumber .querySelectorAll('tr').forEach(function (row)
         {
-            insertPercentageCell(rows[i].querySelectorAll('td')[1], $number );
-        }
+            $insertCell(row.lastChild, number);
+        });
     }
     
     /*
@@ -102,7 +102,7 @@ function (data)
             nodeOuter.appendChild(nodeInner);
             nodeInner.addEventListener('click', function ()
             {
-                document.querySelector('.radios').querySelectorAll('label')[$toggle == 1 ? ($toggle = 0) : ($toggle = 1)].click();
+                document.querySelector('.radios').querySelectorAll('label')[toggle == 1 ? (toggle = 0) : (toggle = 1)].click();
             });
             
         document.querySelector('.radios').appendChild(nodeOuter);
@@ -116,12 +116,12 @@ function (data)
      */
     if (data.OverviewHighlightNegativeNumbers)
     {
-        for (var rows = $boxReturns.querySelectorAll('tr'), i = 0; i < rows.length; i++)
+        boxReturns.querySelectorAll('tr').forEach(function (row)
         {
-            if (toFloat(rows[i].querySelectorAll('td')[1].innerText) < 0.00)
+            if (toFloat(row.lastChild.innerText) < 0.00)
             {
-                rows[i].querySelectorAll('td')[1].style.color = 'red';
+                row.lastChild.style.color = 'red';
             }
-        }
+        });
     }
 });

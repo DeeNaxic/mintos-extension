@@ -13,9 +13,9 @@ chrome.storage.sync.get(
 },
 function (data)
 {
-    var $dataTable      = document.querySelector('#investor-investments-table');
-    var $thead          = $dataTable.querySelector('thead');
-    var $tbody          = $dataTable.querySelector('tbody');
+    var dataTable       = document.querySelector('#investor-investments-table');
+    var thead           = dataTable.querySelector('thead');
+    var tbody           = dataTable.querySelector('tbody');
     
     /*
      *  This will replace the 'next payment date' columns, so instead of showing
@@ -27,9 +27,9 @@ function (data)
     {
         getElementByAttribute(document.querySelector('thead tr').querySelectorAll('th'), 'data-sort-field', 'next_planned_payment_date').querySelector('span').innerHTML = 'Days To<br>Next Payment';
         
-        DomMonitor($dataTable, function (mutations)
+        DomMonitor(dataTable, function (mutations)
         {
-            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
                 var cell  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Next Payment Date');
                 var time  = cell.querySelectorAll('span')[0];
@@ -62,9 +62,9 @@ function (data)
      */
     if (data.InvestmentsHighlightLateLoans)
     {
-        DomMonitor($dataTable, function (mutations)
+        DomMonitor(dataTable, function (mutations)
         {
-            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
                 if (getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Term').innerText.indexOf('Late') + 1 > 0)
                 {
@@ -91,9 +91,9 @@ function (data)
             return parseFloat(/(-?\d+\.\d+)%/g.exec(input)[0]);
         }
         
-        DomMonitor($dataTable, function (mutations)
+        DomMonitor(dataTable, function (mutations)
         {
-            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
                 var cell    = rows[i].lastElementChild;
                 var span    = cell.querySelectorAll('span')[1];

@@ -12,19 +12,19 @@ chrome.storage.sync.get(
 },
 function (data)
 {
-    var $dataTable      = document.querySelector('#investor-investments-table');
-    var $thead          = $dataTable.querySelector('thead');
-    var $tbody          = $dataTable.querySelector('tbody');
+    var dataTable       = document.querySelector('#investor-investments-table');
+    var thead           = dataTable.querySelector('thead');
+    var tbody           = dataTable.querySelector('tbody');
     
     /*
      *  This creates a header cell, according to the ones used in the investment
      *  data table. It uses the same styles, and takes as input the headers text
      */
-    function $createHeader (text)
+    function createHeader (text)
     {
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('a');
-            nodeInner.innerText = text;
+            nodeInner.innerText    = text;
             nodeInner.style.cursor = 'not-allowed';
             nodeOuter.appendChild(nodeInner);
             
@@ -37,7 +37,7 @@ function (data)
      *  box, which appears when hovering or clicking on the icon. For styling it
      *  uses the same style classes, as the built-in ones, so it appears similar
      */
-    function $createTooltip (text)
+    function createTooltip (text)
     {
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('i')
@@ -62,16 +62,16 @@ function (data)
      */
     if (data.InvestmentsShowProfitColumn)
     {
-        $thead.querySelectorAll('tr')[0].appendChild($createHeader ('Duration'));
-        $thead.querySelectorAll('tr')[1].appendChild($createTooltip('The total amount of days which you held this note.'));
+        thead.firstChild.appendChild(createHeader ('Duration'));
+        thead.lastChild .appendChild(createTooltip('The total amount of days which you held this note.'));
         
-        DomMonitor($dataTable, function (mutations)
+        DomMonitor(dataTable, function (mutations)
         {
-            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
                 var cells = rows[i].querySelectorAll('td');
                 var days  = Math.floor(Math.abs((toDate(rows[i].querySelector('td.m-loan-issued').innerText).getTime() - toDate(getElementByAttribute(cells, 'data-m-label', 'Finished').innerText).getTime()) / 86400000));
-                var node  = getElementByAttribute(cells, "data-m-label", 'Duration');
+                var node  = getElementByAttribute(cells, 'data-m-label', 'Duration');
                 
                 if (node === undefined)
                 {
@@ -95,16 +95,16 @@ function (data)
      */
     if (data.InvestmentsShowDurationColumn)
     {
-        $thead.querySelectorAll('tr')[0].appendChild($createHeader ('Profit'));
-        $thead.querySelectorAll('tr')[1].appendChild($createTooltip('The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.'));
+        thead.firstChild.appendChild(createHeader ('Profit'));
+        thead.lastChild .appendChild(createTooltip('The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.'));
         
-        DomMonitor($dataTable, function (mutations)
+        DomMonitor(dataTable, function (mutations)
         {
-            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
                 var cells   = rows[i].querySelectorAll('td');
                 var profit  = toFloat(getElementByAttribute(cells, 'data-m-label', 'Received Payments').innerText) - toFloat(getElementByAttribute(cells, 'data-m-label', 'My Investment').innerText);
-                var node    = getElementByAttribute(cells, "data-m-label", 'Profit');
+                var node    = getElementByAttribute(cells, 'data-m-label', 'Profit');
                 
                 if (node === undefined)
                 {

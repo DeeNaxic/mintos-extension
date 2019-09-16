@@ -12,15 +12,15 @@ chrome.storage.sync.get(
 },
 function (data)
 {
-    var $dataTable      = document.querySelector('#investor-investments-table');
-    var $thead          = $dataTable.querySelector('thead');
-    var $tbody          = $dataTable.querySelector('tbody');
+    var dataTable       = document.querySelector('#investor-investments-table');
+    var thead           = dataTable.querySelector('thead');
+    var tbody           = dataTable.querySelector('tbody');
     
     /*
      *  This creates a header cell, according to the ones used in the investment
      *  data table. It uses the same styles, and takes as input the headers text
      */
-    function $createHeader (text)
+    function createHeader (text)
     {
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('a');
@@ -37,7 +37,7 @@ function (data)
      *  box, which appears when hovering or clicking on the icon. For styling it
      *  uses the same style classes, as the built-in ones, so it appears similar
      */
-    function $createTooltip (text)
+    function createTooltip (text)
     {
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('i')
@@ -60,7 +60,7 @@ function (data)
      *  means that any existing query parameters are kept intact, such that, the
      *  final path returned, always have the same path with the new key appended
      */
-    function $createLink (key, target)
+    function createLink (key, target)
     {
         for (var queries = window.location.search.substr(1).split('&'), results = [], i = 0; i < queries.length; i++)
         {
@@ -82,9 +82,9 @@ function (data)
      */
     if (data.InvestmentsUseLoanTypeLinks)
     {
-        DomMonitor($dataTable, function (mutations)
+        DomMonitor(dataTable, function (mutations)
         {
-            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
                 var node = rows[i].querySelector('td.m-loan-type');
                 var data =
@@ -99,7 +99,7 @@ function (data)
                     'Business Loan'     : '32'
                 };
                 
-                node.innerHTML = '<a href="' + $createLink('pledge_groups[]', data[node.innerText]) + '">' + node.innerText + '</a>';
+                node.innerHTML = '<a href="' + createLink('pledge_groups[]', data[node.innerText]) + '">' + node.innerText + '</a>';
             }
         });
     }
@@ -112,36 +112,34 @@ function (data)
      */
     if (data.InvestmentsShowCountryNameInstead)
     {
-        $thead.querySelectorAll('tr')[0].insertBefore($createHeader ('Country'                                   ), $thead.querySelectorAll('tr')[0].firstChild);
-        $thead.querySelectorAll('tr')[1].insertBefore($createTooltip('The country where this loan was taken out.'), $thead.querySelectorAll('tr')[1].firstChild);
+        thead.firstChild.insertBefore(createHeader ('Country'                                   ), thead.firstChild.firstChild);
+        thead.lastChild .insertBefore(createTooltip('The country where this loan was taken out.'), thead.lastChild .firstChild);
         
-        DomMonitor($dataTable, function (mutations)
+        DomMonitor(dataTable, function (mutations)
         {
-            for (var rows = $tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+            for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
             {
-                var cells = rows[i].querySelectorAll('td');
                 var link  = rows[i].querySelector('td.loan-id-col');
-                var node  = getElementByAttribute(cells, 'data-m-label', 'Country');
+                var node  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Country');
                 
                 if (node === undefined)
                 {
-                    node  = document.createElement('td');
-                    flag  = document.createElement('img');
-                    text  = document.createElement('span');
+                    flag                                        = document.createElement('img');
+                    text                                        = document.createElement('span');
+                    node                                        = document.createElement('td');
+                    flag.style.padding                          = '0px 0px 2px 0px';
+                    link.style.padding                          = '0px 0px 0px 0px';
+                    link.querySelector('a')  .style.paddingLeft = '0px';
+                    link.querySelector('img').style.display     = 'none';
                     
                     node.setAttribute('data-m-label', 'Country');
                     node.appendChild(flag);
                     node.appendChild(text);
                     
-                    link.style.padding                          = '0px 0px 0px 0px';
-                    flag.style.padding                          = '0px 0px 2px 0px';
-                    link.querySelector('a')  .style.paddingLeft = '0px';
-                    link.querySelector('img').style.display     = 'none';
-                    
                     rows[i].insertBefore(node, rows[i].firstChild);
                 }
                 
-                node.querySelector('img' ).setAttribute('src', link.querySelector('img').src);
+                node.querySelector('img' ).src       = link.querySelector('img').src;
                 node.querySelector('span').innerText = ' ' + link.querySelector('img').title;
             }
         });
