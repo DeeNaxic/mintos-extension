@@ -103,6 +103,28 @@ function (data)
      */
     if (true)
     {
+        function $createRow ()
+        {
+            var nodeOuter           = document.createElement('tr');
+            var nodeInner           = document.createElement('td');
+                nodeInner.innerText = 'a'
+                nodeOuter.appendChild(nodeInner);
+                
+            var nodeInner           = document.createElement('td');
+                nodeInner.innerText = 'b';
+                nodeOuter.appendChild(nodeInner);
+                
+            return nodeOuter
+        }
+        
         var $wrapper = document.querySelector('.chart-data');
+        var $table   = document.createElement('table');
+        
+        console.log("is it loaded yet?");
+        $wrapper.querySelectorAll('ul li').forEach(function (element)
+        {
+            console.log(element);
+        });
+        console.log("no?");
     }
 });
