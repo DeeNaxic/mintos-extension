@@ -7,7 +7,9 @@
 
 chrome.storage.sync.get(
 {
-    
+    'LoanShowCountryRow'                : true,
+    'LoanShowOntimePaymentPercent'      : true,
+    'LoanFormatInvestmentBreakdown'     : true
 },
 function (data)
 {
@@ -44,7 +46,7 @@ function (data)
      *  reason for this, is that the flag is already shown at the top. But maybe
      *  we should remove it from there, and then add it to the left of the names
      */
-    if (true)
+    if (data.LoanShowCountryRow)
     {
         details.insertBefore(createDetailsRow('Country', document.querySelector('.m-h1 img').title), details.firstChild);
     }
@@ -56,7 +58,7 @@ function (data)
      */
     if (true)
     {
-        if (details.lastChild.lastChild.innerText != 'Current')
+        if (['Current'].includes(details.lastChild.lastChild.innerText))
         {
             details.lastChild.style.background = '#d4574e22';
         }
@@ -68,7 +70,7 @@ function (data)
      *  and it excludes scheduled payments which has not yet been made. If there
      *  is only scheduled payments the 'n/a' is shown instead of some percentage
      */
-    if (true)
+    if (data.LoanShowOntimePaymentPercent)
     {
         var $ontime  = 0;
         var $others  = 0;
@@ -91,40 +93,72 @@ function (data)
         });
         
         var percent  = $others + $ontime > 0 ? ($ontime / ($others + $ontime) * 100.00).toFixed(0) + '%' : 'n/a';
-        var node     = createDetailsRow('Perfect Payments', percent);
+        var node     = createDetailsRow('On Time Payments', percent);
         
         details.appendChild(node);
     }
     
     /*
-     *
-     *  Experimental: Make investment breakdown a table.
-     *
+     *  Replace the investment breakdown unordered list, with a table. The table
+     *  shows the same informations, and the same colours but formated with rows
+     *  and cells nicely aligned. It also adds decimals to the value calculation
      */
-    if (true)
+    if (data.LoanFormatInvestmentBreakdown)
     {
-        function $createRow ()
+        function $createRow (id, groups)
         {
-            var nodeOuter           = document.createElement('tr');
-            var nodeInner           = document.createElement('td');
-                nodeInner.innerText = 'a'
+            var nodeOuter                   = document.createElement('tr');
+                
+            var nodeInner                   = document.createElement('td');
+                nodeInner.innerHTML         = '<ul id="legend"><li class="' + id + '" style="padding:0px 0px 0px 12px">&nbsp;</li></ul>';
                 nodeOuter.appendChild(nodeInner);
                 
-            var nodeInner           = document.createElement('td');
-                nodeInner.innerText = 'b';
+            var nodeInner                   = document.createElement('td');
+                nodeInner.innerText         = groups[1];
+                nodeOuter.appendChild(nodeInner);
+                
+            var nodeInner                   = document.createElement('td');
+                nodeInner.innerText         = groups[2];
+                nodeInner.style.textAlign   = 'right';
+                nodeOuter.appendChild(nodeInner);
+                
+            var nodeInner                   = document.createElement('td');
+                nodeInner.innerText         = toFloat(groups[3]).toFixed(2) + ' ' + getCurrencySymbol(groups[3]);
+                nodeInner.style.textAlign   = 'right';
                 nodeOuter.appendChild(nodeInner);
                 
             return nodeOuter
         }
         
-        var $wrapper = document.querySelector('.chart-data');
-        var $table   = document.createElement('table');
-        
-        console.log("is it loaded yet?");
-        $wrapper.querySelectorAll('ul li').forEach(function (element)
+        var observer = new MutationObserver(function (mutations)
         {
-            console.log(element);
+            var chart               = document.querySelector('.chart-data');
+            var list                = chart.querySelector('#legend');
+            var node                = document.createElement('table');
+                node.style.width    = '100%';
+                node.style.fontSize = '0.85em';
+            
+            list.querySelectorAll('li').forEach(function (element)
+            {
+                node.appendChild($createRow(element.getAttribute('class'), element.innerText.match(/^(.*?)- (\d+%).*?\/ (.*)/)));
+            });
+            
+            chart.insertBefore(node, list);
+            list.style.display = 'none';
+          
+            observer.disconnect();
         });
-        console.log("no?");
+        
+        observer.observe(document.querySelector('.chart-data'),
+        {
+            childList       : true,
+            subtree         : true,
+            attributes      : false,
+            characterData   : false
+        });
+        
+        
+        
+        
     }
 });

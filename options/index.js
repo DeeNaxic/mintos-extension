@@ -17,7 +17,10 @@ chrome.storage.sync.get(
     'InvestmentsHighlightLateLoans'     : true,
     'InvestmentsShowPremiumDiscount'    : true,
     'InvestmentsShowProfitColumn'       : true,
-    'InvestmentsShowDurationColumn'     : true
+    'InvestmentsShowDurationColumn'     : true,
+    'LoanShowCountryRow'                : true,
+    'LoanShowOntimePaymentPercent'      : true,
+    'LoanFormatInvestmentBreakdown'     : true
 },
 function (data)
 {

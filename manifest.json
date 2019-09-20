@@ -25,6 +25,14 @@
     "content_scripts"   :
     [
         {
+            "matches"   : ["https://www.mintos.com/en/*"],
+            "js"        :
+            [
+                "scripts/util.js",
+                "scripts/loan.js"
+            ]
+        },
+        {
             "matches"   : ["https://www.mintos.com/en/overview/"],
             "js"        :
             [
@@ -48,13 +56,6 @@
                 "scripts/util.js",
                 "scripts/investments.js",
                 "scripts/investmentsCurrent.js"
-            ]
-        },
-        {
-            "matches"   : ["https://www.mintos.com/en/*"],
-            "js"        :
-            [
-                "scripts/loan.js"
             ]
         }
     ]
