@@ -1,5 +1,5 @@
 /*
- *  @project >> Mintos Extension
+ *  @project >> Investments++
  *  @version >> 1.0.0
  *  @authors >> DeeNaxic
  *  @contact >> DeeNaxic@gmail.com
@@ -58,7 +58,7 @@ function (data)
      */
     if (true)
     {
-        if (['Current'].includes(details.lastChild.lastChild.innerText))
+        if (['Current', 'Finished'].includes(details.lastChild.lastChild.innerText.trim()) == false)
         {
             details.lastChild.style.background = '#d4574e22';
         }
@@ -133,7 +133,10 @@ function (data)
         var observer = new MutationObserver(function (mutations)
         {
             var chart               = document.querySelector('.chart-data');
+                
             var list                = chart.querySelector('#legend');
+                list.style.display  = 'none';
+                
             var node                = document.createElement('table');
                 node.style.width    = '100%';
                 node.style.fontSize = '0.85em';
@@ -144,8 +147,7 @@ function (data)
             });
             
             chart.insertBefore(node, list);
-            list.style.display = 'none';
-          
+            
             observer.disconnect();
         });
         
@@ -156,9 +158,5 @@ function (data)
             attributes      : false,
             characterData   : false
         });
-        
-        
-        
-        
     }
 });

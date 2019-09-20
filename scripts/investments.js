@@ -1,5 +1,5 @@
 /*
- *  @project >> Mintos Extension
+ *  @project >> Investments++
  *  @version >> 1.0.0
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> DeeNaxic@gmail.com
@@ -20,7 +20,7 @@ function (data)
      *  This creates a header cell, according to the ones used in the investment
      *  data table. It uses the same styles, and takes as input the headers text
      */
-    function createHeader (text)
+    function createHeader  (text)
     {
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('a');

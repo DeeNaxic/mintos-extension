@@ -1,5 +1,5 @@
 /*
- *  @project >> Mintos Extension
+ *  @project >> Investments++
  *  @version >> 1.0.0
  *  @authors >> DeeNaxic
  *  @contact >> DeeNaxic@gmail.com
