@@ -24,16 +24,8 @@ chrome.storage.sync.get(
 },
 function (data)
 {
-    function $setup ()
-    {
-        document.querySelector('tr').style.background   = '#b5ffb377';
-        document.querySelector('.top img').src          = 'img/' + document.querySelector('tr').id + '_0.png';
-        document.querySelector('.bot img').src          = 'img/' + document.querySelector('tr').id + '_1.png';
-        
-        return document.querySelector('tr').id;
-    }
-    
-    var $previous = $setup();
+    document.querySelector('.top img').src          = 'img/' + document.querySelector('tr').id + '_0.png';
+    document.querySelector('.bot img').src          = 'img/' + document.querySelector('tr').id + '_1.png';
     
     /*
      *  This takes in all the values from the data object and then tries to find
@@ -64,9 +56,6 @@ function (data)
             {
                 document.querySelector('.top img').src = 'img/' + k + '_0.png';
                 document.querySelector('.bot img').src = 'img/' + k + '_1.png';
-                
-                document.querySelector('#' +  $previous     ).style.background = 'none';
-                document.querySelector('#' + ($previous = k)).style.background = '#b5ffb377';
             });
         });
     }

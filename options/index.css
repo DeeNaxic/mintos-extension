@@ -3,6 +3,7 @@
     box-sizing:             border-box;
     margin:                 0px;
     padding:                0px;
+    font-family:            "Verdana";
 }
 
 body
@@ -16,6 +17,27 @@ body
     border-color:           black;
 }
 
+::-webkit-scrollbar
+{
+    width:                  8px;
+    
+}
+
+::-webkit-scrollbar-thumb
+{
+    background:             #666;
+    border-radius:          20px;
+    border-color:           #3c3c3c;
+    border-width:           1px;
+    border-style:           solid;
+}
+
+::-webkit-scrollbar-track
+{
+    background:             inherit;
+    border-radius:          20px;
+}
+
 .list
 {
     position:               absolute;
@@ -23,56 +45,101 @@ body
     left:                   0%;
     right:                  60%;
     bottom:                 2.00em;
-    overflow-y:             auto;
-    padding:                1.00em;
+    overflow-y:             scroll;
+    direction:              rtl;
+    padding-left:           1.00em;
+    margin-left:            2px;
+    margin-top:             5px;
+    margin-bottom:          5px;
 }
 
-.list > p
+.list .pane
 {
-    font-weight:            bold;
-    border-bottom-style:    solid;
-    border-bottom-width:    1px;
-    line-height:            2.00em;
-    margin-bottom:          0.50em;
+    direction:              ltr;
 }
 
-.list table
+table
 {
     width:                  100%;
-    margin-bottom:          2.00em;
     border-collapse:        collapse;
+    margin-bottom:          2.00em;
 }
 
-.list table:last-child
+.list .pane > p
 {
-    margin-bottom:          0.00em;
+    line-height:            3.00em;
+    border-bottom-style:    solid;
+    border-bottom-width:    1px;
+    margin-bottom:          0.25em;
+    font-family:            "Arial";
 }
 
-.list table tr td:nth-child(1)
+table tr
 {
-    text-align:             center;
-    vertical-align:         middle;
-    width:                  1px;
-    padding-top:            5px;
+    line-height:            1.50em;
+    font-size:              0.80em;
 }
 
-.list table tr td:nth-child(1) input
+table tr td:nth-child(1)
 {
+    padding-top:            3px;
+}
+
+table tr td:nth-child(2)
+{
+    text-align:             left;
+    padding-left:           2px;
     cursor:                 pointer;
+    user-select:            none;
 }
 
-.list table tr td:nth-child(2)
-{
-    padding-left:           5px;
-    cursor:                 pointer;
-}
-
-.list table tr td:nth-child(3)
+table tr td:nth-child(3)
 {
     text-align:             right;
     color:                  blue;
     cursor:                 pointer;
     user-select:            none;
+}
+
+input[type="checkbox"]
+{
+    cursor:                 pointer;
+    -webkit-appearance:     none;
+    appearance:             none;
+    outline:                0;
+    background:             gray;
+    height:                 16px;
+    width:                  16px;
+    border:                 1px solid black;
+}
+
+input[type="checkbox"]:checked
+{
+    background:             green;
+}
+
+input[type="checkbox"]:hover
+{
+    filter:                 brightness(90%);
+}
+
+input[type="checkbox"]:after
+{
+    content:                '';
+    position:               relative;
+    left:                   40%;
+    top:                    20%;
+    width:                  15%;
+    height:                 40%;
+    border:                 solid #fff;
+    border-width:           0 2px 2px 0;
+    transform:              rotate(45deg);
+    display:                none;
+}
+
+input[type="checkbox"]:checked:after
+{
+    display:                block;
 }
 
 .demo
