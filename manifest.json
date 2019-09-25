@@ -1,6 +1,6 @@
 {
     "name"              : "Investments++",
-    "description"       : "<description>",
+    "description"       : "Improve the Mintos.com P2P investment experience, by enabling a rich set of additional features, and post-processing of the website.",
     "version"           : "1.0.0",
     "manifest_version"  : 2,
     
