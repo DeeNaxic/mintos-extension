@@ -1,6 +1,7 @@
 General:
 - Disable the 'checkout basket' if no investments is pending.
 - Replace the logout button with a 'logout' text.
+- Add statistics  button to top  panel
 
 Overview:
 - Make information in link 1 and 2 links to various subpages.
@@ -14,12 +15,7 @@ Investments:
 
 Investments Current:
 - Show a world map of investments, weighted maybe?
-- Button for 'Cancel sale' on notes instead of just text.
 - Show percentage of stock for sale instead of the currency number.
 
 Account Statement:
 - Add a filter to show 'Alltime'
-
-Bugs:
-- What if you have 0 cash? does our calculations go NaN?
-- Can we add sorting to our custom columns?

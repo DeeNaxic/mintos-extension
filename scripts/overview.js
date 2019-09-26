@@ -57,8 +57,16 @@ function (settings)
         {
             var percent         = toFloat(source.innerText) / total * 100.00;
             var node            = document.createElement('td');
+            
+            if (Math.abs(percent) == Infinity)
+            {
+                node.innerText  = 'n/a';
+            }
+            else
+            {
                 node.innerText  = percent.toFixed(2) + '%';
-                
+            }
+            
             source.style.textAlign = 'right';
             source.parentNode.insertBefore(node, source.nextSibling);
         }

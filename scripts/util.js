@@ -5,6 +5,11 @@
  *  @contact >> investment.extensions@gmail.com
  */
 
+function toNumber (text)
+{
+    return String(text).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 ')
+}
+
 function toFloat (text)
 {
     return parseFloat(text.replace(/[^0-9\.\-]/g, ''));

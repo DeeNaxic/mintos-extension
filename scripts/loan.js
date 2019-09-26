@@ -141,16 +141,19 @@ function (settings)
                 
             var nodeInner                   = document.createElement('td');
                 nodeInner.innerText         = groups[1];
+                nodeInner.style.whiteSpace  = 'nowrap';
                 nodeOuter.appendChild(nodeInner);
                 
             var nodeInner                   = document.createElement('td');
                 nodeInner.innerText         = groups[2];
                 nodeInner.style.textAlign   = 'right';
+                nodeInner.style.whiteSpace  = 'nowrap';
                 nodeOuter.appendChild(nodeInner);
                 
             var nodeInner                   = document.createElement('td');
                 nodeInner.innerText         = toFloat(groups[3]).toFixed(2) + ' ' + getCurrencySymbol(groups[3]);
                 nodeInner.style.textAlign   = 'right';
+                nodeInner.style.whiteSpace  = 'nowrap';
                 nodeOuter.appendChild(nodeInner);
                 
             return nodeOuter
