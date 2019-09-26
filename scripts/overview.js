@@ -1,8 +1,8 @@
 /*
- *  @project >> Investments++
+ *  @project >> Investment Extensions
  *  @version >> 1.0.0
  *  @authors >> DeeNaxic
- *  @contact >> DeeNaxic@gmail.com
+ *  @contact >> investment.extensions@gmail.com
  */
 
 chrome.storage.sync.get(
@@ -12,7 +12,7 @@ chrome.storage.sync.get(
     'OverviewShowButtonInstead'         : true,
     'OverviewHighlightNegativeNumbers'  : true
 },
-function (data)
+function (settings)
 {
     var boxes           = document.querySelectorAll('table');
     var boxBalance      = boxes[0];
@@ -28,9 +28,9 @@ function (data)
      *  This goes through all of the four boxes, on the overview page, including
      *  the initially hidden one. It then iterate through all rows, in the boxes
      *  and picks the value column. If this value when cast to a float, and then
-     *  to a string is zero, an inline display style of none is added to hide it
+     *  to a string is zero, the display style of none is added to hide that row
      */
-    if (data.OverviewHideEmptyRows)
+    if (settings.OverviewHideEmptyRows)
     {
         boxes.forEach(function (box)
         {
@@ -51,7 +51,7 @@ function (data)
      *  two floats, the current number and the total amount. This will calculate
      *  percentage automatically. This also handles switching the existing style
      */
-    if (data.OverviewShowPercentages)
+    if (settings.OverviewShowPercentages)
     {
         function $insertCell (source, total)
         {
@@ -86,7 +86,7 @@ function (data)
      *  and then registers an event listener, on the new button, whitch switches
      *  between clicking on either of the radio buttons in a very cruede fashion
      */
-    if (data.OverviewShowButtonInstead)
+    if (settings.OverviewShowButtonInstead)
     {
         document.querySelectorAll('.radios label')[0].style.display = 'none';
         document.querySelectorAll('.radios label')[1].style.display = 'none';

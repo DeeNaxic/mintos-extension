@@ -1,16 +1,16 @@
 /*
- *  @project >> Investments++
+ *  @project >> Investment Extensions
  *  @version >> 1.0.0
  *  @authors >> DeeNaxic, o1-steve
- *  @contact >> DeeNaxic@gmail.com
+ *  @contact >> investment.extensions@gmail.com
  */
 
 chrome.storage.sync.get(
 {
     'InvestmentsUseLoanTypeLinks'       : true,
-    'InvestmentsShowCountryNameInstead' : true,
+    'InvestmentsShowCountryColumn'      : true,
 },
-function (data)
+function (settings)
 {
     var dataTable       = document.querySelector('#investor-investments-table');
     var thead           = dataTable.querySelector('thead');
@@ -20,7 +20,7 @@ function (data)
      *  This creates a header cell, according to the ones used in the investment
      *  data table. It uses the same styles, and takes as input the headers text
      */
-    function createHeader  (text)
+    function createHeader (text)
     {
         var nodeOuter = document.createElement('th');
         var nodeInner = document.createElement('a');
@@ -64,7 +64,7 @@ function (data)
     {
         for (var queries = window.location.search.substr(1).split('&'), results = [], i = 0; i < queries.length; i++)
         {
-            if (queries[i].startsWith(key) == false)
+            if (queries[i].toLowerCase().startsWith(key.toLowerCase()) == false)
             {
                 results.push(queries[i]);
             }
@@ -80,7 +80,7 @@ function (data)
      *  link, to the current page, with the same query parameters, but filtering
      *  on the selected loan type only. This's done simply by reloading the page
      */
-    if (data.InvestmentsUseLoanTypeLinks)
+    if (settings.InvestmentsUseLoanTypeLinks)
     {
         DomMonitor(dataTable, function (mutations)
         {
@@ -110,7 +110,7 @@ function (data)
      *  column, at the beginning of the line which has both the country flag and
      *  the country name. This is not sortable, and shows full country name text
      */
-    if (data.InvestmentsShowCountryNameInstead)
+    if (settings.InvestmentsShowCountryColumn)
     {
         thead.firstChild.insertBefore(createHeader ('Country'                                   ), thead.firstChild.firstChild);
         thead.lastChild .insertBefore(createTooltip('The country where this loan was taken out.'), thead.lastChild .firstChild);

@@ -1,3 +1,9 @@
+/*
+ *  @project >> Investment Extensions
+ *  @version >> 1.0.0
+ *  @authors >> DeeNaxic, o1-steve
+ *  @contact >> investment.extensions@gmail.com
+ */
 
 function toFloat (text)
 {

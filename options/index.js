@@ -1,23 +1,32 @@
 /*
- *  @project >> Mintos Extension
+ *  @project >> Investment Extensions
  *  @version >> 1.0.0
  *  @authors >> DeeNaxic, o1-steve
- *  @contact >> DeeNaxic@gmail.com
+ *  @contact >> investment.extensions@gmail.com
  */
 
 chrome.storage.sync.get(
 {
+    // overview.js
     'OverviewHideEmptyRows'             : true,
     'OverviewShowPercentages'           : true,
     'OverviewShowButtonInstead'         : true,
     'OverviewHighlightNegativeNumbers'  : true,
+    
+    // investments.js
     'InvestmentsUseLoanTypeLinks'       : true,
-    'InvestmentsShowCountryNameInstead' : true,
+    'InvestmentsShowCountryColumn'      : true,
+    
+    // investmentsCurrent.js
     'InvestmentsShowDaysToNextPayment'  : true,
     'InvestmentsHighlightLateLoans'     : true,
     'InvestmentsShowPremiumDiscount'    : true,
+    
+    // investmentsFinished.js
     'InvestmentsShowProfitColumn'       : true,
     'InvestmentsShowDurationColumn'     : true,
+    
+    // loan.js
     'LoanShowCountryRow'                : true,
     'LoanShowOntimePaymentPercent'      : true,
     'LoanFormatInvestmentBreakdown'     : true

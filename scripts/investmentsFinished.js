@@ -1,8 +1,8 @@
 /*
- *  @project >> Investments++
+ *  @project >> Investment Extensions
  *  @version >> 1.0.0
  *  @authors >> DeeNaxic
- *  @contact >> DeeNaxic@gmail.com
+ *  @contact >> investment.extensions@gmail.com
  */
 
 chrome.storage.sync.get(
@@ -10,7 +10,7 @@ chrome.storage.sync.get(
     'InvestmentsShowProfitColumn'       : true,
     'InvestmentsShowDurationColumn'     : true
 },
-function (data)
+function (settings)
 {
     var dataTable       = document.querySelector('#investor-investments-table');
     var thead           = dataTable.querySelector('thead');
@@ -60,7 +60,7 @@ function (data)
      *  both sorting and filtering actions, and if the cell already exists, then
      *  it will simply update it. If it does not, then it inserts the data cells
      */
-    if (data.InvestmentsShowProfitColumn)
+    if (settings.InvestmentsShowDurationColumn)
     {
         thead.firstChild.appendChild(createHeader ('Duration'));
         thead.lastChild .appendChild(createTooltip('The total amount of days which you held this note.'));
@@ -93,7 +93,7 @@ function (data)
      *  both sorting and filtering actions, and if the cell already exists, then
      *  it will simply update it. If it does not, then it inserts the data cells
      */
-    if (data.InvestmentsShowDurationColumn)
+    if (settings.InvestmentsShowProfitColumn)
     {
         thead.firstChild.appendChild(createHeader ('Profit'));
         thead.lastChild .appendChild(createTooltip('The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.'));

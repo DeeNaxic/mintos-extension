@@ -1,8 +1,8 @@
 /*
- *  @project >> Investments++
+ *  @project >> Investment Extensions
  *  @version >> 1.0.0
  *  @authors >> DeeNaxic
- *  @contact >> DeeNaxic@gmail.com
+ *  @contact >> investment.extensions@gmail.com
  */
 
 chrome.storage.sync.get(
@@ -11,7 +11,7 @@ chrome.storage.sync.get(
     'LoanShowOntimePaymentPercent'      : true,
     'LoanFormatInvestmentBreakdown'     : true
 },
-function (data)
+function (settings)
 {
     if (document.location.pathname.match(/^\/\w{2}\/[0-9]+-[0-9]+/g) === null)
     {
@@ -46,7 +46,7 @@ function (data)
      *  reason for this, is that the flag is already shown at the top. But maybe
      *  we should remove it from there, and then add it to the left of the names
      */
-    if (data.LoanShowCountryRow)
+    if (settings.LoanShowCountryRow)
     {
         details.insertBefore(createDetailsRow('Country', document.querySelector('.m-h1 img').title), details.firstChild);
     }
@@ -56,7 +56,7 @@ function (data)
      *  Experimental: Highlight dangerous information.
      *
      */
-    if (true)
+    if (false)
     {
         if (['Current', 'Finished'].includes(details.lastChild.lastChild.innerText.trim()) == false)
         {
@@ -70,7 +70,7 @@ function (data)
      *  and it excludes scheduled payments which has not yet been made. If there
      *  is only scheduled payments the 'n/a' is shown instead of some percentage
      */
-    if (data.LoanShowOntimePaymentPercent)
+    if (settings.LoanShowOntimePaymentPercent)
     {
         var $ontime  = 0;
         var $others  = 0;
@@ -93,7 +93,7 @@ function (data)
         });
         
         var percent  = $others + $ontime > 0 ? ($ontime / ($others + $ontime) * 100.00).toFixed(0) + '%' : 'n/a';
-        var node     = createDetailsRow('On Time Payments', percent);
+        var node     = createDetailsRow('On-time Payments', percent);
         
         details.appendChild(node);
     }
@@ -103,8 +103,34 @@ function (data)
      *  shows the same informations, and the same colours but formated with rows
      *  and cells nicely aligned. It also adds decimals to the value calculation
      */
-    if (data.LoanFormatInvestmentBreakdown)
+    if (settings.LoanFormatInvestmentBreakdown)
     {
+        function $createHeader ()
+        {
+            var nodeOuter                   = document.createElement('tr');
+                
+            var nodeInner                   = document.createElement('th');
+                nodeInner.innerText         = '';
+                nodeOuter.appendChild(nodeInner);
+                
+            var nodeInner                   = document.createElement('th');
+                nodeInner.innerText         = 'Name';
+                nodeInner.style.textAlign   = 'left';
+                nodeOuter.appendChild(nodeInner);
+                
+            var nodeInner                   = document.createElement('th');
+                nodeInner.innerText         = 'Percent';
+                nodeInner.style.textAlign   = 'right';
+                nodeOuter.appendChild(nodeInner);
+                
+            var nodeInner                   = document.createElement('th');
+                nodeInner.innerText         = 'Amount';
+                nodeInner.style.textAlign   = 'right';
+                nodeOuter.appendChild(nodeInner);
+                
+            return nodeOuter;
+        }
+        
         function $createRow (id, groups)
         {
             var nodeOuter                   = document.createElement('tr');
@@ -132,22 +158,22 @@ function (data)
         
         var observer = new MutationObserver(function (mutations)
         {
-            var chart               = document.querySelector('.chart-data');
+            var chart                       = document.querySelector('.chart-data');
                 
-            var list                = chart.querySelector('#legend');
-                list.style.display  = 'none';
+            var list                        = chart.querySelector('#legend');
                 
-            var node                = document.createElement('table');
-                node.style.width    = '100%';
-                node.style.fontSize = '0.85em';
-            
+            var nodeTable                   = document.createElement('table');
+                nodeTable.style.width       = '100%';
+                nodeTable.style.fontSize    = '0.85em';
+                nodeTable.appendChild($createHeader());
+                
             list.querySelectorAll('li').forEach(function (element)
             {
-                node.appendChild($createRow(element.getAttribute('class'), element.innerText.match(/^(.*?)- (\d+%).*?\/ (.*)/)));
+                nodeTable.appendChild($createRow(element.getAttribute('class'), element.innerText.match(/^(.*?)- (\d+%).*?\/ (.*)/)));
             });
             
-            chart.insertBefore(node, list);
-            
+            list.style.display  = 'none';
+            chart.insertBefore(nodeTable, list);
             observer.disconnect();
         });
         

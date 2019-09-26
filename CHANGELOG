@@ -1,8 +1,0 @@
-Version 1.0.0:
-- Changed the header from 'Next Payment Date' to 'Days To Next Loan'.
-- Added a feature to show discount or premium on loans for sale.
-- Added 'cursor:not-allowed;' to header cells.
-- Fixed an error where 'Days To Next Payment' would be off by one.
-- In options, the current setting being displayed, is now highlighted in green.
-- The program will now automatically read and use your selected currency.
-- The option to show a country name column has been added.

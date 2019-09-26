@@ -1,8 +1,8 @@
 /*
- *  @project >> Investments++
+ *  @project >> Investment Extensions
  *  @version >> 1.0.0
  *  @authors >> DeeNaxic, o1-steve
- *  @contact >> DeeNaxic@gmail.com
+ *  @contact >> investment.extensions@gmail.com
  */
 
 chrome.storage.sync.get(
@@ -11,7 +11,7 @@ chrome.storage.sync.get(
     'InvestmentsHighlightLateLoans'     : true,
     'InvestmentsShowPremiumDiscount'    : true
 },
-function (data)
+function (settings)
 {
     var dataTable       = document.querySelector('#investor-investments-table');
     var thead           = dataTable.querySelector('thead');
@@ -23,7 +23,7 @@ function (data)
      *  loans whitch are late, doesn't change. Any any loan date today, is shown
      *  as 0 days. It hides the original field, rather than replacing the values
      */
-    if (data.InvestmentsShowDaysToNextPayment)
+    if (settings.InvestmentsShowDaysToNextPayment)
     {
         getElementByAttribute(document.querySelector('thead tr').querySelectorAll('th'), 'data-sort-field', 'next_planned_payment_date').querySelector('span').innerHTML = 'Days To<br>Next Payment';
         
@@ -60,7 +60,7 @@ function (data)
      *  change the background to a slight red color, to highlight late loans. If
      *  they are not late, it sets the default white background, on each re-draw
      */
-    if (data.InvestmentsHighlightLateLoans)
+    if (settings.InvestmentsHighlightLateLoans)
     {
         DomMonitor(dataTable, function (mutations)
         {
@@ -84,7 +84,7 @@ function (data)
      *  original number is still shown, but it becomes easier to see which notes
      *  have been set on sale with a premium / discount, no change is also shown
      */
-    if (data.InvestmentsShowPremiumDiscount)
+    if (settings.InvestmentsShowPremiumDiscount)
     {
         function $getPercentage (input) 
         {
