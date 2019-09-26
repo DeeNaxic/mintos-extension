@@ -122,7 +122,7 @@ function (settings)
      *  the second cell in each of them, which is the value that hold the number
      *  and then checks the value. Note that it only checks the box returns rows
      */
-    if (data.OverviewHighlightNegativeNumbers)
+    if (settings.OverviewHighlightNegativeNumbers)
     {
         boxReturns.querySelectorAll('tr').forEach(function (row)
         {

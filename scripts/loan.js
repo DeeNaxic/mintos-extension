@@ -151,7 +151,7 @@ function (settings)
                 nodeOuter.appendChild(nodeInner);
                 
             var nodeInner                   = document.createElement('td');
-                nodeInner.innerText         = toFloat(groups[3]).toFixed(2) + ' ' + getCurrencySymbol(groups[3]);
+                nodeInner.innerText         = toNumber(toFloat(groups[3]).toFixed(2)) + ' ' + getCurrencySymbol(groups[3]);
                 nodeInner.style.textAlign   = 'right';
                 nodeInner.style.whiteSpace  = 'nowrap';
                 nodeOuter.appendChild(nodeInner);
