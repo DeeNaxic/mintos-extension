@@ -9,7 +9,8 @@ chrome.storage.sync.get(
 {
     'LoanShowCountryRow'                : true,
     'LoanShowOntimePaymentPercent'      : true,
-    'LoanFormatInvestmentBreakdown'     : true
+    'LoanFormatInvestmentBreakdown'     : true,
+    'LoanShowNextPaymentRow'            : true
 },
 function (settings)
 {
@@ -49,6 +50,32 @@ function (settings)
     if (settings.LoanShowCountryRow)
     {
         details.insertBefore(createDetailsRow('Country', document.querySelector('.m-h1 img').title), details.firstChild);
+    }
+
+    if (['Finished', 'Default'].includes(details.lastChild.lastChild.innerText.trim()) == false && settings.LoanShowNextPaymentRow)
+    {
+        var days = 0;
+
+        for (var rows = schedule.querySelectorAll('tr'), i = 0; i < rows.length; i++) 
+        {
+            var columns     = rows[i].querySelectorAll('td');
+            var date        = toDate(columns[0].innerText);
+            var status      = columns[6].innerText;
+
+            if (status === 'Scheduled')
+            {                            
+                days = Math.floor((date - new Date().setHours(0, 0, 0, 0)) / 86400000);
+                if (days >= 0)
+                {
+                    break;
+                }
+            }
+        }
+
+        if (days >= 0)
+        {
+            details.appendChild(createDetailsRow('Next Payment', days + ' days'));
+        }
     }
     
     /*
