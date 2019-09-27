@@ -29,7 +29,8 @@ chrome.storage.sync.get(
     // loan.js
     'LoanShowCountryRow'                : true,
     'LoanShowOntimePaymentPercent'      : true,
-    'LoanFormatInvestmentBreakdown'     : true
+    'LoanFormatInvestmentBreakdown'     : true,
+    'LoanShowNextPaymentRow'            : true
 },
 function (data)
 {
