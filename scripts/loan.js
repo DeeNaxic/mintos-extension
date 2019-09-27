@@ -43,7 +43,7 @@ function (settings)
     
     /*
      *  Show a column at the beginning of the detail window, with the country of
-     *  the note, written out as text. There is no flag in this value field. The
+     *  the loan, written out as text. There is no flag in this value field. The
      *  reason for this, is that the flag is already shown at the top. But maybe
      *  we should remove it from there, and then add it to the left of the names
      */
@@ -52,6 +52,13 @@ function (settings)
         details.insertBefore(createDetailsRow('Country', document.querySelector('.m-h1 img').title), details.firstChild);
     }
 
+    /*
+     * Show the number of days untill the next payment in the loan details window.
+     * If the loan status are finished or default, then next payment will not be
+     * shown. Also, if the loan are in grace period and there are only one scheduled
+     * payment left, then the next payment will not be shown, since negative days
+     * does not make sence.
+     */
     if (['Finished', 'Default'].includes(details.lastChild.lastChild.innerText.trim()) == false && settings.LoanShowNextPaymentRow)
     {
         var days = 0;
