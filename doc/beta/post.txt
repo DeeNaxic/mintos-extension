@@ -7,6 +7,7 @@ The extension does not:
 - Automate any actions for you.
 - Monetizes in any way, no ads, premium or hidden costs.
 - Prevent or alter the actions you have on the website.
+- require any login, user information or personal information
 
 The extension does:
 - Add additional information to various pages.

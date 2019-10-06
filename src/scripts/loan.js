@@ -53,48 +53,39 @@ function (settings)
     }
 
     /*
-     * Show the number of days untill the next payment in the loan details window.
-     * If the loan status are finished or default, then next payment will not be
-     * shown. Also, if the loan are in grace period and there are only one scheduled
-     * payment left, then the next payment will not be shown, since negative days
-     * does not make sence.
+     *  Show the number of days, to the next payment in the loan details windows
+     *  If the loan status are finished or default then next payment will not be
+     *  shown. If the loan are in grace period, and there are only one scheduled
+     *  payment left, then the next payment will instead show as non-applicative
      */
     if (['Finished', 'Default'].includes(details.lastChild.lastChild.innerText.trim()) == false && settings.LoanShowNextPaymentRow)
     {
         var days = 0;
-
+        
         for (var rows = schedule.querySelectorAll('tr'), i = 0; i < rows.length; i++) 
         {
             var columns     = rows[i].querySelectorAll('td');
             var date        = toDate(columns[0].innerText);
             var status      = columns[6].innerText;
-
+            
             if (status === 'Scheduled')
             {                            
                 days = Math.floor((date - new Date().setHours(0, 0, 0, 0)) / 86400000);
+                
                 if (days >= 0)
                 {
                     break;
                 }
             }
         }
-
+        
         if (days >= 0)
         {
             details.appendChild(createDetailsRow('Next Payment', days + ' days'));
         }
-    }
-    
-    /*
-     *
-     *  Experimental: Highlight dangerous information.
-     *
-     */
-    if (false)
-    {
-        if (['Current', 'Finished'].includes(details.lastChild.lastChild.innerText.trim()) == false)
+        else
         {
-            details.lastChild.style.background = '#d4574e22';
+            // todo: show column anyway?
         }
     }
     

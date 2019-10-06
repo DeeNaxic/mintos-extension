@@ -34,8 +34,8 @@ chrome.storage.sync.get(
 },
 function (data)
 {
-    document.querySelector('.top img').src          = 'img/' + document.querySelector('tr').id + '_0.png';
-    document.querySelector('.bot img').src          = 'img/' + document.querySelector('tr').id + '_1.png';
+    document.querySelector('.top img').src = 'img/' + document.querySelector('tr').id + '_0.png';
+    document.querySelector('.bot img').src = 'img/' + document.querySelector('tr').id + '_1.png';
     
     /*
      *  This takes in all the values from the data object and then tries to find
