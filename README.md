@@ -14,4 +14,5 @@ There are two ways to get this extension to work:
 
 ##### **4. Known issues**
 1. At the moment, a known issue appears with slow internet connections. If the extension fails to load on a slow connection, refreshing the page will help. This has been solved from next release.
+
 2. Some images are missing from the option page, this should be fixed shortly.
