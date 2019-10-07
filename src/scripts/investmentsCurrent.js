@@ -13,11 +13,11 @@ chrome.storage.sync.get(
 },
     function (settings)
     {
-        runtime(settings);
+        timeout_investmentsCurrent  (settings);
     }
 );
 
-function runtime (settings)
+function timeout_investmentsCurrent (settings)
 {
     /*
      *  This try catch is meant to handle the cases, where Mintos have not fully
@@ -38,7 +38,7 @@ function runtime (settings)
     
     if (dataTable == null || thead == null || tbody == null)
     {
-        return setTimeout(runtime, 0.1, settings);
+        return setTimeout(timeout_investmentsCurrent, 0.1, settings);
     }
     
     /*

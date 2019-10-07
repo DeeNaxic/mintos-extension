@@ -14,11 +14,11 @@ chrome.storage.sync.get(
 },
     function (settings)
     {
-        runtime(settings);
+        timeout_loan  (settings);
     }
 );
 
-function runtime (settings)
+function timeout_loan (settings)
 {
     /*
      *  This try catch is meant to handle the cases, where Mintos have not fully
@@ -45,7 +45,7 @@ function runtime (settings)
     
     if (tables == null || details == null || borrower == null || schedule == null)
     {
-        return setTimeout(runtime, 0.1, settings);
+        return setTimeout(timeout_loan, 0.1, settings);
     }
     
     function createDetailsRow (header, content)
