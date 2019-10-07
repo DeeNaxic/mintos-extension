@@ -1,6 +1,6 @@
 /*
  *  @project >> Investment Extensions
- *  @version >> 1.0.0
+ *  @version >> 1.1.0
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
  */
@@ -12,17 +12,41 @@ chrome.storage.sync.get(
     'OverviewShowButtonInstead'         : true,
     'OverviewHighlightNegativeNumbers'  : true
 },
-function (settings)
+    function (settings)
+    {
+        runtime(settings);
+    }
+);
+
+function runtime (settings)
 {
-    var boxes           = document.querySelectorAll('table');
-    var boxBalance      = boxes[0];
-    var boxReturns      = boxes[1];
-    var boxAmount       = boxes[2];
-    var boxNumber       = boxes[3];
-    var balance         = toFloat(boxBalance.querySelector('.em span').innerText);
-    var amount          = toFloat(boxAmount .querySelector('.em span').innerText);
-    var number          = toFloat(boxNumber .querySelector('.em span').innerText);
-    var toggle          = 0;
+    /*
+     *  This try catch is meant to handle the cases, where Mintos have not fully
+     *  loaded the website yet. As a result, some things might not have appeared
+     *  on the website. We try to get everything and if anything turns out to be
+     *  empty (null or undefined), we stop the execution and attempt a reloading
+     */
+    try
+    {
+        var boxes           = document.querySelectorAll('table');
+        var boxBalance      = boxes[0];
+        var boxReturns      = boxes[1];
+        var boxAmount       = boxes[2];
+        var boxNumber       = boxes[3];
+        var balance         = toFloat(boxBalance.querySelector('.em span').innerText);
+        var amount          = toFloat(boxAmount .querySelector('.em span').innerText);
+        var number          = toFloat(boxNumber .querySelector('.em span').innerText);
+        var toggle          = 0;
+    }
+    catch
+    {
+        
+    }
+    
+    if (boxes == null || boxBalance == null || boxReturns == null || boxAmount == null || boxNumber == null || balance == null || amount == null || number == null)
+    {
+        return setTimeout(runtime, 0.1, settings);
+    }
     
     /*
      *  This goes through all of the four boxes, on the overview page, including
@@ -132,4 +156,4 @@ function (settings)
             }
         });
     }
-});
+}

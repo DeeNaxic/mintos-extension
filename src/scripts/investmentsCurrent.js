@@ -1,6 +1,6 @@
 /*
  *  @project >> Investment Extensions
- *  @version >> 1.0.0
+ *  @version >> 1.1.0
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
  */
@@ -11,11 +11,35 @@ chrome.storage.sync.get(
     'InvestmentsHighlightLateLoans'     : true,
     'InvestmentsShowPremiumDiscount'    : true
 },
-function (settings)
+    function (settings)
+    {
+        runtime(settings);
+    }
+);
+
+function runtime (settings)
 {
-    var dataTable       = document.querySelector('#investor-investments-table');
-    var thead           = dataTable.querySelector('thead');
-    var tbody           = dataTable.querySelector('tbody');
+    /*
+     *  This try catch is meant to handle the cases, where Mintos have not fully
+     *  loaded the website yet. As a result, some things might not have appeared
+     *  on the website. We try to get everything and if anything turns out to be
+     *  empty (null or undefined), we stop the execution and attempt a reloading
+     */
+    try
+    {
+        var dataTable       = document.querySelector('#investor-investments-table');
+        var thead           = dataTable.querySelector('thead');
+        var tbody           = dataTable.querySelector('tbody');
+    }
+    catch
+    {
+        
+    }
+    
+    if (dataTable == null || thead == null || tbody == null)
+    {
+        return setTimeout(runtime, 0.1, settings);
+    }
     
     /*
      *  This will replace the 'next payment date' columns, so instead of showing
@@ -111,4 +135,4 @@ function (settings)
             }
         });
     }
-});
+}

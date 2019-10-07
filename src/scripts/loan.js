@@ -1,6 +1,6 @@
 /*
  *  @project >> Investment Extensions
- *  @version >> 1.0.0
+ *  @version >> 1.1.0
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
  */
@@ -12,17 +12,41 @@ chrome.storage.sync.get(
     'LoanFormatInvestmentBreakdown'     : true,
     'LoanShowNextPaymentRow'            : true
 },
-function (settings)
-{
-    if (document.location.pathname.match(/^\/\w{2}\/[0-9]+-[0-9]+/g) === null)
+    function (settings)
     {
-        return;
+        runtime(settings);
+    }
+);
+
+function runtime (settings)
+{
+    /*
+     *  This try catch is meant to handle the cases, where Mintos have not fully
+     *  loaded the website yet. As a result, some things might not have appeared
+     *  on the website. We try to get everything and if anything turns out to be
+     *  empty (null or undefined), we stop the execution and attempt a reloading
+     */
+    try
+    {
+        if (document.location.pathname.match(/^\/\w{2}\/[0-9]+-[0-9]+/g) === null)
+        {
+            return;
+        }
+        
+        var tables          = document.querySelectorAll('tbody');
+        var details         = tables[0];
+        var borrower        = tables[1];
+        var schedule        = tables[2];
+    }
+    catch
+    {
+        
     }
     
-    var tables          = document.querySelectorAll('tbody');
-    var details         = tables[0];
-    var borrower        = tables[1];
-    var schedule        = tables[2];
+    if (tables == null || details == null || borrower == null || schedule == null)
+    {
+        return setTimeout(runtime, 0.1, settings);
+    }
     
     function createDetailsRow (header, content)
     {
@@ -213,4 +237,4 @@ function (settings)
             characterData   : false
         });
     }
-});
+}
