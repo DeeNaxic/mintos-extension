@@ -29,7 +29,7 @@ This project aims to add a layer of information and functionality to the Mintos 
 - The extension does run directly in your browser with no external calls.
 - The extension does provide full opensource code for full transparency.
 
-
+<br>
 
 #### Transparency
 
@@ -41,13 +41,13 @@ This GitHub repository is intended for our Chrome Extension (see link for Chrome
 - The extension does not store or send any information about you or your investments.
 - The extension does not require any login or user information.
 
-
+<br>
 
 #### Limitations
 
 todo
 
-
+<br>
 
 #### Installation
 
@@ -57,8 +57,10 @@ There are two ways to get this extension to work:
 
 2. If you prefer a more hands-on and higher transparency approach, you are more than welcome to perform a manual install from the source code. You can download the source code directly from this repository and perform a full audit. If you are satisfied you can then open Chrome to the [extensions page](chrome://extensions/) and load it in, as an unpacked extension. This way is a bit more difficult to setup, and removes any automatic updates - but we did want to provide this method for better security.
 
-
+<br>
 
 #### Contact
 
 If you have any feedback, questions, suggestions or just want to reach out to us, you can throw us an e-mail at investment.extensions@gmail.com. If you have any kind of feature you would like us to add, feel free to contact us, or if you already have the technical expertise, then feel free to open a pull request with the changes, we do accept pull requests as long as they are well reasoned, and do not break with our principles for the extension.
+
+<br>
