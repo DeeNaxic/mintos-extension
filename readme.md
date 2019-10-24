@@ -19,7 +19,7 @@
 
 
 
-#### Introduction
+### Introduction
 
 This project aims to add a layer of information and functionality to the Mintos P2P investment website, through a Chrome Extension. The project is driven by a group of computer scientists from the Copenhagen University of Computer Science (DIKU), who likes to work with investments. The extension was originally an internal tool we used, to fix visual and information gaps on the Mintos website, to improve our experience. From here it has grown and has now been fully released to the public. For a full feature list, please visit the Chrome Extension Store page. Some key points about the extension are:
 
@@ -31,7 +31,7 @@ This project aims to add a layer of information and functionality to the Mintos 
 
 <br>
 
-#### Transparency
+### Transparency
 
 This GitHub repository is intended for our Chrome Extension (see link for Chrome Store page) release packages, the source code from which they are compiled and a collection of features, bugs, and tasks currently in development. The repository is not intended for public use by default, but it does also serve as a way to provide an additional layer of transparency. Trust is an important aspect when it comes to investments, and we do encourage people to perform a full audit of our source code, or even download and run the unpacked extension locally. If you do not have the technical experience to perform such an audit, but still want to ensure that what you are running is not malicious, then feel free to send the repository to someone who does. The code is written in standard JavaScript with a small amount of CSS and HTML, and as so, should be fairly trivial to understand. The following are important aspects in regards to trust:
 
@@ -43,13 +43,13 @@ This GitHub repository is intended for our Chrome Extension (see link for Chrome
 
 <br>
 
-#### Limitations
+### Limitations
 
 todo
 
 <br>
 
-#### Installation
+### Installation
 
 There are two ways to get this extension to work:
 
@@ -59,7 +59,7 @@ There are two ways to get this extension to work:
 
 <br>
 
-#### Contact
+### Contact
 
 If you have any feedback, questions, suggestions or just want to reach out to us, you can throw us an e-mail at investment.extensions@gmail.com. If you have any kind of feature you would like us to add, feel free to contact us, or if you already have the technical expertise, then feel free to open a pull request with the changes, we do accept pull requests as long as they are well reasoned, and do not break with our principles for the extension.
 
