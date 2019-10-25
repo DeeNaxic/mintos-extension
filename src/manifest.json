@@ -25,35 +25,55 @@
     "content_scripts"   :
     [
         {
-            "matches"   : ["https://www.mintos.com/en/*"],
+            "matches"   :
+            [
+                "https://www.mintos.com/*"
+            ],
             "js"        :
             [
-                "scripts/util.js",
-                "scripts/loan.js"
+                "scripts/util.js"
             ]
         },
         {
-            "matches"   : ["https://www.mintos.com/en/overview/"],
+            "matches"   :
+            [
+                "https://www.mintos.com/en/overview/*",
+                "https://www.mintos.com/pl/przeglad/*"
+            ],
             "js"        :
             [
-                "scripts/util.js",
                 "scripts/overview.js"
             ]
         },
         {
-            "matches"   : ["https://www.mintos.com/en/my-investments/finished-investments/*"],
+            "matches"   :
+            [
+                "https://www.mintos.com/en/*",
+                "https://www.mintos.com/pl/*"
+            ],
             "js"        :
             [
-                "scripts/util.js",
+                "scripts/loan.js"
+            ]
+        },
+        {
+            "matches"   :
+            [
+                "https://www.mintos.com/en/my-investments/finished-investments/*"
+            ],
+            "js"        :
+            [
                 "scripts/investments.js",
                 "scripts/investmentsFinished.js"
             ]
         },
         {
-            "matches"   : ["https://www.mintos.com/en/my-investments/current-investments/*"],
+            "matches"   :
+            [
+                "https://www.mintos.com/en/my-investments/current-investments/*"
+            ],
             "js"        :
             [
-                "scripts/util.js",
                 "scripts/investments.js",
                 "scripts/investmentsCurrent.js"
             ]

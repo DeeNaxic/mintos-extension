@@ -5,6 +5,16 @@
  *  @contact >> investment.extensions@gmail.com
  */
 
+function assert (selector)
+{
+    if (selector == null)
+    {
+        throw 'NullException';
+    }
+    
+    return selector;
+}
+
 function toNumber (text)
 {
     return String(text).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 ')
