@@ -37,7 +37,8 @@
         {
             "matches"   :
             [
-                "https://www.mintos.com/en/overview/"
+                "https://www.mintos.com/en/overview/*",
+                "https://www.mintos.com/pl/przeglad/*"
             ],
             "js"        :
             [
@@ -45,14 +46,21 @@
             ]
         },
         {
-            "matches"   : ["https://www.mintos.com/en/*"],
+            "matches"   :
+            [
+                "https://www.mintos.com/en/*",
+                "https://www.mintos.com/pl/*"
+            ],
             "js"        :
             [
                 "scripts/loan.js"
             ]
         },
         {
-            "matches"   : ["https://www.mintos.com/en/my-investments/finished-investments/*"],
+            "matches"   :
+            [
+                "https://www.mintos.com/en/my-investments/finished-investments/*"
+            ],
             "js"        :
             [
                 "scripts/investments.js",
@@ -60,7 +68,10 @@
             ]
         },
         {
-            "matches"   : ["https://www.mintos.com/en/my-investments/current-investments/*"],
+            "matches"   :
+            [
+                "https://www.mintos.com/en/my-investments/current-investments/*"
+            ],
             "js"        :
             [
                 "scripts/investments.js",
