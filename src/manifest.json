@@ -31,7 +31,8 @@
             ],
             "js"        :
             [
-                "scripts/util.js"
+                "scripts/util.js",
+                "scripts/data.js"
             ]
         },
         {

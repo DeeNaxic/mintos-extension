@@ -34,6 +34,7 @@ chrome.storage.sync.get
                 var details         = assert(tables[0]);
                 var borrower        = assert(tables[1]);
                 var schedule        = assert(tables[2]);
+                var originator      = assert(document.querySelector('.m-group-info'));
             }
             catch
             {
@@ -52,6 +53,26 @@ chrome.storage.sync.get
                 var nodeInner           = document.createElement('td');
                     nodeInner.innerText = content;
                     nodeInner.classList.add('value');
+                    nodeOuter.appendChild(nodeInner);
+                    
+                return nodeOuter;
+            }
+            
+            function createOriginatorRow (header, content)
+            {
+                var nodeOuter = document.createElement('div');
+                    nodeOuter.classList.add('row');
+                    
+                var nodeInner           = document.createElement('div');
+                    nodeInner.innerText = header;
+                    nodeInner.classList.add('field-description');
+                    nodeInner.classList.add('col-xs-7');
+                    nodeOuter.appendChild(nodeInner);
+                    
+                var nodeInner           = document.createElement('td');
+                    nodeInner.innerText = content;
+                    nodeInner.classList.add('value');
+                    nodeInner.classList.add('col-xs-5');
                     nodeOuter.appendChild(nodeInner);
                     
                 return nodeOuter;
@@ -228,6 +249,21 @@ chrome.storage.sync.get
                     attributes      : false,
                     characterData   : false
                 });
+            }
+            
+            /*
+             *  Experimental
+             */
+            if (true)
+            {
+                var rows = originator.querySelectorAll('.row');
+                var name = rows[0].querySelector('.value a').innerText;
+                var rank = rows[0].querySelector('.value span');
+                
+                rank.style.display = 'none';
+                
+                originator.insertBefore(createOriginatorRow('Mintos\'s Rating',     rank.innerText), originator.lastChild); // todo: localize
+                originator.insertBefore(createOriginatorRow('ExploreP2P\'s Rating', rating(name)  ), originator.lastChild); // todo: localize
             }
         }
         
