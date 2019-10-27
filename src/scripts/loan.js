@@ -80,7 +80,7 @@ chrome.storage.sync.get
                     nodeOuter.classList.add('row');
                     
                 var nodeInner           = document.createElement('div');
-                    nodeInner.innerText = header;
+                    nodeInner.innerHTML = header;
                     nodeInner.classList.add('field-description');
                     nodeInner.classList.add('col-xs-7');
                     nodeOuter.appendChild(nodeInner);
@@ -271,11 +271,12 @@ chrome.storage.sync.get
                 var rows = originator.querySelectorAll('.row');
                 var name = rows[0].querySelector('.value a').innerText;
                 var rank = rows[0].querySelector('.value span');
+                var link = ' (<a href="https://explorep2p.com/mintos-lender-ratings/" target="_blank">reference</a>)';
                 
                 rank.style.display = 'none';
                 
-                originator.insertBefore(createOriginatorRow('Mintos\'s '     + localization('Rating'), rank.innerText), originator.lastChild);
-                originator.insertBefore(createOriginatorRow('ExploreP2P\'s ' + localization('Rating'), rating(name)  ), originator.lastChild);
+                originator.insertBefore(createOriginatorRow('Mintos\'s '     + localization('Rating'),        rank.innerText), originator.lastChild);
+                originator.insertBefore(createOriginatorRow('ExploreP2P\'s ' + localization('Rating') + link, rating(name)  ), originator.lastChild);
             }
         }
         
