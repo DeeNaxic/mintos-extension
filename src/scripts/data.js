@@ -2,7 +2,7 @@
  *  @project >> Investment Extensions: Mintos
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
- *  @licence >> ?
+ *  @licence >> GNU GPLv3
  */
 
 function rating (originator)

@@ -2,7 +2,7 @@
  *  @project >> Investment Extensions
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
- *  @licence >> MIT
+ *  @licence >> GNU GPLv3
  */
 
 function assert (selector)

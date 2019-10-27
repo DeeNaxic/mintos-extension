@@ -2,7 +2,7 @@
  *  @project >> Investment Extensions: Mintos
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
- *  @licence >> MIT
+ *  @licence >> GNU GPLv3
  */
 
 chrome.storage.sync.get
