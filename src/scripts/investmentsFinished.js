@@ -89,7 +89,7 @@ chrome.storage.sync.get
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
                         var cells = rows[i].querySelectorAll('td');
-                        var days  = Math.floor(Math.abs((toDate(rows[i].querySelector('td.m-loan-issued').innerText).getTime() - toDate(getElementByAttribute(cells, 'data-m-label', 'Finished').innerText).getTime()) / 86400000));
+                        var days  = Math.floor(Math.abs((toDate(rows[i].querySelector('td.m-loan-issued').innerText).getTime() - toDate(getElementByAttribute(cells, 'data-m-label', localization('$Finished')).innerText).getTime()) / 86400000));
                         var node  = getElementByAttribute(cells, 'data-m-label', 'Duration');
                         
                         if (node === undefined)
@@ -122,7 +122,7 @@ chrome.storage.sync.get
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
                         var cells   = rows[i].querySelectorAll('td');
-                        var profit  = toFloat(getElementByAttribute(cells, 'data-m-label', 'Received Payments').innerText) - toFloat(getElementByAttribute(cells, 'data-m-label', 'My Investment').innerText);
+                        var profit  = toFloat(getElementByAttribute(cells, 'data-m-label', localization('$ReceivedPayments')).innerText) - toFloat(getElementByAttribute(cells, 'data-m-label', localization('$MyInvestment')).innerText);
                         var node    = getElementByAttribute(cells, 'data-m-label', 'Profit');
                         
                         if (node === undefined)
@@ -134,7 +134,7 @@ chrome.storage.sync.get
                         }
                         
                         node.style.color = profit > 0.00 ? 'green' : 'red';
-                        node.innerText   = getCurrencySymbol(getElementByAttribute(cells, 'data-m-label', 'Received Payments').innerText) + ' ' + profit.toFixed(2);
+                        node.innerText   = getCurrencySymbol(getElementByAttribute(cells, 'data-m-label', localization('$ReceivedPayments')).innerText) + ' ' + profit.toFixed(2);
                     }
                 });
             }
@@ -168,6 +168,21 @@ chrome.storage.sync.get
                 {
                     'en' : 'The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.',
                     'de' : '??'
+                },
+                '$Finished' :
+                {
+                    'en' : 'Finished',
+                    'de' : 'Zurückgezahlt'
+                },
+                '$ReceivedPayments' :
+                {
+                    'en' : 'Received Payments',
+                    'de' : 'Eingegangene Zahlungen'
+                },
+                '$MyInvestment' :
+                {
+                    'en' : 'My Investment',
+                    'de' : 'Meine Investition'
                 }
             };
             

@@ -50,7 +50,7 @@ chrome.storage.sync.get
                 {
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
-                        var cell  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Next Payment Date');
+                        var cell  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', localization('$NextPayment'));
                         var time  = cell.querySelectorAll('span')[0];
                         var node  = cell.querySelectorAll('span')[1];
                         
@@ -85,7 +85,7 @@ chrome.storage.sync.get
                 {
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
-                        if (getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Term').innerText.indexOf(localization('Late')) + 1 > 0)
+                        if (getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', localization('$Term')).innerText.indexOf(localization('$Late')) + 1 > 0)
                         {
                             rows[i].style.background = '#d4574e22';
                         }
@@ -118,15 +118,12 @@ chrome.storage.sync.get
                         var span    = cell.querySelectorAll('span')[1];
                         var percent = $getPercentage(span.getAttribute('data-tooltip'));
                         
-                        if (cell.innerText != localization('Sell'))
+                        if (span.hasAttribute('data-value') == false)
                         {
-                            if (span.hasAttribute('data-value') == false)
-                            {
-                                span.setAttribute('data-value', span.innerText);
-                            }
-                            
-                            span.innerHTML = span.getAttribute('data-value') + ' <span style="color:' + (percent < 0.0 ? 'green' : (percent > 0.0 ? 'red' : 'black')) + ';">' + (percent < 0.0 ? ' - ' : ' + ') + Math.abs(percent).toFixed(1) + '%</span>';
+                            span.setAttribute('data-value', span.innerText);
                         }
+                        
+                        span.innerHTML = span.getAttribute('data-value') + ' <span style="color:' + (percent < 0.0 ? 'green' : (percent > 0.0 ? 'red' : 'black')) + ';">' + (percent < 0.0 ? ' - ' : ' + ') + Math.abs(percent).toFixed(1) + '%</span>';
                     }
                 });
             }
@@ -146,15 +143,20 @@ chrome.storage.sync.get
                     'en' : 'days',
                     'de' : '??'
                 },
-                'Late' :
+                '$Late' :
                 {
                     'en' : 'Late',
                     'de' : '??'
                 },
-                'Sell' :
+                '$NextPayment' :
                 {
-                    'en' : 'Sell',
-                    'de' : '??'
+                    'en' : 'Next Payment Date',
+                    'de' : 'Nächster Zahlungstermin'
+                },
+                '$Term' :
+                {
+                    'en' : 'Term',
+                    'de' : 'Laufzeit'
                 }
             };
             

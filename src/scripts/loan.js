@@ -44,6 +44,12 @@ chrome.storage.sync.get
                 return setTimeout(runtime, 0.1, settings);
             }
             
+            /*
+             *  This is an auxiliary function, which is used to create a new row of data
+             *  in the details window. It handles everything from setting the attributes
+             *  and adding the styles. The two parameters passed in here, is the headers
+             *  text, which is the left column and the content which is the right column
+             */
             function createDetailsRow (header, content)
             {
                 var nodeOuter = document.createElement('tr');
@@ -61,6 +67,12 @@ chrome.storage.sync.get
                 return nodeOuter;
             }
             
+            /*
+             *  This is an auxiliary function, which is used to create a new row of data
+             *  in the originator box. It handles everything from setting the attributes
+             *  and adding the styles. The two parameters passed in here, is the headers
+             *  text, which is the left column and the content which is the right column
+             */
             function createOriginatorRow (header, content)
             {
                 var nodeOuter = document.createElement('div');
@@ -146,12 +158,12 @@ chrome.storage.sync.get
                 
                 schedule.querySelectorAll('tr').forEach(function (element)
                 {
-                    if (element.lastChild.innerText == localization('Paid'))
+                    if (element.lastChild.innerText == localization('$Paid'))
                     {
                         $ontime++;
                     }
                     else
-                    if (element.lastChild.innerText == localization('Scheduled'))
+                    if (element.lastChild.innerText == localization('$Scheduled'))
                     {
                         
                     }
@@ -257,7 +269,7 @@ chrome.storage.sync.get
             }
             
             /*
-             *  Experimental
+             *  todo: Experimental
              */
             if (true)
             {
@@ -281,6 +293,11 @@ chrome.storage.sync.get
                     'en' : 'Country',
                     'de' : '??'
                 },
+                'Payments' :
+                {
+                    'en' : 'On-time Payments',
+                    'de' : '??'
+                },
                 'Name' :
                 {
                     'en' : 'Name',
@@ -296,25 +313,20 @@ chrome.storage.sync.get
                     'en' : 'Amount',
                     'de' : '??'
                 },
-                'Payments' :
-                {
-                    'en' : 'On-time Payments',
-                    'de' : '??'
-                },
-                'Paid' :
-                {
-                    'en' : 'Paid',
-                    'de' : 'Gezahlt'
-                },
-                'Scheduled' :
-                {
-                    'en' : 'Scheduled',
-                    'de' : 'Geplante'
-                },
                 'Rating' :
                 {
                     'en' : 'Rating',
                     'de' : '??'
+                },
+                '$Paid' :
+                {
+                    'en' : 'Paid',
+                    'de' : 'Gezahlt'
+                },
+                '$Scheduled' :
+                {
+                    'en' : 'Scheduled',
+                    'de' : 'Geplante'
                 }
             };
             
