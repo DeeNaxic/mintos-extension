@@ -172,7 +172,7 @@ chrome.storage.sync.get
                 '$Finished' :
                 {
                     'en' : 'Finished',
-                    'de' : 'Zurückgezahlt'
+                    'de' : 'ZurÃ¼ckgezahlt'
                 },
                 '$ReceivedPayments' :
                 {

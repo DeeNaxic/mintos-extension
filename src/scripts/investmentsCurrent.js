@@ -151,7 +151,7 @@ chrome.storage.sync.get
                 '$NextPayment' :
                 {
                     'en' : 'Next Payment Date',
-                    'de' : 'Nächster Zahlungstermin'
+                    'de' : 'NÃ¤chster Zahlungstermin'
                 },
                 '$Term' :
                 {

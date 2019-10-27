@@ -11,7 +11,8 @@ chrome.storage.sync.get
         'LoanShowCountryRow'                : true,
         'LoanShowOntimePaymentPercent'      : true,
         'LoanFormatInvestmentBreakdown'     : true,
-        'LoanShowNextPaymentRow'            : true
+        'LoanShowNextPaymentRow'            : true,
+        'LoanShowAdditionalRatings'         : true
     },
     
     function (settings)
@@ -110,39 +111,33 @@ chrome.storage.sync.get
              *  shown. If the loan are in grace period, and there are only one scheduled
              *  payment left, then the next payment will instead show as non-applicative
              */
-            if (['Finished', 'Default'].includes(details.lastChild.lastChild.innerText.trim()) == false && settings.LoanShowNextPaymentRow) // todo: localize & warning
+            if (settings.LoanShowNextPaymentRow)
             {
-                var days = 0;
+                var days  = null;
+                var today = new Date().setHours(0, 0, 0, 0);
                 
-                for (var rows = schedule.querySelectorAll('tr'), i = 0; i < rows.length; i++) 
+                if ([localization('$Finished'), localization('$Default')].includes(details.lastChild.lastChild.innerText.trim()) == false)
                 {
-                    var columns = rows[i].querySelectorAll('td');
-                    var date    = toDate(columns[0].innerText); // todo: warning
-                    var status  = columns[6].innerText; // todo: warning
-                    
-                    if (status == 'Scheduled') // todo: localize
-                    {                            
-                        days = Math.floor((date - new Date().setHours(0, 0, 0, 0)) / 86400000);
+                    for (var rows = schedule.querySelectorAll('tr'), i = 0; i < rows.length; i++)
+                    {
+                        var columns = rows[i].querySelectorAll('td');
+                        var status  = columns[6].innerText;
                         
-                        if (days >= 0)
+                        if (status == localization('$Scheduled'))
                         {
-                            break;
+                            days = Math.floor((toDate(columns[0].innerText) - today) / 86400000); break;
                         }
                     }
                 }
                 
-                if (days >= 0)
+                if (days == null)
                 {
-                    details.appendChild(createDetailsRow('Next Payment', days + ' days')); // todo: localize
+                    details.appendChild(createDetailsRow(localization('NextPayment'), 'n/a'));
                 }
                 else
                 {
-                    // todo: show column anyway?
+                    details.appendChild(createDetailsRow(localization('NextPayment'), days + ' ' + localization('Days')));
                 }
-            }
-            else
-            {
-                // todo: show column anyway?
             }
             
             /*
@@ -271,7 +266,7 @@ chrome.storage.sync.get
             /*
              *  todo: Experimental
              */
-            if (true)
+            if (settings.LoanShowAdditionalRatings)
             {
                 var rows = originator.querySelectorAll('.row');
                 var name = rows[0].querySelector('.value a').innerText;
@@ -316,6 +311,26 @@ chrome.storage.sync.get
                 'Rating' :
                 {
                     'en' : 'Rating',
+                    'de' : '??'
+                },
+                'NextPayment' :
+                {
+                    'en' : 'Next Payment',
+                    'de' : '??'
+                },
+                'Days' :
+                {
+                    'en' : 'days',
+                    'de' : '??'
+                },
+                '$Finished' :
+                {
+                    'en' : 'Finished',
+                    'de' : '??'
+                },
+                '$Default' :
+                {
+                    'en' : 'Default',
                     'de' : '??'
                 },
                 '$Paid' :
