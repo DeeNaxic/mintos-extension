@@ -2,6 +2,7 @@
  *  @project >> Investment Extensions: Mintos
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
+ *  @licence >> MIT
  */
 
 chrome.storage.sync.get
@@ -21,7 +22,9 @@ chrome.storage.sync.get
              *  This try catch is meant to handle the cases, where Mintos have not fully
              *  loaded the website yet. As a result, some things might not have appeared
              *  on the website. We try to get everything and if anything turns out to be
-             *  empty (null or undefined), we stop the execution and attempt a reloading
+             *  empty (null or undefined), we stop further execution and reload the page
+             *  in 0.1 seconds using a timeout. This is done until the page successfully
+             *  loads, and has everything assigned, at which point the runtime continues
              */
             try
             {
@@ -86,7 +89,7 @@ chrome.storage.sync.get
              */
             if (settings.LoanShowCountryRow)
             {
-                details.insertBefore(createDetailsRow('Country', document.querySelector('.m-h1 img').title), details.firstChild); // todo: localize
+                details.insertBefore(createDetailsRow(localization('Country'), document.querySelector('.m-h1 img').title), details.firstChild);
             }
             
             /*
@@ -95,17 +98,17 @@ chrome.storage.sync.get
              *  shown. If the loan are in grace period, and there are only one scheduled
              *  payment left, then the next payment will instead show as non-applicative
              */
-            if (['Finished', 'Default'].includes(details.lastChild.lastChild.innerText.trim()) == false && settings.LoanShowNextPaymentRow) // todo: localize
+            if (['Finished', 'Default'].includes(details.lastChild.lastChild.innerText.trim()) == false && settings.LoanShowNextPaymentRow) // todo: localize & warning
             {
                 var days = 0;
                 
                 for (var rows = schedule.querySelectorAll('tr'), i = 0; i < rows.length; i++) 
                 {
-                    var columns     = rows[i].querySelectorAll('td');
-                    var date        = toDate(columns[0].innerText);
-                    var status      = columns[6].innerText;
+                    var columns = rows[i].querySelectorAll('td');
+                    var date    = toDate(columns[0].innerText); // todo: warning
+                    var status  = columns[6].innerText; // todo: warning
                     
-                    if (status === 'Scheduled') // todo: localize
+                    if (status == 'Scheduled') // todo: localize
                     {                            
                         days = Math.floor((date - new Date().setHours(0, 0, 0, 0)) / 86400000);
                         
@@ -125,6 +128,10 @@ chrome.storage.sync.get
                     // todo: show column anyway?
                 }
             }
+            else
+            {
+                // todo: show column anyway?
+            }
             
             /*
              *  This shows a percentage calculation, of how many payments, which were on
@@ -139,12 +146,12 @@ chrome.storage.sync.get
                 
                 schedule.querySelectorAll('tr').forEach(function (element)
                 {
-                    if (element.lastChild.innerText == 'Paid') // todo: localize
+                    if (element.lastChild.innerText == localization('Paid'))
                     {
                         $ontime++;
                     }
                     else
-                    if (element.lastChild.innerText == 'Scheduled') // todo: localize
+                    if (element.lastChild.innerText == localization('Scheduled'))
                     {
                         
                     }
@@ -155,7 +162,7 @@ chrome.storage.sync.get
                 });
                 
                 var percent  = $others + $ontime > 0 ? ($ontime / ($others + $ontime) * 100.00).toFixed(0) + '%' : 'n/a';
-                var node     = createDetailsRow('On-time Payments', percent); // todo: localize
+                var node     = createDetailsRow(localization('Payments'), percent);
                 
                 details.appendChild(node);
             }
@@ -176,17 +183,17 @@ chrome.storage.sync.get
                         nodeOuter.appendChild(nodeInner);
                         
                     var nodeInner                   = document.createElement('th');
-                        nodeInner.innerText         = 'Name'; // todo: localize
+                        nodeInner.innerText         = localization('Name');
                         nodeInner.style.textAlign   = 'left';
                         nodeOuter.appendChild(nodeInner);
                         
                     var nodeInner                   = document.createElement('th');
-                        nodeInner.innerText         = 'Percent'; // todo: localize
+                        nodeInner.innerText         = localization('Percent');
                         nodeInner.style.textAlign   = 'right';
                         nodeOuter.appendChild(nodeInner);
                         
                     var nodeInner                   = document.createElement('th');
-                        nodeInner.innerText         = 'Amount'; // todo: localize
+                        nodeInner.innerText         = localization('Amount');
                         nodeInner.style.textAlign   = 'right';
                         nodeOuter.appendChild(nodeInner);
                         
@@ -224,9 +231,7 @@ chrome.storage.sync.get
                 var observer = new MutationObserver(function (mutations)
                 {
                     var chart                       = document.querySelector('.chart-data');
-                        
                     var list                        = chart.querySelector('#legend');
-                        
                     var nodeTable                   = document.createElement('table');
                         nodeTable.style.width       = '100%';
                         nodeTable.style.fontSize    = '0.85em';
@@ -262,9 +267,58 @@ chrome.storage.sync.get
                 
                 rank.style.display = 'none';
                 
-                originator.insertBefore(createOriginatorRow('Mintos\'s Rating',     rank.innerText), originator.lastChild); // todo: localize
-                originator.insertBefore(createOriginatorRow('ExploreP2P\'s Rating', rating(name)  ), originator.lastChild); // todo: localize
+                originator.insertBefore(createOriginatorRow('Mintos\'s '     + localization('Rating'), rank.innerText), originator.lastChild);
+                originator.insertBefore(createOriginatorRow('ExploreP2P\'s ' + localization('Rating'), rating(name)  ), originator.lastChild);
             }
+        }
+        
+        function localization (key)
+        {
+            var translations =
+            {
+                'Country' :
+                {
+                    'en' : 'Country',
+                    'de' : '??'
+                },
+                'Name' :
+                {
+                    'en' : 'Name',
+                    'de' : '??'
+                },
+                'Percent' :
+                {
+                    'en' : 'Percent',
+                    'de' : '??'
+                },
+                'Amount' :
+                {
+                    'en' : 'Amount',
+                    'de' : '??'
+                },
+                'Payments' :
+                {
+                    'en' : 'On-time Payments',
+                    'de' : '??'
+                },
+                'Paid' :
+                {
+                    'en' : 'Paid',
+                    'de' : 'Gezahlt'
+                },
+                'Scheduled' :
+                {
+                    'en' : 'Scheduled',
+                    'de' : 'Geplante'
+                },
+                'Rating' :
+                {
+                    'en' : 'Rating',
+                    'de' : '??'
+                }
+            };
+            
+            return translations[key][document.location.pathname.substring(1, 3)];
         }
         
         runtime(settings);

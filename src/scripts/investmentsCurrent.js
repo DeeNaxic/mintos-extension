@@ -2,6 +2,7 @@
  *  @project >> Investment Extensions: Mintos
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
+ *  @licence >> MIT
  */
 
 chrome.storage.sync.get
@@ -20,7 +21,9 @@ chrome.storage.sync.get
              *  This try catch is meant to handle the cases, where Mintos have not fully
              *  loaded the website yet. As a result, some things might not have appeared
              *  on the website. We try to get everything and if anything turns out to be
-             *  empty (null or undefined), we stop the execution and attempt a reloading
+             *  empty (null or undefined), we stop further execution and reload the page
+             *  in 0.1 seconds using a timeout. This is done until the page successfully
+             *  loads, and has everything assigned, at which point the runtime continues
              */
             try
             {
@@ -41,13 +44,13 @@ chrome.storage.sync.get
              */
             if (settings.InvestmentsShowDaysToNextPayment)
             {
-                getElementByAttribute(document.querySelector('thead tr').querySelectorAll('th'), 'data-sort-field', 'next_planned_payment_date').querySelector('span').innerHTML = 'Days To<br>Next Payment'; // todo: localize
+                getElementByAttribute(document.querySelector('thead tr').querySelectorAll('th'), 'data-sort-field', 'next_planned_payment_date').querySelector('span').innerHTML = localization('DaysToNext');
                 
                 DomMonitor(dataTable, function (mutations)
                 {
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
-                        var cell  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Next Payment Date'); // todo: localize
+                        var cell  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Next Payment Date');
                         var time  = cell.querySelectorAll('span')[0];
                         var node  = cell.querySelectorAll('span')[1];
                         
@@ -64,7 +67,7 @@ chrome.storage.sync.get
                         }
                         else
                         {
-                            node.innerText = Math.floor((toDate(time.innerText) - new Date().setHours(0, 0, 0, 0)) / 86400000) + ' days'; // todo: localize
+                            node.innerText = Math.floor((toDate(time.innerText) - new Date().setHours(0, 0, 0, 0)) / 86400000) + ' ' + localization('Days');
                         }
                     }
                 });
@@ -82,7 +85,7 @@ chrome.storage.sync.get
                 {
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
-                        if (getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Term').innerText.indexOf('Late') + 1 > 0) // todo: localize
+                        if (getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Term').innerText.indexOf(localization('Late')) + 1 > 0)
                         {
                             rows[i].style.background = '#d4574e22';
                         }
@@ -115,7 +118,7 @@ chrome.storage.sync.get
                         var span    = cell.querySelectorAll('span')[1];
                         var percent = $getPercentage(span.getAttribute('data-tooltip'));
                         
-                        if (cell.innerText != 'Sell') // todo: localize
+                        if (cell.innerText != localization('Sell'))
                         {
                             if (span.hasAttribute('data-value') == false)
                             {
@@ -127,6 +130,35 @@ chrome.storage.sync.get
                     }
                 });
             }
+        }
+        
+        function localization (key)
+        {
+            var translations =
+            {
+                'DaysToNext' :
+                {
+                    'en' : 'Days To<br>Next Payment',
+                    'de' : '??'
+                },
+                'Days' :
+                {
+                    'en' : 'days',
+                    'de' : '??'
+                },
+                'Late' :
+                {
+                    'en' : 'Late',
+                    'de' : '??'
+                },
+                'Sell' :
+                {
+                    'en' : 'Sell',
+                    'de' : '??'
+                }
+            };
+            
+            return translations[key][document.location.pathname.substring(1, 3)];
         }
         
         runtime(settings);

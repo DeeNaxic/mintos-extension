@@ -2,6 +2,7 @@
  *  @project >> Investment Extensions: Mintos
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
+ *  @licence >> MIT
  */
 
 chrome.storage.sync.get
@@ -19,7 +20,9 @@ chrome.storage.sync.get
              *  This try catch is meant to handle the cases, where Mintos have not fully
              *  loaded the website yet. As a result, some things might not have appeared
              *  on the website. We try to get everything and if anything turns out to be
-             *  empty (null or undefined), we stop the execution and attempt a reloading
+             *  empty (null or undefined), we stop further execution and reload the page
+             *  in 0.1 seconds using a timeout. This is done until the page successfully
+             *  loads, and has everything assigned, at which point the runtime continues
              */
             try
             {
@@ -78,8 +81,8 @@ chrome.storage.sync.get
              */
             if (settings.InvestmentsShowDurationColumn)
             {
-                thead.firstChild.appendChild(createHeader ('Duration')); // todo: localize
-                thead.lastChild .appendChild(createTooltip('The total amount of days which you held this note.')); // todo: localize
+                thead.firstChild.appendChild(createHeader (localization('Duration')));
+                thead.lastChild .appendChild(createTooltip(localization('DurationDescription')));
                 
                 DomMonitor(dataTable, function (mutations)
                 {
@@ -87,17 +90,17 @@ chrome.storage.sync.get
                     {
                         var cells = rows[i].querySelectorAll('td');
                         var days  = Math.floor(Math.abs((toDate(rows[i].querySelector('td.m-loan-issued').innerText).getTime() - toDate(getElementByAttribute(cells, 'data-m-label', 'Finished').innerText).getTime()) / 86400000));
-                        var node  = getElementByAttribute(cells, 'data-m-label', 'Duration'); // todo: localize
+                        var node  = getElementByAttribute(cells, 'data-m-label', 'Duration');
                         
                         if (node === undefined)
                         {
                             node  = document.createElement('td');
-                            node.setAttribute  ('data-m-label', 'Duration'); // todo: localize
+                            node.setAttribute  ('data-m-label', 'Duration');
                             node.classList.add ('global-align-right');
                             rows[i].appendChild(node);
                         }
                         
-                        node.innerText = days + ' days'; // todo: localize
+                        node.innerText = days + ' ' + localization('Days');
                     }
                 });
             }
@@ -111,30 +114,64 @@ chrome.storage.sync.get
              */
             if (settings.InvestmentsShowProfitColumn)
             {
-                thead.firstChild.appendChild(createHeader ('Profit')); // todo: localize
-                thead.lastChild .appendChild(createTooltip('The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.')); // todo: localize
+                thead.firstChild.appendChild(createHeader (localization('Profit')));
+                thead.lastChild .appendChild(createTooltip(localization('ProfitDescription')));
                 
                 DomMonitor(dataTable, function (mutations)
                 {
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
                         var cells   = rows[i].querySelectorAll('td');
-                        var profit  = toFloat(getElementByAttribute(cells, 'data-m-label', 'Received Payments').innerText) - toFloat(getElementByAttribute(cells, 'data-m-label', 'My Investment').innerText); // todo: localize
-                        var node    = getElementByAttribute(cells, 'data-m-label', 'Profit'); // todo: localize
+                        var profit  = toFloat(getElementByAttribute(cells, 'data-m-label', 'Received Payments').innerText) - toFloat(getElementByAttribute(cells, 'data-m-label', 'My Investment').innerText);
+                        var node    = getElementByAttribute(cells, 'data-m-label', 'Profit');
                         
                         if (node === undefined)
                         {
                             node = document.createElement('td');
-                            node.setAttribute  ('data-m-label', 'Profit'); // todo: localize
+                            node.setAttribute  ('data-m-label', 'Profit');
                             node.classList.add ('global-align-right');
                             rows[i].appendChild(node);
                         }
                         
                         node.style.color = profit > 0.00 ? 'green' : 'red';
-                        node.innerText   = getCurrencySymbol(getElementByAttribute(cells, 'data-m-label', 'Received Payments').innerText) + ' ' + profit.toFixed(2); // todo: localize
+                        node.innerText   = getCurrencySymbol(getElementByAttribute(cells, 'data-m-label', 'Received Payments').innerText) + ' ' + profit.toFixed(2);
                     }
                 });
             }
+        }
+        
+        function localization (key)
+        {
+            var translations =
+            {
+                'Duration' :
+                {
+                    'en' : 'Duration',
+                    'de' : '??'
+                },
+                'DurationDescription' :
+                {
+                    'en' : 'The total amount of days which you held this note.',
+                    'de' : '??'
+                },
+                'Days' :
+                {
+                    'en' : 'days',
+                    'de' : '??'
+                },
+                'Profit' :
+                {
+                    'en' : 'Profit',
+                    'de' : '??'
+                },
+                'ProfitDescription' :
+                {
+                    'en' : 'The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.',
+                    'de' : '??'
+                }
+            };
+            
+            return translations[key][document.location.pathname.substring(1, 3)];
         }
         
         runtime(settings);

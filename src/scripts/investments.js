@@ -2,6 +2,7 @@
  *  @project >> Investment Extensions: Mintos
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
+ *  @licence >> MIT
  */
 
 chrome.storage.sync.get
@@ -19,7 +20,9 @@ chrome.storage.sync.get
              *  This try catch is meant to handle the cases, where Mintos have not fully
              *  loaded the website yet. As a result, some things might not have appeared
              *  on the website. We try to get everything and if anything turns out to be
-             *  empty (null or undefined), we stop the execution and attempt a reloading
+             *  empty (null or undefined), we stop further execution and reload the page
+             *  in 0.1 seconds using a timeout. This is done until the page successfully
+             *  loads, and has everything assigned, at which point the runtime continues
              */
             try
             {
@@ -96,7 +99,7 @@ chrome.storage.sync.get
              *  link, to the current page, with the same query parameters, but filtering
              *  on the selected loan type only. This's done simply by reloading the page
              */
-            if (false && settings.InvestmentsUseLoanTypeLinks)
+            if (false && settings.InvestmentsUseLoanTypeLinks) // todo: broken
             {
                 DomMonitor(dataTable, function (mutations)
                 {
@@ -128,15 +131,15 @@ chrome.storage.sync.get
              */
             if (settings.InvestmentsShowCountryColumn)
             {
-                thead.firstChild.insertBefore(createHeader ('Country'                                   ), thead.firstChild.firstChild); // todo: localize
-                thead.lastChild .insertBefore(createTooltip('The country where this loan was taken out.'), thead.lastChild .firstChild); // todo: localize
+                thead.firstChild.insertBefore(createHeader (localization('Country')           ), thead.firstChild.firstChild);
+                thead.lastChild .insertBefore(createTooltip(localization('CountryDescription')), thead.lastChild .firstChild);
                 
                 DomMonitor(dataTable, function (mutations)
                 {
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
                         var link  = rows[i].querySelector('td.loan-id-col');
-                        var node  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Country'); // todo: localize
+                        var node  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Country');
                         
                         if (node === undefined)
                         {
@@ -148,7 +151,7 @@ chrome.storage.sync.get
                             link.querySelector('a')  .style.paddingLeft = '0px';
                             link.querySelector('img').style.display     = 'none';
                             
-                            node.setAttribute('data-m-label', 'Country'); // todo: localize
+                            node.setAttribute('data-m-label', 'Country');
                             node.appendChild(flag);
                             node.appendChild(text);
                             
@@ -160,6 +163,25 @@ chrome.storage.sync.get
                     }
                 });
             }
+        }
+        
+        function localization (key)
+        {
+            var translations =
+            {
+                'Country' :
+                {
+                    'en' : 'Country',
+                    'de' : '??'
+                },
+                'CountryDescription' :
+                {
+                    'en' : 'The country where this loan was taken out.',
+                    'de' : '??'
+                }
+            };
+            
+            return translations[key][document.location.pathname.substring(1, 3)];
         }
         
         runtime(settings);
