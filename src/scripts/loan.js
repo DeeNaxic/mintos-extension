@@ -29,7 +29,7 @@ chrome.storage.sync.get
              */
             try
             {
-                if (document.location.pathname.match(/^\/\w{2}\/[0-9]+-[0-9]+/g) === null)
+                if (document.location.pathname.match(/^\/\w{2}\/[0-9]+(?:-[0-9]+)?/g) === null)
                 {
                     return;
                 }
