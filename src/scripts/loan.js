@@ -123,7 +123,7 @@ chrome.storage.sync.get
                         var columns = rows[i].querySelectorAll('td');
                         var status  = columns[6].innerText;
                         
-                        if (status == localization('$Scheduled'))
+                        if ([localization('$Scheduled'), localization('$Late')].includes(status))
                         {
                             days = Math.floor((toDate(columns[0].innerText) - today) / 86400000); break;
                         }
@@ -136,7 +136,7 @@ chrome.storage.sync.get
                 }
                 else
                 {
-                    details.appendChild(createDetailsRow(localization('NextPayment'), days + ' ' + localization('Days')));
+                    details.appendChild(createDetailsRow(localization('NextPayment'), days > -1 ? days + ' ' + localization('Days') : Math.abs(days) + ' ' + localization('DaysLate')));
                 }
             }
             
@@ -287,52 +287,62 @@ chrome.storage.sync.get
                 'Country' :
                 {
                     'en' : 'Country',
-                    'de' : '??'
+                    'de' : 'Land'
                 },
                 'Payments' :
                 {
                     'en' : 'On-time Payments',
-                    'de' : '??'
+                    'de' : 'Pünktliche Zahlungen'
                 },
                 'Name' :
                 {
                     'en' : 'Name',
-                    'de' : '??'
+                    'de' : 'Name'
                 },
                 'Percent' :
                 {
                     'en' : 'Percent',
-                    'de' : '??'
+                    'de' : 'Prozent'
                 },
                 'Amount' :
                 {
                     'en' : 'Amount',
-                    'de' : '??'
+                    'de' : 'Anzahl'
                 },
                 'Rating' :
                 {
                     'en' : 'Rating',
-                    'de' : '??'
+                    'de' : 'Bewertung'
                 },
                 'NextPayment' :
                 {
                     'en' : 'Next Payment',
-                    'de' : '??'
+                    'de' : 'Nächste Zahlung'
                 },
                 'Days' :
                 {
                     'en' : 'days',
-                    'de' : '??'
+                    'de' : 'Tage'
+                },
+                'DaysLate' :
+                {
+                    'en' : 'days late',
+                    'de' : 'Tage zu spät'
+                },
+                '$Late' :
+                {
+                    'en' : 'Late',
+                    'de' : 'In Verzug'
                 },
                 '$Finished' :
                 {
                     'en' : 'Finished',
-                    'de' : '??'
+                    'de' : 'Zurückgezahlt'
                 },
                 '$Default' :
                 {
                     'en' : 'Default',
-                    'de' : '??'
+                    'de' : '??' // todo
                 },
                 '$Paid' :
                 {

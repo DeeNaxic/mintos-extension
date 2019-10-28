@@ -136,17 +136,17 @@ chrome.storage.sync.get
                 'DaysToNext' :
                 {
                     'en' : 'Days To<br>Next Payment',
-                    'de' : '??'
+                    'de' : 'Tage zur<br>nächsten Zahlung.'
                 },
                 'Days' :
                 {
                     'en' : 'days',
-                    'de' : '??'
+                    'de' : 'tage'
                 },
                 '$Late' :
                 {
                     'en' : 'Late',
-                    'de' : '??'
+                    'de' : 'In Verzug'
                 },
                 '$NextPayment' :
                 {

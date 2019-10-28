@@ -147,27 +147,27 @@ chrome.storage.sync.get
                 'Duration' :
                 {
                     'en' : 'Duration',
-                    'de' : '??'
+                    'de' : 'Dauer'
                 },
                 'DurationDescription' :
                 {
                     'en' : 'The total amount of days which you held this note.',
-                    'de' : '??'
+                    'de' : 'Der Gesamtbetrag von tagen welches du liehst.'
                 },
                 'Days' :
                 {
                     'en' : 'days',
-                    'de' : '??'
+                    'de' : 'tage'
                 },
                 'Profit' :
                 {
                     'en' : 'Profit',
-                    'de' : '??'
+                    'de' : 'Profitieren'
                 },
                 'ProfitDescription' :
                 {
                     'en' : 'The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.',
-                    'de' : '??'
+                    'de' : 'Der Gesamtgewinn vom Darlehen berechnet als das gesamt erhaltene Zahlung minus die investierte Menge was sie gekauft haben.'
                 },
                 '$Finished' :
                 {

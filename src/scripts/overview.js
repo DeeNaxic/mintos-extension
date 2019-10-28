@@ -161,7 +161,7 @@ chrome.storage.sync.get
                 'Switch' :
                 {
                     'en' : 'Switch Metric',
-                    'de' : '??'
+                    'de' : 'Veränderung'
                 }
             };
             
