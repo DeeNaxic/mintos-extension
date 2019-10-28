@@ -264,7 +264,13 @@ chrome.storage.sync.get
             }
             
             /*
-             *  todo: Experimental
+             *  This does two things. First it splits the line from Mintos, with ratings
+             *  and loan originator name, into two lines. Such that the rating is put on
+             *  its own line. It then tries to load up a ranking, from the data document
+             *  and creates a new line with the ExploreP2P's assessement of that company
+             *  along with a link to their site. The link can is to get an understanding
+             *  of how the ratings were calculated. We have gotten permission to use the
+             *  ratings, under the agreement that we link to the site they were taken of
              */
             if (settings.LoanShowAdditionalRatings)
             {
