@@ -177,7 +177,7 @@ chrome.storage.sync.get
                 'CountryDescription' :
                 {
                     'en' : 'The country where this loan was taken out.',
-                    'de' : 'Das Land woher du das Darlehen genommen hast.'
+                    'de' : 'Das Land in welchem dieses Darlehen bezogen wurde.'
                 }
             };
             

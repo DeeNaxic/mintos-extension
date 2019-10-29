@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  @project >> Investment Extensions: Mintos
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
@@ -152,7 +152,7 @@ chrome.storage.sync.get
                 'DurationDescription' :
                 {
                     'en' : 'The total amount of days which you held this note.',
-                    'de' : 'Der Gesamtbetrag von tagen welches du liehst.'
+                    'de' : 'Zeitraum des Darlehens in Tagen.'
                 },
                 'Days' :
                 {
@@ -167,7 +167,7 @@ chrome.storage.sync.get
                 'ProfitDescription' :
                 {
                     'en' : 'The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.',
-                    'de' : 'Der Gesamtgewinn vom Darlehen berechnet als das gesamt erhaltene Zahlung minus die investierte Menge was sie gekauft haben.'
+                    'de' : 'Der Gesamtgewinn des Darlehens berechnet als gesamt erhaltene Zahlung minus der Summe, die Sie zum Kauf aufgewendet haben.'
                 },
                 '$Finished' :
                 {
