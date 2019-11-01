@@ -9,7 +9,8 @@ chrome.storage.sync.get
 (
     {
         'InvestmentsShowProfitColumn'       : true,
-        'InvestmentsShowDurationColumn'     : true
+        'InvestmentsShowDurationColumn'     : true,
+		'InvestmentsUseLoanTypeLinks'       : true
     },
     
     function (settings)
@@ -35,6 +36,26 @@ chrome.storage.sync.get
                 return setTimeout(runtime, 0.1, settings);
             }
             
+			/*
+             *  This takes the current query string, splits it up into components and it
+             *  then iterates through all the key, value pairs. If there is any existing
+             *  keys, which matches the one we are trying to insert, it is removed. This
+             *  means that any existing query parameters are kept intact, such that, the
+             *  final path returned, always have the same path with the new key appended
+             */
+            function createLink (key, target)
+            {
+                for (var queries = window.location.search.substr(1).split('&'), results = [], i = 0; i < queries.length; i++)
+                {
+                    if (queries[i].toLowerCase().startsWith(key.toLowerCase()) == false)
+                    {
+                        results.push(queries[i]);
+                    }
+                }
+                
+                return window.location.pathname + '?' + results.join('&') + '&' + key + '=' + target;
+            }
+			
             /*
              *  This creates a header cell, according to the ones used in the investment
              *  data table. It uses the same styles, and takes as input the headers text
@@ -83,8 +104,8 @@ chrome.storage.sync.get
             {
                 thead.firstChild.appendChild(createHeader (localization('Duration')));
                 thead.lastChild .appendChild(createTooltip(localization('DurationDescription')));
-                
-                DomMonitor(dataTable, function (mutations)
+				
+				DomMonitor(dataTable, function (mutations)
                 {
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
@@ -143,6 +164,36 @@ chrome.storage.sync.get
 							node.style.color = 'green';
 							node.innerText	 = getCurrencySymbol(getElementByAttribute(cells, 'data-m-label', localization('$ReceivedPayments')).innerText) + ' ' + profit.toFixed(2);
 						}
+                    }
+                });
+            }
+			
+			/*
+             *  This registers a DomMonitor which listens for changes, in the data table
+             *  and on any change including initially, it runs this code. It iterates on
+             *  all rows in the investment table and inserts on the loan type cells, the
+             *  link, to the current page, with the same query parameters, but filtering
+             *  on the selected loan type only. This's done simply by reloading the page
+             */
+            if (settings.InvestmentsUseLoanTypeLinks)
+            {
+                DomMonitor(dataTable, function (mutations)
+                {
+					for (var data = {}, lines = document.querySelectorAll('#sel-pledge-groups option'), i = 0; i < lines.length; i++)
+					{
+						data[lines[i].innerText] = lines[i].value;
+					}
+					
+                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    {
+                        var node 			  = rows[i].querySelector('td.m-loan-type');
+							node.style.color  = '#3f85f4';
+							node.style.cursor = 'pointer';
+							
+							node.onclick = function (e)
+							{
+								window.location.href = createLink('pledge_groups[]', data[e.target.innerText]);
+							}
                     }
                 });
             }
