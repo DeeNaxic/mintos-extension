@@ -136,27 +136,52 @@ chrome.storage.sync.get
                 'DaysToNext' :
                 {
                     'en' : 'Days To<br>Next Payment',
-                    'de' : 'Tage bis zur<br>nächsten Zahlung.'
+                    'de' : 'Tage bis zur<br>nächsten Zahlung',
+					'pl' : 'Dni do<br>następnej opłaty',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'Days' :
                 {
                     'en' : 'days',
-                    'de' : 'tage'
+                    'de' : 'tage',
+					'pl' : 'dni',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$Late' :
                 {
                     'en' : 'Late',
-                    'de' : 'In Verzug'
+                    'de' : 'In Verzug',
+					'pl' : 'Late',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$NextPayment' :
                 {
                     'en' : 'Next Payment Date',
-                    'de' : 'Nächster Zahlungstermin'
+                    'de' : 'Nächster Zahlungstermin',
+					'pl' : 'Data następnej płatności',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$Term' :
                 {
                     'en' : 'Term',
-                    'de' : 'Laufzeit'
+                    'de' : 'Laufzeit',
+					'pl' : 'Okres',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 }
             };
             

@@ -116,7 +116,7 @@ chrome.storage.sync.get
                 var days  = null;
                 var today = new Date().setHours(0, 0, 0, 0);
                 
-                if ([localization('$Finished'), localization('$Default')].includes(details.lastChild.lastChild.innerText.trim()) == false)
+                if ([localization('$Finished'), localization('$FinishedPrematurely'), localization('$Default')].includes(details.lastChild.lastChild.innerText.trim()) == false)
                 {
                     for (var rows = schedule.querySelectorAll('tr'), i = 0; i < rows.length; i++)
                     {
@@ -293,72 +293,152 @@ chrome.storage.sync.get
                 'Country' :
                 {
                     'en' : 'Country',
-                    'de' : 'Land'
+                    'de' : 'Land',
+					'pl' : 'Kraj',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'Payments' :
                 {
                     'en' : 'On-time Payments',
-                    'de' : 'Pünktliche Zahlungen'
+                    'de' : 'Pünktliche Zahlungen',
+					'pl' : 'Opłata na czas',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'Name' :
                 {
                     'en' : 'Name',
-                    'de' : 'Name'
+                    'de' : 'Name',
+					'pl' : 'Imię',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'Percent' :
                 {
                     'en' : 'Percent',
-                    'de' : 'Prozent'
+                    'de' : 'Prozent',
+					'pl' : 'Procent',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'Amount' :
                 {
                     'en' : 'Amount',
-                    'de' : 'Anzahl'
+                    'de' : 'Anzahl',
+					'pl' : 'Ilość',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'Rating' :
                 {
                     'en' : 'Rating',
-                    'de' : 'Bewertung'
+                    'de' : 'Bewertung',
+					'pl' : 'Ocena',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'NextPayment' :
                 {
                     'en' : 'Next Payment',
-                    'de' : 'Nächste Zahlung'
+                    'de' : 'Nächste Zahlung',
+					'pl' : 'Następna opłata',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'Days' :
                 {
                     'en' : 'days',
-                    'de' : 'Tage'
+                    'de' : 'Tage',
+					'pl' : 'dni',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'DaysLate' :
                 {
                     'en' : 'days late',
-                    'de' : 'Tage zu spät'
+                    'de' : 'Tage zu spät',
+					'pl' : 'Spóźnione dni',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$Late' :
                 {
                     'en' : 'Late',
-                    'de' : 'In Verzug'
+                    'de' : 'In Verzug',
+					'pl' : '?',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$Finished' :
                 {
                     'en' : 'Finished',
-                    'de' : 'Zurückgezahlt'
+                    'de' : 'Zurückgezahlt',
+					'pl' : 'Finished',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
+                },
+                '$FinishedPrematurely' :
+                {
+                    'en' : 'Finished prematurely',
+                    'de' : 'Vorzeitig beendet',
+					'pl' : 'Status Zokończona przed czasem',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$Default' :
                 {
                     'en' : 'Default',
-                    'de' : '??' // todo
+                    'de' : '?',
+					'pl' : '?',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$Paid' :
                 {
                     'en' : 'Paid',
-                    'de' : 'Gezahlt'
+                    'de' : 'Gezahlt',
+					'pl' : 'Zapłacono',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$Scheduled' :
                 {
                     'en' : 'Scheduled',
-                    'de' : 'Geplante'
+                    'de' : 'Geplante',
+					'pl' : 'Zaplanowano',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 }
             };
             

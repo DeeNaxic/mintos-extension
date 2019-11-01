@@ -161,7 +161,12 @@ chrome.storage.sync.get
                 'Switch' :
                 {
                     'en' : 'Switch Metric',
-                    'de' : 'Veränderung'
+                    'de' : 'Veränderung',
+					'pl' : 'Zmiana',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 }
             };
             

@@ -147,42 +147,82 @@ chrome.storage.sync.get
                 'Duration' :
                 {
                     'en' : 'Duration',
-                    'de' : 'Dauer'
+                    'de' : 'Dauer',
+					'pl' : 'Czas trwania',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'DurationDescription' :
                 {
                     'en' : 'The total amount of days which you held this note.',
-                    'de' : 'Zeitraum des Darlehens in Tagen.'
+                    'de' : 'Zeitraum des Darlehens in Tagen.',
+					'pl' : 'Łączna liczba dni, w których posiadałeś pożyczkę.',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'Days' :
                 {
                     'en' : 'days',
-                    'de' : 'tage'
+                    'de' : 'tage',
+					'pl' : 'dni',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'Profit' :
                 {
                     'en' : 'Profit',
-                    'de' : 'Profitieren'
+                    'de' : 'Profitieren',
+					'pl' : 'Zysk',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'ProfitDescription' :
                 {
                     'en' : 'The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.',
-                    'de' : 'Der Gesamtgewinn des Darlehens berechnet als gesamt erhaltene Zahlung minus der Summe, die Sie zum Kauf aufgewendet haben.'
+                    'de' : 'Der Gesamtgewinn des Darlehens berechnet als gesamt erhaltene Zahlung minus der Summe, die Sie zum Kauf aufgewendet haben.',
+					'pl' : 'Całkowity zysk uzyskany z pożyczki, obliczany na podstawie uzyskanych zapłat minus wkład inwestycyjny włożony w kupno.',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$Finished' :
                 {
                     'en' : 'Finished',
-                    'de' : 'Zurückgezahlt'
+                    'de' : 'Zurückgezahlt',
+					'pl' : 'Finished',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$ReceivedPayments' :
                 {
                     'en' : 'Received Payments',
-                    'de' : 'Eingegangene Zahlungen'
+                    'de' : 'Eingegangene Zahlungen',
+					'pl' : 'Otrzymane płatności',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 '$MyInvestment' :
                 {
                     'en' : 'My Investment',
-                    'de' : 'Meine Investition'
+                    'de' : 'Meine Investition',
+					'pl' : 'Moja inwestycja',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 }
             };
             

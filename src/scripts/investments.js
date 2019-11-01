@@ -172,12 +172,22 @@ chrome.storage.sync.get
                 'Country' :
                 {
                     'en' : 'Country',
-                    'de' : 'Land'
+                    'de' : 'Land',
+					'pl' : 'Kraj',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 },
                 'CountryDescription' :
                 {
                     'en' : 'The country where this loan was taken out.',
-                    'de' : 'Das Land in welchem dieses Darlehen bezogen wurde.'
+                    'de' : 'Das Land in welchem dieses Darlehen bezogen wurde.',
+					'pl' : 'Kraj w którym została wzięta pozyczka.',
+					'cs' : '?',
+					'es' : '?',
+					'lv' : '?',
+					'ru' : '?'
                 }
             };
             
