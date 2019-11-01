@@ -133,8 +133,16 @@ chrome.storage.sync.get
                             rows[i].appendChild(node);
                         }
                         
-                        node.style.color = profit > 0.00 ? 'green' : 'red';
-                        node.innerText   = getCurrencySymbol(getElementByAttribute(cells, 'data-m-label', localization('$ReceivedPayments')).innerText) + ' ' + profit.toFixed(2);
+						if (profit < 0.00)
+						{
+							node.style.color = 'black';
+							node.innerText	 = 'n/a';
+						}
+						else
+						{
+							node.style.color = 'green';
+							node.innerText	 = getCurrencySymbol(getElementByAttribute(cells, 'data-m-label', localization('$ReceivedPayments')).innerText) + ' ' + profit.toFixed(2);
+						}
                     }
                 });
             }
