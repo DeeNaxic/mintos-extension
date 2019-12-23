@@ -77,3 +77,39 @@ var DomMonitor = (function ()
         }
     }
 })();
+
+var DomMonitorAggressive = (function ()
+{
+    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    var ready            = true;
+    
+    return function (source, callback)
+    {
+        if (!source || !source.nodeType === 1)
+        {
+            return;
+        }
+        
+        if (MutationObserver)
+        {
+            var obs = new MutationObserver(function(mutations, observer)
+            {
+                if (ready && (ready = false) == false)
+                {
+                    callback(mutations); setTimeout(function () {ready = true}, 0.2);
+                }
+            });
+            
+            obs.observe(source,
+            {
+                childList   : true,
+                subtree     : true
+            });
+        }
+        else
+        if (window.addEventListener)
+        {
+            source.addEventListener('DOMNodeRemoved', callback, false);
+        }
+    }
+})();

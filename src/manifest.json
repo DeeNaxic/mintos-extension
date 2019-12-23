@@ -90,6 +90,18 @@
                 "scripts/investments.js",
                 "scripts/investmentsCurrent.js"
             ]
+        },
+        {
+            "matches"   :
+            [
+                "https://www.mintos.com/en/account-statement/*",
+                "https://www.mintos.com/de/kontoauszug/*",
+                "https://www.mintos.com/pl/wyciag-z-konta/*"
+            ],
+            "js"        :
+            [
+                "scripts/accountStatement.js"
+            ]
         }
     ]
 }
