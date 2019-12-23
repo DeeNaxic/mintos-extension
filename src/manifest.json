@@ -1,7 +1,7 @@
 {
-    "name"              : "Investment Extensions: Mintos",
-    "description"       : "Improves the Mintos.com P2P investment experience, by enabling a rich set of additional features and post-processing of the website.",
-    "version"           : "0.0.1",
+    "name"              : "Investment Extensions: www.Mintos.com",
+    "description"       : "This extension aims to improve the Mintos.com experience, with additional features and post-processing of the website.",
+    "version"           : "1.0.0",
     "manifest_version"  : 2,
     
     "options_ui"        :
@@ -16,7 +16,7 @@
         "48"            : "icons/icon-48.png",
         "128"           : "icons/icon-128.png"
     },
-
+    
     "browser_action"    : 
     {
         "default_popup" : "options/index.html"
@@ -45,7 +45,7 @@
             [
                 "https://www.mintos.com/en/overview/*",
                 "https://www.mintos.com/de/ubersicht/*",
-				"https://www.mintos.com/pl/przeglad/*"
+                "https://www.mintos.com/pl/przeglad/*"
             ],
             "js"        :
             [
@@ -69,8 +69,8 @@
             [
                 "https://www.mintos.com/en/my-investments/finished-investments/*",
                 "https://www.mintos.com/de/meine-investitionen/finished-investments-de/*",
-				"https://www.mintos.com/pl/moje-inwestycje/finished-investments-pl/*"
-				
+                "https://www.mintos.com/pl/moje-inwestycje/finished-investments-pl/*"
+                
             ],
             "js"        :
             [
@@ -83,7 +83,7 @@
             [
                 "https://www.mintos.com/en/my-investments/current-investments/*",
                 "https://www.mintos.com/de/meine-investitionen/current-investments-de/*",
-				"https://www.mintos.com/pl/moje-inwestycje/current-investments-pl/*"
+                "https://www.mintos.com/pl/moje-inwestycje/current-investments-pl/*"
             ],
             "js"        :
             [

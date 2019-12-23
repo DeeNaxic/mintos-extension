@@ -1,5 +1,5 @@
 /*
- *  @project >> Investment Extensions: Mintos
+ *  @project >> Investment.Extensions: www.Mintos.com
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
@@ -9,9 +9,9 @@ chrome.storage.sync.get
 (
     {
         'LoanShowCountryRow'                : true,
+        'LoanShowNextPaymentRow'            : true,
         'LoanShowOntimePaymentPercent'      : true,
         'LoanFormatInvestmentBreakdown'     : true,
-        'LoanShowNextPaymentRow'            : true,
         'LoanShowAdditionalRatings'         : true
     },
     
@@ -23,7 +23,7 @@ chrome.storage.sync.get
              *  This try catch is meant to handle the cases, where Mintos have not fully
              *  loaded the website yet. As a result, some things might not have appeared
              *  on the website. We try to get everything and if anything turns out to be
-             *  empty (null or undefined), we stop further execution and reload the page
+             *  empty (null or undefined), we stop further execution and reload the code
              *  in 0.1 seconds using a timeout. This is done until the page successfully
              *  loads, and has everything assigned, at which point the runtime continues
              */
@@ -246,7 +246,7 @@ chrome.storage.sync.get
                         
                     list.querySelectorAll('li').forEach(function (element)
                     {
-                        nodeTable.appendChild($createRow(element.getAttribute('class'), element.innerText.match(/^(.*?)- (\d+%).*?\/ (.*)/)));
+                        nodeTable.appendChild($createRow(element.getAttribute('class'), element.innerText.match(/^(.*?)[-<] (\d+%).*?\/ (.*)/)));
                     });
                     
                     list.style.display  = 'none';
@@ -286,7 +286,7 @@ chrome.storage.sync.get
             }
         }
         
-        function localization (key)
+        function localization (field)
         {
             var translations =
             {
@@ -294,155 +294,155 @@ chrome.storage.sync.get
                 {
                     'en' : 'Country',
                     'de' : 'Land',
-					'pl' : 'Kraj',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Kraj',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 'Payments' :
                 {
                     'en' : 'On-time Payments',
                     'de' : 'Pünktliche Zahlungen',
-					'pl' : 'Opłata na czas',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Opłata na czas',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 'Name' :
                 {
                     'en' : 'Name',
                     'de' : 'Name',
-					'pl' : 'Imię',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Imię',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 'Percent' :
                 {
                     'en' : 'Percent',
                     'de' : 'Prozent',
-					'pl' : 'Procent',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Procent',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 'Amount' :
                 {
                     'en' : 'Amount',
                     'de' : 'Anzahl',
-					'pl' : 'Ilość',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Ilość',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 'Rating' :
                 {
                     'en' : 'Rating',
                     'de' : 'Bewertung',
-					'pl' : 'Ocena',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Ocena',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 'NextPayment' :
                 {
                     'en' : 'Next Payment',
                     'de' : 'Nächste Zahlung',
-					'pl' : 'Następna opłata',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Następna opłata',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 'Days' :
                 {
                     'en' : 'days',
                     'de' : 'Tage',
-					'pl' : 'dni',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'dni',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 'DaysLate' :
                 {
                     'en' : 'days late',
                     'de' : 'Tage zu spät',
-					'pl' : 'Spóźnione dni',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Spóźnione dni',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 '$Late' :
                 {
                     'en' : 'Late',
                     'de' : 'In Verzug',
-					'pl' : '?',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : '?',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 '$Finished' :
                 {
                     'en' : 'Finished',
                     'de' : 'Zurückgezahlt',
-					'pl' : 'Finished',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Finished',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 '$FinishedPrematurely' :
                 {
                     'en' : 'Finished prematurely',
                     'de' : 'Vorzeitig beendet',
-					'pl' : 'Status Zokończona przed czasem',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Status Zokończona przed czasem',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 '$Default' :
                 {
                     'en' : 'Default',
                     'de' : '?',
-					'pl' : '?',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : '?',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 '$Paid' :
                 {
                     'en' : 'Paid',
                     'de' : 'Gezahlt',
-					'pl' : 'Zapłacono',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Zapłacono',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 '$Scheduled' :
                 {
                     'en' : 'Scheduled',
                     'de' : 'Geplante',
-					'pl' : 'Zaplanowano',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Zaplanowano',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 }
             };
             
-            return translations[key][document.location.pathname.substring(1, 3)];
+            return translations[field][document.location.pathname.substring(1, 3)];
         }
         
         runtime(settings);

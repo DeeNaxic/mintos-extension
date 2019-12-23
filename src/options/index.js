@@ -14,7 +14,7 @@ chrome.storage.sync.get(
     'OverviewHighlightNegativeNumbers'  : true,
     
     // investments.js
-    'InvestmentsUseLoanTypeLinks'       : true,
+    'InvestmentsUseLoanTypeLinks'       : false,
     'InvestmentsShowCountryColumn'      : true,
     
     // investmentsCurrent.js

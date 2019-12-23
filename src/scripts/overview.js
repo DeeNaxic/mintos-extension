@@ -1,5 +1,5 @@
 /*
- *  @project >> Investment Extensions: Mintos
+ *  @project >> Investment.Extensions: www.Mintos.com
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
@@ -22,7 +22,7 @@ chrome.storage.sync.get
              *  This try catch is meant to handle the cases, where Mintos have not fully
              *  loaded the website yet. As a result, some things might not have appeared
              *  on the website. We try to get everything and if anything turns out to be
-             *  empty (null or undefined), we stop further execution and reload the page
+             *  empty (null or undefined), we stop further execution and reload the code
              *  in 0.1 seconds using a timeout. This is done until the page successfully
              *  loads, and has everything assigned, at which point the runtime continues
              */
@@ -72,7 +72,7 @@ chrome.storage.sync.get
              */
             if (settings.OverviewShowPercentages)
             {
-                function $insertCell (source, total)
+                function $insertPercentageCell (source, total)
                 {
                     var percent = toFloat(source.innerText) / total * 100.00;
                     var node    = document.createElement('td');
@@ -92,17 +92,17 @@ chrome.storage.sync.get
                 
                 boxBalance.querySelectorAll('tr').forEach(function (row)
                 {
-                    $insertCell(row.lastChild, balance);
+                    $insertPercentageCell(row.lastChild, balance);
                 });
                 
                 boxAmount .querySelectorAll('tr').forEach(function (row)
                 {
-                    $insertCell(row.lastChild, amount);
+                    $insertPercentageCell(row.lastChild, amount);
                 });
                 
                 boxNumber .querySelectorAll('tr').forEach(function (row)
                 {
-                    $insertCell(row.lastChild, number);
+                    $insertPercentageCell(row.lastChild, number);
                 });
             }
             
@@ -154,7 +154,7 @@ chrome.storage.sync.get
             }
         }
         
-        function localization (key)
+        function localization (field)
         {
             var translations =
             {
@@ -162,15 +162,15 @@ chrome.storage.sync.get
                 {
                     'en' : 'Switch Metric',
                     'de' : 'Veränderung',
-					'pl' : 'Zmiana',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Zmiana',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 }
             };
             
-            return translations[key][document.location.pathname.substring(1, 3)];
+            return translations[field][document.location.pathname.substring(1, 3)];
         }
         
         runtime(settings);

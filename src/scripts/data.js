@@ -1,5 +1,5 @@
 /*
- *  @project >> Investment Extensions: Mintos
+ *  @project >> Investment.Extensions: www.Mintos.com
  *  @authors >> DeeNaxic
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3

@@ -1,5 +1,5 @@
 /*
- *  @project >> Investment Extensions: Mintos
+ *  @project >> Investment.Extensions: www.Mintos.com
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
@@ -11,7 +11,7 @@ chrome.storage.sync.get
         'InvestmentsShowDaysToNextPayment'  : true,
         'InvestmentsHighlightLateLoans'     : true,
         'InvestmentsShowPremiumDiscount'    : true,
-		'InvestmentsUseLoanTypeLinks'       : true
+        'InvestmentsUseLoanTypeLinks'       : false
     },
     
     function (settings)
@@ -22,7 +22,7 @@ chrome.storage.sync.get
              *  This try catch is meant to handle the cases, where Mintos have not fully
              *  loaded the website yet. As a result, some things might not have appeared
              *  on the website. We try to get everything and if anything turns out to be
-             *  empty (null or undefined), we stop further execution and reload the page
+             *  empty (null or undefined), we stop further execution and reload the code
              *  in 0.1 seconds using a timeout. This is done until the page successfully
              *  loads, and has everything assigned, at which point the runtime continues
              */
@@ -37,7 +37,7 @@ chrome.storage.sync.get
                 return setTimeout(runtime, 0.1, settings);
             }
             
-			/*
+            /*
              *  This takes the current query string, splits it up into components and it
              *  then iterates through all the key, value pairs. If there is any existing
              *  keys, which matches the one we are trying to insert, it is removed. This
@@ -56,7 +56,7 @@ chrome.storage.sync.get
                 
                 return window.location.pathname + '?' + results.join('&') + '&' + key + '=' + target;
             }
-			
+            
             /*
              *  This will replace the 'next payment date' columns, so instead of showing
              *  the date of the next payment, it shows the amount of days instead. Those
@@ -148,8 +148,8 @@ chrome.storage.sync.get
                     }
                 });
             }
-			
-			/*
+            
+            /*
              *  This registers a DomMonitor which listens for changes, in the data table
              *  and on any change including initially, it runs this code. It iterates on
              *  all rows in the investment table and inserts on the loan type cells, the
@@ -160,27 +160,27 @@ chrome.storage.sync.get
             {
                 DomMonitor(dataTable, function (mutations)
                 {
-					for (var data = {}, lines = document.querySelectorAll('#sel-pledge-groups option'), i = 0; i < lines.length; i++)
-					{
-						data[lines[i].innerText] = lines[i].value;
-					}
-					
+                    for (var data = {}, lines = document.querySelectorAll('#sel-pledge-groups option'), i = 0; i < lines.length; i++)
+                    {
+                        data[lines[i].innerText] = lines[i].value;
+                    }
+                    
                     for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                     {
-						var node	 		  = rows[i].querySelector('.m-loan-id span');
-							node.style.color  = '#3f85f4';
-							node.style.cursor = 'pointer';
-							
-							node.onclick = function (e)
-							{
-								window.location.href = createLink('pledge_groups[]', data[e.target.innerText]);
-							}
+                        var node              = rows[i].querySelector('.m-loan-id span');
+                            node.style.color  = '#3f85f4';
+                            node.style.cursor = 'pointer';
+                            
+                            node.onclick = function (e)
+                            {
+                                window.location.href = createLink('pledge_groups[]', data[e.target.innerText]);
+                            }
                     }
                 });
             }
         }
         
-        function localization (key)
+        function localization (field)
         {
             var translations =
             {
@@ -188,55 +188,55 @@ chrome.storage.sync.get
                 {
                     'en' : 'Days To<br>Next Payment',
                     'de' : 'Tage bis zur<br>nächsten Zahlung',
-					'pl' : 'Dni do<br>następnej opłaty',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Dni do<br>następnej opłaty',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 'Days' :
                 {
                     'en' : 'days',
                     'de' : 'tage',
-					'pl' : 'dni',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'dni',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 '$Late' :
                 {
                     'en' : 'Late',
                     'de' : 'In Verzug',
-					'pl' : 'Opóźnienie',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Opóźnienie',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 '$NextPayment' :
                 {
                     'en' : 'Next Payment Date',
                     'de' : 'Nächster Zahlungstermin',
-					'pl' : 'Data następnej płatności',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Data następnej płatności',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 },
                 '$Term' :
                 {
                     'en' : 'Term',
                     'de' : 'Laufzeit',
-					'pl' : 'Okres',
-					'cs' : '?',
-					'es' : '?',
-					'lv' : '?',
-					'ru' : '?'
+                    'pl' : 'Okres',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
                 }
             };
             
-            return translations[key][document.location.pathname.substring(1, 3)];
+            return translations[field][document.location.pathname.substring(1, 3)];
         }
         
         runtime(settings);
