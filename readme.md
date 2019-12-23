@@ -1,5 +1,5 @@
 <h3 align="center">
-    <a href=""><img src="https://ucddd6a8f03170b62a0cae6e0f57.previews.dropboxusercontent.com/p/thumb/AAnDKzNS47j2hkiFPGLYJ_I5xRj4miAx-LPRB4kZzInDM4H6NhRWeQrgrXtN7fsOyJxKb1l2_g_IlLnExurX8C5Ul6FGNZWZjOBPGNTNXwCYT3QBQoOLRXbZZjXMz30675BOCkdAtAslJ3PiEXbBGaFMnmY3sLuhNgJm4lG0Po60vYs0DgLxqIlr5pCIj3uDyKiL-yB6dAh-mH39LMA70bKld7wAofAKEgCJWJLTf7KEjJmUcwtNnGurR1-2sdwhfDKN_nMtZz_az7U4AZznhlC7t9_WlsaT67ZKyGdrWg95RTauAREOSXCS3fyYUbrmS13MUpXaxSr-yMZSwjYHIyGpYoR8m5dDC96H7qAKf_WU5lWyrjWX4fZg8gEG9VfvjS9871Q8tHd0YXVGMehpiStdalaREHcR_Bz-yHJhAdtytw6QBL8a1skpVmEB4L9aDhnqzMPqI7BnhZUi1EfPB8DU/p.png?fv_content=true&size_mode=5" width="150" /></a>
+    <a href=""><img src="https://www.dropbox.com/s/kxywate8is7y6mm/icon-128.png?dl=0" width="150" /></a>
     <br>
     Investment Extensions: Mintos
 </h3>
