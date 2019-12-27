@@ -3,6 +3,7 @@
     <br>
     Investment Extensions: Mintos
 </h3>
+
 <p align="center">
     <a href="#Introduction">introduction</a>
     •
@@ -27,9 +28,11 @@ This project aims to add a layer of information and functionality to the [Mintos
 - The extension does change the cosmetic of the website in a few places.
 - The extension does allow for features to be turned on or off individually.
 - The extension does run directly in your Chrome browser.
-- The extension does provide full opens-ource code for transparency.
+- The extension does provide full open-source code for transparency.
 
 <br>
+
+
 
 ### Transparency
 
@@ -43,21 +46,27 @@ This GitHub repository is intended for our Chrome Extension (see above link for 
 
 <br>
 
+
+
 ### Limitations
 
 As this is a Chrome extension, it only runs in a Chrome Browser, and there is no plans to ever create a similar product for other browsers. For the same reason, this will not work on a mobile phone, so when viewing the website elsewhere, it will just look normal. The biggest limitation at the moment, is the translations. Currently we only provide the plugin for English, German and Polish. If you use the Mintos website in another language, and are able to help us translate a few lines - then please reach out to us.
 
 <br>
 
+
+
 ### Installation
 
 There are two ways to get this extension to work:
 
-1. You can download it directly through the Chrome store page available [here](https://chrome.google.com/webstore/detail/investments%20%20/faoghbbhgbedgejlifiafhkhdhpjofol). By using this method, you can use the built-in Chrome Extension installer, and it will add the extension directly to your browser, with no setup required. Doing it this way takes less time and you can get subsequent updates easier. After a page refresh, the extension should run.
+1. You can download it directly through the Chrome store page available [here](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). By using this method, you can use the built-in Chrome Extension installer, and it will add the extension directly to your browser, with no setup required. Doing it this way takes less time and you can get subsequent updates easier. After a page refresh, the extension should run.
 
 2. If you prefer a more hands-on and higher transparency approach, you are more than welcome to perform a manual install from the source code. You can download the source code directly from this repository and perform a full audit. If you are satisfied you can then open Chrome to the [extensions page](chrome://extensions/) and load it in, as an unpacked extension. This way is a bit more difficult to setup, and disables automatic updates - but we did want to provide this method for better security.
 
 <br>
+
+
 
 ### Contact
 
