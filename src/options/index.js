@@ -1,5 +1,5 @@
 /*
- *  @project >> Investment Extensions
+ *  @project >> Investment.Extensions: www.Mintos.com
  *  @authors >> DeeNaxic, o1-steve
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
@@ -31,7 +31,10 @@ chrome.storage.sync.get(
     'LoanShowOntimePaymentPercent'      : true,
     'LoanFormatInvestmentBreakdown'     : true,
     'LoanShowNextPaymentRow'            : true,
-    'LoanShowAdditionalRatings'         : true
+    'LoanShowAdditionalRatings'         : true,
+    
+    // accountStatement.js
+    'AccountOverviewUseFourDecimals'    : false
 },
 function (data)
 {
