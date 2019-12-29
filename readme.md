@@ -37,11 +37,11 @@ This project aims to add an additional layer of information and functionality to
 ### Featurelist
 
 **In Overview:**
-- `Hide unused and empty rows.`
-- `Show a percentage column for 'Account Balance' and 'My Investments'.`
-- `Highlight negative numbers in red.`
-- `Switch the radio buttons to a real button.`
-- `Gray out news articles that you already read.`
+- Hide unused and empty rows.
+- Show a percentage column for 'Account Balance' and 'My Investments'.
+- Highlight negative numbers in red.
+- Switch the radio buttons to a real button.
+- Gray out news articles that you already read.
 
 **In Account Statement:**
 - Show four decimals for numbers instead of two.
