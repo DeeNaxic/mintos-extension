@@ -22,7 +22,7 @@
 
 ### Introduction
 
-This project aims to add a layer of information and functionality to the [Mintos](https://www.mintos.com) P2P investment website, through a [Chrome Extension](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). The project is driven by a group of computer scientists from the Copenhagen University of Computer Science (DIKU), who likes to work with investments. The extension was originally an internal tool we used, to fix visual and information gaps on the Mintos website, to improve our experience. From here it has grown and has now been fully released to the public. For a full feature list, please visit the [Chrome Extension Store page](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). Some key points about the extension are:
+This project aims to add an additional layer of information and functionality to the [Mintos](https://www.mintos.com) P2P investment website, through a [Chrome Extension](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). The project is driven by a group of former students from the Copenhagen University of Computer Science (DIKU), who likes to work with investments. The extension was originally an internal tool we used, to fix weird visuals and add additional information on loans, on the Mintos website, to improve our experience. From here it has grown and has now been fully released to the public. For a feature list, please visit the [Chrome Extension Store page](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). Some key points about the extension are:
 
 - The extension does add additional information to various pages.
 - The extension does change the cosmetic of the website in a few places.
@@ -36,12 +36,12 @@ This project aims to add a layer of information and functionality to the [Mintos
 
 ### Transparency
 
-This GitHub repository is intended for our Chrome Extension (see above link for Chrome Store page) [release packages](https://github.com/DeeNaxic/mintos-extension/tree/master/bin), the [source](https://github.com/DeeNaxic/mintos-extension/tree/master/src) code from which it is compiled and a [collection](https://github.com/DeeNaxic/mintos-extension/issues) of features, bugs, and tasks currently in development. The repository itself is not intended for public use, but it does also serve as a way to provide an additional layer of transparency. Trust is an important aspect when it comes to investments, and we do encourage people to perform a full audit of our source code, or even download and run the unpacked extension locally. If you do not have the technical experience to perform such an audit, but still want to ensure that what you are running is not malicious, then feel free to send the repository to someone who does. The code is written in plain JavaScript with a small amount of CSS and HTML, and as so, should be fairly trivial to understand. The following are important aspects in regards to trust:
+This GitHub repository here, is intended for our Chrome Extension [release packages](https://github.com/DeeNaxic/mintos-extension/tree/master/bin), the [sourcecode](https://github.com/DeeNaxic/mintos-extension/tree/master/src) from which it is compiled and a [collection](https://github.com/DeeNaxic/mintos-extension/issues) of features, bugs, and tasks currently in development. The repository itself is not intended for public use, but it does also serve as a way to provide an additional layer of transparency. Trust is an important aspect when it comes to investments, and we do encourage people to perform a full audit of our source code, or even download and run the unpacked extension locally. If you do not have the technical experience to perform such an audit, but still want to ensure that what you are running is not malicious, then feel free to send the repository to someone who does. The code is written in plain JavaScript with a small amount of CSS and HTML, and as so, should be fairly trivial to understand. The following are important aspects in regards to trust:
 
 - The extension does not monetize in any way, it is entirely free.
 - The extension does not automate or perform any action for you.
-- The extension does not falsely alter any information displayed on the website.
-- The extension does not store or send any information about you or your investments.
+- The extension does not falsely alter any information displayed.
+- The extension does not store or send any information about you.
 - The extension does not require any login or user information.
 
 <br>
@@ -50,7 +50,7 @@ This GitHub repository is intended for our Chrome Extension (see above link for 
 
 ### Limitations
 
-As this is a Chrome extension, it only runs in a Chrome Browser, and there is no plans to ever create a similar product for other browsers. For the same reason, this will not work on a mobile phone, so when viewing the website elsewhere, it will just look normal. The biggest limitation at the moment, is the translations. Currently we only provide the plugin for English, German and Polish. If you use the Mintos website in another language, and are able to help us translate a few lines - then please reach out to us.
+As this is a Chrome extension, it only runs in a Chrome Browser, and there is no plans to create a similar product for other browsers. For the same reason, this will not work on a mobile phone, so when viewing Mintos elsewhere, it will just look normal. At the moment, the extension is only supported in the following languages: English, Polish and German. If you use Mintos in another language, the extension won't do anything. If you are able to help translate a few things into Latvian, Russian, Czechish or Spanish, please reach out to us!
 
 <br>
 
