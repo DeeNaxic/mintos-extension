@@ -22,13 +22,49 @@
 
 ### Introduction
 
-This project aims to add an additional layer of information and functionality to the [Mintos](https://www.mintos.com) P2P investment website, through a [Chrome Extension](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). The project is driven by a group of former students from the Copenhagen University of Computer Science (DIKU), who likes to work with investments. The extension was originally an internal tool we used, to fix weird visuals and add additional information on loans, on the Mintos website, to improve our experience. From here it has grown and has now been fully released to the public. For a feature list, please visit the [Chrome Extension Store page](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). Some key points about the extension are:
+This project aims to add an additional layer of information and functionality to the [Mintos](https://www.mintos.com) P2P investment website, through a [Chrome Extension](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). The project is driven by a group of former students from the Copenhagen University of Computer Science (DIKU), who likes to work with investments. The extension was originally an internal tool we used, to fix weird visuals and add additional information on loans, on the Mintos website, to improve our experience. From here it has grown and has now been fully released to the public. Get it from Chrome here: [Chrome Extension Store page](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). Some key points about the extension are:
 
 - The extension does add additional information to various pages.
 - The extension does change the cosmetic of the website in a few places.
 - The extension does allow for features to be turned on or off individually.
 - The extension does run directly in your Chrome browser.
 - The extension does provide full open-source code for transparency.
+
+<br>
+
+
+
+### Featurelist
+
+**In Overview:**
+- Hide unused and empty rows.
+- Show a percentage column for 'Account Balance' and 'My Investments'.
+- Highlight negative numbers in red.
+- Switch the radio buttons to a real button.
+- Gray out news articles that you already read.
+
+**In Account Statement:**
+- Show four decimals for numbers instead of two.
+
+**In Current Investments:**
+- Show a column with the loans country.
+- Show a column with days to next planned payment.
+- Highlight late loans in a red background.
+- Show the premium or discount percent, in the sell text.
+- Make loan types links for filtering the search.
+
+**In Finished Investments:**
+- Show a column with the loans country.
+- Show a column with profit made for a finished loan.
+- Show a column with the duration you held the loan.
+- Make loan types links for filtering the search.
+
+**In Loan Information:**
+- Show a row with the loans country.
+- Show a row with days to next payment.
+- Show a row with the on-time payment percentage.
+- Format the loan breakdown table properly.
+- Show the ExploreP2P rating for that loan originator.
 
 <br>
 
