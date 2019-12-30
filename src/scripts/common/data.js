@@ -23,7 +23,7 @@ function rating (originator)
         "kredit pintar"      :    "66",
         "acema"              :    "66",
         "lime zaim"          :    "65",
-        "dziesiä…tka finanse":    "62",
+        "dziesiatka finanse" :    "62",
         "varks"              :    "61",
         "dozarplati"         :    "61",
         "watu credit"        :    "61",
@@ -69,7 +69,7 @@ function rating (originator)
         "credilikeme"        :    "18",
         "lendo"              :    "14",
         "tigo"               :    "13",
-        "metrokredit"        :    "11",
+        "metrokredit"        :    "11"
     };
     
     if (originator.toLowerCase() in ratings)
