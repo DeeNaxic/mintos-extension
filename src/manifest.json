@@ -1,7 +1,7 @@
 {
     "name"              : "Investment Extensions: Mintos",
     "description"       : "This extension aims to improve the Mintos.com experience, with additional features and post-processing of the website.",
-    "version"           : "1.1.0",
+    "version"           : "1.1.1",
     "manifest_version"  : 2,
     
     "options_ui"        :

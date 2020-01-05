@@ -34,11 +34,9 @@ chrome.storage.sync.get
                 var boxReturns      = assert(boxes[1]);
                 var boxAmount       = assert(boxes[2]);
                 var boxNumber       = assert(boxes[3]);
-                var balance         = assert(toFloat(boxBalance.querySelector('.em span').innerText));
-                var amount          = assert(toFloat(boxAmount .querySelector('.em span').innerText));
-                var number          = assert(toFloat(boxNumber .querySelector('.em span').innerText));
                 var toggle          = assert(0);
                 var newsTable       = assert(document.querySelector('.news-feed'));
+                var callbacks       = assert([])
             }
             catch
             {
@@ -53,16 +51,27 @@ chrome.storage.sync.get
              */
             if (settings.OverviewHideEmptyRows)
             {
-                boxes.forEach(function (box)
+                function $runHideEmptyRows ()
                 {
-                    for (var rows = box.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    boxes.forEach(function (box)
                     {
-                        if (toFloat(rows[i].lastChild.innerText).toFixed(2) == '0.00')
+                        for (var rows = box.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
                         {
-                            rows[i].style.display = 'none';
+                            if (toFloat(rows[i].querySelectorAll('td')[1].innerText).toFixed(2) == '0.00')
+                            {
+                                rows[i].style.display = 'none';
+                            }
+                            else
+                            {
+                                rows[i].style.display = '';
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                
+                callbacks.push($runHideEmptyRows);
+                
+                $runHideEmptyRows();
             }
             
             /*
@@ -77,7 +86,14 @@ chrome.storage.sync.get
                 function $insertPercentageCell (source, total)
                 {
                     var percent = toFloat(source.innerText) / total * 100.00;
-                    var node    = document.createElement('td');
+                    var node    = source.parentElement.querySelector('.percent')
+                    
+                    if (node == undefined)
+                    {
+                        node  = document.createElement('td');
+                        node.classList.add('percent');
+                        source.parentNode.insertBefore(node, source.nextSibling);
+                    }
                     
                     if (Math.abs(percent) == Infinity)
                     {
@@ -87,25 +103,38 @@ chrome.storage.sync.get
                     {
                         node.innerText = percent.toFixed(2) + '%';
                     }
-                    
-                    source.style.textAlign = 'right';
-                    source.parentNode.insertBefore(node, source.nextSibling);
                 }
                 
-                boxBalance.querySelectorAll('tr').forEach(function (row)
+                function $runShowPercentages ()
                 {
-                    $insertPercentageCell(row.lastChild, balance);
-                });
+                    if (boxBalance.querySelector('.em span'))
+                    {
+                        boxBalance.querySelectorAll('tr').forEach(function (row)
+                        {
+                            $insertPercentageCell(row.querySelectorAll('td')[1], toFloat(boxBalance.querySelector('.em span').innerText));
+                        });
+                    }
+                    
+                    if (boxAmount .querySelector('.em span'))
+                    {
+                        boxAmount .querySelectorAll('tr').forEach(function (row)
+                        {
+                            $insertPercentageCell(row.querySelectorAll('td')[1], toFloat(boxAmount .querySelector('.em span').innerText));
+                        });
+                    }
+                    
+                    if (boxNumber .querySelector('.em span'))
+                    {
+                        boxNumber .querySelectorAll('tr').forEach(function (row)
+                        {
+                            $insertPercentageCell(row.querySelectorAll('td')[1], toFloat(boxNumber .querySelector('.em span').innerText));
+                        });
+                    }
+                }
                 
-                boxAmount .querySelectorAll('tr').forEach(function (row)
-                {
-                    $insertPercentageCell(row.lastChild, amount);
-                });
+                callbacks.push($runShowPercentages);
                 
-                boxNumber .querySelectorAll('tr').forEach(function (row)
-                {
-                    $insertPercentageCell(row.lastChild, number);
-                });
+                $runShowPercentages();
             }
             
             /*
@@ -146,13 +175,24 @@ chrome.storage.sync.get
              */
             if (settings.OverviewHighlightNegativeNumbers)
             {
-                boxReturns.querySelectorAll('tr').forEach(function (row)
+                function $runHighlightNegativeNumbers ()
                 {
-                    if (toFloat(row.lastChild.innerText) < 0.00)
+                    boxReturns.querySelectorAll('tr').forEach(function (row)
                     {
-                        row.lastChild.style.color = 'red';
-                    }
-                });
+                        if (toFloat(row.lastChild.innerText) < 0.00)
+                        {
+                            row.lastChild.style.color = 'red';
+                        }
+                        else
+                        {
+                            row.lastChild.style.color = '#555';
+                        }
+                    });
+                }
+                
+                callbacks.push($runHighlightNegativeNumbers);
+                
+                $runHighlightNegativeNumbers();
             }
             
             /*
@@ -201,6 +241,19 @@ chrome.storage.sync.get
                     }
                 })
             }
+            
+            /*
+             *  Whenever a change in the balance box occours, that means that a currency
+             *  change was made, and as so, we should update all of the numbers from the
+             *  page. This is sort of a semi-hotfix making different currencies possible
+             */
+            DomMonitorAggressive(boxBalance, function (mutations)
+            {
+                callbacks.forEach(function (callback)
+                {
+                    callback();
+                });
+            });
         }
         
         function localization (field)
