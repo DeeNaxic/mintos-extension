@@ -36,7 +36,7 @@ chrome.storage.sync.get
                 var boxNumber       = assert(boxes[3]);
                 var toggle          = assert(0);
                 var newsTable       = assert(document.querySelector('.news-feed'));
-                var callbacks       = assert([])
+                var callbacks       = assert([]);
             }
             catch
             {

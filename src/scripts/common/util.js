@@ -30,6 +30,11 @@ function toDate (text)
     return new Date(parseInt(text.split('.')[2]), parseInt(text.split('.')[1]) - 1, parseInt(text.split('.')[0]));
 }
 
+function insertElementBefore (element, next)
+{
+    next.parentNode.insertBefore(element, next);
+}
+
 function getElementByAttribute (elements, attribute, value)
 {
     for (var i = 0; i < elements.length; i++)
