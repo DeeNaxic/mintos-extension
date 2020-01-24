@@ -12,7 +12,8 @@ chrome.storage.sync.get
         'OverviewShowPercentages'           : true,
         'OverviewShowButtonInstead'         : true,
         'OverviewHighlightNegativeNumbers'  : true,
-        'OverviewGrayOutVisitedNews'        : true
+        'OverviewGrayOutVisitedNews'        : true,
+        'OverviewBreakdownRewards'          : true
     },
     
     function (settings)
@@ -69,9 +70,7 @@ chrome.storage.sync.get
                     });
                 }
                 
-                callbacks.push($runHideEmptyRows);
-                
-                $runHideEmptyRows();
+                callbacks.push($runHideEmptyRows); $runHideEmptyRows();
             }
             
             /*
@@ -132,9 +131,7 @@ chrome.storage.sync.get
                     }
                 }
                 
-                callbacks.push($runShowPercentages);
-                
-                $runShowPercentages();
+                callbacks.push($runShowPercentages); $runShowPercentages();
             }
             
             /*
@@ -190,13 +187,13 @@ chrome.storage.sync.get
                     });
                 }
                 
-                callbacks.push($runHighlightNegativeNumbers);
-                
-                $runHighlightNegativeNumbers();
+                callbacks.push($runHighlightNegativeNumbers); $runHighlightNegativeNumbers();
             }
             
             /*
-             *  Experimental
+             *  This feature enables a memory cache, which remembers all of the articles
+             *  that you read. When you visit a new article link, from the overview page
+             *  it will be remembered, and the link will be greyed out after visiting it
              */
             if (settings.OverviewGrayOutVisitedNews)
             {
@@ -240,6 +237,63 @@ chrome.storage.sync.get
                         }
                     }
                 })
+            }
+            
+            /*
+             *  Experimental
+             */
+            if (settings.OverviewBreakdownRewards)
+            {
+                function $campaignSubtotal (names, total, data, currency, name)
+                {
+                    if (parseFloat(data.balances[currency][name]) > 0.00)
+                    {
+                        var node = document.createElement('p');
+                            node.innerText              = '- ' + name;
+                            node.style.color            = '#5c5c5c';
+                            node.style.fontSize         = '0.9em';
+                            node.classList.add('campaignSubcore');
+                            names.appendChild(node);
+                        
+                        var node = document.createElement('p');
+                            node.innerText = parseFloat(data.balances[currency][name]).toFixed(2);
+                            node.style.color = '#5c5c5c';
+                            node.style.fontSize = '0.9em';
+                            node.classList.add('campaignSubcore');
+                            total.appendChild(node);
+                    }
+                }
+                
+                for (var cells = null, ls = boxReturns.querySelectorAll('tr'), i = 0; i < ls.length; i++)
+                {
+                    if (ls[i].innerText.includes('Campaign Rewards')) // todo localize?
+                    {
+                        cells = ls[i].querySelectorAll('td'); break;
+                    }
+                }
+                
+                cells[1].querySelector('br').remove();
+                cells[1].querySelector('a' ).remove();
+                
+                var data     = JSON.parse(document.querySelector('#withdraw').getAttribute('data-account'));
+                var currency = 978;
+                
+                function $run ()
+                {
+                    for (var ls = document.getElementsByClassName('campaignSubcore'), i = ls.length - 1; i >= 0; i--)
+                    {
+                        ls[i].remove();
+                    }
+                    
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedReferAfriendBonus');
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedAffiliateBonus');
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedCashbackBonus');
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedActivationBonus');
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedWelcomeBonus');
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedBonus');
+                }
+                
+                callbacks.push($run); $run();
             }
             
             /*
