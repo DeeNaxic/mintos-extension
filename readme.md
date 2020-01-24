@@ -13,8 +13,6 @@
     •
     <a href="#Installation">installation</a>
     •
-    <a href="#Changelog"   >changelog   </a>
-    •
     <a href="#Contact"     >contact     </a>
 </p>
 
@@ -106,14 +104,6 @@ There are two ways to get this extension to work:
 1. You can download it directly through the Chrome store page available [here](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). By using this method, you can use the built-in Chrome Extension installer, and it will add the extension directly to your browser, with no setup required. Doing it this way takes less time and you can get subsequent updates easier. After a page refresh, the extension should run.
 
 2. If you prefer a more hands-on and higher transparency approach, you are more than welcome to perform a manual install from the source code. You can download the source code directly from this repository and perform a full audit. If you are satisfied you can then open Chrome to the [extensions page](chrome://extensions/) and load it in, as an unpacked extension. This way is a bit more difficult to setup, and disables automatic updates - but we did want to provide this method for better security.
-
-<br>
-
-
-
-### Changelog
-
-?
 
 <br>
 
