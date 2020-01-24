@@ -37,8 +37,8 @@ This project aims to add an additional layer of information and functionality to
 
 
 ### Featurelist
-
-**In Overview:**
+```
+In Overview:
 - Hide unused and empty rows.
 - Show a percentage column for 'Account Balance' and 'My Investments'.
 - Highlight negative numbers in red.
@@ -46,33 +46,33 @@ This project aims to add an additional layer of information and functionality to
 - Gray out news articles that you already read.
 - Break down campaign rewards in different types.
 
-**Auto Invest:**
+Auto Invest:
 - Highlight near empty and near full strategies.
 - Show a utilization percentage column for strategies.
 
-**In Account Statement:**
+In Account Statement:
 - Show four decimals for numbers instead of two.
 
-**In Current Investments:**
+In Current Investments:
 - Show a column with the loans country.
 - Show a column with days to next planned payment.
 - Highlight late loans in a red background.
 - Show the premium or discount percent, in the sell text.
 - Make loan types links for filtering the search.
 
-**In Finished Investments:**
+In Finished Investments:
 - Show a column with the loans country.
 - Show a column with profit made for a finished loan.
 - Show a column with the duration you held the loan.
 - Make loan types links for filtering the search.
 
-**In Loan Information:**
+In Loan Information:
 - Show a row with the loans country.
 - Show a row with days to next payment.
 - Show a row with the on-time payment percentage.
 - Format the loan breakdown table properly.
 - Show the ExploreP2P rating for that loan originator.
-
+```
 <br>
 
 
