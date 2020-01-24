@@ -13,6 +13,7 @@ chrome.storage.sync.get(
     'OverviewShowButtonInstead'         : true,
     'OverviewHighlightNegativeNumbers'  : true,
     'OverviewGrayOutVisitedNews'        : true,
+    'OverviewBreakdownRewards'          : true,
     
     // investments.js
     'InvestmentsUseLoanTypeLinks'       : false,

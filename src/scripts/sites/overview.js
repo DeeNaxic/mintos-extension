@@ -244,21 +244,21 @@ chrome.storage.sync.get
              */
             if (settings.OverviewBreakdownRewards)
             {
-                function $campaignSubtotal (names, total, data, currency, name)
+                function $campaignSubtotal (names, total, data, currency, target, text)
                 {
-                    if (parseFloat(data.balances[currency][name]) > 0.00)
+                    if (parseFloat(data.balances[currency][target]) > 0.00)
                     {
                         var node = document.createElement('p');
-                            node.innerText              = '- ' + name;
-                            node.style.color            = '#5c5c5c';
-                            node.style.fontSize         = '0.9em';
+                            node.innerText              = text;
+                            node.style.fontSize         = '0.85em';
+                            node.style.color            = '#a9a9a9';
                             node.classList.add('campaignSubcore');
                             names.appendChild(node);
                         
                         var node = document.createElement('p');
-                            node.innerText = parseFloat(data.balances[currency][name]).toFixed(2);
-                            node.style.color = '#5c5c5c';
-                            node.style.fontSize = '0.9em';
+                            node.innerText              = parseFloat(data.balances[currency][target]).toFixed(2);
+                            node.style.fontSize         = '0.85em';
+                            node.style.color            = '#a9a9a9';
                             node.classList.add('campaignSubcore');
                             total.appendChild(node);
                     }
@@ -266,7 +266,7 @@ chrome.storage.sync.get
                 
                 for (var cells = null, ls = boxReturns.querySelectorAll('tr'), i = 0; i < ls.length; i++)
                 {
-                    if (ls[i].innerText.includes('Campaign Rewards')) // todo localize?
+                    if (ls[i].innerText.includes(localization('$CampaignText')))
                     {
                         cells = ls[i].querySelectorAll('td'); break;
                     }
@@ -278,22 +278,22 @@ chrome.storage.sync.get
                 var data     = JSON.parse(document.querySelector('#withdraw').getAttribute('data-account'));
                 var currency = 978;
                 
-                function $run ()
+                function $runInsertSubtotals ()
                 {
                     for (var ls = document.getElementsByClassName('campaignSubcore'), i = ls.length - 1; i >= 0; i--)
                     {
                         ls[i].remove();
                     }
                     
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedReferAfriendBonus');
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedAffiliateBonus');
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedCashbackBonus');
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedActivationBonus');
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedWelcomeBonus');
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedBonus');
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedReferAfriendBonus', 'Refer-a-friend bonus');
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedAffiliateBonus',    'Affiliate bonus'     );
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedCashbackBonus',     'Cashback bonus'      );
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedActivationBonus',   'Activation bonus'    );
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedWelcomeBonus',      'Welcome bonus'       );
+                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedBonus',             'Bonus'               );
                 }
                 
-                callbacks.push($run); $run();
+                callbacks.push($runInsertSubtotals); $runInsertSubtotals();
             }
             
             /*
@@ -319,6 +319,16 @@ chrome.storage.sync.get
                     'en' : 'Switch Metric',
                     'de' : 'Veränderung',
                     'pl' : 'Zmiana',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                '$CampaignText' :
+                {
+                    'en' : 'Campaign Rewards',
+                    'de' : 'Mehr verdienen',
+                    'pl' : 'Zarabiaj więcej',
                     'cs' : '?',
                     'es' : '?',
                     'lv' : '?',
