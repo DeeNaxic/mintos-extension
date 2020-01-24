@@ -35,7 +35,11 @@ chrome.storage.sync.get(
     'LoanShowAdditionalRatings'         : true,
     
     // accountStatement.js
-    'AccountOverviewUseFourDecimals'    : false
+    'AccountOverviewUseFourDecimals'    : false,
+    
+    // autoInvest.js
+    'AutoInvestHighlightUtilityUse'     : true,
+    'AutoInvestShowUtilizationPercent'  : true
 },
 function (data)
 {
