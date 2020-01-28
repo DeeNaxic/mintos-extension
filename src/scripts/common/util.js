@@ -17,7 +17,7 @@ function assert (selector)
 
 function getCurrencyPrefix (text)
 {
-    return text.substr(0, 1);
+    return text.match(/^\S+/)[0];
 }
 
 function toNumber (text)
