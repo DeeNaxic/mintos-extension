@@ -137,6 +137,12 @@ chrome.storage.sync.get
                     {
                         var cell    = rows[i].lastElementChild;
                         var span    = cell.querySelectorAll('span')[1];
+                        
+                        if (span == undefined)
+                        {
+                            continue;
+                        }
+                        
                         var percent = $getPercentage(span.getAttribute('data-tooltip'));
                         
                         if (span.hasAttribute('data-value') == false)
