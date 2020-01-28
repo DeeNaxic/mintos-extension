@@ -244,56 +244,63 @@ chrome.storage.sync.get
              */
             if (settings.OverviewBreakdownRewards)
             {
-                function $campaignSubtotal (names, total, data, currency, target, text)
+                function $insertReturnsRow (campaign, data, symbol, target, text)
                 {
-                    if (parseFloat(data.balances[currency][target]) > 0.00)
+                    if (parseFloat(data.balances[iso_code(symbol)][target]) > 0.00)
                     {
-                        var node = document.createElement('p');
-                            node.innerText              = text;
-                            node.style.fontSize         = '0.85em';
-                            node.style.color            = '#a9a9a9';
-                            node.classList.add('campaignSubcore');
-                            names.appendChild(node);
-                        
-                        var node = document.createElement('p');
-                            node.innerText              = parseFloat(data.balances[currency][target]).toFixed(2);
-                            node.style.fontSize         = '0.85em';
-                            node.style.color            = '#a9a9a9';
-                            node.classList.add('campaignSubcore');
-                            total.appendChild(node);
+                        var tr = document.createElement('tr');
+                            tr.classList.add('campaign');
+                            
+                        var td = document.createElement('td');
+                            td.innerText = text;
+                            tr.appendChild(td);
+                            
+                        var td = document.createElement('td');
+                            td.innerText = symbol + ' ' + parseFloat(data.balances[iso_code(symbol)][target]).toFixed(2);
+                            tr.appendChild(td);
+                            
+                        insertElementBefore(tr, campaign);
                     }
                 }
                 
-                for (var cells = null, ls = boxReturns.querySelectorAll('tr'), i = 0; i < ls.length; i++)
+                function $runBreakdownRewards ()
                 {
-                    if (ls[i].innerText.includes(localization('$CampaignText')))
-                    {
-                        cells = ls[i].querySelectorAll('td'); break;
-                    }
-                }
-                
-                cells[1].querySelector('br').remove();
-                cells[1].querySelector('a' ).remove();
-                
-                var data     = JSON.parse(document.querySelector('#withdraw').getAttribute('data-account'));
-                var currency = 978;
-                
-                function $runInsertSubtotals ()
-                {
-                    for (var ls = document.getElementsByClassName('campaignSubcore'), i = ls.length - 1; i >= 0; i--)
+                    for (var ls = document.getElementsByClassName('campaign'), i = ls.length - 1; i >= 0; i--)
                     {
                         ls[i].remove();
                     }
                     
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedReferAfriendBonus', 'Refer-a-friend bonus');
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedAffiliateBonus',    'Affiliate bonus'     );
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedCashbackBonus',     'Cashback bonus'      );
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedActivationBonus',   'Activation bonus'    );
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedWelcomeBonus',      'Welcome bonus'       );
-                    $campaignSubtotal(cells[0], cells[1], data, currency, 'totalReceivedBonus',             'Bonus'               );
+                    if (document.querySelector('.overview-box .header span') == null)
+                    {
+                        return;
+                    }
+                    
+                    var data     = JSON.parse(document.querySelector('#withdraw').getAttribute('data-account'));
+                    var symbol   = document.querySelector('.overview-box .header span').innerText.match(/\S+/)[0];
+                    
+                    if (iso_code(symbol) == null)
+                    {
+                        return;
+                    }
+                    
+                    for (var row = null, ls = boxReturns.querySelectorAll('tr'), i = 0; i < ls.length; i++)
+                    {
+                        if (ls[i].innerText.includes(localization('$CampaignText')))
+                        {
+                            row = ls[i]; row.style.display = 'none'; break;
+                        }
+                    }
+                    
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedReferAfriendBonus', 'Refer-a-friend bonus');
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedAffiliateBonus',    'Affiliate bonus'     );
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedCashbackBonus',     'Cashback bonus'      );
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedActivationBonus',   'Activation bonus'    );
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedWelcomeBonus',      'Welcome bonus'       );
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedBonus',             'Bonus'               );
                 }
                 
-                callbacks.push($runInsertSubtotals); $runInsertSubtotals();
+                callbacks.push($runBreakdownRewards);
+                $runBreakdownRewards();
             }
             
             /*
