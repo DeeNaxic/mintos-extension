@@ -5,9 +5,9 @@
  *  @licence >> GNU GPLv3
  */
 
-function rating (originator)
+function rating (loan_originator)
 {
-    var ratings =
+    var data =
     {
         "1pm"                :    "81",
         "credissimo"         :    "80",
@@ -72,12 +72,34 @@ function rating (originator)
         "metrokredit"        :    "11"
     };
     
-    if (originator.toLowerCase() in ratings)
+    if (loan_originator.toLowerCase() in data)
     {
-        return ratings[originator.toLowerCase()] + ' / 100';
+        return data[loan_originator.toLowerCase()] + ' / 100';
     }
     else
     {
         return 'n/a';
+    }
+}
+
+function iso_code (currency)
+{
+    var data =
+    {
+        '€'   : 978,
+        'Kč'  : 203,
+        '£'   : 826,
+        '₸'   : 398,
+        'Mex' : 484,
+        'zł'  : 985
+    };
+    
+    if (currency in data)
+    {
+        return data[currency];
+    }
+    else
+    {
+        return null;
     }
 }

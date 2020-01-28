@@ -15,6 +15,11 @@ function assert (selector)
     return selector;
 }
 
+function getCurrencyPrefix (text)
+{
+    return text.substr(0, 1);
+}
+
 function toNumber (text)
 {
     return String(text).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 ')
@@ -30,9 +35,9 @@ function toDate (text)
     return new Date(parseInt(text.split('.')[2]), parseInt(text.split('.')[1]) - 1, parseInt(text.split('.')[0]));
 }
 
-function insertElementBefore (element, next)
+function insertElementBefore (element, node)
 {
-    next.parentNode.insertBefore(element, next);
+    node.parentNode.insertBefore(element, node);
 }
 
 function getElementByAttribute (elements, attribute, value)
@@ -44,11 +49,8 @@ function getElementByAttribute (elements, attribute, value)
             return elements[i];
         }
     }
-}
-
-function getCurrencySymbol (text)
-{
-    return text.substr(0, 1);
+    
+    return null;
 }
 
 var DomMonitor = (function ()

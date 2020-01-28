@@ -113,7 +113,7 @@ chrome.storage.sync.get
                         var days  = Math.floor(Math.abs((toDate(rows[i].querySelector('td.m-loan-issued').innerText).getTime() - toDate(getElementByAttribute(cells, 'data-m-label', localization('$Finished')).innerText).getTime()) / 86400000));
                         var node  = getElementByAttribute(cells, 'data-m-label', 'Duration');
                         
-                        if (node === undefined)
+                        if (node === null)
                         {
                             node  = document.createElement('td');
                             node.setAttribute  ('data-m-label', 'Duration');
@@ -146,7 +146,7 @@ chrome.storage.sync.get
                         var profit  = toFloat(getElementByAttribute(cells, 'data-m-label', localization('$ReceivedPayments')).innerText) - toFloat(getElementByAttribute(cells, 'data-m-label', localization('$MyInvestment')).innerText);
                         var node    = getElementByAttribute(cells, 'data-m-label', 'Profit');
                         
-                        if (node === undefined)
+                        if (node === null)
                         {
                             node = document.createElement('td');
                             node.setAttribute  ('data-m-label', 'Profit');
@@ -162,7 +162,7 @@ chrome.storage.sync.get
                         else
                         {
                             node.style.color = 'green';
-                            node.innerText   = getCurrencySymbol(getElementByAttribute(cells, 'data-m-label', localization('$ReceivedPayments')).innerText) + ' ' + profit.toFixed(2);
+                            node.innerText   = getCurrencyPrefix(getElementByAttribute(cells, 'data-m-label', localization('$ReceivedPayments')).innerText) + ' ' + profit.toFixed(2);
                         }
                     }
                 });

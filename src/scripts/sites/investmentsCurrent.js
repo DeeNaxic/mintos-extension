@@ -75,7 +75,7 @@ chrome.storage.sync.get
                         var time  = cell.querySelectorAll('span')[0];
                         var node  = cell.querySelectorAll('span')[1];
                         
-                        if (node == undefined)
+                        if (node == null)
                         {
                             cell.appendChild(node = document.createElement('span'));
                             cell.classList.add('global-align-right');

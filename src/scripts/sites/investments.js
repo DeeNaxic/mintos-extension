@@ -89,7 +89,7 @@ chrome.storage.sync.get
                         var link  = rows[i].querySelector('td.loan-id-col');
                         var node  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Country');
                         
-                        if (node === undefined)
+                        if (node === null)
                         {
                             flag                                        = document.createElement('img');
                             text                                        = document.createElement('span');
