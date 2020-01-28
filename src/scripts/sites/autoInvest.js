@@ -33,7 +33,7 @@ chrome.storage.sync.get
             }
             catch
             {
-                return setTimeout(runtime, 0.1, settings);
+                return setTimeout(runtime, 100, settings);
             }
             
             /*
@@ -115,7 +115,7 @@ chrome.storage.sync.get
                             callback();
                         });
                     },
-                    10
+                    100
                     );
                 });
             }
