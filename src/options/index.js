@@ -34,6 +34,8 @@ chrome.storage.sync.get(
     'LoanFormatInvestmentBreakdown'     : true,
     'LoanShowNextPaymentRow'            : true,
     'LoanShowAdditionalRatings'         : true,
+    'LoanShowPaymentWarning'            : true,
+    'LoanShowAgeWarning'                : true,
     
     // accountStatement.js
     'AccountOverviewUseFourDecimals'    : false,
