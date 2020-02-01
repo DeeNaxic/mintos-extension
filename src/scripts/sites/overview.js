@@ -12,7 +12,8 @@ chrome.storage.sync.get
         'OverviewShowPercentages'           : true,
         'OverviewShowButtonInstead'         : true,
         'OverviewHighlightNegativeNumbers'  : true,
-        'OverviewGrayOutVisitedNews'        : true
+        'OverviewGrayOutVisitedNews'        : true,
+        'OverviewBreakdownRewards'          : true
     },
     
     function (settings)
@@ -40,7 +41,7 @@ chrome.storage.sync.get
             }
             catch
             {
-                return setTimeout(runtime, 0.1, settings);
+                return setTimeout(runtime, 100, settings);
             }
             
             /*
@@ -69,9 +70,7 @@ chrome.storage.sync.get
                     });
                 }
                 
-                callbacks.push($runHideEmptyRows);
-                
-                $runHideEmptyRows();
+                callbacks.push($runHideEmptyRows); $runHideEmptyRows();
             }
             
             /*
@@ -132,9 +131,7 @@ chrome.storage.sync.get
                     }
                 }
                 
-                callbacks.push($runShowPercentages);
-                
-                $runShowPercentages();
+                callbacks.push($runShowPercentages); $runShowPercentages();
             }
             
             /*
@@ -190,13 +187,13 @@ chrome.storage.sync.get
                     });
                 }
                 
-                callbacks.push($runHighlightNegativeNumbers);
-                
-                $runHighlightNegativeNumbers();
+                callbacks.push($runHighlightNegativeNumbers); $runHighlightNegativeNumbers();
             }
             
             /*
-             *  Experimental
+             *  This feature enables a memory cache, which remembers all of the articles
+             *  that you read. When you visit a new article link, from the overview page
+             *  it will be remembered, and the link will be greyed out after visiting it
              */
             if (settings.OverviewGrayOutVisitedNews)
             {
@@ -243,6 +240,70 @@ chrome.storage.sync.get
             }
             
             /*
+             *  Experimental
+             */
+            if (settings.OverviewBreakdownRewards)
+            {
+                function $insertReturnsRow (campaign, data, symbol, target, text)
+                {
+                    if (parseFloat(data.balances[iso_code(symbol)][target]) > 0.00)
+                    {
+                        var tr = document.createElement('tr');
+                            tr.classList.add('campaign');
+                            
+                        var td = document.createElement('td');
+                            td.innerText = text;
+                            tr.appendChild(td);
+                            
+                        var td = document.createElement('td');
+                            td.innerText = symbol + ' ' + parseFloat(data.balances[iso_code(symbol)][target]).toFixed(2);
+                            tr.appendChild(td);
+                            
+                        insertElementBefore(tr, campaign);
+                    }
+                }
+                
+                function $runBreakdownRewards ()
+                {
+                    for (var ls = document.getElementsByClassName('campaign'), i = ls.length - 1; i >= 0; i--)
+                    {
+                        ls[i].remove();
+                    }
+                    
+                    if (document.querySelector('.overview-box .header span') == null)
+                    {
+                        return;
+                    }
+                    
+                    var data     = JSON.parse(document.querySelector('#withdraw').getAttribute('data-account'));
+                    var symbol   = document.querySelector('.overview-box .header span').innerText.match(/\S+/)[0];
+                    
+                    if (iso_code(symbol) == null)
+                    {
+                        return;
+                    }
+                    
+                    for (var row = null, ls = boxReturns.querySelectorAll('tr'), i = 0; i < ls.length; i++)
+                    {
+                        if (ls[i].innerText.includes(localization('$CampaignText')))
+                        {
+                            row = ls[i]; row.style.display = 'none'; break;
+                        }
+                    }
+                    
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedReferAfriendBonus', 'Refer-a-friend bonus');
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedAffiliateBonus',    'Affiliate bonus'     );
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedCashbackBonus',     'Cashback bonus'      );
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedActivationBonus',   'Activation bonus'    );
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedWelcomeBonus',      'Welcome bonus'       );
+                    $insertReturnsRow(row, data, symbol, 'totalReceivedBonus',             'Bonus'               );
+                }
+                
+                callbacks.push($runBreakdownRewards);
+                $runBreakdownRewards();
+            }
+            
+            /*
              *  Whenever a change in the balance box occours, that means that a currency
              *  change was made, and as so, we should update all of the numbers from the
              *  page. This is sort of a semi-hotfix making different currencies possible
@@ -265,6 +326,16 @@ chrome.storage.sync.get
                     'en' : 'Switch Metric',
                     'de' : 'Veränderung',
                     'pl' : 'Zmiana',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                '$CampaignText' :
+                {
+                    'en' : 'Campaign Rewards',
+                    'de' : 'Mehr verdienen',
+                    'pl' : 'Zarabiaj więcej',
                     'cs' : '?',
                     'es' : '?',
                     'lv' : '?',

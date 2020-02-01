@@ -12,7 +12,9 @@ chrome.storage.sync.get
         'LoanShowNextPaymentRow'            : true,
         'LoanShowOntimePaymentPercent'      : true,
         'LoanFormatInvestmentBreakdown'     : true,
-        'LoanShowAdditionalRatings'         : true
+        'LoanShowAdditionalRatings'         : true,
+        'LoanShowPaymentWarning'            : true,
+        'LoanShowAgeWarning'                : true,
     },
     
     function (settings)
@@ -42,7 +44,7 @@ chrome.storage.sync.get
             }
             catch
             {
-                return setTimeout(runtime, 0.1, settings);
+                return setTimeout(runtime, 100, settings);
             }
             
             /*
@@ -62,6 +64,29 @@ chrome.storage.sync.get
                     
                 var nodeInner           = document.createElement('td');
                     nodeInner.innerText = content;
+                    nodeInner.classList.add('value');
+                    nodeOuter.appendChild(nodeInner);
+                    
+                return nodeOuter;
+            }
+            
+            /*
+             *  This is similiar to the createDetailsRow function. But it inserts things
+             *  such as color and icon, which makes it a warning entry and not just text
+             */
+            function createDetailsRowWarning (header, content)
+            {
+                var nodeOuter = document.createElement('tr');
+                    
+                var nodeInner             = document.createElement('td');
+                    nodeInner.innerText   = localization('Warning') + ': ' + header
+                    nodeInner.style.color = 'red';
+                    nodeInner.classList.add('field-description');
+                    nodeOuter.appendChild(nodeInner);
+                    
+                var nodeInner             = document.createElement('td');
+                    nodeInner.innerText   = content;
+                    nodeInner.style.color = 'red';
                     nodeInner.classList.add('value');
                     nodeOuter.appendChild(nodeInner);
                     
@@ -169,7 +194,7 @@ chrome.storage.sync.get
                 });
                 
                 var percent  = $others + $ontime > 0 ? ($ontime / ($others + $ontime) * 100.00).toFixed(0) + '%' : 'n/a';
-                var node     = createDetailsRow(localization('Payments'), percent);
+                var node     = createDetailsRow(localization('OntimePayments'), percent);
                 
                 details.appendChild(node);
             }
@@ -227,7 +252,7 @@ chrome.storage.sync.get
                         nodeOuter.appendChild(nodeInner);
                         
                     var nodeInner                   = document.createElement('td');
-                        nodeInner.innerText         = toNumber(toFloat(groups[3]).toFixed(2)) + ' ' + getCurrencySymbol(groups[3]);
+                        nodeInner.innerText         = toNumber(toFloat(groups[3]).toFixed(2)) + ' ' + getCurrencyPrefix(groups[3]);
                         nodeInner.style.textAlign   = 'right';
                         nodeInner.style.whiteSpace  = 'nowrap';
                         nodeOuter.appendChild(nodeInner);
@@ -284,6 +309,54 @@ chrome.storage.sync.get
                 originator.insertBefore(createOriginatorRow('Mintos\'s '     + localization('Rating'),        rank.innerText), originator.lastChild);
                 originator.insertBefore(createOriginatorRow('ExploreP2P\'s ' + localization('Rating') + link, rating(name)  ), originator.lastChild);
             }
+            
+            /*
+             *  Experimental
+             */
+            if (settings.LoanShowPaymentWarning)
+            {
+                var $ontime  = 0;
+                var $others  = 0;
+                
+                schedule.querySelectorAll('tr').forEach(function (element)
+                {
+                    if (element.lastChild.innerText == localization('$Paid'))
+                    {
+                        $ontime++;
+                    }
+                    else
+                    if (element.lastChild.innerText == localization('$Scheduled'))
+                    {
+                        
+                    }
+                    else
+                    {
+                        $others++;
+                    }
+                });
+                
+                if ($ontime / ($others + $ontime) * 100.00 < 60.0)
+                {
+                    insertElementBefore(createDetailsRowWarning(localization('Payments'), ($ontime / ($others + $ontime) * 100.00).toFixed(2) + '% ' + localization('Ontime')), details.firstChild);
+                }
+            }
+            
+            /*
+             *  Experimental
+             */
+            if (settings.LoanShowAgeWarning)
+            {
+                for (var match = null, rows = borrower.querySelectorAll('tr'), i = 0; i < rows.length; i++)
+                {
+                    if (rows[i].firstChild.innerText == localization('$Borrower') && (match = rows[i].lastChild.innerText.match(localization('$BorrowerPattern'))))
+                    {
+                        if (parseInt(match[1]) > 55)
+                        {
+                            insertElementBefore(createDetailsRowWarning(localization('Age'), match[1] + ' ' + localization('Years')), details.firstChild); break;
+                        }
+                    }
+                }
+            }
         }
         
         function localization (field)
@@ -301,6 +374,26 @@ chrome.storage.sync.get
                     'ru' : '?'
                 },
                 'Payments' :
+                {
+                    'en' : 'Payments',
+                    'de' : 'Zahlungen',
+                    'pl' : 'Płatności',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                'Ontime' :
+                {
+                    'en' : 'on-time',
+                    'de' : 'pünktliche',
+                    'pl' : 'na czas',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                'OntimePayments' :
                 {
                     'en' : 'On-time Payments',
                     'de' : 'Pünktliche Zahlungen',
@@ -380,6 +473,36 @@ chrome.storage.sync.get
                     'lv' : '?',
                     'ru' : '?'
                 },
+                'Years' :
+                {
+                    'en' : 'years',
+                    'de' : 'jahre',
+                    'pl' : 'lat',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                'Warning' :
+                {
+                    'en' : 'Warning',
+                    'de' : 'Warnung',
+                    'pl' : 'Uwaga',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                'Age' :
+                {
+                    'en' : 'High age',
+                    'de' : 'Hohes Alter',
+                    'pl' : 'Wysoki wiek',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
                 '$Late' :
                 {
                     'en' : 'Late',
@@ -435,6 +558,26 @@ chrome.storage.sync.get
                     'en' : 'Scheduled',
                     'de' : 'Geplante',
                     'pl' : 'Zaplanowano',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                '$Borrower' :
+                {
+                    'en' : 'Borrower',
+                    'de' : 'Kreditnehmer',
+                    'pl' : 'Pożyczkobiorca',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                '$BorrowerPattern' :
+                {
+                    'en' : /(?:female|male), (\d+) y/i,
+                    'de' : /(?:Weiblich|Männlich), (\d+)/i,
+                    'pl' : /(?:mężczyzna|kobieta) (\d+)/i,
                     'cs' : '?',
                     'es' : '?',
                     'lv' : '?',

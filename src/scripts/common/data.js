@@ -5,9 +5,9 @@
  *  @licence >> GNU GPLv3
  */
 
-function rating (originator)
+function rating (loan_originator)
 {
-    var ratings =
+    var data =
     {
         "1pm"                :    "81",
         "credissimo"         :    "80",
@@ -19,19 +19,20 @@ function rating (originator)
         "wowwo"              :    "70",
         "everest finanse"    :    "69",
         "credius"            :    "68",
+        "Invescore"          :    "68",
         "creamfinance"       :    "67",
         "kredit pintar"      :    "66",
         "acema"              :    "66",
         "lime zaim"          :    "65",
         "dziesiatka finanse" :    "62",
-        "varks"              :    "61",
+        "varks"              :    "63",
         "dozarplati"         :    "61",
         "watu credit"        :    "61",
         "dineo credito"      :    "60",
         "esto"               :    "60",
         "lf tech"            :    "59",
         "ebv finance"        :    "58",
-        "capital service"    :    "57",
+        "capital service"    :    "53",
         "akulaku"            :    "57",
         "kviku"              :    "57",
         "bb finance group"   :    "55",
@@ -63,21 +64,43 @@ function rating (originator)
         "e cash"             :    "26",
         "creditter"          :    "25",
         "kredo"              :    "23",
+        "getbucks"           :    "23",
         "expresscredit"      :    "22",
         "peachy"             :    "22",
-        "getbucks"           :    "19",
         "credilikeme"        :    "18",
         "lendo"              :    "14",
         "tigo"               :    "13",
         "metrokredit"        :    "11"
     };
     
-    if (originator.toLowerCase() in ratings)
+    if (loan_originator.toLowerCase() in data)
     {
-        return ratings[originator.toLowerCase()] + ' / 100';
+        return data[loan_originator.toLowerCase()] + ' / 100';
     }
     else
     {
         return 'n/a';
+    }
+}
+
+function iso_code (currency)
+{
+    var data =
+    {
+        '€'   : 978,
+        'Kč'  : 203,
+        '£'   : 826,
+        '₸'   : 398,
+        'Mex' : 484,
+        'zł'  : 985
+    };
+    
+    if (currency in data)
+    {
+        return data[currency];
+    }
+    else
+    {
+        return null;
     }
 }

@@ -13,6 +13,7 @@ chrome.storage.sync.get(
     'OverviewShowButtonInstead'         : true,
     'OverviewHighlightNegativeNumbers'  : true,
     'OverviewGrayOutVisitedNews'        : true,
+    'OverviewBreakdownRewards'          : true,
     
     // investments.js
     'InvestmentsUseLoanTypeLinks'       : false,
@@ -33,9 +34,15 @@ chrome.storage.sync.get(
     'LoanFormatInvestmentBreakdown'     : true,
     'LoanShowNextPaymentRow'            : true,
     'LoanShowAdditionalRatings'         : true,
+    'LoanShowPaymentWarning'            : true,
+    'LoanShowAgeWarning'                : true,
     
     // accountStatement.js
-    'AccountOverviewUseFourDecimals'    : false
+    'AccountOverviewUseFourDecimals'    : false,
+    
+    // autoInvest.js
+    'AutoInvestHighlightUtilityUse'     : true,
+    'AutoInvestShowUtilizationPercent'  : true
 },
 function (data)
 {

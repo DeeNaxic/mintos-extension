@@ -34,7 +34,7 @@ chrome.storage.sync.get
             }
             catch
             {
-                return setTimeout(runtime, 0.1, settings);
+                return setTimeout(runtime, 100, settings);
             }
             
             /*
@@ -75,7 +75,7 @@ chrome.storage.sync.get
                         var time  = cell.querySelectorAll('span')[0];
                         var node  = cell.querySelectorAll('span')[1];
                         
-                        if (node == undefined)
+                        if (node == null)
                         {
                             cell.appendChild(node = document.createElement('span'));
                             cell.classList.add('global-align-right');
@@ -137,6 +137,12 @@ chrome.storage.sync.get
                     {
                         var cell    = rows[i].lastElementChild;
                         var span    = cell.querySelectorAll('span')[1];
+                        
+                        if (span == undefined)
+                        {
+                            continue;
+                        }
+                        
                         var percent = $getPercentage(span.getAttribute('data-tooltip'));
                         
                         if (span.hasAttribute('data-value') == false)
