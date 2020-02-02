@@ -110,6 +110,8 @@ chrome.storage.sync.get
                         node.querySelector('span').innerText = ' ' + link.querySelector('img').title;
                     }
                 });
+                
+                insertElementBefore(document.createElement('td'), tbody.lastChild.querySelectorAll('td')[1]);
             }
         }
         
