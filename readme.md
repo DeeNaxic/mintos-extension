@@ -68,8 +68,12 @@ This project aims to add an additional layer of information and functionality to
 - Show a row with the loans country.
 - Show a row with days to next payment.
 - Show a row with the on-time payment percentage.
+- Show a row with total time in grace for the payments.
 - Format the loan breakdown table properly.
 - Show the ExploreP2P rating for that loan originator.
+- Show a warning for high aged borrowers.
+- Show a warning for low on-time payment history.
+- Show a warning for unemployed borrowers.
 
 <br>
 
