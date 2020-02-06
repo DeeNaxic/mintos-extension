@@ -31,11 +31,13 @@ chrome.storage.sync.get(
     // loan.js
     'LoanShowCountryRow'                : true,
     'LoanShowOntimePaymentPercent'      : true,
+    'LoanShowTotalGraceTime'            : true,
     'LoanFormatInvestmentBreakdown'     : true,
     'LoanShowNextPaymentRow'            : true,
     'LoanShowAdditionalRatings'         : true,
     'LoanShowPaymentWarning'            : true,
     'LoanShowAgeWarning'                : true,
+    'LoanShowJobWarning'                : true,
     
     // accountStatement.js
     'AccountOverviewUseFourDecimals'    : false,

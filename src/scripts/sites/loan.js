@@ -11,10 +11,12 @@ chrome.storage.sync.get
         'LoanShowCountryRow'                : true,
         'LoanShowNextPaymentRow'            : true,
         'LoanShowOntimePaymentPercent'      : true,
+        'LoanShowTotalGraceTime'            : true,
         'LoanFormatInvestmentBreakdown'     : true,
         'LoanShowAdditionalRatings'         : true,
         'LoanShowPaymentWarning'            : true,
         'LoanShowAgeWarning'                : true,
+        'LoanShowJobWarning'                : true,
     },
     
     function (settings)
@@ -199,6 +201,28 @@ chrome.storage.sync.get
                 details.appendChild(node);
             }
             
+            if (settings.LoanShowTotalGraceTime)
+            {
+                var $days = 0;
+                
+                schedule.querySelectorAll('tr').forEach(function (element)
+                {
+                    if (element.lastChild.innerText == localization('$Paid'))
+                    {
+                        var cells     = element.querySelectorAll('td');
+                        var date      = getElementByAttribute(cells, 'data-m-label', localization('$Date'));
+                        var date_paid = getElementByAttribute(cells, 'data-m-label', localization('$PaymentDate'));
+                        
+                        if (date_paid.innerText.trim().length > 0)
+                        {
+                            $days = $days + Math.floor((toDate(date_paid.innerText.trim()) - toDate(date.innerText.trim())) / 86400000);
+                        }
+                    }
+                });
+                
+                details.appendChild(createDetailsRow(localization('TimeInGrace'), $days + ' ' + localization('Days')));
+            }
+            
             /*
              *  Replace the investment breakdown unordered list, with a table. The table
              *  shows the same informations, and the same colours but formated with rows
@@ -357,6 +381,23 @@ chrome.storage.sync.get
                     }
                 }
             }
+            
+            /*
+             *  Experimental
+             */
+            if (settings.LoanShowJobWarning)
+            {
+                for (var rows = borrower.querySelectorAll('tr'), i = 0; i < rows.length; i++)
+                {
+                    if (rows[i].firstChild.innerText == localization('$Occupation'))
+                    {
+                        if (rows[i].lastChild.innerText.toLowerCase() == 'unemployed')
+                        {
+                            insertElementBefore(createDetailsRowWarning(localization('$Occupation'), rows[i].lastChild.innerText), details.firstChild); break;
+                        }
+                    }
+                }
+            }
         }
         
         function localization (field)
@@ -378,6 +419,16 @@ chrome.storage.sync.get
                     'en' : 'Payments',
                     'de' : 'Zahlungen',
                     'pl' : 'Płatności',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                'TimeInGrace' :
+                {
+                    'en' : 'Time in grace',
+                    'de' : 'Zeit in Schonfrist',
+                    'pl' : 'Całkowity czas karencji',
                     'cs' : '?',
                     'es' : '?',
                     'lv' : '?',
@@ -507,7 +558,7 @@ chrome.storage.sync.get
                 {
                     'en' : 'Late',
                     'de' : 'In Verzug',
-                    'pl' : '?',
+                    'pl' : 'Late',
                     'cs' : '?',
                     'es' : '?',
                     'lv' : '?',
@@ -543,6 +594,16 @@ chrome.storage.sync.get
                     'lv' : '?',
                     'ru' : '?'
                 },
+                '$Date' :
+                {
+                    'en' : 'Date',
+                    'de' : 'Datum',
+                    'pl' : 'Data',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
                 '$Paid' :
                 {
                     'en' : 'Paid',
@@ -553,11 +614,31 @@ chrome.storage.sync.get
                     'lv' : '?',
                     'ru' : '?'
                 },
+                '$PaymentDate' :
+                {
+                    'en' : 'Payment Date',
+                    'de' : 'Zahlungsdatum',
+                    'pl' : 'Data płatności',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
                 '$Scheduled' :
                 {
                     'en' : 'Scheduled',
                     'de' : 'Geplante',
                     'pl' : 'Zaplanowano',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                '$Occupation' :
+                {
+                    'en' : 'Occupation',
+                    'de' : 'Occupation',
+                    'pl' : 'Zawód',
                     'cs' : '?',
                     'es' : '?',
                     'lv' : '?',
