@@ -16,6 +16,7 @@ chrome.storage.sync.get
         'LoanShowAdditionalRatings'         : true,
         'LoanShowPaymentWarning'            : true,
         'LoanShowAgeWarning'                : true,
+        'LoanShowJobWarning'                : true,
     },
     
     function (settings)
@@ -380,6 +381,23 @@ chrome.storage.sync.get
                     }
                 }
             }
+            
+            /*
+             *  Experimental
+             */
+            if (settings.LoanShowJobWarning)
+            {
+                for (var rows = borrower.querySelectorAll('tr'), i = 0; i < rows.length; i++)
+                {
+                    if (rows[i].firstChild.innerText == localization('$Occupation'))
+                    {
+                        if (rows[i].lastChild.innerText.toLowerCase() == 'unemployed')
+                        {
+                            insertElementBefore(createDetailsRowWarning(localization('$Occupation'), rows[i].lastChild.innerText), details.firstChild); break;
+                        }
+                    }
+                }
+            }
         }
         
         function localization (field)
@@ -611,6 +629,16 @@ chrome.storage.sync.get
                     'en' : 'Scheduled',
                     'de' : 'Geplante',
                     'pl' : 'Zaplanowano',
+                    'cs' : '?',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                },
+                '$Occupation' :
+                {
+                    'en' : 'Occupation',
+                    'de' : 'Occupation',
+                    'pl' : 'Zawód',
                     'cs' : '?',
                     'es' : '?',
                     'lv' : '?',
