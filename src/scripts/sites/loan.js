@@ -558,7 +558,7 @@ chrome.storage.sync.get
                 {
                     'en' : 'Late',
                     'de' : 'In Verzug',
-                    'pl' : '?',
+                    'pl' : 'Late',
                     'cs' : '?',
                     'es' : '?',
                     'lv' : '?',
