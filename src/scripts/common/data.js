@@ -70,6 +70,9 @@ function rating (loan_originator)
         "credilikeme"        :    "18",
         "lendo"              :    "14",
         "tigo"               :    "13",
+        "tascredit"          :    "52",
+        "gfm"                :    "41",
+        "julo"               :    "47",
         "metrokredit"        :    "11"
     };
     
