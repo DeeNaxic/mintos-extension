@@ -559,7 +559,7 @@ chrome.storage.sync.get
                     'en' : 'Late',
                     'de' : 'In Verzug',
                     'pl' : 'Late',
-                    'cs' : 'V prolení',
+                    'cs' : 'V prodlení',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
