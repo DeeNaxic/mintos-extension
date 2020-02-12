@@ -326,7 +326,7 @@ chrome.storage.sync.get
                     'en' : 'Switch Metric',
                     'de' : 'Veränderung',
                     'pl' : 'Zmiana',
-                    'cs' : '?',
+                    'cs' : 'Přepnout částky/počty',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -336,7 +336,7 @@ chrome.storage.sync.get
                     'en' : 'Campaign Rewards',
                     'de' : 'Mehr verdienen',
                     'pl' : 'Zarabiaj więcej',
-                    'cs' : '?',
+                    'cs' : 'Odměny z kampaní',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
