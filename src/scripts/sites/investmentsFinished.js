@@ -208,7 +208,7 @@ chrome.storage.sync.get
                     'en' : 'Duration',
                     'de' : 'Dauer',
                     'pl' : 'Czas trwania',
-                    'cs' : '?',
+                    'cs' : 'V držení',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -218,7 +218,7 @@ chrome.storage.sync.get
                     'en' : 'The total amount of days which you held this note.',
                     'de' : 'Zeitraum des Darlehens in Tagen.',
                     'pl' : 'Łączna liczba dni, w których posiadałeś pożyczkę.',
-                    'cs' : '?',
+                    'cs' : 'Doba od nákupu půjčky po její splacení nebo odprodej.',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -228,7 +228,7 @@ chrome.storage.sync.get
                     'en' : 'days',
                     'de' : 'tage',
                     'pl' : 'dni',
-                    'cs' : '?',
+                    'cs' : 'dní',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -238,7 +238,7 @@ chrome.storage.sync.get
                     'en' : 'Profit',
                     'de' : 'Profitieren',
                     'pl' : 'Zysk',
-                    'cs' : '?',
+                    'cs' : 'Zisk',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -248,7 +248,7 @@ chrome.storage.sync.get
                     'en' : 'The total profit made from this note, calculated as the total received payments minus the investment amount you spent on buying it.',
                     'de' : 'Der Gesamtgewinn des Darlehens berechnet als gesamt erhaltene Zahlung minus der Summe, die Sie zum Kauf aufgewendet haben.',
                     'pl' : 'Całkowity zysk uzyskany z pożyczki, obliczany na podstawie uzyskanych zapłat minus wkład inwestycyjny włożony w kupno.',
-                    'cs' : '?',
+                    'cs' : 'Celkový zisk z půjčky. Jde o všechny přijaté platby snížené o investovanou částku.',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -258,7 +258,7 @@ chrome.storage.sync.get
                     'en' : 'Finished',
                     'de' : 'Zurückgezahlt',
                     'pl' : 'Finished',
-                    'cs' : '?',
+                    'cs' : 'Ukončeno',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -268,7 +268,7 @@ chrome.storage.sync.get
                     'en' : 'Received Payments',
                     'de' : 'Eingegangene Zahlungen',
                     'pl' : 'Otrzymane płatności',
-                    'cs' : '?',
+                    'cs' : 'Přijaté platby',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -278,7 +278,7 @@ chrome.storage.sync.get
                     'en' : 'My Investment',
                     'de' : 'Meine Investition',
                     'pl' : 'Moja inwestycja',
-                    'cs' : '?',
+                    'cs' : 'Moje investice',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
