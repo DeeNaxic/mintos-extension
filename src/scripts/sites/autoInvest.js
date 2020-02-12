@@ -130,7 +130,7 @@ chrome.storage.sync.get
                     'en' : 'Utilization',
                     'de' : 'Nutzung',
                     'pl' : 'Wykorzystanie',
-                    'cs' : '?',
+                    'cs' : 'Naplnění limitu',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
