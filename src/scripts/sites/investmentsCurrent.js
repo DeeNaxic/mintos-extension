@@ -195,7 +195,7 @@ chrome.storage.sync.get
                     'en' : 'Days To<br>Next Payment',
                     'de' : 'Tage bis zur<br>nächsten Zahlung',
                     'pl' : 'Dni do<br>następnej opłaty',
-                    'cs' : '?',
+                    'cs' : 'Dní do <br>další splátky',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -205,7 +205,7 @@ chrome.storage.sync.get
                     'en' : 'days',
                     'de' : 'tage',
                     'pl' : 'dni',
-                    'cs' : '?',
+                    'cs' : 'd',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -215,7 +215,7 @@ chrome.storage.sync.get
                     'en' : 'Late',
                     'de' : 'In Verzug',
                     'pl' : 'Opóźnienie',
-                    'cs' : '?',
+                    'cs' : 'V prodlení',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -225,7 +225,7 @@ chrome.storage.sync.get
                     'en' : 'Next Payment Date',
                     'de' : 'Nächster Zahlungstermin',
                     'pl' : 'Data następnej płatności',
-                    'cs' : '?',
+                    'cs' : 'Datum další splátky',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -235,7 +235,7 @@ chrome.storage.sync.get
                     'en' : 'Term',
                     'de' : 'Laufzeit',
                     'pl' : 'Okres',
-                    'cs' : '?',
+                    'cs' : 'Splatnost',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
