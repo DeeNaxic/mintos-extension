@@ -1,7 +1,7 @@
 {
     "name"              : "Investment Extensions: Mintos",
     "description"       : "This extension aims to improve the Mintos.com experience, with additional features and post-processing of the website.",
-    "version"           : "1.3.0",
+    "version"           : "1.4.0",
     "manifest_version"  : 2,
     
     "options_ui"        :
@@ -45,7 +45,8 @@
             [
                 "https://www.mintos.com/en/overview/*",
                 "https://www.mintos.com/de/ubersicht/*",
-                "https://www.mintos.com/pl/przeglad/*"
+                "https://www.mintos.com/pl/przeglad/*",
+                "https://www.mintos.com/cs/prehled-uctu/*"
             ],
             "js"        :
             [
@@ -57,7 +58,8 @@
             [
                 "https://www.mintos.com/en/*",
                 "https://www.mintos.com/de/*",
-                "https://www.mintos.com/pl/*"
+                "https://www.mintos.com/pl/*",
+                "https://www.mintos.com/cs/*"
             ],
             "js"        :
             [
@@ -69,8 +71,8 @@
             [
                 "https://www.mintos.com/en/my-investments/finished-investments/*",
                 "https://www.mintos.com/de/meine-investitionen/finished-investments-de/*",
-                "https://www.mintos.com/pl/moje-inwestycje/finished-investments-pl/*"
-                
+                "https://www.mintos.com/pl/moje-inwestycje/finished-investments-pl/*",
+                "https://www.mintos.com/cs/moje-investice/finished-investments-cs/*"
             ],
             "js"        :
             [
@@ -83,7 +85,8 @@
             [
                 "https://www.mintos.com/en/my-investments/current-investments/*",
                 "https://www.mintos.com/de/meine-investitionen/current-investments-de/*",
-                "https://www.mintos.com/pl/moje-inwestycje/current-investments-pl/*"
+                "https://www.mintos.com/pl/moje-inwestycje/current-investments-pl/*",
+                "https://www.mintos.com/cs/moje-investice/current-investments-cs/*"
             ],
             "js"        :
             [
@@ -96,7 +99,8 @@
             [
                 "https://www.mintos.com/en/invest-en/auto-invest/*",
                 "https://www.mintos.com/de/investieren-de/auto-invest-de/*",
-                "https://www.mintos.com/pl/inwestuj-pl/auto-invest-pl/*"
+                "https://www.mintos.com/pl/inwestuj-pl/auto-invest-pl/*",
+                "https://www.mintos.com/cs/investovat-cs/auto-invest-cz/*"
             ],
             "js"        :
             [
@@ -108,7 +112,8 @@
             [
                 "https://www.mintos.com/en/account-statement/*",
                 "https://www.mintos.com/de/kontoauszug/*",
-                "https://www.mintos.com/pl/wyciag-z-konta/*"
+                "https://www.mintos.com/pl/wyciag-z-konta/*",
+                "https://www.mintos.com/cs/vypis-z-uctu/*"
             ],
             "js"        :
             [

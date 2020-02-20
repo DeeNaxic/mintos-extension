@@ -195,7 +195,7 @@ chrome.storage.sync.get
                     'en' : 'Days To<br>Next Payment',
                     'de' : 'Tage bis zur<br>nächsten Zahlung',
                     'pl' : 'Dni do<br>następnej opłaty',
-                    'cs' : '?',
+                    'cs' : 'Dní do <br>další splátky',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -205,7 +205,7 @@ chrome.storage.sync.get
                     'en' : 'days',
                     'de' : 'tage',
                     'pl' : 'dni',
-                    'cs' : '?',
+                    'cs' : 'd',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -215,30 +215,30 @@ chrome.storage.sync.get
                     'en' : 'Late',
                     'de' : 'In Verzug',
                     'pl' : 'Opóźnienie',
-                    'cs' : '?',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Zpožděné',
+                    'es' : 'Retrasado',
+                    'lv' : 'Kavējas',
+                    'ru' : 'Задерживается'
                 },
                 '$NextPayment' :
                 {
                     'en' : 'Next Payment Date',
                     'de' : 'Nächster Zahlungstermin',
                     'pl' : 'Data następnej płatności',
-                    'cs' : '?',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Datum  další splátky',
+                    'es' : 'Next Payment Date',
+                    'lv' : 'Nākamāmaksājuma datums',
+                    'ru' : 'Дата следующего платежа'
                 },
                 '$Term' :
                 {
                     'en' : 'Term',
                     'de' : 'Laufzeit',
                     'pl' : 'Okres',
-                    'cs' : '?',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Doba splácení',
+                    'es' : 'Período de vencimiento',
+                    'lv' : 'Termiņš',
+                    'ru' : 'Срок'
                 }
             };
             

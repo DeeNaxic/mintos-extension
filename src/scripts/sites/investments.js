@@ -124,7 +124,7 @@ chrome.storage.sync.get
                     'en' : 'Country',
                     'de' : 'Land',
                     'pl' : 'Kraj',
-                    'cs' : '?',
+                    'cs' : 'Stát',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'
@@ -134,7 +134,7 @@ chrome.storage.sync.get
                     'en' : 'The country where this loan was taken out.',
                     'de' : 'Das Land in welchem dieses Darlehen bezogen wurde.',
                     'pl' : 'Kraj w którym została wzięta pozyczka.',
-                    'cs' : '?',
+                    'cs' : 'Stát ve kterém byla půjčka poskytnuta.',
                     'es' : '?',
                     'lv' : '?',
                     'ru' : '?'

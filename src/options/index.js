@@ -41,6 +41,7 @@ chrome.storage.sync.get(
     
     // accountStatement.js
     'AccountOverviewUseFourDecimals'    : false,
+    'AccountOverviewShowAllTimeButton'  : true,
     
     // autoInvest.js
     'AutoInvestHighlightUtilityUse'     : true,
