@@ -64,9 +64,61 @@ chrome.storage.sync.get
                 });
                 
                 $formatDecimals();
+                $add_timespan_always();
             }
         }
-        
+
+        function $add_timespan_always() {
+
+            const always_a = document.createElement('a');
+            always_a.innerText = localization('timespan');
+            always_a.href = 'javascript:;';
+            always_a.setAttribute('data-value', 'always');
+
+            always_a.addEventListener('click', function (event) {
+                document.querySelectorAll('li.m-quickfilter-item > a:not([data-value = "always"])').forEach(function (elem) {
+                    elem.classList.remove('active')
+                });
+                always_a.classList.add('active');
+                document.querySelector('#period-from').value = '1.1.1950';
+                var d = new Date();
+                document.querySelector('#period-to').value = d.getDate()
+                    + '.' + d.getMonth()
+                    + '.' + d.getFullYear();
+                document.querySelector('#filter-button').click()
+            });
+
+            const always_li = document.createElement('li');
+            always_li.classList.add('m-quickfilter-item');
+            always_li.appendChild(always_a);
+            document.querySelector('#quickfilters').appendChild(always_li);
+
+            document.querySelectorAll('li.m-quickfilter-item > a:not([data-value = "always"])').forEach(function (elem) {
+                elem.addEventListener('click', function (event) {
+                    always_a.classList.remove('active');
+                })
+            });
+        }
+
+        function localization (field)
+        {
+            var translations =
+                {
+                    'timespan' :
+                        {
+                            'en' : 'All the time',
+                            'de' : 'Ganze Zeit',
+                            'pl' : 'Od początku',
+                            'cs' : '?',
+                            'es' : '?',
+                            'lv' : '?',
+                            'ru' : '?'
+                        }
+                };
+
+            return translations[field][document.location.pathname.substring(1, 3)];
+        }
+
         runtime(settings);
     }
 );
