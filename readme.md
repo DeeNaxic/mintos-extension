@@ -50,6 +50,7 @@ This project aims to add an additional layer of information and functionality to
 
 ##### In Account Statement:
 - Show four decimals for numbers instead of two.
+- Adds an alltime time filter option.
 
 ##### In Current Investments:
 - Show a column with the loans country.
