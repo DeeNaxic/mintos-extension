@@ -116,6 +116,14 @@ chrome.storage.sync.get
                         }
                 };
 
+                    'en' : 'Alltime',
+                    'de' : 'Ganze Zeit',
+                    'pl' : 'Od początku',
+                    'cs' : 'Kompletní historie',
+                    'es' : '?',
+                    'lv' : '?',
+                    'ru' : '?'
+                }
             return translations[field][document.location.pathname.substring(1, 3)];
         }
 

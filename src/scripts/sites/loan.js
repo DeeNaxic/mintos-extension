@@ -559,30 +559,30 @@ chrome.storage.sync.get
                     'en' : 'Late',
                     'de' : 'In Verzug',
                     'pl' : 'Late',
-                    'cs' : 'V prodlení',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Late',
+                    'es' : 'Late',
+                    'lv' : 'Kavējas',
+                    'ru' : 'Задерживается'
                 },
                 '$Finished' :
                 {
                     'en' : 'Finished',
                     'de' : 'Zurückgezahlt',
                     'pl' : 'Finished',
-                    'cs' : 'Ukončeno',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Ukončené',
+                    'es' : 'Amortizado',
+                    'lv' : 'Atmaksāts',
+                    'ru' : 'Погашен'
                 },
                 '$FinishedPrematurely' :
                 {
                     'en' : 'Finished prematurely',
                     'de' : 'Vorzeitig beendet',
                     'pl' : 'Status Zokończona przed czasem',
-                    'cs' : 'Ukončena předčasně',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Předčasně ukončeno',
+                    'es' : 'Amortización anticipada',
+                    'lv' : 'Pabeigts priekšlaicīgi',
+                    'ru' : 'Преждевременно закончено'
                 },
                 '$Default' :
                 {
@@ -599,40 +599,40 @@ chrome.storage.sync.get
                     'en' : 'Date',
                     'de' : 'Datum',
                     'pl' : 'Data',
-                    'cs' : 'Datum',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Date',
+                    'es' : 'Fecha',
+                    'lv' : 'Datums',
+                    'ru' : 'Дата'
                 },
                 '$Paid' :
                 {
                     'en' : 'Paid',
                     'de' : 'Gezahlt',
                     'pl' : 'Zapłacono',
-                    'cs' : 'Splaceno',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Paid',
+                    'es' : 'Pagado',
+                    'lv' : 'Samaksāts',
+                    'ru' : 'Выплачено'
                 },
                 '$PaymentDate' :
                 {
                     'en' : 'Payment Date',
                     'de' : 'Zahlungsdatum',
                     'pl' : 'Data płatności',
-                    'cs' : 'Splaceno dne',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Datum platby',
+                    'es' : 'Fecha del pago',
+                    'lv' : 'Maksājuma datums',
+                    'ru' : 'Число'
                 },
                 '$Scheduled' :
                 {
                     'en' : 'Scheduled',
                     'de' : 'Geplante',
                     'pl' : 'Zaplanowano',
-                    'cs' : 'Naplánováno',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Naplánované',
+                    'es' : 'Scheduled',
+                    'lv' : 'Plānots',
+                    'ru' : 'Запланировано'
                 },
                 '$Occupation' :
                 {
@@ -640,9 +640,9 @@ chrome.storage.sync.get
                     'de' : 'Occupation',
                     'pl' : 'Zawód',
                     'cs' : 'Zaměstnání',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'es' : 'Occupation',
+                    'lv' : 'Nodarbošanās',
+                    'ru' : 'Occupation'
                 },
                 '$Borrower' :
                 {
@@ -650,9 +650,9 @@ chrome.storage.sync.get
                     'de' : 'Kreditnehmer',
                     'pl' : 'Pożyczkobiorca',
                     'cs' : 'Dlužník',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'es' : 'Prestatario',
+                    'lv' : 'Aizņēmējs',
+                    'ru' : 'Заемщик'
                 },
                 '$BorrowerPattern' :
                 {

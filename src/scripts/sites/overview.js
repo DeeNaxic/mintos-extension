@@ -337,9 +337,9 @@ chrome.storage.sync.get
                     'de' : 'Mehr verdienen',
                     'pl' : 'Zarabiaj więcej',
                     'cs' : 'Odměny z kampaní',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'es' : 'Recompensas de la campaña',
+                    'lv' : 'Akcijas balvas',
+                    'ru' : 'Призы акции'
                 }
             };
             

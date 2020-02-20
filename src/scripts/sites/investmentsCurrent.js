@@ -215,30 +215,30 @@ chrome.storage.sync.get
                     'en' : 'Late',
                     'de' : 'In Verzug',
                     'pl' : 'Opóźnienie',
-                    'cs' : 'V prodlení',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Zpožděné',
+                    'es' : 'Retrasado',
+                    'lv' : 'Kavējas',
+                    'ru' : 'Задерживается'
                 },
                 '$NextPayment' :
                 {
                     'en' : 'Next Payment Date',
                     'de' : 'Nächster Zahlungstermin',
                     'pl' : 'Data następnej płatności',
-                    'cs' : 'Datum další splátky',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Datum  další splátky',
+                    'es' : 'Next Payment Date',
+                    'lv' : 'Nākamāmaksājuma datums',
+                    'ru' : 'Дата следующего платежа'
                 },
                 '$Term' :
                 {
                     'en' : 'Term',
                     'de' : 'Laufzeit',
                     'pl' : 'Okres',
-                    'cs' : 'Splatnost',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Doba splácení',
+                    'es' : 'Período de vencimiento',
+                    'lv' : 'Termiņš',
+                    'ru' : 'Срок'
                 }
             };
             

@@ -258,20 +258,20 @@ chrome.storage.sync.get
                     'en' : 'Finished',
                     'de' : 'Zurückgezahlt',
                     'pl' : 'Finished',
-                    'cs' : 'Ukončeno',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Ukončené',
+                    'es' : 'Amortizado',
+                    'lv' : 'Atmaksāts',
+                    'ru' : 'Погашен'
                 },
                 '$ReceivedPayments' :
                 {
                     'en' : 'Received Payments',
                     'de' : 'Eingegangene Zahlungen',
                     'pl' : 'Otrzymane płatności',
-                    'cs' : 'Přijaté platby',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'cs' : 'Received Payments',
+                    'es' : 'Received Payments',
+                    'lv' : 'Saņemtie maksājumi',
+                    'ru' : 'Полученные платежи'
                 },
                 '$MyInvestment' :
                 {
@@ -279,9 +279,9 @@ chrome.storage.sync.get
                     'de' : 'Meine Investition',
                     'pl' : 'Moja inwestycja',
                     'cs' : 'Moje investice',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
+                    'es' : 'Mi inversión',
+                    'lv' : 'Mana investīcija',
+                    'ru' : 'Моя инвестиция'
                 }
             };
             
