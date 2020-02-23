@@ -81,10 +81,15 @@ chrome.storage.sync.get
             {
                 thead.firstChild.insertBefore(createHeader (localization('Country')           ), thead.firstChild.firstChild);
                 thead.lastChild .insertBefore(createTooltip(localization('CountryDescription')), thead.lastChild .firstChild);
+
+                const tfoot = document.createElement('tfoot');
+                dataTable.appendChild(tfoot);
                 
                 DomMonitor(dataTable, function (mutations)
                 {
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    fixSummaryRows(tbody, tfoot);
+                    
+                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length; i++)
                     {
                         var link  = rows[i].querySelector('td.loan-id-col');
                         var node  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Country');
@@ -110,8 +115,6 @@ chrome.storage.sync.get
                         node.querySelector('span').innerText = ' ' + link.querySelector('img').title;
                     }
                 });
-                
-                insertElementBefore(document.createElement('td'), tbody.lastChild.querySelectorAll('td')[1]);
             }
         }
         
@@ -144,6 +147,17 @@ chrome.storage.sync.get
             return translations[field][document.location.pathname.substring(1, 3)];
         }
         
+        function fixSummaryRows (tbody, tfoot)
+        {
+            for (const row of tbody.querySelectorAll('tr.total-row'))
+            {
+                const emptyCell = document.createElement('td');
+                emptyCell.classList.add('m-hidden-col', 'mod-hidden-on-small');
+                row.insertBefore(emptyCell, row.childNodes[1]);
+                tfoot.appendChild(row);
+            }
+        }
+
         runtime(settings);
     }
 );
