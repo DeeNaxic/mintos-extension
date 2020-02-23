@@ -69,7 +69,7 @@ chrome.storage.sync.get
                 
                 DomMonitor(dataTable, function (mutations)
                 {
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length; i++)
                     {
                         var cell  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', localization('$NextPayment'));
                         var time  = cell.querySelectorAll('span')[0];

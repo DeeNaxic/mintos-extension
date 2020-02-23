@@ -107,7 +107,7 @@ chrome.storage.sync.get
                 
                 DomMonitor(dataTable, function (mutations)
                 {
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length; i++)
                     {
                         var cells = rows[i].querySelectorAll('td');
                         var days  = Math.floor(Math.abs((toDate(rows[i].querySelector('td.m-loan-issued').innerText).getTime() - toDate(getElementByAttribute(cells, 'data-m-label', localization('$Finished')).innerText).getTime()) / 86400000));
@@ -140,7 +140,7 @@ chrome.storage.sync.get
                 
                 DomMonitor(dataTable, function (mutations)
                 {
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length; i++)
                     {
                         var cells   = rows[i].querySelectorAll('td');
                         var profit  = toFloat(getElementByAttribute(cells, 'data-m-label', localization('$ReceivedPayments')).innerText) - toFloat(getElementByAttribute(cells, 'data-m-label', localization('$MyInvestment')).innerText);
@@ -184,7 +184,7 @@ chrome.storage.sync.get
                         data[lines[i].innerText] = lines[i].value;
                     }
                     
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length; i++)
                     {
                         var node              = rows[i].querySelector('td.m-loan-type');
                             node.style.color  = '#3f85f4';
