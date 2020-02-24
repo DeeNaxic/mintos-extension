@@ -5,7 +5,7 @@
  *  @licence >> GNU GPLv3
  */
 
-function rating (loan_originator)
+export function rating (loan_originator)
 {
     var data =
     {
@@ -87,7 +87,7 @@ function rating (loan_originator)
     }
 }
 
-function iso_code (currency)
+export function iso_code (currency)
 {
     var data =
     {

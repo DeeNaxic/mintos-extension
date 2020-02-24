@@ -5,6 +5,9 @@
  *  @licence >> GNU GPLv3
  */
 
+import {iso_code} from '../common/data'
+import {assert, DomMonitorAggressive, insertElementBefore, toFloat} from '../common/util';
+
 chrome.storage.sync.get
 (
     {

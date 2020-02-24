@@ -5,7 +5,7 @@
  *  @licence >> GNU GPLv3
  */
 
-function assert (selector)
+export function assert (selector)
 {
     if (selector == null)
     {
@@ -15,32 +15,32 @@ function assert (selector)
     return selector;
 }
 
-function getCurrencyPrefix (text)
+export function getCurrencyPrefix (text)
 {
     return text.match(/^\S+/)[0];
 }
 
-function toNumber (text)
+export function toNumber (text)
 {
     return String(text).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 ')
 }
 
-function toFloat (text)
+export function toFloat (text)
 {
     return parseFloat(text.replace(/[^0-9\.\-]/g, ''));
 }
 
-function toDate (text)
+export function toDate (text)
 {
     return new Date(parseInt(text.split('.')[2]), parseInt(text.split('.')[1]) - 1, parseInt(text.split('.')[0]));
 }
 
-function insertElementBefore (element, node)
+export function insertElementBefore (element, node)
 {
     node.parentNode.insertBefore(element, node);
 }
 
-function getElementByAttribute (elements, attribute, value)
+export function getElementByAttribute (elements, attribute, value)
 {
     for (var i = 0; i < elements.length; i++)
     {
@@ -53,7 +53,7 @@ function getElementByAttribute (elements, attribute, value)
     return null;
 }
 
-var DomMonitor = (function ()
+export const DomMonitor = (function ()
 {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     
@@ -85,7 +85,7 @@ var DomMonitor = (function ()
     }
 })();
 
-var DomMonitorAggressive = (function ()
+export const DomMonitorAggressive = (function ()
 {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var ready            = true;

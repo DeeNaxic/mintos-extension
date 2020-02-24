@@ -1,0 +1,22 @@
+{
+    "description": "This extension aims to improve the Mintos.com experience, with additional features and post-processing of the website.",
+    "version": "1.5.0",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DeeNaxic/mintos-extension.git"
+    },
+    "license": "GPL-3.0",
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^11.0.2",
+        "@rollup/plugin-node-resolve": "^7.1.1",
+        "rollup": "^1.15.4",
+        "rollup-plugin-chrome-extension": "^2.1.0",
+        "rollup-plugin-copy": "^3.3.0",
+        "rollup-plugin-delete": "^1.2.0",
+        "rollup-plugin-progress": "^1.1.1"
+    },
+    "scripts": {
+        "build": "rollup -c"
+    },
+    "dependencies": {}
+}

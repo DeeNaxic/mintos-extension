@@ -5,6 +5,8 @@
  *  @licence >> GNU GPLv3
  */
 
+import {assert, DomMonitorAggressive} from '../common/util';
+
 chrome.storage.sync.get
 (
     {

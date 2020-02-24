@@ -5,6 +5,9 @@
  *  @licence >> GNU GPLv3
  */
 
+import {rating} from '../common/data'
+import {assert, getCurrencyPrefix, getElementByAttribute, toDate, toFloat, toNumber, insertElementBefore} from '../common/util';
+
 chrome.storage.sync.get
 (
     {

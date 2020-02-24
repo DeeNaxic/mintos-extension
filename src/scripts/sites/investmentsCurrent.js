@@ -5,6 +5,9 @@
  *  @licence >> GNU GPLv3
  */
 
+import './investments';
+import {assert, getElementByAttribute, DomMonitor, toDate} from '../common/util';
+
 chrome.storage.sync.get
 (
     {
