@@ -115,7 +115,7 @@ chrome.storage.sync.get
             {
                 'timespan' :
                 {
-                    'en' : 'Alltime',
+                    'en' : 'All the time',
                     'de' : 'Ganze Zeit',
                     'pl' : 'Od początku',
                     'cs' : 'Kompletní historie',
