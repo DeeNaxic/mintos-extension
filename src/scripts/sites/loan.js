@@ -330,8 +330,8 @@ chrome.storage.sync.get
                 
                 rank.style.display = 'none';
                 
-                originator.insertBefore(createOriginatorRow('Mintos\'s '     + localization('Rating'),        rank.innerText), originator.lastChild);
-                originator.insertBefore(createOriginatorRow('ExploreP2P\'s ' + localization('Rating') + link, rating(name)  ), originator.lastChild);
+                originator.append(createOriginatorRow('Mintos\'s '     + localization('Rating'),        rank.innerText));
+                originator.append(createOriginatorRow('ExploreP2P\'s ' + localization('Rating') + link, rating(name)  ));
             }
             
             /*
