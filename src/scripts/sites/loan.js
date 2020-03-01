@@ -148,11 +148,14 @@ chrome.storage.sync.get
                     for (var rows = schedule.querySelectorAll('tr'), i = 0; i < rows.length; i++)
                     {
                         var columns = rows[i].querySelectorAll('td');
+                        if (columns.length === 1)
+                            continue;
                         var status  = columns[6].innerText;
                         
                         if ([localization('$Scheduled'), localization('$Late')].includes(status))
                         {
-                            days = Math.floor((toDate(columns[0].innerText) - today) / 86400000); break;
+                            days = Math.floor((toDate(columns[0].innerText) - today) / 86400000);
+                            break;
                         }
                     }
                 }
@@ -173,7 +176,7 @@ chrome.storage.sync.get
              *  and it excludes scheduled payments which has not yet been made. If there
              *  is only scheduled payments the 'n/a' is shown instead of some percentage
              */
-            if (settings.LoanShowOntimePaymentPercent)
+            if (settings.LoanShowOntimePaymentPercent || settings.LoanShowPaymentWarning)
             {
                 var $ontime  = 0;
                 var $others  = 0;
@@ -185,7 +188,9 @@ chrome.storage.sync.get
                         $ontime++;
                     }
                     else
-                    if (element.lastChild.innerText == localization('$Scheduled'))
+                    if (element.lastChild.innerText === localization('$Scheduled')
+                        || element.childNodes.length === 1
+                    )
                     {
                         
                     }
@@ -195,10 +200,23 @@ chrome.storage.sync.get
                     }
                 });
                 
-                var percent  = $others + $ontime > 0 ? ($ontime / ($others + $ontime) * 100.00).toFixed(0) + '%' : 'n/a';
-                var node     = createDetailsRow(localization('OntimePayments'), percent);
+                const totalPayments = $others + $ontime;
+                const percent = totalPayments > 0 ? ($ontime / totalPayments * 100.00) : NaN;
                 
-                details.appendChild(node);
+                if (settings.LoanShowOntimePaymentPercent)
+                {
+                    const percentStr = !percent.isNaN ? percent.toFixed(0) + '%' : 'n/a';
+                    var node = createDetailsRow(localization('OntimePayments'), percentStr);
+                    details.appendChild(node);
+                }
+    
+                /*
+                 *  Experimental
+                 */
+                if (settings.LoanShowPaymentWarning && percent < 60.0)
+                {
+                    insertElementBefore(createDetailsRowWarning(localization('Payments'), percent.toFixed(2) + '% ' + localization('Ontime')), details.firstChild);
+                }
             }
             
             if (settings.LoanShowTotalGraceTime)
@@ -332,37 +350,6 @@ chrome.storage.sync.get
                 
                 originator.append(createOriginatorRow('Mintos\'s '     + localization('Rating'),        rank.innerText));
                 originator.append(createOriginatorRow('ExploreP2P\'s ' + localization('Rating') + link, rating(name)  ));
-            }
-            
-            /*
-             *  Experimental
-             */
-            if (settings.LoanShowPaymentWarning)
-            {
-                var $ontime  = 0;
-                var $others  = 0;
-                
-                schedule.querySelectorAll('tr').forEach(function (element)
-                {
-                    if (element.lastChild.innerText == localization('$Paid'))
-                    {
-                        $ontime++;
-                    }
-                    else
-                    if (element.lastChild.innerText == localization('$Scheduled'))
-                    {
-                        
-                    }
-                    else
-                    {
-                        $others++;
-                    }
-                });
-                
-                if ($ontime / ($others + $ontime) * 100.00 < 60.0)
-                {
-                    insertElementBefore(createDetailsRowWarning(localization('Payments'), ($ontime / ($others + $ontime) * 100.00).toFixed(2) + '% ' + localization('Ontime')), details.firstChild);
-                }
             }
             
             /*
