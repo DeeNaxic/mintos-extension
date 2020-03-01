@@ -1,3 +1,14 @@
+div.invext-chart-container {
+    position: relative;
+    height: 50%;
+    width: 50%;
+}
+
+.invext-chart-container canvas {
+    height: 100%;
+    width: 100%;
+}
+
 .invext-hidden {
     display: none;
 }

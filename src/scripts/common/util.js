@@ -35,6 +35,16 @@ export function toDate (text)
     return new Date(parseInt(text.split('.')[2]), parseInt(text.split('.')[1]) - 1, parseInt(text.split('.')[0]));
 }
 
+/**
+ * @param {Date} a
+ * @param {Date} b
+ * @returns {number} number of days between a and b
+ */
+export function daysBetween(a, b){
+    const millisPerDay = 1000 * 60 * 60 * 24;
+    return (b.getTime() - a.getTime()) / millisPerDay
+}
+
 export function insertElementBefore (element, node)
 {
     node.parentNode.insertBefore(element, node);

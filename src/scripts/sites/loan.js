@@ -6,7 +6,17 @@
  */
 
 import {rating} from '../common/data'
-import {assert, getCurrencyPrefix, getElementByAttribute, toDate, toFloat, toNumber, insertElementBefore} from '../common/util';
+import {
+    assert,
+    daysBetween,
+    getCurrencyPrefix,
+    getElementByAttribute,
+    insertElementBefore,
+    toDate,
+    toFloat,
+    toNumber
+} from '../common/util';
+import {latePaymentHistogramChart} from "../components/paymentDelayHisto";
 
 chrome.storage.sync.get
 (
@@ -20,6 +30,7 @@ chrome.storage.sync.get
         'LoanShowPaymentWarning'            : true,
         'LoanShowAgeWarning'                : true,
         'LoanShowJobWarning'                : true,
+        'LoanShowLatePaymentHistogram'      : true,
     },
     
     function (settings)
@@ -179,29 +190,42 @@ chrome.storage.sync.get
              *  and it excludes scheduled payments which has not yet been made. If there
              *  is only scheduled payments the 'n/a' is shown instead of some percentage
              */
-            if (settings.LoanShowOntimePaymentPercent || settings.LoanShowPaymentWarning)
+            if (settings.LoanShowOntimePaymentPercent ||
+                settings.LoanShowPaymentWarning ||
+                settings.LoanShowLatePaymentHistogram
+            )
             {
                 var $ontime  = 0;
                 var $others  = 0;
-                
-                schedule.querySelectorAll('tr').forEach(function (element)
+                const histogram = [];
+    
+                for (let element of schedule.querySelectorAll('tr'))
                 {
+                    if (element.lastChild.innerText === localization('$Scheduled'))
+                        // Quit parsing on first scheduled payment
+                        break;
+                    if (element.children.length === 1 || element.children[1].innerText.trim() === '')
+                        // Don't count payments made before listing time (those without any details) as on-time.
+                        // Skip schedule extension rows
+                        continue;
                     if (element.lastChild.innerText == localization('$Paid'))
                     {
                         $ontime++;
+                        histogram[0] = (histogram[0] || 0) + 1;
                     }
-                    else
-                    if (element.lastChild.innerText === localization('$Scheduled')
-                        || element.childNodes.length === 1
-                    )
+                    else if (paymentStatus === localization('$Late'))
                     {
-                        
+                        ++$others;
+                        const days = toDays(today() - toDate(element.children[0].innerText));
+                        histogram[days] = (histogram[days] || 0) + 1;
                     }
                     else
                     {
                         $others++;
+                        const days = getDaysBetweenFromRow(element);
+                        histogram[days] = (histogram[days] || 0) + 1;
                     }
-                });
+                }
                 
                 const totalPayments = $others + $ontime;
                 const percent = totalPayments > 0 ? ($ontime / totalPayments * 100.00) : NaN;
@@ -219,6 +243,13 @@ chrome.storage.sync.get
                 if (settings.LoanShowPaymentWarning && percent < 60.0)
                 {
                     insertElementBefore(createDetailsRowWarning(localization('Payments'), percent.toFixed(2) + '% ' + localization('Ontime')), details.firstChild);
+                }
+    
+                if (settings.LoanShowLatePaymentHistogram)
+                {
+                    document.querySelector('div.chart-data')
+                        .insertAdjacentElement('afterend', 
+                            latePaymentHistogramChart(histogram).querySelector('div'));
                 }
             }
             
@@ -662,3 +693,10 @@ chrome.storage.sync.get
         runtime(settings);
     }
 );
+
+function getDaysBetweenFromRow (row)
+{
+    const dateScheduled = toDate(row.children[0].innerText);
+    const datePayed = toDate(row.children[5].innerText);
+    return daysBetween(dateScheduled, datePayed);
+}
