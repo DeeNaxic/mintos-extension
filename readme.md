@@ -50,6 +50,7 @@ This project aims to add an additional layer of information and functionality to
 
 ##### In Account Statement:
 - Show four decimals for numbers instead of two.
+- Adds an alltime time filter option.
 
 ##### In Current Investments:
 - Show a column with the loans country.
@@ -95,7 +96,7 @@ This GitHub repository here, is intended for our Chrome Extension [release packa
 
 ### Limitations
 
-As this is a Chrome extension, it only runs in a Chrome Browser, and there is no plans to create a similar product for other browsers. For the same reason, this will not work on a mobile phone, so when viewing Mintos elsewhere, it will just look normal. At the moment, the extension is only supported in the following languages: English, Polish and German. If you use Mintos in another language, the extension won't do anything. If you are able to help translate a few things into Latvian, Russian, Czechish or Spanish, please reach out to us!
+As this is a Chrome extension, it only runs in a Chrome Browser, and there is no plans to create a similar product for other browsers. For the same reason, this will not work on a mobile phone, so when viewing Mintos elsewhere, it will just look normal. At the moment, the extension is only supported in the following languages: English, Polish, German and Czechish. If you use Mintos in another language, the extension won't do anything. If you are able to help translate a few things into Latvian, Russian, Spanish, please reach out to us!
 
 <br>
 
