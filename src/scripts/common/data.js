@@ -74,7 +74,7 @@ function rating (loan_originator)
         "credilikeme"        :    "18",
         "lendo"              :    "14",
         "tigo"               :    "13",
-        "metrokredit"        :    "11"
+        "metrokredit"        :    "11" 
     };
     
     if (loan_originator.toLowerCase() in data)
