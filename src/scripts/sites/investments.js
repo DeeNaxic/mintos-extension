@@ -81,15 +81,12 @@ chrome.storage.sync.get
             {
                 thead.firstChild.insertBefore(createHeader (localization('Country')           ), thead.firstChild.firstChild);
                 thead.lastChild .insertBefore(createTooltip(localization('CountryDescription')), thead.lastChild .firstChild);
-
-                const tfoot = document.createElement('tfoot');
-                dataTable.appendChild(tfoot);
                 
                 DomMonitor(dataTable, function (mutations)
                 {
-                    fixSummaryRows(tbody, tfoot);
-                    
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length; i++)
+                    fixSummaryRows(tbody);
+    
+                    for (var rows = tbody.querySelectorAll('tr:not(.total-row)'), i = 0; i < rows.length; i++)
                     {
                         var link  = rows[i].querySelector('td.loan-id-col');
                         var node  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Country');
@@ -147,17 +144,24 @@ chrome.storage.sync.get
             return translations[field][document.location.pathname.substring(1, 3)];
         }
         
-        function fixSummaryRows (tbody, tfoot)
+        function fixSummaryRows (tbody)
         {
             for (const row of tbody.querySelectorAll('tr.total-row'))
             {
-                const emptyCell = document.createElement('td');
-                emptyCell.classList.add('m-hidden-col', 'mod-hidden-on-small');
-                row.insertBefore(emptyCell, row.childNodes[1]);
-                tfoot.appendChild(row);
+                if (row.querySelector('td.loan-country-col') !== null)
+                    continue;
+    
+                const countryCell = document.createElement('td');
+                countryCell.classList.add('loan-country-col');
+                
+                // move summary labels to the new first row
+                for (const child of row.querySelector('.loan-id-col').childNodes)
+                    countryCell.append(child);
+
+                row.insertAdjacentElement("afterbegin", countryCell);
             }
         }
-
+        
         runtime(settings);
     }
 );
