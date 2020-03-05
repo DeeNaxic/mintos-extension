@@ -68,7 +68,7 @@ chrome.storage.sync.get
             }
             
             /*
-             *  This adds an alltime button to the account overview, which sets the time
+             *  This adds an 'All time' button to the account overview, which sets the time
              *  period, to show all your investments on Mintos. This is helpful when you
              *  want the total progression over time without setting selecting the dates
              */
@@ -77,7 +77,7 @@ chrome.storage.sync.get
                 function $add_timespan_always ()
                 {
                     const always_a = document.createElement('a');
-                    always_a.innerText = localization('timespan');
+                    always_a.innerText = localization('alltime');
                     always_a.href = 'javascript:;';
                     always_a.setAttribute('data-value', 'always');
                     always_a.addEventListener('click', function (event)
@@ -113,10 +113,10 @@ chrome.storage.sync.get
         {
             var translations =
             {
-                'timespan' :
+                'alltime' :
                 {
-                    'en' : 'All the time',
-                    'de' : 'Ganze Zeit',
+                    'en' : 'All time',
+                    'de' : 'Alle Zeit',
                     'pl' : 'Od początku',
                     'cs' : 'Kompletní historie',
                     'es' : '?',
