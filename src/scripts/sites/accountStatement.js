@@ -66,68 +66,70 @@ chrome.storage.sync.get
                 
                 $formatDecimals();
             }
-            
-            /*
-             *  This adds an 'All time' button to the account overview, which sets the time
-             *  period, to show all your investments on Mintos. This is helpful when you
-             *  want the total progression over time without setting selecting the dates
-             */
-            if (settings.AccountOverviewShowAllTimeButton)
-            {
-                function $add_timespan_always ()
-                {
-                    const always_a = document.createElement('a');
-                    always_a.innerText = localization('alltime');
-                    always_a.href = 'javascript:;';
-                    always_a.setAttribute('data-value', 'always');
-                    always_a.addEventListener('click', function (event)
-                    {
-                        document.querySelectorAll('li.m-quickfilter-item > a:not([data-value = "always"])').forEach(function (e)
-                        {
-                            e.classList.remove('active');
-                        });
-                        always_a.classList.add('active');
-                        document.querySelector('#period-from').value = '1.1.1950';
-                        document.querySelector('#period-to')  .value = '1.1.2050';
-                        document.querySelector('#filter-button').click()
-                    });
-                    
-                    const always_li = document.createElement('li');
-                    always_li.classList.add('m-quickfilter-item');
-                    always_li.appendChild(always_a);
-                    
-                    document.querySelector('#quickfilters').appendChild(always_li);
-                    document.querySelectorAll('li.m-quickfilter-item > a:not([data-value = "always"])').forEach(function (e)
-                    {
-                        e.addEventListener('click', function (event) {
-                            always_a.classList.remove('active');
-                        })
-                    });
-                }
-                
-                $add_timespan_always();
-            }
-        }
-        
-        function localization (field)
-        {
-            var translations =
-            {
-                'alltime' :
-                {
-                    'en' : 'All time',
-                    'de' : 'Alle Zeit',
-                    'pl' : 'Od początku',
-                    'cs' : 'Kompletní historie',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
-                }
-            };
-                
-            return translations[field][document.location.pathname.substring(1, 3)];
         }
         
         runtime(settings);
+        
+        if (settings.AccountOverviewShowAllTimeButton)
+        {
+            $add_timespan_always();
+        }
     }
 );
+
+/*
+*  This adds an 'All time' button to the account overview, which sets the time
+*  period, to show all your investments on Mintos. This is helpful when you
+*  want the total progression over time without setting selecting the dates
+*/
+function $add_timespan_always ()
+{
+    const always_a = document.createElement('a');
+    always_a.innerText = localization('alltime');
+    always_a.href = 'javascript:;';
+    always_a.setAttribute('data-value', 'always');
+    always_a.addEventListener('click', function (event)
+    {
+        document.querySelectorAll('li.m-quickfilter-item > a:not([data-value = "always"])').forEach(function (e)
+        {
+            e.classList.remove('active');
+        });
+        always_a.classList.add('active');
+        document.querySelector('#period-from').value = '1.1.1950';
+        document.querySelector('#period-to')  .value = '1.1.2050';
+        document.querySelector('#filter-button').click()
+    });
+    
+    const always_li = document.createElement('li');
+    always_li.classList.add('m-quickfilter-item');
+    always_li.appendChild(always_a);
+    
+    document.querySelector('#quickfilters').appendChild(always_li);
+    document.querySelectorAll('li.m-quickfilter-item > a:not([data-value = "always"])').forEach(function (e)
+    {
+        e.addEventListener('click', function (event)
+        {
+            always_a.classList.remove('active');
+        })
+    });
+}
+
+function localization (field)
+{
+    var translations =
+            {
+                'alltime' :
+                    {
+                        'en' : 'All time',
+                        'de' : 'Alle Zeit',
+                        'pl' : 'Od początku',
+                        'cs' : 'Kompletní historie',
+                        'es' : '?',
+                        'lv' : '?',
+                        'ru' : '?'
+                    }
+            };
+    
+    return translations[field][document.location.pathname.substring(1, 3)];
+}
+
