@@ -205,7 +205,7 @@ chrome.storage.sync.get
                 
                 if (settings.LoanShowOntimePaymentPercent)
                 {
-                    const percentStr = !percent.isNaN ? percent.toFixed(0) + '%' : 'n/a';
+                    const percentStr = !Number.isNaN(percent) ? percent.toFixed(0) + '%' : 'n/a';
                     var node = createDetailsRow(localization('OntimePayments'), percentStr);
                     details.appendChild(node);
                 }
