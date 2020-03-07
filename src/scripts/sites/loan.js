@@ -249,8 +249,8 @@ chrome.storage.sync.get
                 if (settings.LoanShowLatePaymentHistogram)
                 {
                     document.querySelector('div.chart-data')
-                        .insertAdjacentElement('afterend', 
-                            latePaymentHistogramChart(histogram).querySelector('div'));
+                        .insertAdjacentElement('afterend',
+                            latePaymentHistogramChart('payment-histogram', histogram).querySelector('div'));
                 }
             }
             

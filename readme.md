@@ -76,6 +76,7 @@ This project aims to add an additional layer of information and functionality to
 - Show a warning for high aged borrowers.
 - Show a warning for low on-time payment history.
 - Show a warning for unemployed borrowers.
+- Show a histogram of how many days the payments are late.
 
 <br>
 

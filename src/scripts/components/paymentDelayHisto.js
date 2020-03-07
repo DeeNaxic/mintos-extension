@@ -60,15 +60,37 @@ const chartOptions = {
     },
 };
 
+function getColors (id)
+{
+    const tmp = document.createElement('div');
+    
+    tmp.innerHTML = `
+        <div id="${id}" style="display: none">
+            <div class="bar-on-time"/>
+            <div class="bar-late"/>
+        </div>
+    `;
+    
+    document.body.append(tmp);
+    
+    const result = {
+        ontime : window.getComputedStyle(tmp.querySelector('.bar-on-time')).backgroundColor,
+        late   : window.getComputedStyle(tmp.querySelector('.bar-late')).backgroundColor,
+    };
+    document.body.removeChild(tmp);
+    return result;
+}
+
 /**
  * Render a histogram of delayed payments.
  * The X axis is how many days a payment is delayed,
  * Y how many payments was delayed by the given number of days
  *
+ * @param {string} id - id of root div, also used to get colors from the stylesheet
  * @param {Number[]} data an array of numbers
  * @param {ParentNode} [target=HTMLTemplateElement]
  */
-export function latePaymentHistogramChart (data, target = null)
+export function latePaymentHistogramChart (id, data, target = null)
 {
     target = target || document.createElement('template').content;
     
@@ -76,19 +98,21 @@ export function latePaymentHistogramChart (data, target = null)
     for (let i = 0; i < labels.length; i++)
         labels[i] = i;
     
+    const color = getColors(id);
+    
     const chartData = {
         labels,
         datasets : [
             {
                 data,
-                backgroundColor    : ({dataIndex}) => dataIndex === 0 ? '#0db000' : '#b0010c',
+                backgroundColor    : ({dataIndex}) => !dataIndex ? color.ontime : color.late,
                 barPercentage      : 1.0,
                 categoryPercentage : 1.0,
             }],
     };
     
     render(html`
-<div class="m-group-info mod-pt-28">
+<div id=${id} class="m-group-info mod-pt-28">
     <h3>${localization('Late Payments Histogram')}</h3>
     ${chart('bar', chartData, chartOptions)}
 </div>
