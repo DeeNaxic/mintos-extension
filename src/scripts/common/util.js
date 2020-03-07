@@ -36,13 +36,24 @@ export function toDate (text)
 }
 
 /**
- * @param {Date} a
- * @param {Date} b
- * @returns {number} number of days between a and b
+ * @returns {Date}
  */
-export function daysBetween(a, b){
+export function today ()
+{
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
+
+/**
+ * Calculate the number of toDays from millis
+ * @param {Number} millis
+ * @returns {Number} number of toDays (rounded)
+ */
+export function toDays (millis)
+{
     const millisPerDay = 1000 * 60 * 60 * 24;
-    return (b.getTime() - a.getTime()) / millisPerDay
+    return Math.round(millis / millisPerDay);
 }
 
 export function insertElementBefore (element, node)

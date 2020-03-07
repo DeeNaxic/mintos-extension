@@ -8,11 +8,12 @@
 import {rating} from '../common/data'
 import {
     assert,
-    daysBetween,
     getCurrencyPrefix,
     getElementByAttribute,
     insertElementBefore,
     toDate,
+    today,
+    toDays,
     toFloat,
     toNumber
 } from '../common/util';
@@ -155,7 +156,6 @@ chrome.storage.sync.get
             if (settings.LoanShowNextPaymentRow)
             {
                 var days  = null;
-                var today = new Date().setHours(0, 0, 0, 0);
                 
                 if ([localization('$Finished'), localization('$FinishedPrematurely'), localization('$Default')].includes(details.lastChild.lastChild.innerText.trim()) == false)
                 {
@@ -168,7 +168,7 @@ chrome.storage.sync.get
                         
                         if ([localization('$Scheduled'), localization('$Late')].includes(status))
                         {
-                            days = Math.floor((toDate(columns[0].innerText) - today) / 86400000);
+                            days = toDays(toDate(columns[0].innerText) - today());
                             break;
                         }
                     }
@@ -201,14 +201,15 @@ chrome.storage.sync.get
     
                 for (let element of schedule.querySelectorAll('tr'))
                 {
-                    if (element.lastChild.innerText === localization('$Scheduled'))
+                    const paymentStatus = element.lastChild.innerText;
+                    if (paymentStatus === localization('$Scheduled'))
                         // Quit parsing on first scheduled payment
                         break;
                     if (element.children.length === 1 || element.children[1].innerText.trim() === '')
                         // Don't count payments made before listing time (those without any details) as on-time.
                         // Skip schedule extension rows
                         continue;
-                    if (element.lastChild.innerText == localization('$Paid'))
+                    if (paymentStatus == localization('$Paid'))
                     {
                         $ontime++;
                         histogram[0] = (histogram[0] || 0) + 1;
@@ -222,7 +223,7 @@ chrome.storage.sync.get
                     else
                     {
                         $others++;
-                        const days = getDaysBetweenFromRow(element);
+                        const days = toDays(toDate(element.children[5].innerText) - toDate(element.children[0].innerText));
                         histogram[days] = (histogram[days] || 0) + 1;
                     }
                 }
@@ -267,7 +268,7 @@ chrome.storage.sync.get
                         
                         if (date_paid.innerText.trim().length > 0)
                         {
-                            $days = $days + Math.floor((toDate(date_paid.innerText.trim()) - toDate(date.innerText.trim())) / 86400000);
+                            $days += toDays(toDate(date_paid.innerText.trim()) - toDate(date.innerText.trim()));
                         }
                     }
                 });
@@ -693,10 +694,3 @@ chrome.storage.sync.get
         runtime(settings);
     }
 );
-
-function getDaysBetweenFromRow (row)
-{
-    const dateScheduled = toDate(row.children[0].innerText);
-    const datePayed = toDate(row.children[5].innerText);
-    return daysBetween(dateScheduled, datePayed);
-}
