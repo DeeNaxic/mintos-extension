@@ -10,6 +10,7 @@ chrome.storage.sync.get
     {
         'AccountOverviewUseFourDecimals'    : false,
         'AccountOverviewShowAllTimeButton'  : true,
+        'AccountOverviewSplitDetailsTable'  : true,
     },
     
     function (settings)
@@ -68,6 +69,13 @@ chrome.storage.sync.get
                     });
             }
             
+            if (settings.AccountOverviewSplitDetailsTable)
+            {
+                enhancers.push(addDataTableSplitHeaderCells);
+        
+                dataTableRowEnhancers.push(splitDataTableRow);
+            }
+    
             function handleChanges ()
             {
                 enhancers.forEach(enhancer => enhancer());
@@ -128,6 +136,68 @@ function $add_timespan_always ()
             always_a.classList.remove('active');
         })
     });
+}
+
+function addDataTableSplitHeaderCells ()
+{
+    const headerRow = document.querySelector('#overview-details thead tr');
+    if (headerRow.childElementCount !== 4)
+        return;
+    
+    const headersNode = document.createElement('template');
+    headersNode.innerHTML = `
+        <th>Transaction ID</th>
+        <th>Loan ID</th>
+        <th>Transaction Type</th>
+        <th>Reference ID</th>
+        `;
+    const detailsHeadCell = headerRow.children[1];
+    detailsHeadCell.classList.add('invext-hidden');
+    headerRow.insertBefore(headersNode.content, detailsHeadCell);
+}
+
+const detailsNode = document.createElement('template');
+detailsNode.innerHTML = `
+    <td class="invext-tx-id" />
+    <td class="invext-loan-id" />
+    <td class="invext-tx-type" />
+    <td class="invext-tx-ref-id" />
+`;
+
+function splitDataTableRow (row)
+{
+    const detailsCell = row.querySelector('td.m-transaction-details');
+    if (!detailsCell.classList.contains('invext-hidden'))
+    {
+        detailsCell.classList.add('invext-hidden');
+        row.insertBefore(detailsNode.content.cloneNode(true), row.children[1]);
+    }
+    
+    const text = detailsCell.innerText.split(' - ');
+    
+    const txId = text[0].match(/^Transaction ID: (\d+)$/)[1];
+    if (txId === row.querySelector('.invext-tx-id').innerText)
+        // MutationObserver caught our changes and called us again.
+        return;
+    row.querySelector('.invext-tx-id').innerText = txId;
+    
+    
+    const loanCell = row.querySelector('.invext-loan-id');
+    loanCell.innerHTML = '';
+    const a = detailsCell.querySelector('a');
+    if (a)
+        loanCell.appendChild(a.cloneNode(true));
+    
+    
+    const typeAndRef = text[text.length - 1];
+    const match = typeAndRef.match(/^(\D+) (\d+).$/);
+    if (match)
+    {
+        row.querySelector('.invext-tx-type').innerText = match[1];
+        row.querySelector('.invext-tx-ref-id').innerText = match[2];
+    }
+    else
+        row.querySelector('.invext-tx-type').innerText = typeAndRef;
 }
 
 function localization (field)

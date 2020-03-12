@@ -38,7 +38,11 @@
             [
                 "scripts/common/util.js",
                 "scripts/common/data.js"
-            ]
+            ],
+            "css": 
+                    [
+                        "styles/index.css"
+                    ]
         },
         {
             "matches"   :
