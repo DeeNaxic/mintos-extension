@@ -54,7 +54,9 @@ chrome.storage.sync.get
                         var turnover            = row.querySelector('.turnover span');
                             turnover.innerText  = turnover .title.replace(/([^/.])\.(\d{4}).*/g, '$1.$2');
                         
+                        // Remainder column is not present when searching by transaction type 
                         var remainder           = row.querySelector('.remainder span');
+                        if (remainder)
                             remainder.innerText = remainder.title.replace(/([^/.])\.(\d{4}).*/g, '$1.$2');
                     });
                 }
