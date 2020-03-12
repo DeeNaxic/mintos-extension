@@ -164,6 +164,27 @@ detailsNode.innerHTML = `
     <td class="invext-tx-ref-id" />
 `;
 
+function parseTransactionDetails (text)
+{
+    const result = {};
+    const parts = text.split(' - ');
+    
+    result.txId = parts[0].match(/^Transaction ID: (\d+)$/)[1];
+    
+    const typeAndRef = parts[parts.length - 1];
+    const match = typeAndRef.match(/^(\D+) (\d+).$/);
+    if (match)
+    {
+        result.txType = match[1];
+        result.txRef = match[2];
+    }
+    else
+        result.txType = typeAndRef;
+    
+    
+    return result;
+}
+
 function splitDataTableRow (row)
 {
     const detailsCell = row.querySelector('td.m-transaction-details');
@@ -173,13 +194,13 @@ function splitDataTableRow (row)
         row.insertBefore(detailsNode.content.cloneNode(true), row.children[1]);
     }
     
-    const text = detailsCell.innerText.split(' - ');
-    
-    const txId = text[0].match(/^Transaction ID: (\d+)$/)[1];
-    if (txId === row.querySelector('.invext-tx-id').innerText)
+    const details = parseTransactionDetails(detailsCell.innerText);
+    if (details.txId === row.querySelector('.invext-tx-id').innerText)
         // MutationObserver caught our changes and called us again.
         return;
-    row.querySelector('.invext-tx-id').innerText = txId;
+    
+    
+    row.querySelector('.invext-tx-id').innerText = details.txId;
     
     
     const loanCell = row.querySelector('.invext-loan-id');
@@ -189,15 +210,8 @@ function splitDataTableRow (row)
         loanCell.appendChild(a.cloneNode(true));
     
     
-    const typeAndRef = text[text.length - 1];
-    const match = typeAndRef.match(/^(\D+) (\d+).$/);
-    if (match)
-    {
-        row.querySelector('.invext-tx-type').innerText = match[1];
-        row.querySelector('.invext-tx-ref-id').innerText = match[2];
-    }
-    else
-        row.querySelector('.invext-tx-type').innerText = typeAndRef;
+    row.querySelector('.invext-tx-type').innerText = details.txType;
+    row.querySelector('.invext-tx-ref-id').innerText = 'txRef' in details ? details.txRef : '';
 }
 
 function localization (field)
