@@ -14,6 +14,9 @@ chrome.storage.sync.get
     
     function (settings)
     {
+        if (!Object.values(settings).includes(true))
+            return;
+        
         function runtime (settings)
         {
             /*
@@ -34,6 +37,9 @@ chrome.storage.sync.get
                 return setTimeout(runtime, 100, settings);
             }
             
+            const enhancers = [];
+            const dataTableRowEnhancers = [];
+    
             /*
              *  This replaces the default two digit representation with four digits. The
              *  problem with the default implementation is, that it might show a gain of
@@ -42,14 +48,15 @@ chrome.storage.sync.get
              */
             if (settings.AccountOverviewUseFourDecimals)
             {
-                function $formatDecimals ()
-                {
+                enhancers.push(() =>
                     dataSummary.querySelectorAll('.mod-pointer').forEach(function (row)
                     {
                         row.innerText           = row.getAttribute('data-tooltip').replace(/([^/.])\.(\d{4}).*/g, '$1.$2');
-                    });
-                    
-                    dataTable.querySelectorAll('tr').forEach(function (row)
+                    }
+                    ));
+        
+                dataTableRowEnhancers.push(
+                    function (row)
                     {
                         var turnover            = row.querySelector('.turnover span');
                             turnover.innerText  = turnover .title.replace(/([^/.])\.(\d{4}).*/g, '$1.$2');
@@ -59,23 +66,30 @@ chrome.storage.sync.get
                         if (remainder)
                             remainder.innerText = remainder.title.replace(/([^/.])\.(\d{4}).*/g, '$1.$2');
                     });
-                }
+            }
+            
+            function handleChanges ()
+            {
+                enhancers.forEach(enhancer => enhancer());
+        
+                if (dataTableRowEnhancers)
+                    dataTable.querySelectorAll('tr')
+                        .forEach(row => dataTableRowEnhancers
+                            .forEach(enhancer => enhancer(row)));
+            }
                 
                 DomMonitorAggressive(dataTable, function (mutations)
                 {
-                    $formatDecimals();
+                handleChanges();
                 });
                 
-                $formatDecimals();
-            }
+            handleChanges();
+                
+            if (settings.AccountOverviewShowAllTimeButton)
+                $add_timespan_always();
         }
         
         runtime(settings);
-        
-        if (settings.AccountOverviewShowAllTimeButton)
-        {
-            $add_timespan_always();
-        }
     }
 );
 
