@@ -25,8 +25,8 @@ chrome.storage.sync.get(
     'InvestmentsShowPremiumDiscount'    : true,
     
     // investmentsFinished.js
-    'InvestmentsShowProfitColumn'       : true,
     'InvestmentsShowDurationColumn'     : true,
+    'InvestmentsShowProfitColumn'       : true,
     
     // loan.js
     'LoanShowCountryRow'                : true,
