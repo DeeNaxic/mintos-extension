@@ -6,7 +6,18 @@
  */
 
 import {rating} from '../common/data'
-import {assert, getCurrencyPrefix, getElementByAttribute, toDate, toFloat, toNumber, insertElementBefore} from '../common/util';
+import {
+    assert,
+    getCurrencyPrefix,
+    getElementByAttribute,
+    insertElementBefore,
+    toDate,
+    today,
+    toDays,
+    toFloat,
+    toNumber
+} from '../common/util';
+import {latePaymentHistogramChart} from "../components/paymentDelayHisto";
 
 chrome.storage.sync.get
 (
@@ -20,6 +31,7 @@ chrome.storage.sync.get
         'LoanShowPaymentWarning'            : true,
         'LoanShowAgeWarning'                : true,
         'LoanShowJobWarning'                : true,
+        'LoanShowLatePaymentHistogram'      : true,
     },
     
     function (settings)
@@ -144,7 +156,6 @@ chrome.storage.sync.get
             if (settings.LoanShowNextPaymentRow)
             {
                 var days  = null;
-                var today = new Date().setHours(0, 0, 0, 0);
                 
                 if ([localization('$Finished'), localization('$FinishedPrematurely'), localization('$Default')].includes(details.lastChild.lastChild.innerText.trim()) == false)
                 {
@@ -157,7 +168,7 @@ chrome.storage.sync.get
                         
                         if ([localization('$Scheduled'), localization('$Late')].includes(status))
                         {
-                            days = Math.floor((toDate(columns[0].innerText) - today) / 86400000);
+                            days = toDays(toDate(columns[0].innerText) - today());
                             break;
                         }
                     }
@@ -179,29 +190,43 @@ chrome.storage.sync.get
              *  and it excludes scheduled payments which has not yet been made. If there
              *  is only scheduled payments the 'n/a' is shown instead of some percentage
              */
-            if (settings.LoanShowOntimePaymentPercent || settings.LoanShowPaymentWarning)
+            if (settings.LoanShowOntimePaymentPercent ||
+                settings.LoanShowPaymentWarning ||
+                settings.LoanShowLatePaymentHistogram
+            )
             {
                 var $ontime  = 0;
                 var $others  = 0;
-                
-                schedule.querySelectorAll('tr').forEach(function (element)
+                const histogram = [];
+    
+                for (let element of schedule.querySelectorAll('tr'))
                 {
-                    if (element.lastChild.innerText == localization('$Paid'))
+                    const paymentStatus = element.lastChild.innerText;
+                    if (paymentStatus === localization('$Scheduled'))
+                        // Quit parsing on first scheduled payment
+                        break;
+                    if (element.children.length === 1 || element.children[1].innerText.trim() === '')
+                        // Don't count payments made before listing time (those without any details) as on-time.
+                        // Skip schedule extension rows
+                        continue;
+                    if (paymentStatus == localization('$Paid'))
                     {
                         $ontime++;
+                        histogram[0] = (histogram[0] || 0) + 1;
                     }
-                    else
-                    if (element.lastChild.innerText === localization('$Scheduled')
-                        || element.childNodes.length === 1
-                    )
+                    else if (paymentStatus === localization('$Late'))
                     {
-                        
+                        ++$others;
+                        const days = toDays(today() - toDate(element.children[0].innerText));
+                        histogram[days] = (histogram[days] || 0) + 1;
                     }
                     else
                     {
                         $others++;
+                        const days = toDays(toDate(element.children[5].innerText) - toDate(element.children[0].innerText));
+                        histogram[days] = (histogram[days] || 0) + 1;
                     }
-                });
+                }
                 
                 const totalPayments = $others + $ontime;
                 const percent = totalPayments > 0 ? ($ontime / totalPayments * 100.00) : NaN;
@@ -220,6 +245,13 @@ chrome.storage.sync.get
                 {
                     insertElementBefore(createDetailsRowWarning(localization('Payments'), percent.toFixed(2) + '% ' + localization('Ontime')), details.firstChild);
                 }
+    
+                if (settings.LoanShowLatePaymentHistogram)
+                {
+                    document.querySelector('div.chart-data')
+                        .insertAdjacentElement('afterend',
+                            latePaymentHistogramChart('payment-histogram', histogram).querySelector('div'));
+                }
             }
             
             if (settings.LoanShowTotalGraceTime)
@@ -236,7 +268,7 @@ chrome.storage.sync.get
                         
                         if (date_paid.innerText.trim().length > 0)
                         {
-                            $days = $days + Math.floor((toDate(date_paid.innerText.trim()) - toDate(date.innerText.trim())) / 86400000);
+                            $days += toDays(toDate(date_paid.innerText.trim()) - toDate(date.innerText.trim()));
                         }
                     }
                 });

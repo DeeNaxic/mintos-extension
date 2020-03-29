@@ -35,6 +35,27 @@ export function toDate (text)
     return new Date(parseInt(text.split('.')[2]), parseInt(text.split('.')[1]) - 1, parseInt(text.split('.')[0]));
 }
 
+/**
+ * @returns {Date}
+ */
+export function today ()
+{
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
+
+/**
+ * Calculate the number of toDays from millis
+ * @param {Number} millis
+ * @returns {Number} number of toDays (rounded)
+ */
+export function toDays (millis)
+{
+    const millisPerDay = 1000 * 60 * 60 * 24;
+    return Math.round(millis / millisPerDay);
+}
+
 export function insertElementBefore (element, node)
 {
     node.parentNode.insertBefore(element, node);
