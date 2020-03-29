@@ -84,7 +84,9 @@ chrome.storage.sync.get
                 
                 DomMonitor(dataTable, function (mutations)
                 {
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    fixSummaryRows(tbody);
+    
+                    for (var rows = tbody.querySelectorAll('tr:not(.total-row)'), i = 0; i < rows.length; i++)
                     {
                         var link  = rows[i].querySelector('td.loan-id-col');
                         var node  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', 'Country');
@@ -110,8 +112,6 @@ chrome.storage.sync.get
                         node.querySelector('span').innerText = ' ' + link.querySelector('img').title;
                     }
                 });
-                
-                insertElementBefore(document.createElement('td'), tbody.lastChild.querySelectorAll('td')[1]);
             }
         }
         
@@ -142,6 +142,24 @@ chrome.storage.sync.get
             };
             
             return translations[field][document.location.pathname.substring(1, 3)];
+        }
+        
+        function fixSummaryRows (tbody)
+        {
+            for (const row of tbody.querySelectorAll('tr.total-row'))
+            {
+                if (row.querySelector('td.loan-country-col') !== null)
+                    continue;
+    
+                const countryCell = document.createElement('td');
+                countryCell.classList.add('loan-country-col');
+                
+                // move summary labels to the new first row
+                for (const child of row.querySelector('.loan-id-col').childNodes)
+                    countryCell.append(child);
+
+                row.insertAdjacentElement("afterbegin", countryCell);
+            }
         }
         
         runtime(settings);
