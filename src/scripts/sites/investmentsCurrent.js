@@ -133,6 +133,11 @@ chrome.storage.sync.get
                 
                 DomMonitor(dataTable, function (mutations)
                 {
+                    for (var cells = tbody.querySelectorAll('td.placeholder'), i = 0; i < cells.length; i++)
+                    {
+                        cells[i].parentElement.removeChild(cells[i]);
+                    }
+                    
                     for (var rows = tbody.querySelectorAll('tr:not(.total-row)'), i = 0; i < rows.length; i++)
                     {
                         var cell    = rows[i].lastElementChild;
@@ -140,6 +145,16 @@ chrome.storage.sync.get
                         
                         if (span == undefined)
                         {
+                            continue;
+                        }
+                        
+                        if (span.getAttribute('data-tooltip') == null)
+                        {
+                            var e = document.createElement('td');
+                                e.classList.add('placeholder')
+                                
+                            rows[i].appendChild(e);
+                            
                             continue;
                         }
                         
