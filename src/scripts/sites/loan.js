@@ -57,7 +57,7 @@ chrome.storage.sync.get
                 var details         = assert(tables[0]);
                 var borrower        = assert(tables[1]);
                 var schedule        = assert(tables[2]);
-                var originator      = assert(document.querySelector('.m-group-info'));
+                var originator      = assert(document.querySelector('#chart-wrapper > div.m-u-padding-top-5.m-u-fs-6'));
             }
             catch
             {
@@ -119,18 +119,16 @@ chrome.storage.sync.get
             function createOriginatorRow (header, content)
             {
                 var nodeOuter = document.createElement('div');
-                    nodeOuter.classList.add('row');
+                    nodeOuter.classList.add('m-o-grid');
                     
                 var nodeInner           = document.createElement('div');
                     nodeInner.innerHTML = header;
-                    nodeInner.classList.add('field-description');
-                    nodeInner.classList.add('col-xs-7');
+                    nodeInner.classList.add('m-o-grid__item', 'm-o-grid__item--xs-5');
                     nodeOuter.appendChild(nodeInner);
                     
                 var nodeInner           = document.createElement('td');
                     nodeInner.innerText = content;
-                    nodeInner.classList.add('value');
-                    nodeInner.classList.add('col-xs-5');
+                    nodeInner.classList.add('m-o-grid__item', 'm-o-grid__item--xs-7');
                     nodeOuter.appendChild(nodeInner);
                     
                 return nodeOuter;
@@ -376,15 +374,16 @@ chrome.storage.sync.get
              */
             if (settings.LoanShowAdditionalRatings)
             {
-                var rows = originator.querySelectorAll('.row');
-                var name = rows[0].querySelector('.value a').innerText;
-                var rank = rows[0].querySelector('.value span');
-                var link = ' (<a href="https://explorep2p.com/mintos-lender-ratings/" target="_blank">reference</a>)';
+                const cell = originator
+                    .querySelector('#chart-wrapper div.m-o-grid:first-of-type div.m-o-grid__item:nth-of-type(2)');
+                const name = cell.querySelector('a').innerText;
+                const rank = cell.querySelector('span');
+                const link = `<a href="https://explorep2p.com/mintos-lender-ratings/" target="_blank">${localization('Rating')}</a>`;
                 
                 rank.style.display = 'none';
                 
-                originator.append(createOriginatorRow('Mintos\'s '     + localization('Rating'),        rank.innerText));
-                originator.append(createOriginatorRow('ExploreP2P\'s ' + localization('Rating') + link, rating(name)  ));
+                originator.append(createOriginatorRow('Mintos\'s '     + localization('Rating'), rank.innerText));
+                originator.append(createOriginatorRow('ExploreP2P\'s ' + link                        , rating(name)  ));
             }
             
             /*
