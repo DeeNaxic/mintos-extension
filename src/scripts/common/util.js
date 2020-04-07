@@ -1,6 +1,6 @@
 /*
  *  @project >> Investment.Extensions: Mintos
- *  @authors >> DeeNaxic, o1-steve
+ *  @authors >> DeeNaxic, o1-steve, Raphael Krupinski
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
@@ -141,3 +141,87 @@ export const DomMonitorAggressive = (function ()
         }
     }
 })();
+
+function queryAllSelectors (selectors, from)
+{
+    const result = {};
+    for (const [name, selector] of Object.entries(selectors))
+    {
+        const node = from.querySelector(selector);
+        if (!node)
+            return null;
+        result[name] = node;
+    }
+    return result;
+}
+
+/**
+ * Wait for elements matched by given selectors to be available in the document.
+ * When all selectors match against the document, the resulting promise'strNotEmpty resolve method is called
+ * with a mapping of selector to a matching node. If however the timeout is reached before all selectors match,
+ * the promise'strNotEmpty fail method is called with the time passed (millis).
+ * The timeout is checked when any mutations are detected in the target node.
+ *
+ * @param {object} selectors - list of selectors to match against document.
+ * @param {Element} from
+ * @param {number} timeout - time in milliseconds after the resulting promise fails.
+ * @returns {Promise}
+ */
+export function onNodesAvailable (selectors, from = undefined, timeout = 30000)
+{
+    const start = new Date();
+    from = from || document;
+    let resolved = false;
+    return new Promise((resolve, reject) =>
+    {
+        const nodes = queryAllSelectors(selectors, from);
+        if (nodes)
+        {
+            resolve(nodes);
+            return;
+        }
+        
+        const mo = new MutationObserver(function (_)
+        {
+            const nodes = queryAllSelectors(selectors, from);
+            if (nodes)
+            {
+                resolved = true;
+                mo.disconnect();
+                resolve(nodes);
+            }
+        });
+        
+        mo.observe(from, {
+            childList : true,
+            subtree   : true,
+        });
+        
+        if (timeout)
+            setTimeout(onTimeout, timeout);
+        
+        const self = this;
+        
+        function onTimeout ()
+        {
+            console.info(self);
+            if (!resolved)
+            {
+                mo.disconnect();
+                reject(new Error(`Selectors didn't resolve within timeout of ${new Date() - start}ms`));
+            }
+        }
+    });
+}
+
+/**
+ * Promise-based chrome API.
+ * Methods instead taking callback, return a Promise.
+ */
+export const chrome = {
+    storage : {
+        sync : {
+            get : (keys) => new Promise((resolve, _) => window.chrome.storage.sync.get(keys, resolve)),
+        }
+    }
+};

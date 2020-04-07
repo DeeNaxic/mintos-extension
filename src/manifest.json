@@ -30,11 +30,14 @@
         {
             "matches"   :
             [
-                "https://www.mintos.com/*"
+                "https://www.mintos.com/en/*",
+                "https://www.mintos.com/de/*",
+                "https://www.mintos.com/pl/*",
+                "https://www.mintos.com/cs/*"
             ],
             "js"        :
             [
-                "scripts/common/polyfills.js"
+                "scripts/sites/_all.js"
             ],
             "css"       : 
             [
@@ -52,19 +55,6 @@
             "js"        :
             [
                 "scripts/sites/overview.js"
-            ]
-        },
-        {
-            "matches"   :
-            [
-                "https://www.mintos.com/en/*",
-                "https://www.mintos.com/de/*",
-                "https://www.mintos.com/pl/*",
-                "https://www.mintos.com/cs/*"
-            ],
-            "js"        :
-            [
-                "scripts/sites/loan.js"
             ]
         },
         {

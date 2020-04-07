@@ -1,3 +1,10 @@
+/*
+ *  @project >> Investment.Extensions: Mintos
+ *  @authors >> Raphael Krupinski
+ *  @contact >> investment.extensions@gmail.com
+ *  @licence >> GNU GPLv3
+ */
+
 /* Mintos colors */
 :root {
     --invext-mintos-green: #78c8c7;
@@ -25,4 +32,8 @@ div.invext-chart-container {
 
 .invext-hidden {
     display: none;
+}
+
+td.invext-details-warning {
+    color: var(--invext-mintos-red) !important;
 }

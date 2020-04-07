@@ -92,6 +92,7 @@ function getColors (id)
  */
 export function latePaymentHistogramChart (id, data, target = null)
 {
+    const returnFirstChild = target === null;
     target = target || document.createElement('template').content;
     
     const labels = Array(Math.max(data.length, 15));
@@ -118,7 +119,7 @@ export function latePaymentHistogramChart (id, data, target = null)
 </div>
         `, target);
     
-    return target
+    return returnFirstChild ? target.firstElementChild : target;
 }
 
 function localization (key)
