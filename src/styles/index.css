@@ -9,6 +9,7 @@
 :root {
     --invext-mintos-green: #78c8c7;
     --invext-mintos-red: #ed4300;
+    --invext-montos-grey: #888;
 }
 
 div.invext-chart-container {
@@ -36,4 +37,8 @@ div.invext-chart-container {
 
 td.invext-details-warning {
     color: var(--invext-mintos-red) !important;
+}
+
+.new-feed-title a:visited.invext-grayout-visited{
+    color: var(--invext-montos-grey);
 }

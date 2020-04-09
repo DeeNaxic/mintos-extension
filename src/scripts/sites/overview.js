@@ -192,54 +192,17 @@ chrome.storage.sync.get
                 
                 callbacks.push($runHighlightNegativeNumbers); $runHighlightNegativeNumbers();
             }
-            
+
             /*
-             *  This feature enables a memory cache, which remembers all of the articles
-             *  that you read. When you visit a new article link, from the overview page
-             *  it will be remembered, and the link will be greyed out after visiting it
+             *  This feature adds a new css class to blog links.
+             *  After you visit a new article link, it will be greyed out.
              */
-            if (settings.OverviewGrayOutVisitedNews)
-            {
-                chrome.storage.sync.get(
-                {
-                    '$newsArticles' : []
-                },
-                function (list)
-                {
-                    for (var rows = newsTable.querySelectorAll('.blog-post a'), i = 0; i < rows.length; i++)
-                    {
-                        let line = rows[i];
-                        let href = line.getAttribute('href');
-                        
-                        if (list.$newsArticles.includes(href))
-                        {
-                            line.style.color = '#d1d1d1';
-                        }
-                        else
-                        {
-                            line.onclick = function ()
-                            {
-                                chrome.storage.sync.get(
-                                {
-                                    '$newsArticles' : []
-                                },
-                                function (list)
-                                {
-                                    list.$newsArticles.push(href);
-                                    
-                                    chrome.storage.sync.set(
-                                    {
-                                        ['$newsArticles'] : list.$newsArticles
-                                    },
-                                    function ()
-                                    {
-                                        line.style.color = '#d1d1d1';
-                                    })
-                                })
-                            }
-                        }
-                    }
-                })
+            if (settings.OverviewGrayOutVisitedNews){
+                for (const row of newsTable.querySelectorAll('.blog-post a'))
+                    row.classList.add('invext-grayout-visited');
+        
+                // remove saved links
+                chrome.storage.sync.remove('$newsArticles');
             }
             
             /*
