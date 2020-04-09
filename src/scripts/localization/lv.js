@@ -16,6 +16,7 @@ export const translations = {
     '$Late'                : 'Kavējas',
     '$Occupation'          : 'Nodarbošanās',
     '$Paid'                : 'Samaksāts',
+    '$PartiallyPaid'       : 'Daļēji apmaksāts',
     '$PaymentDate'         : 'Maksājuma datums',
     '$Scheduled'           : 'Plānots',
 };

@@ -200,11 +200,8 @@ export function onNodesAvailable (selectors, from = undefined, timeout = 30000)
         if (timeout)
             setTimeout(onTimeout, timeout);
         
-        const self = this;
-        
         function onTimeout ()
         {
-            console.info(self);
             if (!resolved)
             {
                 mo.disconnect();

@@ -8,9 +8,9 @@
 // comment out incomplete translations
 
 import {translations as cs} from '../localization/cs';
-// import {translations as es} from '../localization/es';
 import {translations as de} from '../localization/de';
 import {translations as en} from '../localization/en';
+// import {translations as es} from '../localization/es';
 // import {translations as lv} from '../localization/lv';
 // import {translations as nl} from '../localization/nl';
 import {translations as pl} from '../localization/pl';
@@ -18,9 +18,9 @@ import {translations as pl} from '../localization/pl';
 
 const translations = {
     cs,
-    // es,
     de,
     en,
+    // es,
     // lv,
     // nl
     pl,

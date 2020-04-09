@@ -17,6 +17,7 @@ export const translations = {
     '$Late'                : 'Late',
     '$Occupation'          : 'Occupation',
     '$Paid'                : 'Pagado',
+    '$PartiallyPaid'       : 'Parcialmente pagado',
     '$PaymentDate'         : 'Fecha del pago',
     '$Scheduled'           : 'Scheduled',
 };

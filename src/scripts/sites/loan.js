@@ -139,9 +139,7 @@ export async function handle(){
                 chart.insertBefore(loanInvBreakdownLegend(model.legend, document.createElement('div')), list);
                 list.style.display = 'none';
             }).catch(console.warn);
-        
-        console.info(model);
-    }
+}
 
 function parseLegendModel (listElem, model)
 {
@@ -159,11 +157,75 @@ function parseLegendModel (listElem, model)
         });
 }
 
+class Payment
+{
+    constructor (row)
+    {
+        this.row = row;
+        this.paymentStatus = row.lastChild.innerText;
+    }
+    
+    get isExtensionRow ()
+    {
+        // Example https://www.mintos.com/en/21566570-05
+        return this.row.children.length === 1;
+    }
+    
+    /**
+     * @return {boolean} true if the payment was made before loan was listed on Mintos
+     */
+    get isBeforeListing ()
+    {
+        return this.row.children[1].innerText.trim() === ''
+    }
+    
+    get paymentDate ()
+    {
+        if (this._paymentDate === undefined)
+        {
+            const cell = this.row.querySelector(`td[data-m-label="${localization('$PaymentDate')}"]`);
+            const text = cell ? cell.innerText : null;
+            this._paymentDate = text ? toDate(text) : null;
+        }
+        return this._paymentDate;
+    }
+
+    get scheduledDate ()
+    {
+        if (this._scheduledDate === undefined)
+        {
+            const cell = this.row.querySelector(`td[data-m-label="${localization('$Date')}"]`);
+            const text = cell ? cell.innerText : null;
+            this._scheduledDate = text ? toDate(text) : null;
+        }
+        return this._scheduledDate;
+    }
+    
+    get isLate ()
+    {
+        return this.paymentStatus.includes(localization('$Late'));
+    }
+    
+    get isScheduled ()
+    {
+        return this.paymentStatus === localization('$Scheduled');
+    }
+    
+    get isPaid ()
+    {
+        return this.paymentStatus === localization('$Paid');
+    }
+    
+    get isPaidPartially ()
+    {
+        return this.paymentStatus === localization('$PartiallyPaid');
+    }
+}
+
 /*
  * Parse schedule to model, and check each setting at the render stage
  */
 function parseSchedule (schedule, details, model)
-// TODO support late - paid full & partial
 {
     function inc (list, index)
     {
@@ -172,55 +234,48 @@ function parseSchedule (schedule, details, model)
     
     model.details.graceDays = 0;
     
-    let $ontime = 0, $others = 0, nextPaymentDate = null;
+    let totalPayments = 0, nextPaymentDate = null;
     
     for (const row of schedule.childNodes)
     {
-        if (row.children.length === 1 || row.children[1].innerText.trim() === '')
-            // Don't count payments made before listing time (those without any details) as on-time.
-            // Skip schedule extension rows
+        const payment = new Payment(row);
+
+        if (payment.isExtensionRow || payment.isBeforeListing)
             continue;
     
-        const paymentStatus = row.lastChild.innerText;
+        if (nextPaymentDate === null && (payment.isScheduled || payment.isLate))
+            nextPaymentDate = payment.scheduledDate;
     
-        if (nextPaymentDate === null
-            && [
-                localization('$Scheduled'),
-                localization('$Late'),
-            ].includes(paymentStatus))
-            nextPaymentDate = toDate(row.children[0].innerText);
-        
-        if (paymentStatus === localization('$Scheduled'))
+        if (payment.isScheduled)
             // Quit parsing on first scheduled payment
             break;
 
-        if (paymentStatus === localization('$Paid'))
+        // Doesn't include payments made before listing date or scheduled in future.
+        ++totalPayments;
+
+        if (payment.isPaid || payment.isPaidPartially)
         {
-            $ontime++;
+            // Statuses 'paid' and 'partially paid' (but not 'Late - partially paid') are special.
+            // Even if payment date is different than scheduled, the loan was paid on time,
+            // meaning there was either grace or extension.
+
             inc(model.histogram, 0);
             
-            const date = row.querySelector(`td[data-m-label="${localization('$Date')}"]`);
-            const date_paid = row.querySelector(`td[data-m-label="${localization('$PaymentDate')}"]`);
-            
-            if (date_paid.innerText.trim().length > 0)
-                model.details.graceDays += toDays(toDate(date_paid.innerText.trim()) - toDate(date.innerText.trim()));
-        }
-        else if (paymentStatus === localization('$Late'))
-            // TODO add Late - partial
-        {
-            ++$others;
-            const days = toDays(today() - toDate(row.children[0].innerText));
-            inc(model.histogram, days);
+            const paymentDate = payment.paymentDate;
+            if (paymentDate)
+                model.details.graceDays += toDays(paymentDate - payment.scheduledDate);
         }
         else
         {
-            $others++;
-            const days = toDays(toDate(row.children[5].innerText) - toDate(row.children[0].innerText));
+            // Anything else than 'paid' is somehow late. There might be payment date or it may be missing.
+            // In the latter case, interpret it as 'not paid until today'
+
+            const days = toDays((payment.paymentDate || today()) - payment.scheduledDate);
             inc(model.histogram, days);
         }
     }
     
-    const totalPayments = $others + $ontime;
+    const $ontime = model.histogram[0] || 0; 
     model.details.ontimePercent = totalPayments > 0 ? ($ontime / totalPayments * 100.00) : NaN;
     
     const loanStatus = details.lastElementChild.lastElementChild.innerText.trim();

@@ -33,6 +33,7 @@ export const translations = {
     '$Late'                : 'Late',
     '$Occupation'          : 'Zaměstnání',
     '$Paid'                : 'Paid',
+    '$PartiallyPaid'       : 'Částečně zaplaceno',
     '$PaymentDate'         : 'Datum platby',
     '$Scheduled'           : 'Naplánované',
 };

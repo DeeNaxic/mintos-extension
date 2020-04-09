@@ -9,4 +9,6 @@ export const translations = {
     
     // patterns used to extract data from page
     
+    '$Late'                : 'Laat',
+    '$PartiallyPaid'       : 'Gedeeltelijk betaald',
 };

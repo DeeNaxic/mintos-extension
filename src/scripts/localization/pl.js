@@ -33,6 +33,7 @@ export const translations = {
     '$Late'                : 'Late',
     '$Occupation'          : 'Zawód',
     '$Paid'                : 'Zapłacono',
+    '$PartiallyPaid'       : 'Częściowo zapłacone',
     '$PaymentDate'         : 'Data płatności',
     '$Scheduled'           : 'Zaplanowano',
 };
