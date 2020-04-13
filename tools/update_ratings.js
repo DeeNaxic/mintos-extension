@@ -1,6 +1,6 @@
 import cheerio from 'cheerio'
 import fetch from 'node-fetch';
-import {readFileSync} from 'fs';
+import {readFileSync, writeFileSync} from 'fs';
 
 const uri = 'https://explorep2p.com/mintos-lender-ratings/'
 
@@ -21,8 +21,8 @@ async function update ()
     const countries = getNameList()
     
     const model = fromInput(input, countries);
-    const json = JSON.stringify(toOutput(model), undefined, 2);
-    console.info(json);
+    const json = JSON.stringify(toOutput(model), undefined, 4);
+    writeFileSync('src/data/originators.json', json + '\n', 'utf8');
 }
 
 function fromInput (input, countries)
@@ -38,7 +38,6 @@ function fromInput (input, countries)
         
         result.rating = Number.isInteger(rating) ? rating : null;
         
-        // console.info({originator, rating}, result);
         return result;
     };
     return input.map(convertRow).filter(row => !!row)

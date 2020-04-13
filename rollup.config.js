@@ -4,6 +4,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import {chromeExtension} from 'rollup-plugin-chrome-extension'
 import del from 'rollup-plugin-delete'
 import progress from 'rollup-plugin-progress';
+import json from "@rollup/plugin-json";
 
 export default {
     input    : 'src/manifest.json',
@@ -28,6 +29,9 @@ export default {
                     dest : 'dist/options/'
                 }],
             verbose : true,
+        }),
+        json({
+            preferConst : true,
         }),
     ],
 }
