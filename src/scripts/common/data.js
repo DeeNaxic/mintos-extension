@@ -1,85 +1,237 @@
 /*
  *  @project >> Investment.Extensions: Mintos
- *  @authors >> DeeNaxic
+ *  @authors >> DeeNaxic, Raphael Krupinski
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
 
-export function rating (loan_originator)
+export function rating (loan_originator, country)
 {
     var data =
     {
-        "acema"              :    "66",
-        "agrocredit"         :    "47",
-        "akulaku"            :    "57",
-        "alexcredit"         :    "41",
-        "alfakredyt"         :    "45",
-        "bb finance group"   :    "55",
-        "capital service"    :    "53",
-        "capitalia"          :    "36",
-        "cashcredit"         :    "53",
-        "cashwagon"          :    "42",
-        "creamfinance"       :    "67",
-        "credilikeme"        :    "18",
-        "credissimo"         :    "80",
-        "creditstar"         :    "79",
-        "creditter"          :    "25",
-        "credius"            :    "68",
-        "danarupiah"         :    "24",
-        "debifo"             :    "32",
-        "dineo credito"      :    "60",
-        "dinerito"           :    "53",
-        "dinero"             :    "39",
-        "dozarplati"         :    "61",
-        "dziesiatka finanse" :    "62",
-        "e cash"             :    "26",
-        "ecofinance"         :    "47",
-        "esto"               :    "60",
-        "everest finanse"    :    "69",
-        "evergreen"          :    "51",
-        "expresscredit"      :    "22",
-        "extra finance"      :    "52",
-        "fireof"             :    "43",
-        "getbucks"           :    "23",
-        "gfm"                :    "41",
-        "hipocredit"         :    "32",
-        "itf group"          :    "50",
-        "iutecredit"         :    "77",
-        "julo"               :    "47",
-        "kredit pintar"      :    "66",
-        "kredit24"           :    "32",
-        "kredo"              :    "23",
-        "kviku"              :    "57",
-        "lendo"              :    "14",
-        "lf tech"            :    "66",
-        "lime zaim"          :    "65",
-        "metrokredit"        :    "11",
-        "mikro kapital"      :    "47",
-        "mogo"               :    "79",
-        "moneda"             :    "20",
-        "monego"             :    "34",
-        "mozipo group"       :    "36",
-        "novaloans"          :    "51",
-        "peachy"             :    "22",
-        "pinjam yuk"         :    "41",
-        "placet group"       :    "71",
-        "rapicredit"         :    "28",
-        "sebo"               :    "53",
-        "sos credit"         :    "46",
-        "stik credit"        :    "53",
-        "swiss capital"      :    "40",
-        "tascredit"          :    "52",
-        "tigo"               :    "13",
-        "varks"              :    "63",
-        "vizia"              :    "77",
-        "watu credit"        :    "61",
-        "wowwo"              :    "70",
-        "zenka"              :    "41",
-    };
+        "aasa"               : {
+            "_" : -1000
+        },
+        "acema"              : {
+            "_" : 66
+        },
+        "aforti"             : {
+            "_" : -100
+        },
+        "agrocredit"         : {
+            "_" : 47
+        },
+        "akulaku"            : {
+            "_" : 57
+        },
+        "alexcredit"         : {
+            "_" : 41
+        },
+        "alfakredyt"         : {
+            "_" : 31
+        },
+        "bb finance group"   : {
+            "_" : 55
+        },
+        "capital service"    : {
+            "_" : 39
+        },
+        "capitalia"          : {
+            "_" : 36
+        },
+        "cashcredit"         : {
+            "_" : 53
+        },
+        "cashwagon"          : {
+            "_" : 42
+        },
+        "creamfinance"       : {
+            "_" : 67
+        },
+        "credilikeme"        : {
+            "_" : 18
+        },
+        "credissimo"         : {
+            "_" : 80
+        },
+        "creditstar"         : {
+            "_" : 79
+        },
+        "creditter"          : {
+            "_" : 22
+        },
+        "credius"            : {
+            "_" : 68
+        },
+        "danarupiah"         : {
+            "_" : 24
+        },
+        "debifo"             : {
+            "_" : 32
+        },
+        "delfingroup"        : {
+            "_" : 77
+        },
+        "dineo credito"      : {
+            "_" : 60
+        },
+        "dinerito"           : {
+            "_" : 53
+        },
+        "dozarplati"         : {
+            "_" : 49
+        },
+        "dziesiatka finanse" : {
+            "_" : 43
+        },
+        "e cash"             : {
+            "_" : 26
+        },
+        "ecofinance"         : {
+            "_" : 40
+        },
+        "esto"               : {
+            "_" : 62
+        },
+        "everest finanse"    : {
+            "_" : 53
+        },
+        "evergreen"          : {
+            "_" : 51
+        },
+        "expresscredit"      : {
+            "_" : 22
+        },
+        "extra finance"      : {
+            "_" : 52
+        },
+        "finitera"           : {
+            "Albania"   : 23,
+            "Macedonia" : 13
+        },
+        "finko"              : {
+            "Georgia" : 14,
+            "Moldova" : 53,
+            "Ukraine" : 39
+        },
+        "fireof"             : {
+            "_" : 43
+        },
+        "getbucks"           : {
+            "_" : 15
+        },
+        "gfm"                : {
+            "_" : 33
+        },
+        "hipocredit"         : {
+            "_" : 32
+        },
+        "id finance"         : {
+            "Spain"  : 39,
+            "Mexico" : 8
+        },
+        "idf eurasia"        : {
+            "_" : 63
+        },
+        "itf group"          : {
+            "_" : 50
+        },
+        "iutecredit"         : {
+            "_" : 77
+        },
+        "julo"               : {
+            "_" : 47
+        },
+        "kredit pintar"      : {
+            "_" : 66
+        },
+        "kredit24"           : {
+            "_" : 24
+        },
+        "kviku"              : {
+            "_" : 44
+        },
+        "lf tech"            : {
+            "_" : 55
+        },
+        "lime zaim"          : {
+            "_" : 65
+        },
+        "mikro kapital"      : {
+            "_" : 42
+        },
+        "mogo"               : {
+            "_" : 79
+        },
+        "moneda"             : {
+            "_" : 20
+        },
+        "monego"             : {
+            "_" : 34
+        },
+        "mozipo group"       : {
+            "_" : 36
+        },
+        "mwananchi"          : {
+            "_" : 54
+        },
+        "novaloans"          : {
+            "_" : 51
+        },
+        "peachy"             : {
+            "_" : 22
+        },
+        "pinjam yuk"         : {
+            "_" : 41
+        },
+        "placet group"       : {
+            "_" : 71
+        },
+        "rapicredit"         : {
+            "_" : 28
+        },
+        "rapido finance"     : {
+            "_" : -99
+        },
+        "revo technology"    : {
+            "_" : 61
+        },
+        "sos credit"         : {
+            "_" : 46
+        },
+        "stik credit"        : {
+            "_" : 53
+        },
+        "sun finance"        : {
+            "Denmark"    : 30,
+            "Poland"     : 22,
+            "Kazakhstan" : 13,
+            "Latvia"     : 28,
+            "Mexico"     : 12,
+            "Vietnam"    : 7
+        },
+        "swiss capital kz"   : {
+            "_" : 37
+        },
+        "tascredit"          : {
+            "_" : 45
+        },
+        "watu credit"        : {
+            "_" : 61
+        },
+        "wowwo"              : {
+            "_" : 70
+        },
+        "zenka"              : {
+            "_" : 41
+        }
+    }
     
     if (loan_originator.toLowerCase() in data)
     {
-        return data[loan_originator.toLowerCase()] + ' / 100';
+        const entry = data[loan_originator.toLowerCase()];
+        const rating = entry.hasOwnProperty(country) ? entry[country] : entry._;
+        return rating ? `${rating} / 100` : 'n/a'
     }
     else
     {

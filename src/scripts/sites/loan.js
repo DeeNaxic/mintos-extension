@@ -118,7 +118,8 @@ export async function handle(){
                 const cell = originator
                     .querySelector('#chart-wrapper div.m-o-grid:first-of-type div.m-o-grid__item:nth-of-type(2)');
                 
-                parseRatings(cell, model);
+                const country = document.querySelector('.m-h1 img').title;
+                parseRatings(cell, model, country);
                 renderRatings(model.details, originator);
                 cell.querySelector('span').classList.add('invext-hidden');
             }
@@ -289,10 +290,10 @@ function parseSchedule (schedule, details, model)
         model.details.nextPayment = NaN;
 }
 
-function parseRatings (cell, model)
+function parseRatings (cell, model, country)
 {
     model.details.mintosRating = cell.querySelector('span').innerText;
-    model.details.explorep2pRating = rating(cell.querySelector('a').innerText);
+    model.details.explorep2pRating = rating(cell.querySelector('a').innerText, country);
 }
 
 function parseAge (borrower, model)
