@@ -8,7 +8,11 @@
     "license"         : "GPL-3.0",
     "devDependencies" : {
         "@rollup/plugin-commonjs"        : "^11.0.2",
+        "@rollup/plugin-json"            : "^4.0.2",
         "@rollup/plugin-node-resolve"    : "^7.1.1",
+        "cheerio"                        : "^1.0.0-rc.3",
+        "country-list"                   : "^2.2.0",
+        "node-fetch"                     : "^2.6.0",
         "rollup"                         : "^1.15.4",
         "rollup-plugin-chrome-extension" : "^2.1.0",
         "rollup-plugin-copy"             : "^3.3.0",
@@ -16,10 +20,12 @@
         "rollup-plugin-progress"         : "^1.1.1"
     },
     "scripts"         : {
-        "build" : "rollup -c"
+        "build"  : "rollup -c",
+        "update" : "node tools/update_ratings.js"
     },
     "dependencies"    : {
         "chart.js" : "^2.9.3",
         "lit-html" : "^1.2.1"
-    }
+    },
+    "type"            : "module"
 }
