@@ -22,7 +22,7 @@
 
 ### Introduction
 
-This project aims to add an additional layer of information and functionality to the [Mintos](https://www.mintos.com) P2P investment website, through a [Chrome Extension](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). The project is driven by a group of former students from the Copenhagen University of Computer Science (DIKU), who likes to work with investments. The extension was originally an internal tool we used, to fix weird visuals and add additional information on loans, on the Mintos website, to improve our experience. From here it has grown and has now been fully released to the public. Get it from Chrome here: [Chrome Extension Store page](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). Some key points about the extension are:
+This project aims to add an additional layer of information and functionality to the [Mintos](https://www.mintos.com) P2P investment website, through a [Chrome Extension](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). The project is driven by a group of Mintos investors, and through community support. The extension was originally an internal tool we used, to fix weird visuals and add additional information on loans, on the Mintos website, to improve our experience. From here it has grown and has now been fully released to the public. Get it from Chrome here: [Chrome Extension Store page](https://chrome.google.com/webstore/detail/investment-extensions-min/ehngchilahobaplambailiienioefiod?fbclid=IwAR01MI6zIVPmprXmABE3KDIEdpU7hW_b4cJrI0AwM2gpjFFrT-GuJx5qFxo). Some key points about the extension are:
 
 - The extension does add additional information to various pages.
 - The extension does change the cosmetic of the website in a few places.
@@ -76,6 +76,7 @@ This project aims to add an additional layer of information and functionality to
 - Show a warning for high aged borrowers.
 - Show a warning for low on-time payment history.
 - Show a warning for unemployed borrowers.
+- Show a histogram of how many days the payments are late.
 
 <br>
 
