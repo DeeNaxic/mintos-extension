@@ -6,21 +6,26 @@
  */
 
 export const translations = {
-    'Age'            : 'Vysoký věk',
-    'Amount'         : 'Částka',
-    'Country'        : 'Stát',
-    'Days'           : 'dní',
-    'DaysLate'       : 'dní v prodlení',
-    'Name'           : 'Podíly investorů',
-    'NextPayment'    : 'Další splátka',
-    'Ontime'         : 'Včasných',
-    'OntimePayments' : 'Splátek včas',
-    'Payments'       : 'Platby',
-    'Percent'        : 'Procent',
-    'Rating'         : 'Rating',
-    'TimeInGrace'    : 'Celkem dní v povoleném odkladu',
-    'Warning'        : 'Pozor',
-    'Years'          : 'let',
+    'Age'             : 'Vysoký věk',
+    'alltime'         : 'Kompletní historie',
+    'Amount'          : 'Částka',
+    'Country'         : 'Stát',
+    'Days'            : 'dní',
+    'DaysLate'        : 'dní v prodlení',
+    'LoanId'          : 'Loan ID',          // TODO translate
+    'Name'            : 'Podíly investorů',
+    'NextPayment'     : 'Další splátka',
+    'Ontime'          : 'Včasných',
+    'OntimePayments'  : 'Splátek včas',
+    'Payments'        : 'Platby',
+    'Percent'         : 'Procent',
+    'Rating'          : 'Rating',
+    'ReferenceId'     : 'Reference ID',     // TODO translate
+    'TimeInGrace'     : 'Celkem dní v povoleném odkladu',
+    'TransactionId'   : 'ID transakce',
+    'TransactionType' : 'Transaction Type', // TODO translate
+    'Warning'         : 'Pozor',
+    'Years'           : 'let',
     
     // patterns used to extract data from page
     
@@ -36,4 +41,5 @@ export const translations = {
     '$PartiallyPaid'       : 'Částečně zaplaceno',
     '$PaymentDate'         : 'Datum platby',
     '$Scheduled'           : 'Naplánované',
+    '$TransactionDetails'  : /[-–] (\D+)(?: (\d+).)?$/u,
 };

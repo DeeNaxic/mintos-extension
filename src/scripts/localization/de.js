@@ -6,21 +6,26 @@
  */
 
 export const translations = {
-    'Age'            : 'Hohes Alter',
-    'Amount'         : 'Anzahl',
-    'Country'        : 'Land',
-    'Days'           : 'Tage',
-    'DaysLate'       : 'Tage zu spät',
-    'Name'           : 'Name',
-    'NextPayment'    : 'Nächste Zahlung',
-    'Ontime'         : 'pünktliche',
-    'OntimePayments' : 'Pünktliche Zahlungen',
-    'Payments'       : 'Zahlungen',
-    'Percent'        : 'Prozent',
-    'Rating'         : 'Bewertung',
-    'TimeInGrace'    : 'Zeit in Schonfrist',
-    'Warning'        : 'Warnung',
-    'Years'          : 'jahre',
+    'Age'             : 'Hohes Alter',
+    'alltime'         : 'Alle Zeit',
+    'Amount'          : 'Anzahl',
+    'Country'         : 'Land',
+    'Days'            : 'Tage',
+    'DaysLate'        : 'Tage zu spät',
+    'LoanId'          : 'Darlehen-Nr.',
+    'Name'            : 'Name',
+    'NextPayment'     : 'Nächste Zahlung',
+    'Ontime'          : 'pünktliche',
+    'OntimePayments'  : 'Pünktliche Zahlungen',
+    'Payments'        : 'Zahlungen',
+    'Percent'         : 'Prozent',
+    'Rating'          : 'Bewertung',
+    'ReferenceId'     : 'Referenz-Nr.',
+    'TimeInGrace'     : 'Zeit in Schonfrist',
+    'TransactionId'   : 'Transaktions-Nr.',
+    'TransactionType' : 'Transaktionsform',
+    'Warning'         : 'Warnung',
+    'Years'           : 'jahre',
     
     // patterns used to extract data from page
     
@@ -36,4 +41,5 @@ export const translations = {
     '$PartiallyPaid'       : 'Teilweise bezahlt',
     '$PaymentDate'         : 'Zahlungsdatum',
     '$Scheduled'           : 'Geplante',
+    '$TransactionDetails'  : /[-–]? (?:- )?(\D+)(?: (\d+).)?$/u,
 };

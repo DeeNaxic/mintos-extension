@@ -11,4 +11,5 @@ export const translations = {
     
     '$Late'                : 'Laat',
     '$PartiallyPaid'       : 'Gedeeltelijk betaald',
+    '$TransactionDetails'  : /.?/u,                  // TODO translate
 };

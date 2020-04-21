@@ -7,14 +7,14 @@
 
 // comment out incomplete translations
 
-import {translations as cs} from '../localization/cs';
-import {translations as de} from '../localization/de';
-import {translations as en} from '../localization/en';
-// import {translations as es} from '../localization/es';
-// import {translations as lv} from '../localization/lv';
-// import {translations as nl} from '../localization/nl';
-import {translations as pl} from '../localization/pl';
-// import {translations as ru} from '../localization/ru';
+import {translations as cs} from '../localization/cs.js';
+import {translations as de} from '../localization/de.js';
+import {translations as en} from '../localization/en.js';
+// import {translations as es} from '../localization/es.js';
+// import {translations as lv} from '../localization/lv.js';
+// import {translations as nl} from '../localization/nl.js';
+import {translations as pl} from '../localization/pl.js';
+// import {translations as ru} from '../localization/ru.js';
 
 const translations = {
     cs,
@@ -27,9 +27,9 @@ const translations = {
     // ru,
 };
 
-const userLang = document.location.pathname.substring(1, 3);
+const userLang = () => document.location.pathname.substring(1, 3);
 
-export function localization (field)
+export function localization (field, lang = null)
 {
-    return translations[userLang][field];
+    return translations[lang || userLang()][field];
 }

@@ -20,4 +20,5 @@ export const translations = {
     '$PartiallyPaid'       : 'Частично оплачено',
     '$PaymentDate'         : 'Число',
     '$Scheduled'           : 'Запланировано',
+    '$TransactionDetails'  : /.?/,                       // TODO translate
 };
