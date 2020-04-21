@@ -1,6 +1,6 @@
 {
     "description"     : "This extension aims to improve the Mintos.com experience, with additional features and post-processing of the website.",
-    "version"         : "1.5.1",
+    "version"         : "2.0.0",
     "repository"      : {
         "type" : "git",
         "url"  : "git+https://github.com/DeeNaxic/mintos-extension.git"
