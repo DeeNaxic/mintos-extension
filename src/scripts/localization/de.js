@@ -7,11 +7,11 @@
 
 export const translations = {
     'Age'             : 'Hohes Alter',
-    'alltime'         : 'Alle Zeit',
+    'alltime'         : 'Alle Zeiten',
     'Amount'          : 'Anzahl',
     'Country'         : 'Land',
     'Days'            : 'Tage',
-    'DaysLate'        : 'Tage zu spät',
+    'DaysLate'        : 'Tage verspätet',
     'LoanId'          : 'Darlehen-Nr.',
     'Name'            : 'Name',
     'NextPayment'     : 'Nächste Zahlung',
@@ -20,12 +20,12 @@ export const translations = {
     'Payments'        : 'Zahlungen',
     'Percent'         : 'Prozent',
     'Rating'          : 'Bewertung',
-    'ReferenceId'     : 'Referenz-Nr.',
+    'ReferenceId'     : 'Belegnr.',
     'TimeInGrace'     : 'Zeit in Schonfrist',
     'TransactionId'   : 'Transaktions-Nr.',
-    'TransactionType' : 'Transaktionsform',
+    'TransactionType' : 'Geschäftsvorgang',
     'Warning'         : 'Warnung',
-    'Years'           : 'jahre',
+    'Years'           : 'Jahre',
     
     // patterns used to extract data from page
     
