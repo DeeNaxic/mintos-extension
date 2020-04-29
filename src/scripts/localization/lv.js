@@ -19,4 +19,5 @@ export const translations = {
     '$PartiallyPaid'       : 'Daļēji apmaksāts',
     '$PaymentDate'         : 'Maksājuma datums',
     '$Scheduled'           : 'Plānots',
+    '$TransactionDetails'  : /.?/u,                      // TODO translate
 };
