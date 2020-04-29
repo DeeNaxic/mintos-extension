@@ -12,7 +12,7 @@ export const translations = {
     'Country'         : 'Stát',
     'Days'            : 'dní',
     'DaysLate'        : 'dní v prodlení',
-    'LoanId'          : 'Loan ID',          // TODO translate
+    'LoanId'          : 'ID půjčky',
     'Name'            : 'Podíly investorů',
     'NextPayment'     : 'Další splátka',
     'Ontime'          : 'Včasných',
@@ -20,10 +20,10 @@ export const translations = {
     'Payments'        : 'Platby',
     'Percent'         : 'Procent',
     'Rating'          : 'Rating',
-    'ReferenceId'     : 'Reference ID',     // TODO translate
+    'ReferenceId'     : 'ID zdrojové trans.',
     'TimeInGrace'     : 'Celkem dní v povoleném odkladu',
     'TransactionId'   : 'ID transakce',
-    'TransactionType' : 'Transaction Type', // TODO translate
+    'TransactionType' : 'Typ platby',
     'Warning'         : 'Pozor',
     'Years'           : 'let',
     
