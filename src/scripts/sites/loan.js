@@ -42,7 +42,7 @@ chrome.storage.sync.get
                 var details         = assert(tables[0]);
                 var borrower        = assert(tables[1]);
                 var schedule        = assert(tables[2]);
-                var originator      = assert(document.querySelector('.m-group-info'));
+                var originator      = assert(document.querySelector('#chart-wrapper > div.m-u-padding-top-5.m-u-fs-6'));
             }
             catch
             {
@@ -104,18 +104,16 @@ chrome.storage.sync.get
             function createOriginatorRow (header, content)
             {
                 var nodeOuter = document.createElement('div');
-                    nodeOuter.classList.add('row');
+                    nodeOuter.classList.add('m-o-grid');
                     
                 var nodeInner           = document.createElement('div');
                     nodeInner.innerHTML = header;
-                    nodeInner.classList.add('field-description');
-                    nodeInner.classList.add('col-xs-7');
+                    nodeInner.classList.add('m-o-grid__item', 'm-o-grid__item--xs-5');
                     nodeOuter.appendChild(nodeInner);
                     
                 var nodeInner           = document.createElement('td');
                     nodeInner.innerText = content;
-                    nodeInner.classList.add('value');
-                    nodeInner.classList.add('col-xs-5');
+                    nodeInner.classList.add('m-o-grid__item', 'm-o-grid__item--xs-7');
                     nodeOuter.appendChild(nodeInner);
                     
                 return nodeOuter;
@@ -148,11 +146,14 @@ chrome.storage.sync.get
                     for (var rows = schedule.querySelectorAll('tr'), i = 0; i < rows.length; i++)
                     {
                         var columns = rows[i].querySelectorAll('td');
+                        if (columns.length === 1)
+                            continue;
                         var status  = columns[6].innerText;
                         
                         if ([localization('$Scheduled'), localization('$Late')].includes(status))
                         {
-                            days = Math.floor((toDate(columns[0].innerText) - today) / 86400000); break;
+                            days = Math.floor((toDate(columns[0].innerText) - today) / 86400000);
+                            break;
                         }
                     }
                 }
@@ -173,7 +174,7 @@ chrome.storage.sync.get
              *  and it excludes scheduled payments which has not yet been made. If there
              *  is only scheduled payments the 'n/a' is shown instead of some percentage
              */
-            if (settings.LoanShowOntimePaymentPercent)
+            if (settings.LoanShowOntimePaymentPercent || settings.LoanShowPaymentWarning)
             {
                 var $ontime  = 0;
                 var $others  = 0;
@@ -185,7 +186,9 @@ chrome.storage.sync.get
                         $ontime++;
                     }
                     else
-                    if (element.lastChild.innerText == localization('$Scheduled'))
+                    if (element.lastChild.innerText === localization('$Scheduled')
+                        || element.childNodes.length === 1
+                    )
                     {
                         
                     }
@@ -195,10 +198,23 @@ chrome.storage.sync.get
                     }
                 });
                 
-                var percent  = $others + $ontime > 0 ? ($ontime / ($others + $ontime) * 100.00).toFixed(0) + '%' : 'n/a';
-                var node     = createDetailsRow(localization('OntimePayments'), percent);
+                const totalPayments = $others + $ontime;
+                const percent = totalPayments > 0 ? ($ontime / totalPayments * 100.00) : NaN;
                 
-                details.appendChild(node);
+                if (settings.LoanShowOntimePaymentPercent)
+                {
+                    const percentStr = !Number.isNaN(percent) ? percent.toFixed(0) + '%' : 'n/a';
+                    var node = createDetailsRow(localization('OntimePayments'), percentStr);
+                    details.appendChild(node);
+                }
+    
+                /*
+                 *  Experimental
+                 */
+                if (settings.LoanShowPaymentWarning && percent < 60.0)
+                {
+                    insertElementBefore(createDetailsRowWarning(localization('Payments'), percent.toFixed(2) + '% ' + localization('Ontime')), details.firstChild);
+                }
             }
             
             if (settings.LoanShowTotalGraceTime)
@@ -323,46 +339,16 @@ chrome.storage.sync.get
              */
             if (settings.LoanShowAdditionalRatings)
             {
-                var rows = originator.querySelectorAll('.row');
-                var name = rows[0].querySelector('.value a').innerText;
-                var rank = rows[0].querySelector('.value span');
-                var link = ' (<a href="https://explorep2p.com/mintos-lender-ratings/" target="_blank">reference</a>)';
+                const cell = originator
+                    .querySelector('#chart-wrapper div.m-o-grid:first-of-type div.m-o-grid__item:nth-of-type(2)');
+                const name = cell.querySelector('a').innerText;
+                const rank = cell.querySelector('span');
+                const link = `<a href="https://explorep2p.com/mintos-lender-ratings/" target="_blank">${localization('Rating')}</a>`;
                 
                 rank.style.display = 'none';
                 
-                originator.insertBefore(createOriginatorRow('Mintos\'s '     + localization('Rating'),        rank.innerText), originator.lastChild);
-                originator.insertBefore(createOriginatorRow('ExploreP2P\'s ' + localization('Rating') + link, rating(name)  ), originator.lastChild);
-            }
-            
-            /*
-             *  Experimental
-             */
-            if (settings.LoanShowPaymentWarning)
-            {
-                var $ontime  = 0;
-                var $others  = 0;
-                
-                schedule.querySelectorAll('tr').forEach(function (element)
-                {
-                    if (element.lastChild.innerText == localization('$Paid'))
-                    {
-                        $ontime++;
-                    }
-                    else
-                    if (element.lastChild.innerText == localization('$Scheduled'))
-                    {
-                        
-                    }
-                    else
-                    {
-                        $others++;
-                    }
-                });
-                
-                if ($ontime / ($others + $ontime) * 100.00 < 60.0)
-                {
-                    insertElementBefore(createDetailsRowWarning(localization('Payments'), ($ontime / ($others + $ontime) * 100.00).toFixed(2) + '% ' + localization('Ontime')), details.firstChild);
-                }
+                originator.append(createOriginatorRow('Mintos\'s '     + localization('Rating'), rank.innerText));
+                originator.append(createOriginatorRow('ExploreP2P\'s ' + link                        , rating(name)  ));
             }
             
             /*

@@ -69,7 +69,7 @@ chrome.storage.sync.get
                 
                 DomMonitor(dataTable, function (mutations)
                 {
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    for (var rows = tbody.querySelectorAll('tr:not(.total-row)'), i = 0; i < rows.length; i++)
                     {
                         var cell  = getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', localization('$NextPayment'));
                         var time  = cell.querySelectorAll('span')[0];
@@ -104,7 +104,7 @@ chrome.storage.sync.get
             {
                 DomMonitor(dataTable, function (mutations)
                 {
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    for (var rows = tbody.querySelectorAll('tr:not(.total-row)'), i = 0; i < rows.length; i++)
                     {
                         if (getElementByAttribute(rows[i].querySelectorAll('td'), 'data-m-label', localization('$Term')).innerText.indexOf(localization('$Late')) + 1 > 0)
                         {
@@ -133,13 +133,28 @@ chrome.storage.sync.get
                 
                 DomMonitor(dataTable, function (mutations)
                 {
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    for (var cells = tbody.querySelectorAll('td.placeholder'), i = 0; i < cells.length; i++)
+                    {
+                        cells[i].parentElement.removeChild(cells[i]);
+                    }
+                    
+                    for (var rows = tbody.querySelectorAll('tr:not(.total-row)'), i = 0; i < rows.length; i++)
                     {
                         var cell    = rows[i].lastElementChild;
                         var span    = cell.querySelectorAll('span')[1];
                         
                         if (span == undefined)
                         {
+                            continue;
+                        }
+                        
+                        if (span.getAttribute('data-tooltip') == null)
+                        {
+                            var e = document.createElement('td');
+                                e.classList.add('placeholder')
+                                
+                            rows[i].appendChild(e);
+                            
                             continue;
                         }
                         
@@ -171,7 +186,7 @@ chrome.storage.sync.get
                         data[lines[i].innerText] = lines[i].value;
                     }
                     
-                    for (var rows = tbody.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
+                    for (var rows = tbody.querySelectorAll('tr:not(.total-row)'), i = 0; i < rows.length; i++)
                     {
                         var node              = rows[i].querySelector('.m-loan-id span');
                             node.style.color  = '#3f85f4';
