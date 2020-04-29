@@ -5,6 +5,8 @@
  *  @licence >> GNU GPLv3
  */
 
+import {assert, toFloat, insertElementBefore} from '../common/util';
+
 chrome.storage.sync.get
 (
     {

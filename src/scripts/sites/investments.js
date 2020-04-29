@@ -5,6 +5,8 @@
  *  @licence >> GNU GPLv3
  */
 
+import {assert, getElementByAttribute, DomMonitor} from '../common/util';
+
 chrome.storage.sync.get
 (
     {
@@ -93,8 +95,8 @@ chrome.storage.sync.get
                         
                         if (node === null)
                         {
-                            flag                                        = document.createElement('img');
-                            text                                        = document.createElement('span');
+                            const flag                                  = document.createElement('img');
+                            const text                                  = document.createElement('span');
                             node                                        = document.createElement('td');
                             flag.style.padding                          = '0px 0px 2px 0px';
                             link.style.padding                          = '0px 0px 0px 0px';

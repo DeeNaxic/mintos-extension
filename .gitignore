@@ -1,0 +1,11 @@
+# npm
+
+# push /dist for user who don't want to build but want to see the runnable code
+#/dist/
+
+# But don't commit node_modules, can grow to hundrets MB
+/node_modules/
+
+# Intellij
+/.idea/
+/*.iml

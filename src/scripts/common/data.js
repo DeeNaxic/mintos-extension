@@ -1,85 +1,22 @@
 /*
  *  @project >> Investment.Extensions: Mintos
- *  @authors >> DeeNaxic
+ *  @authors >> DeeNaxic, Raphael Krupinski
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
 
-function rating (loan_originator)
+import originator_ratings from '../../data/originators.json'
+
+export function rating (loan_originator, country)
 {
     var data =
-    {
-        "credissimo"         :    "80",
-        "mogo"               :    "79",
-        "creditstar"         :    "79",
-        "iutecredit"         :    "77",
-        "vizia"              :    "77",
-        "placet group"       :    "71",
-        "wowwo"              :    "70",
-        "everest finanse"    :    "69",
-        "credius"            :    "68",
-        "creamfinance"       :    "67",
-        "kredit pintar"      :    "66",
-        "acema"              :    "66",
-        "lf tech"            :    "66",
-        "lime zaim"          :    "65",
-        "dziesiatka finanse" :    "62",
-        "varks"              :    "63",
-        "dozarplati"         :    "61",
-        "watu credit"        :    "61",
-        "dineo credito"      :    "60",
-        "esto"               :    "60",
-        "capital service"    :    "53",
-        "akulaku"            :    "57",
-        "kviku"              :    "57",
-        "bb finance group"   :    "55",
-        "sebo"               :    "53",
-        "stik credit"        :    "53",
-        "dinerito"           :    "53",
-        "cashcredit"         :    "53",
-        "extra finance"      :    "52",
-        "tascredit"          :    "52",
-        "evergreen"          :    "51",
-        "novaloans"          :    "51",
-        "itf group"          :    "50",
-        "agrocredit"         :    "47",
-        "ecofinance"         :    "47",
-        "julo"               :    "47",
-        "mikro kapital"      :    "47",
-        "sos credit"         :    "46",
-        "alfakredyt"         :    "45",
-        "fireof"             :    "43",
-        "cashwagon"          :    "42",
-        "pinjam yuk"         :    "41",
-        "zenka"              :    "41",
-        "alexcredit"         :    "41",
-        "gfm"                :    "41",
-        "swiss capital"      :    "40",
-        "dinero"             :    "39",
-        "mozipo group"       :    "36",
-        "capitalia"          :    "36",
-        "monego"             :    "34",
-        "hipocredit"         :    "32",
-        "debifo"             :    "32",
-        "kredit24"           :    "32",
-        "rapicredit"         :    "28",
-        "e cash"             :    "26",
-        "creditter"          :    "25",
-        "danarupiah"         :    "24",
-        "kredo"              :    "23",
-        "getbucks"           :    "23",
-        "expresscredit"      :    "22",
-        "peachy"             :    "22",
-        "moneda"             :    "20",
-        "credilikeme"        :    "18",
-        "lendo"              :    "14",
-        "tigo"               :    "13",
-        "metrokredit"        :    "11"
-    };
+        originator_ratings;
     
     if (loan_originator.toLowerCase() in data)
     {
-        return data[loan_originator.toLowerCase()] + ' / 100';
+        const entry = data[loan_originator.toLowerCase()];
+        const rating = entry.hasOwnProperty(country) ? entry[country] : entry._;
+        return rating ? `${rating} / 100` : 'n/a'
     }
     else
     {
@@ -87,7 +24,7 @@ function rating (loan_originator)
     }
 }
 
-function iso_code (currency)
+export function iso_code (currency)
 {
     var data =
     {

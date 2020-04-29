@@ -38,6 +38,7 @@ chrome.storage.sync.get(
     'LoanShowPaymentWarning'            : true,
     'LoanShowAgeWarning'                : true,
     'LoanShowJobWarning'                : true,
+    'LoanShowLatePaymentHistogram'      : true,
     
     // accountStatement.js
     'AccountOverviewUseFourDecimals'    : false,
