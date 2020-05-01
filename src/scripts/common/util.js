@@ -5,6 +5,8 @@
  *  @licence >> GNU GPLv3
  */
 
+import u from 'umbrellajs';
+
 export function assert (selector)
 {
     if (selector == null)
@@ -222,3 +224,56 @@ export const chrome = {
         }
     }
 };
+
+/**
+ * This is a DEBUGGING utility. It shows which selectors are available from the first load of the page and which become
+ * available at later stages
+ *
+ * @param {Array} selectors
+ */
+function doReportNodesAvailable (selectors)
+{
+    let selectorMap = querySelectors(selectors);
+    let stage = 0;
+    console.info(`stage ${stage}`, selectorMap);
+    
+    const observer = new MutationObserver(mutationHandler);
+    
+    function querySelectors (selectors)
+    {
+        return new Map(Object.entries(selectors
+            .map(selector => ({[selector] : u(selector).length !== 0}))
+            .reduce((r, v) => ({...r, ...v}), {})));
+    }
+    
+    function mutationHandler (mutations)
+    {
+        ++stage;
+        const availability = querySelectors(selectors);
+        const report = new Map();
+        for (const [key, value] of availability.entries())
+            if (selectorMap.get(key) !== value)
+                report.set(key, value);
+        
+        if (report.size)
+            console.info(`stage ${stage}`, report);
+        
+        selectorMap = availability;
+        
+        if (![...selectorMap.values()].includes(false))
+            observer.disconnect();
+    }
+    
+    observer.observe(document, {
+        childList : true,
+        subtree   : true,
+    });
+}
+
+export let reportNodesAvailable;
+if ('__BUILD_ENV__' === 'production')
+    reportNodesAvailable = () =>
+    {
+    };
+else
+    reportNodesAvailable = doReportNodesAvailable;

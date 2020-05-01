@@ -27,9 +27,9 @@ const translations = {
     // ru,
 };
 
-const userLang = () => document.location.pathname.substring(1, 3);
+export const userLang = (pathname) => /(?:\/webapp)?\/(\w{2})\//.exec(pathname)[1];
 
 export function localization (field, lang = null)
 {
-    return translations[lang || userLang()][field];
+    return translations[lang || userLang(document.location.pathname)][field];
 }

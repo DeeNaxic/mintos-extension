@@ -1,10 +1,11 @@
+import {chromeExtension} from 'rollup-plugin-chrome-extension'
 import commonjs from '@rollup/plugin-commonjs';
 import copy from "rollup-plugin-copy";
-import resolve from '@rollup/plugin-node-resolve'
-import {chromeExtension} from 'rollup-plugin-chrome-extension'
 import del from 'rollup-plugin-delete'
-import progress from 'rollup-plugin-progress';
 import json from "@rollup/plugin-json";
+import progress from 'rollup-plugin-progress';
+import replace from '@rollup/plugin-replace';
+import resolve from '@rollup/plugin-node-resolve'
 
 export default {
     input    : 'src/manifest.json',
@@ -32,6 +33,9 @@ export default {
         }),
         json({
             preferConst : true,
+        }),
+        replace({
+            '__BUILD_ENV__' : process.env.NODE_ENV,
         }),
     ],
 }

@@ -12,16 +12,12 @@ export function rating (loan_originator, country)
     var data =
         originator_ratings;
     
-    if (loan_originator.toLowerCase() in data)
-    {
-        const entry = data[loan_originator.toLowerCase()];
-        const rating = entry.hasOwnProperty(country) ? entry[country] : entry._;
-        return rating ? `${rating} / 100` : 'n/a'
-    }
-    else
-    {
-        return 'n/a';
-    }
+    if (!(loan_originator.toLowerCase() in data))
+        return NaN;
+    
+    const entry = data[loan_originator.toLowerCase()];
+    const rating = entry.hasOwnProperty(country) ? entry[country] : entry._;
+    return typeof rating === 'number' ? rating : NaN;
 }
 
 export function iso_code (currency)

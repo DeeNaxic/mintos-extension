@@ -33,16 +33,21 @@
                 "https://www.mintos.com/en/*",
                 "https://www.mintos.com/de/*",
                 "https://www.mintos.com/pl/*",
-                "https://www.mintos.com/cs/*"
+                "https://www.mintos.com/cs/*",
+                "https://www.mintos.com/webapp/cs/*",
+                "https://www.mintos.com/webapp/de/*",
+                "https://www.mintos.com/webapp/en/*",
+                "https://www.mintos.com/webapp/pl/*"
             ],
             "js"        :
             [
                 "scripts/sites/_all.js"
             ],
-            "css"       : 
+            "css"       :
             [
                 "styles/index.css"
-            ]
+            ],
+            "all_frames" : true
         },
         {
             "matches"   :

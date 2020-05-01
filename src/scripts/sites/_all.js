@@ -9,7 +9,7 @@ import '../common/polyfills'
 
 function isLoanPage (pathname)
 {
-    return pathname.match(/^\/\w{2}\/[0-9]+(?:-[0-9]+)?/g) !== null;
+    return /^\/webapp\/\w{2}\/[0-9]+(?:-[0-9]+)?/.test(pathname);
 }
 
 // since we can't make a matcher for the loan page, we load it here dynamically

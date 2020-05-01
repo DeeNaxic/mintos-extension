@@ -6,14 +6,24 @@
  */
 
 import {rating} from '../common/data'
-import {chrome, getCurrencyPrefix, onNodesAvailable, toDate, today, toDays, toFloat,} from '../common/util';
+import {
+    chrome,
+    getCurrencyPrefix,
+    onNodesAvailable,
+    toDate,
+    today,
+    toDays,
+    toFloat,
+} from '../common/util';
 import {loanInvBreakdownLegend} from "../components/loanInvBreakdownLegend";
 import {renderRatings} from "../components/loanLoRatings";
 import {renderExtraDetails} from "../components/loanDetails";
 import {latePaymentHistogramChart} from "../components/paymentDelayHisto";
 import {localization} from "../localization";
+import u from 'umbrellajs';
 
-export async function handle(){
+export async function handle ()
+{
     const model = {
         details   : {
             borrower : {},
@@ -52,7 +62,7 @@ export async function handle(){
         onNodesAvailable({
             details  : '#info-wrapper tbody',
             borrower : '#card-tabs-content li:first-child tbody',
-            schedule : '#card-tabs-content li:nth-child(2) tbody',
+            schedule : '#card-tabs-content li:nth-child(2) table',
         }).then(({
                      details,
                      borrower,
@@ -98,32 +108,31 @@ export async function handle(){
         
         }).catch(console.warn);
     
+    /*
+     *  This does two things. First it splits the line from Mintos, with ratings
+     *  and loan originator name, into two lines. Such that the rating is put on
+     *  its own line. It then tries to load up a ranking, from the data document
+     *  and creates a new line with the ExploreP2P's assessement of that company
+     *  along with a link to their site. The link can is to get an understanding
+     *  of how the ratings were calculated. We have gotten permission to use the
+     *  ratings, under the agreement that we link to the site they were taken of
+     */
+    if (settings.LoanShowAdditionalRatings)
+    {
         onNodesAvailable({
-            originator : '#chart-wrapper > div.m-u-padding-top-5.m-u-fs-6',
+            originator : '#chart-wrapper > div.m-u-padding-top-4',
         }).then(({
-                     originator,
-                 }) =>
+            originator,
+        }) =>
         {
-            /*
-             *  This does two things. First it splits the line from Mintos, with ratings
-             *  and loan originator name, into two lines. Such that the rating is put on
-             *  its own line. It then tries to load up a ranking, from the data document
-             *  and creates a new line with the ExploreP2P's assessement of that company
-             *  along with a link to their site. The link can is to get an understanding
-             *  of how the ratings were calculated. We have gotten permission to use the
-             *  ratings, under the agreement that we link to the site they were taken of
-             */
-            if (settings.LoanShowAdditionalRatings)
-            {
-                const cell = originator
-                    .querySelector('#chart-wrapper div.m-o-grid:first-of-type div.m-o-grid__item:nth-of-type(2)');
-                
-                const country = document.querySelector('.m-h1 img').title;
-                parseRatings(cell, model, country);
-                renderRatings(model.details, originator);
-                cell.querySelector('span').classList.add('invext-hidden');
-            }
+            const cell = originator
+                .querySelector('#chart-wrapper div.m-o-grid:first-of-type div.m-o-grid__item:nth-of-type(2)');
+            
+            const country = document.querySelector('.m-h1 img').title;
+            parseRatings(cell, model, country);
+            renderRatings(model.details, originator);
         }).catch(console.warn);
+    }
     
         /*
          *  Replace the investment breakdown unordered list, with a table. The table
@@ -137,7 +146,7 @@ export async function handle(){
             }).then(({chart, list}) =>
             {
                 parseLegendModel(list, model);
-                chart.insertBefore(loanInvBreakdownLegend(model.legend, document.createElement('div')), list);
+                u(chart).after(loanInvBreakdownLegend(model.legend, document.createElement('div')));
                 list.style.display = 'none';
             }).catch(console.warn);
 }
@@ -237,8 +246,12 @@ function parseSchedule (schedule, details, model)
     
     let totalPayments = 0, nextPaymentDate = null;
     
-    for (const row of schedule.childNodes)
+    for (const row of schedule.querySelectorAll('tr'))
     {
+        // skip the header
+        if(!u(row).find('td').length)
+            continue;
+        
         const payment = new Payment(row);
 
         if (payment.isExtensionRow || payment.isBeforeListing)
@@ -292,13 +305,13 @@ function parseSchedule (schedule, details, model)
 
 function parseRatings (cell, model, country)
 {
-    model.details.mintosRating = cell.querySelector('span').innerText;
+    model.details.mintosRating = u('span.lo-rating', cell).text().trim();
     model.details.explorep2pRating = rating(cell.querySelector('a').innerText, country);
 }
 
 function parseAge (borrower, model)
 {
-    for (const row of borrower.childNodes)
+    for (const row of borrower.children)
     {
         let match;
         if (row.firstChild.innerText === localization('$Borrower') && (match = row.lastChild.innerText.match(localization('$BorrowerPattern'))))
