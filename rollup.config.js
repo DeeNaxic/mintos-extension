@@ -22,7 +22,8 @@ export default {
         resolve(),
         commonjs(),
         del({targets : 'dist'}),
-        progress({clearLine : false}),
+        // https://github.com/jkuri/rollup-plugin-progress/issues/19
+        // progress({clearLine : false}),
         copy({
             targets : [
                 {
