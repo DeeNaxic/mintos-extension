@@ -91,10 +91,13 @@ function getNameList ()
 {
     const f = readFileSync('node_modules/country-list/data.json', 'utf8');
     const doc = JSON.parse(f)
-    const fromEntries = Object.fromEntries(doc.map(({code, name}) => ([name, code])));
-    fromEntries.Moldova = 'MD';
-    fromEntries.Macedonia = 'MK';
-    fromEntries.Vietnam = 'VN';
+    let fromEntries = Object.fromEntries(doc.map(({code, name}) => ([name, code])));
+    fromEntries = Object.assign(fromEntries, {
+        Moldova   : 'MD',
+        Macedonia : 'MK',
+        Vietnam   : 'VN',
+        Russia    : 'RU',
+    });
     return fromEntries;
 }
 

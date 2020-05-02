@@ -1,6 +1,6 @@
 {
     "aasa"               : {
-        "_" : -1000
+        "_" : 41
     },
     "acema"              : {
         "_" : 66
@@ -21,7 +21,7 @@
         "_" : 31
     },
     "bb finance group"   : {
-        "_" : 55
+        "_" : 54
     },
     "capital service"    : {
         "_" : 39
@@ -45,7 +45,7 @@
         "_" : 80
     },
     "creditstar"         : {
-        "_" : 79
+        "_" : 74
     },
     "creditter"          : {
         "_" : 22
@@ -69,13 +69,13 @@
         "_" : 53
     },
     "dozarplati"         : {
-        "_" : 49
+        "_" : 45
     },
     "dziesiatka finanse" : {
         "_" : 43
     },
     "e cash"             : {
-        "_" : 26
+        "_" : 20
     },
     "ecofinance"         : {
         "_" : 40
@@ -114,10 +114,10 @@
         "_" : 33
     },
     "hipocredit"         : {
-        "_" : 32
+        "_" : 41
     },
     "id finance"         : {
-        "Spain"  : 39,
+        "Spain"  : 59,
         "Mexico" : 8
     },
     "idf eurasia"        : {
@@ -133,7 +133,7 @@
         "_" : 47
     },
     "kredit pintar"      : {
-        "_" : 66
+        "_" : 62
     },
     "kredit24"           : {
         "_" : 24
@@ -145,13 +145,16 @@
         "_" : 55
     },
     "lime zaim"          : {
-        "_" : 65
+        "_" : 55
     },
     "mikro kapital"      : {
-        "_" : 42
+        "Russia"  : 45,
+        "Romania" : 53,
+        "Belarus" : 63,
+        "Moldova" : 62
     },
     "mogo"               : {
-        "_" : 79
+        "_" : 76
     },
     "moneda"             : {
         "_" : 20
@@ -175,16 +178,16 @@
         "_" : 41
     },
     "placet group"       : {
-        "_" : 71
+        "_" : 73
     },
     "rapicredit"         : {
-        "_" : 28
+        "_" : 45
     },
     "rapido finance"     : {
         "_" : -99
     },
     "revo technology"    : {
-        "_" : 61
+        "_" : 59
     },
     "sos credit"         : {
         "_" : 46
