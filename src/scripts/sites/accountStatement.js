@@ -5,6 +5,10 @@
  *  @licence >> GNU GPLv3
  */
 
+import {assert, DomMonitorAggressive} from '../common/util';
+import {localization} from "../localization";
+import {parseTransactionDetails} from "../components/accountHistoryDetails";
+
 chrome.storage.sync.get
 (
     {
@@ -146,10 +150,10 @@ function addDataTableSplitHeaderCells ()
     
     const headersNode = document.createElement('template');
     headersNode.innerHTML = `
-        <th>Transaction ID</th>
-        <th>Loan ID</th>
-        <th>Transaction Type</th>
-        <th>Reference ID</th>
+        <th>${localization('TransactionId')}</th>
+        <th>${localization('LoanId')}</th>
+        <th>${localization('TransactionType')}</th>
+        <th>${localization('ReferenceId')}</th>
         `;
     const detailsHeadCell = headerRow.children[1];
     detailsHeadCell.classList.add('invext-hidden');
@@ -163,27 +167,6 @@ detailsNode.innerHTML = `
     <td class="invext-tx-type" />
     <td class="invext-tx-ref-id" />
 `;
-
-function parseTransactionDetails (text)
-{
-    const result = {};
-    const parts = text.split(' - ');
-    
-    result.txId = parts[0].match(/^Transaction ID: (\d+)$/)[1];
-    
-    const typeAndRef = parts[parts.length - 1];
-    const match = typeAndRef.match(/^(\D+) (\d+).$/);
-    if (match)
-    {
-        result.txType = match[1];
-        result.txRef = match[2];
-    }
-    else
-        result.txType = typeAndRef;
-    
-    
-    return result;
-}
 
 function splitDataTableRow (row)
 {
@@ -213,23 +196,3 @@ function splitDataTableRow (row)
     row.querySelector('.invext-tx-type').innerText = details.txType;
     row.querySelector('.invext-tx-ref-id').innerText = 'txRef' in details ? details.txRef : '';
 }
-
-function localization (field)
-{
-    var translations =
-            {
-                'alltime' :
-                    {
-                        'en' : 'All time',
-                        'de' : 'Alle Zeit',
-                        'pl' : 'Od początku',
-                        'cs' : 'Kompletní historie',
-                        'es' : '?',
-                        'lv' : '?',
-                        'ru' : '?'
-                    }
-            };
-    
-    return translations[field][document.location.pathname.substring(1, 3)];
-}
-

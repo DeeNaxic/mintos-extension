@@ -5,6 +5,9 @@
  *  @licence >> GNU GPLv3
  */
 
+import './investments';
+import {assert, DomMonitor, getElementByAttribute, toDate, today, toDays} from '../common/util';
+
 chrome.storage.sync.get
 (
     {
@@ -59,7 +62,7 @@ chrome.storage.sync.get
             
             /*
              *  This will replace the 'next payment date' columns, so instead of showing
-             *  the date of the next payment, it shows the amount of days instead. Those
+             *  the date of the next payment, it shows the number of days instead. Those
              *  loans whitch are late, doesn't change. Any any loan date today, is shown
              *  as 0 days. It hides the original field, rather than replacing the values
              */
@@ -88,7 +91,7 @@ chrome.storage.sync.get
                         }
                         else
                         {
-                            node.innerText = Math.floor((toDate(time.innerText) - new Date().setHours(0, 0, 0, 0)) / 86400000) + ' ' + localization('Days');
+                            node.innerText = toDays(toDate(time.innerText) - today()) + ' ' + localization('Days');
                         }
                     }
                 });

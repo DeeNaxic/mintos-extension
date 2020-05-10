@@ -1,7 +1,5 @@
 {
     "name"              : "Investment Extensions: Mintos",
-    "description"       : "This extension aims to improve the Mintos.com experience, with additional features and post-processing of the website.",
-    "version"           : "1.5.1",
     "manifest_version"  : 2,
     
     "options_ui"        :
@@ -32,17 +30,24 @@
         {
             "matches"   :
             [
-                "https://www.mintos.com/*"
+                "https://www.mintos.com/en/*",
+                "https://www.mintos.com/de/*",
+                "https://www.mintos.com/pl/*",
+                "https://www.mintos.com/cs/*",
+                "https://www.mintos.com/webapp/cs/*",
+                "https://www.mintos.com/webapp/de/*",
+                "https://www.mintos.com/webapp/en/*",
+                "https://www.mintos.com/webapp/pl/*"
             ],
             "js"        :
             [
-                "scripts/common/util.js",
-                "scripts/common/data.js"
+                "scripts/sites/_all.js"
             ],
-            "css": 
-                    [
-                        "styles/index.css"
-                    ]
+            "css"       :
+            [
+                "styles/index.css"
+            ],
+            "all_frames" : true
         },
         {
             "matches"   :
@@ -60,19 +65,6 @@
         {
             "matches"   :
             [
-                "https://www.mintos.com/en/*",
-                "https://www.mintos.com/de/*",
-                "https://www.mintos.com/pl/*",
-                "https://www.mintos.com/cs/*"
-            ],
-            "js"        :
-            [
-                "scripts/sites/loan.js"
-            ]
-        },
-        {
-            "matches"   :
-            [
                 "https://www.mintos.com/en/my-investments/finished-investments/*",
                 "https://www.mintos.com/de/meine-investitionen/finished-investments-de/*",
                 "https://www.mintos.com/pl/moje-inwestycje/finished-investments-pl/*",
@@ -80,7 +72,6 @@
             ],
             "js"        :
             [
-                "scripts/sites/investments.js",
                 "scripts/sites/investmentsFinished.js"
             ]
         },
@@ -94,7 +85,6 @@
             ],
             "js"        :
             [
-                "scripts/sites/investments.js",
                 "scripts/sites/investmentsCurrent.js"
             ]
         },
