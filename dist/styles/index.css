@@ -1,0 +1,44 @@
+/*
+ *  @project >> Investment.Extensions: Mintos
+ *  @authors >> Raphael Krupinski
+ *  @contact >> investment.extensions@gmail.com
+ *  @licence >> GNU GPLv3
+ */
+
+/* Mintos colors */
+:root {
+    --invext-mintos-green: #78c8c7;
+    --invext-mintos-red: #ed4300;
+    --invext-montos-grey: #888;
+}
+
+div.invext-chart-container {
+    position: relative;
+    height: 50%;
+    width: 50%;
+}
+
+.invext-chart-container canvas {
+    height: 100%;
+    width: 100%;
+}
+
+#payment-histogram .bar-on-time {
+    background-color: var(--invext-mintos-green);
+}
+
+#payment-histogram .bar-late {
+    background-color: var(--invext-mintos-red);
+}
+
+.invext-hidden {
+    display: none;
+}
+
+td.invext-details-warning {
+    color: var(--invext-mintos-red) !important;
+}
+
+.new-feed-title a:visited.invext-grayout-visited{
+    color: var(--invext-montos-grey);
+}
