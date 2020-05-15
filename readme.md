@@ -120,7 +120,7 @@ There are two ways to get this extension to work:
 
 If you want to contribute to the project as a developer, or you'd like to use the bleeding-edge version of the extension, or if you're simply not happy with the above installation options, you can build the project yourself.
 
-Starting with version 2.0.0 the extension requires [Node 13](https://nodejs.org/) and [node-gyp](https://github.com/nodejs/node-gyp) to build. Please follow their installation instructions if you're building the extension 2.0.0+ for the first time.
+Starting with version 2.0.0 the extension requires [Node 13](https://nodejs.org/) or newer and [node-gyp](https://github.com/nodejs/node-gyp) to build. Please follow their installation instructions if you're building the extension 2.0.0+ for the first time.
 
 #### Installing the dependencies
 ```sh
