@@ -29,7 +29,8 @@
     },
     "dependencies"    : {
         "chart.js" : "^2.9.3",
-        "lit-html" : "^1.2.1"
+        "lit-html" : "^1.2.1",
+        "moment"   : "^2.24.0"
     },
     "type"            : "module",
     "engines"         : {

@@ -7,7 +7,7 @@
 
 export const translations = {
     'Age'             : 'Vysoký věk',
-    'alltime'         : 'Kompletní historie',
+    'all-time'         : 'Kompletní historie',
     'Amount'          : 'Částka',
     'Country'         : 'Stát',
     'Days'            : 'dní',

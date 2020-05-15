@@ -7,7 +7,7 @@
 
 export const translations = {
     'Age'             : 'High age',
-    'alltime'         : 'All time',
+    'all-time'        : 'All Time',
     'Amount'          : 'Amount',
     'Country'         : 'Country',
     'Days'            : 'days',
