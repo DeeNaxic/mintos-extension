@@ -41,5 +41,5 @@ export const translations = {
     '$PartiallyPaid'       : 'Teilweise bezahlt',
     '$PaymentDate'         : 'Zahlungsdatum',
     '$Scheduled'           : 'Geplante',
-    '$TransactionDetails'  : /[-–]? (?:- )?(\D+)(?: (\d+).)?$/u,
+    '$TransactionDetails'  : /[-–]? (?:- )?(\D+)(?: (-?\d+).)?$/u,
 };
