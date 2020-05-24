@@ -51,7 +51,7 @@ chrome.storage.sync.get
                     tableBody.querySelectorAll('tr').forEach(function (row)
                     {
                         var cells   = row.querySelectorAll('.autoinvest-list__portfolio-size__amount-wrapper span');
-                        var percent = toFloat(cells[0].innerText) / toFloat(cells[1].innerText) * 100.00;
+                        var percent = toFloat(cells[0].innerText) / toFloat(cells[2].innerText) * 100.00;
                         
                         if (percent > 80.00)
                         {
@@ -84,7 +84,7 @@ chrome.storage.sync.get
                     tableBody.querySelectorAll('tr').forEach(function (row)
                     {
                         var cells   = row.querySelectorAll('.autoinvest-list__portfolio-size__amount-wrapper span');
-                        var percent = toFloat(cells[0].innerText) / toFloat(cells[1].innerText) * 100.00;
+                        var percent = toFloat(cells[0].innerText) / toFloat(cells[2].innerText) * 100.00;
                         var node    = row.querySelector('.percent');
                         
                         if (node == null)
