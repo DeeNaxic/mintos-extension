@@ -5,20 +5,32 @@
  *  @licence >> GNU GPLv3
  */
 
-import {assert, DomMonitorAggressive} from '../common/util';
+import {assert, chrome, DomMonitorAggressive, reportNodesAvailable} from '../common/util';
+import {extendQuickFilters} from "../components/historyQuickFilters";
+import u from 'umbrellajs';
 import {localization} from "../localization";
 import {parseTransactionDetails} from "../components/accountHistoryDetails";
 
-chrome.storage.sync.get
-(
-    {
+(async function ()
+{
+    await handle();
+})()
+
+async function handle ()
+{
+    reportNodesAvailable([
+        '#overview-results tbody',
+        '#overview-details tbody',
+        '#quickfilters',
+        '#overview',
+    ]);
+    
+    const settings = await chrome.storage.sync.get({
         'AccountOverviewUseFourDecimals'    : false,
         'AccountOverviewShowAllTimeButton'  : true,
         'AccountOverviewSplitDetailsTable'  : true,
-    },
+    });
     
-    function (settings)
-    {
         if (!Object.values(settings).includes(true))
             return;
         
@@ -96,50 +108,14 @@ chrome.storage.sync.get
                 });
                 
             handleChanges();
-                
-            if (settings.AccountOverviewShowAllTimeButton)
-                $add_timespan_always();
         }
         
         runtime(settings);
+    
+    if (settings.AccountOverviewShowAllTimeButton)
+    {
+        extendQuickFilters(u('#quickfilters').first())
     }
-);
-
-/*
-*  This adds an 'All time' button to the account overview, which sets the time
-*  period, to show all your investments on Mintos. This is helpful when you
-*  want the total progression over time without setting selecting the dates
-*/
-function $add_timespan_always ()
-{
-    const always_a = document.createElement('a');
-    always_a.innerText = localization('alltime');
-    always_a.href = 'javascript:;';
-    always_a.setAttribute('data-value', 'always');
-    always_a.addEventListener('click', function (event)
-    {
-        document.querySelectorAll('li.m-quickfilter-item > a:not([data-value = "always"])').forEach(function (e)
-        {
-            e.classList.remove('active');
-        });
-        always_a.classList.add('active');
-        document.querySelector('#period-from').value = '1.1.1950';
-        document.querySelector('#period-to')  .value = '1.1.2050';
-        document.querySelector('#filter-button').click()
-    });
-    
-    const always_li = document.createElement('li');
-    always_li.classList.add('m-quickfilter-item');
-    always_li.appendChild(always_a);
-    
-    document.querySelector('#quickfilters').appendChild(always_li);
-    document.querySelectorAll('li.m-quickfilter-item > a:not([data-value = "always"])').forEach(function (e)
-    {
-        e.addEventListener('click', function (event)
-        {
-            always_a.classList.remove('active');
-        })
-    });
 }
 
 function addDataTableSplitHeaderCells ()

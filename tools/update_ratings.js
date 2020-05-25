@@ -22,7 +22,9 @@ async function update ()
     
     const model = fromInput(input, countries);
     const json = JSON.stringify(toOutput(model), undefined, 4);
-    writeFileSync('src/data/originators.json', json + '\n', 'utf8');
+    const outputPath = 'src/data/originators.json';
+    writeFileSync(outputPath, json + '\n', 'utf8');
+    console.info(`Please review the above output and format ${outputPath} before committing`)
 }
 
 function fromInput (input, countries)
@@ -147,13 +149,4 @@ function fixOriginator (entry)
     return [name, rating];
 }
 
-(async function ()
-{
-    try
-    {
-        await update();
-    } catch (e)
-    {
-        console.warn(e);
-    }
-})()
+update().catch(console.warn);

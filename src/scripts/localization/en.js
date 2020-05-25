@@ -7,7 +7,7 @@
 
 export const translations = {
     'Age'             : 'High age',
-    'alltime'         : 'All time',
+    'all-time'        : 'All Time',
     'Amount'          : 'Amount',
     'Country'         : 'Country',
     'Days'            : 'days',
@@ -41,5 +41,5 @@ export const translations = {
     '$PartiallyPaid'       : 'Partially paid',
     '$PaymentDate'         : 'Payment Date',
     '$Scheduled'           : 'Scheduled',
-    '$TransactionDetails'  : /[-–] (\D+)(?: (\d+).)?$/u,
+    '$TransactionDetails'  : /[-–] (\D+)(?: (-?\d+).)?$/u,
 };

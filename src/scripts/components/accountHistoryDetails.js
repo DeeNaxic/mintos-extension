@@ -4,7 +4,7 @@ export function parseTransactionDetails (text, lang = null)
 {
     const result = {};
     
-    const txIdMatch = /^[^:]+: (\d+)/u.exec(text);
+    const txIdMatch = /^[^:]+: (-?\d+)/u.exec(text);
     result.txId = txIdMatch[1];
     
     const refIdMatch = localization('$TransactionDetails', lang).exec(text);
