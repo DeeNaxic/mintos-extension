@@ -91,7 +91,7 @@ chrome.storage.sync.get
                         {
                             node = document.createElement('td');
                             node.classList.add('percent');
-                            node.style.textAlign = 'right';
+                            node.style.textAlign = 'left';
                             insertElementBefore(node, row.querySelector('.autoinvest-list__portfolio-size'));
                         }
                         

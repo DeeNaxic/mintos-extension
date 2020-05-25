@@ -91,7 +91,9 @@ export async function handle ()
              *  Experimental
              */
             if (settings.LoanShowAgeWarning)
+            {
                 parseAge(borrower, model);
+            }
             
             /*
              *  Experimental
@@ -314,10 +316,13 @@ function parseAge (borrower, model)
     for (const row of borrower.children)
     {
         let match;
-        if (row.firstChild.innerText === localization('$Borrower') && (match = row.lastChild.innerText.match(localization('$BorrowerPattern'))))
+        if (row.firstChild.innerText === localization('$Borrower'))
         {
-            model.details.borrower.age = match[1];
-            return;
+            if (match = row.lastChild.innerText.match(localization('$BorrowerPattern')))
+            {
+                model.details.borrower.age = match[1];
+                return;
+            }
         }
     }
 }
