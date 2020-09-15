@@ -270,10 +270,12 @@ function doReportNodesAvailable (selectors)
     });
 }
 
-export let reportNodesAvailable;
-if ('__BUILD_ENV__' === 'production')
-    reportNodesAvailable = () =>
-    {
-    };
-else
-    reportNodesAvailable = doReportNodesAvailable;
+/**
+ * This method is intended for helping development. In development mode (NODE_ENV != production) it will report the
+ * changing availability of elements (as described by CSS selectors) in the document DOM tree.
+ * If the code is built with NODE_ENV = production, it does nothing.
+ */
+export const reportNodesAvailable =
+    process.env.NODE_ENV === 'production'
+        ? () => {}
+        : doReportNodesAvailable;

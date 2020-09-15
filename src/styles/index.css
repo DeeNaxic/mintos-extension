@@ -32,7 +32,7 @@ div.invext-chart-container {
 }
 
 .invext-hidden {
-    display: none;
+    display: none !important;
 }
 
 td.invext-details-warning {

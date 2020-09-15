@@ -42,4 +42,5 @@ export const translations = {
     '$PaymentDate'         : 'Payment Date',
     '$Scheduled'           : 'Scheduled',
     '$TransactionDetails'  : /[-–] (\D+)(?: (-?\d+).)?$/u,
+    '$PathOverview'        : 'overview',
 };

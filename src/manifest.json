@@ -24,6 +24,10 @@
     [
         "storage"
     ],
+
+    "web_accessible_resources": [
+        "scripts/sites/overview.js"
+    ],
     
     "content_scripts"   :
     [
@@ -48,19 +52,6 @@
                 "styles/index.css"
             ],
             "all_frames" : true
-        },
-        {
-            "matches"   :
-            [
-                "https://www.mintos.com/en/overview/*",
-                "https://www.mintos.com/de/ubersicht/*",
-                "https://www.mintos.com/pl/przeglad/*",
-                "https://www.mintos.com/cs/prehled-uctu/*"
-            ],
-            "js"        :
-            [
-                "scripts/sites/overview.js"
-            ]
         },
         {
             "matches"   :

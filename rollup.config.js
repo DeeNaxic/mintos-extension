@@ -35,7 +35,7 @@ export default {
             preferConst : true,
         }),
         replace({
-            '__BUILD_ENV__' : process.env.NODE_ENV,
+            'process.env.NODE_ENV' : process.env.NODE_ENV,
         }),
     ],
 }

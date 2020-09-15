@@ -1,22 +1,117 @@
 /*
  *  @project >> Investment.Extensions: Mintos
- *  @authors >> DeeNaxic
+ *  @authors >> DeeNaxic, Raphael Krupinski
  *  @contact >> investment.extensions@gmail.com
  *  @licence >> GNU GPLv3
  */
 
 import {iso_code} from '../common/data'
-import {assert, DomMonitorAggressive, insertElementBefore, toFloat} from '../common/util';
+import {
+    assert,
+    chrome,
+    DomMonitorAggressive,
+    insertElementBefore,
+    onNodesAvailable,
+    reportNodesAvailable,
+    toFloat
+} from '../common/util';
+import u from 'umbrellajs';
+
+
+export async function handle ()
+{
+    reportNodesAvailable([
+        '.m-o-grid',
+        'div.mw-overview-card',
+        '.mw-overview-card span:nth-child(2)',
+        '.mw-overview-card__aggregate--total span:nth-child(2)',
+    ]);
+    
+    const settings = await chrome.storage.sync.get({
+        'OverviewHideEmptyRows'            : true,
+        'OverviewShowPercentages'          : true,
+        'OverviewShowButtonInstead'        : true,
+        'OverviewHighlightNegativeNumbers' : true,
+        'OverviewGrayOutVisitedNews'       : true,
+        'OverviewBreakdownRewards'         : true
+    });
+    
+    try
+    {
+        const {grid} = await onNodesAvailable({
+            grid    : '.m-o-grid',
+            _values : 'div.mw-overview-card span:nth-child(2)',
+            _totals : '.mw-overview-card__aggregate--total span:nth-child(2)',
+        })
+        const cards = u(grid).children();
+        updatePage(settings, cards);
+        
+        DomMonitorAggressive(grid, () => updatePage(settings, cards))
+    } catch (x)
+    {
+        console.error(x);
+    }
+}
+
+const updatePage = (settings, cards) =>
+{
+    if (settings.OverviewHideEmptyRows)
+    {
+        try
+        {
+            hideZeroEntries(cards);
+        } catch (e)
+        {
+            console.error('hideZeroEntries', e);
+        }
+    }
+    if (settings.OverviewShowPercentages)
+    {
+        try
+        {
+            addPercentageCells(cards);
+        } catch (e)
+        {
+            console.error('addPercentageCells', e);
+        }
+    }
+}
+
+/*
+ *  This goes through all of the four boxes, on the overview page, including
+ *  the initially hidden one. It then iterate through all rows, in the boxes
+ *  and picks the value column. If this value when cast to a float is zero,
+ *  the display style of none is added to hide that row
+ */
+function hideZeroEntries (cards)
+{
+    function hideZeroEntry (entry)
+    {
+        const value = toFloat(entry.children().nodes[1].textContent);
+        if (value == .0)
+        {
+            entry.addClass('invext-hidden');
+        }
+        else
+        {
+            entry.removeClass('invext-hidden');
+        }
+    }
+    
+    cards
+        .find('.mw-overview-card__aggregate')
+        .each(elem => hideZeroEntry(u(elem)));
+}
 
 chrome.storage.sync.get
 (
     {
-        'OverviewHideEmptyRows'             : true,
-        'OverviewShowPercentages'           : true,
-        'OverviewShowButtonInstead'         : true,
-        'OverviewHighlightNegativeNumbers'  : true,
-        'OverviewGrayOutVisitedNews'        : true,
-        'OverviewBreakdownRewards'          : true
+        'OverviewHideEmptyRows'            : true,
+        'OverviewShowPercentages'          : true,
+        'OverviewShowButtonInstead'        : true,
+        'OverviewHighlightNegativeNumbers' : true,
+        'OverviewGrayOutVisitedNews'       : true,
+        'OverviewBreakdownRewards'         : true
     },
     
     function (settings)
@@ -45,35 +140,6 @@ chrome.storage.sync.get
             catch
             {
                 return setTimeout(runtime, 100, settings);
-            }
-            
-            /*
-             *  This goes through all of the four boxes, on the overview page, including
-             *  the initially hidden one. It then iterate through all rows, in the boxes
-             *  and picks the value column. If this value when cast to a float, and then
-             *  to a string is zero, the display style of none is added to hide that row
-             */
-            if (settings.OverviewHideEmptyRows)
-            {
-                function $runHideEmptyRows ()
-                {
-                    boxes.forEach(function (box)
-                    {
-                        for (var rows = box.querySelectorAll('tr'), i = 0; i < rows.length - 1; i++)
-                        {
-                            if (toFloat(rows[i].querySelectorAll('td')[1].innerText).toFixed(2) == '0.00')
-                            {
-                                rows[i].style.display = 'none';
-                            }
-                            else
-                            {
-                                rows[i].style.display = '';
-                            }
-                        }
-                    });
-                }
-                
-                callbacks.push($runHideEmptyRows); $runHideEmptyRows();
             }
             
             /*
