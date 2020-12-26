@@ -39,8 +39,8 @@ export const translations = {
     '$Occupation'          : 'Occupation',
     '$Paid'                : 'Paid',
     '$PartiallyPaid'       : 'Partially paid',
+    '$PathOverview'        : 'overview',
     '$PaymentDate'         : 'Payment Date',
     '$Scheduled'           : 'Scheduled',
     '$TransactionDetails'  : /[-–] (\D+)(?: (-?\d+).)?$/u,
-    '$PathOverview'        : 'overview',
 };

@@ -39,6 +39,7 @@ export const translations = {
     '$Occupation'          : 'Zaměstnání',
     '$Paid'                : 'Paid',
     '$PartiallyPaid'       : 'Částečně zaplaceno',
+    '$PathOverview'        : 'prehled-uctu',
     '$PaymentDate'         : 'Datum platby',
     '$Scheduled'           : 'Naplánované',
     '$TransactionDetails'  : /[-–] (\D+)(?: (-?\d+).)?$/u,

@@ -27,18 +27,17 @@ function isLoanPage (pathname)
         return;
     }
 
-// since we can't make a matcher for the loan page, we load it here dynamically
+    let moduleFuture;
     if (isLoanPage(pathname))
     {
-    import('./loan')
-        .then(module => module.handle())
-        .catch(console.warn);
+        moduleFuture = import('./loan');
     }
     else if (pathname.includes(localization('$PathOverview')))
     {
-        import('./overview')
-            .then(module => module.handle())
-            .catch(console.warn);
+        moduleFuture = import('./overview');
     }
+    
+    moduleFuture
+        .then(module => module.handle())
+        .catch(console.warn);
 })()
-
