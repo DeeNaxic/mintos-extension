@@ -25,6 +25,7 @@ export async function handle ()
         'div.mw-overview-card',
         '.mw-overview-card span:nth-child(2)',
         '.mw-overview-card__aggregate--total span:nth-child(2)',
+        '.blog a',
     ]);
     
     const settings = await chrome.storage.sync.get({
@@ -65,14 +66,14 @@ const updatePage = (settings, cards) =>
             console.error('hideZeroEntries', e);
         }
     }
-    if (settings.OverviewShowPercentages)
+    if (settings.OverviewGrayOutVisitedNews)
     {
         try
         {
-            addPercentageCells(cards);
+            grayOutVisitedNews(document);
         } catch (e)
         {
-            console.error('addPercentageCells', e);
+            console.error('grayOutVisitedNews', e);
         }
     }
 }
@@ -103,6 +104,18 @@ function hideZeroEntries (cards)
         .each(elem => hideZeroEntry(u(elem)));
 }
 
+/*
+ *  This feature adds a new css class to blog links.
+ *  After you visit an article link, it will be greyed out.
+ */
+function grayOutVisitedNews (root)
+{
+    u('div a:not([href="https://www.mintos.com/blog/"])', u('.blog', root).first())
+        .each(child => u(child)
+            .addClass('invext-blog-entry'))
+}
+
+// all code below is deprecated, doesn't work and is kept for reference only
 chrome.storage.sync.get
 (
     {
@@ -259,18 +272,6 @@ chrome.storage.sync.get
                 callbacks.push($runHighlightNegativeNumbers); $runHighlightNegativeNumbers();
             }
 
-            /*
-             *  This feature adds a new css class to blog links.
-             *  After you visit a new article link, it will be greyed out.
-             */
-            if (settings.OverviewGrayOutVisitedNews){
-                for (const row of newsTable.querySelectorAll('.blog-post a'))
-                    row.classList.add('invext-grayout-visited');
-        
-                // remove saved links
-                chrome.storage.sync.remove('$newsArticles');
-            }
-            
             /*
              *  Experimental
              */

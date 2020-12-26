@@ -39,6 +39,7 @@ td.invext-details-warning {
     color: var(--invext-mintos-red) !important;
 }
 
-.new-feed-title a:visited.invext-grayout-visited{
+.blog a:visited.invext-blog-entry
+{
     color: var(--invext-montos-grey);
 }
