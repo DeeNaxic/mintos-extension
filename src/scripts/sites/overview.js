@@ -16,6 +16,7 @@ import {
     toFloat
 } from '../common/util';
 import u from 'umbrellajs';
+import {enhanceOverviewCards} from "../components/overview/cards";
 
 
 export async function handle ()
@@ -76,6 +77,8 @@ const updatePage = (settings, cards) =>
             console.error('grayOutVisitedNews', e);
         }
     }
+    
+    enhanceOverviewCards(u('div.m-o-grid').first(), settings);
 }
 
 /*
@@ -120,7 +123,6 @@ chrome.storage.sync.get
 (
     {
         'OverviewHideEmptyRows'            : true,
-        'OverviewShowPercentages'          : true,
         'OverviewShowButtonInstead'        : true,
         'OverviewHighlightNegativeNumbers' : true,
         'OverviewGrayOutVisitedNews'       : true,
@@ -153,67 +155,6 @@ chrome.storage.sync.get
             catch
             {
                 return setTimeout(runtime, 100, settings);
-            }
-            
-            /*
-             *  This will insert a third column to all tables where the percentage makes
-             *  sense. This includes the balance box, and the investment summaries boxes
-             *  It declares a local function, which can be used to insert the cell, with
-             *  two floats, the current number and the total amount. This will calculate
-             *  percentage automatically. This also handles switching the existing style
-             */
-            if (settings.OverviewShowPercentages)
-            {
-                function $insertPercentageCell (source, total)
-                {
-                    var percent = toFloat(source.innerText) / total * 100.00;
-                    var node    = source.parentElement.querySelector('.percent')
-                    
-                    if (node == undefined)
-                    {
-                        node  = document.createElement('td');
-                        node.classList.add('percent');
-                        source.parentNode.insertBefore(node, source.nextSibling);
-                    }
-                    
-                    if (Math.abs(percent) == Infinity)
-                    {
-                        node.innerText = 'n/a';
-                    }
-                    else
-                    {
-                        node.innerText = percent.toFixed(2) + '%';
-                    }
-                }
-                
-                function $runShowPercentages ()
-                {
-                    if (boxBalance.querySelector('.em span'))
-                    {
-                        boxBalance.querySelectorAll('tr').forEach(function (row)
-                        {
-                            $insertPercentageCell(row.querySelectorAll('td')[1], toFloat(boxBalance.querySelector('.em span').innerText));
-                        });
-                    }
-                    
-                    if (boxAmount .querySelector('.em span'))
-                    {
-                        boxAmount .querySelectorAll('tr').forEach(function (row)
-                        {
-                            $insertPercentageCell(row.querySelectorAll('td')[1], toFloat(boxAmount .querySelector('.em span').innerText));
-                        });
-                    }
-                    
-                    if (boxNumber .querySelector('.em span'))
-                    {
-                        boxNumber .querySelectorAll('tr').forEach(function (row)
-                        {
-                            $insertPercentageCell(row.querySelectorAll('td')[1], toFloat(boxNumber .querySelector('.em span').innerText));
-                        });
-                    }
-                }
-                
-                callbacks.push($runShowPercentages); $runShowPercentages();
             }
             
             /*
