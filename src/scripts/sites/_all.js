@@ -37,7 +37,11 @@ function isLoanPage (pathname)
         moduleFuture = import('./overview');
     }
     
-    moduleFuture
-        .then(module => module.handle())
-        .catch(console.warn);
+    
+    if (moduleFuture !== undefined)
+    {
+        moduleFuture
+            .then(module => module.handle())
+            .catch(console.warn);
+    }
 })()

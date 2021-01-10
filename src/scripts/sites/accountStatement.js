@@ -112,6 +112,7 @@ async function handle ()
         
         runtime(settings);
     
+        if(false) // this feature breaks the page due to page changes
     if (settings.AccountOverviewShowAllTimeButton)
     {
         extendQuickFilters(u('#quickfilters').first())
