@@ -15,9 +15,17 @@ import {
     reportNodesAvailable,
     toFloat
 } from '../common/util';
-import u from 'umbrellajs';
-import {enhanceOverviewCards} from "../components/overview/cards";
+import {
+    enhanceCardsDom,
+    enhanceCardsModel,
+    grayOutVisitedNews,
+    renderCardsModel,
+    updateCardsModel
+} from "../components/overview";
 
+const model = {
+    cards : [],
+}
 
 export async function handle ()
 {
@@ -40,82 +48,46 @@ export async function handle ()
     
     try
     {
-        const {grid} = await onNodesAvailable({
-            grid    : '.m-o-grid',
+        const {
+                  blog,
+                  grid
+              } = await onNodesAvailable({
+            blog : 'div.blog',
+            grid : '.m-o-grid',
             _values : 'div.mw-overview-card span:nth-child(2)',
             _totals : '.mw-overview-card__aggregate--total span:nth-child(2)',
         })
-        const cards = u(grid).children();
-        updatePage(settings, cards);
-        
-        DomMonitorAggressive(grid, () => updatePage(settings, cards))
+    
+        enhanceDom(settings, {blog, grid});
+    
+        updatePage(settings, grid);
+    
+        DomMonitorAggressive(grid, () => updatePage(settings, grid))
     } catch (x)
     {
         console.error(x);
     }
 }
 
-const updatePage = (settings, cards) =>
+/**
+ * Apply initial changes to DOM, without monitoring for live page updates
+ */
+function enhanceDom (settings, nodes)
 {
-    if (settings.OverviewHideEmptyRows)
-    {
-        try
-        {
-            hideZeroEntries(cards);
-        } catch (e)
-        {
-            console.error('hideZeroEntries', e);
-        }
-    }
     if (settings.OverviewGrayOutVisitedNews)
     {
-        try
-        {
-            grayOutVisitedNews(document);
-        } catch (e)
-        {
-            console.error('grayOutVisitedNews', e);
-        }
+        grayOutVisitedNews(nodes.blog);
     }
     
-    enhanceOverviewCards(u('div.m-o-grid').first(), settings);
+    enhanceCardsDom(settings, nodes.grid);
 }
 
-/*
- *  This goes through all of the four boxes, on the overview page, including
- *  the initially hidden one. It then iterate through all rows, in the boxes
- *  and picks the value column. If this value when cast to a float is zero,
- *  the display style of none is added to hide that row
- */
-function hideZeroEntries (cards)
+function updatePage (settings, grid)
 {
-    function hideZeroEntry (entry)
-    {
-        const value = toFloat(entry.children().nodes[1].textContent);
-        if (value == .0)
-        {
-            entry.addClass('invext-hidden');
-        }
-        else
-        {
-            entry.removeClass('invext-hidden');
-        }
-    }
-    
-    cards
-        .find('.mw-overview-card__aggregate')
-        .each(elem => hideZeroEntry(u(elem)));
-}
-
-/*
- *  This feature adds a new css class to blog links.
- *  After you visit an article link, it will be greyed out.
- */
-function grayOutVisitedNews (root)
-{
-    u('div a:not([href="https://www.mintos.com/blog/"])', u('.blog', root).first())
-        .each(child => u(child)
-            .addClass('invext-blog-entry'))
+    updateCardsModel(grid, model.cards);
+    enhanceCardsModel(model);
+    // console.debug(model);
+    renderCardsModel(settings, model.cards, grid);
 }
 
 // all code below is deprecated, doesn't work and is kept for reference only

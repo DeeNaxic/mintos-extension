@@ -9,7 +9,7 @@
 :root {
     --invext-mintos-green: #78c8c7;
     --invext-mintos-red: #ed4300;
-    --invext-montos-grey: #888;
+    --invext-mintos-grey: #888;
 }
 
 div.invext-chart-container {
@@ -39,7 +39,7 @@ td.invext-details-warning {
     color: var(--invext-mintos-red) !important;
 }
 
-.blog a:visited.invext-blog-entry
+.invext-blog a:not([href="https://www.mintos.com/blog/"]):visited
 {
-    color: var(--invext-montos-grey);
+    color: var(--invext-mintos-grey);
 }
