@@ -43,3 +43,7 @@ td.invext-details-warning {
 {
     color: var(--invext-mintos-grey);
 }
+
+.invext-warning-negative {
+    color: var(--invext-mintos-red);
+}

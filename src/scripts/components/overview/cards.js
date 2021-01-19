@@ -8,8 +8,10 @@
 import u from 'umbrellajs';
 import {toFloat} from "../../common/util";
 
-const percentClass = 'invext-percent';
-const entryClass = 'invext-entry';
+const classPercent = 'invext-percent';
+const classEntry = 'invext-entry';
+const classNegative = 'invext-warning-negative';
+const classHidden = 'invext-hidden';
 
 /**
  * make sure the cards' rows are turned to CSS grids and there is a percentage column
@@ -33,11 +35,11 @@ function createStyleElem (settings)
     const styleElem = u('<style id="invext-overview-style">');
     styleElem.first().type = 'text/css';
     styleElem.html(`
-        .${entryClass} {
+        .${classEntry} {
             grid-template-columns: ${gridColumns};
         }
         
-        .${percentClass} {
+        .${classPercent} {
             text-align: right;
             display: ${percentDisplay};
         }
@@ -49,9 +51,9 @@ function enhanceEntryDom (entryElem)
 {
     // use the inline style to override specific selector in mintos css
     entryElem.style.display = 'grid';
-    entryElem.classList.add(entryClass);
+    entryElem.classList.add(classEntry);
     
-    entryElem.insertAdjacentHTML("beforeend", `<span class="${percentClass}">0%</span>`);
+    entryElem.insertAdjacentHTML("beforeend", `<span class="${classPercent}">0%</span>`);
 }
 
 export function updateCardsModel (root, model)
@@ -65,7 +67,7 @@ function createCardModel (card)
     const total = toFloat(u('.mw-overview-card__aggregate--total span:nth-of-type(2)', card).text());
     const entries = u('.mw-overview-card__aggregate', card).nodes.map(item =>
     {
-        return {value : toFloat(u(item).children('span:nth-child(2), a:first-of-type').text())}
+        return {value : toFloat(getEntryValueElem(item).text())}
     });
     
     return {
@@ -91,11 +93,11 @@ export function renderCardsModel (settings, model, grid)
     {
         const cardModel = model[index];
         u('.mw-overview-card__aggregate', card)
-            .each((entry, eindex) => updateEntryDom(settings, cardModel.entries[eindex], entry))
+            .each((entry, eindex) => updateEntryDom(settings, cardModel.entries[eindex], u(entry), index))
     });
 }
 
-function updateEntryDom (settings, model, entry)
+function updateEntryDom (settings, model, entry, cardIdx)
 {
     renderPercentValue(model, entry);
     
@@ -103,23 +105,45 @@ function updateEntryDom (settings, model, entry)
     {
         hideEntry(model, entry);
     }
+    
+    if (cardIdx === 1 && settings.OverviewHighlightNegativeNumbers)
+    {
+        highlightNegative(model, entry);
+    }
 }
 
 function renderPercentValue (model, entry)
 {
     const display = Number.isNaN(model.fraction) ? '-' : ((model.fraction * 100.0).toFixed(2) + '%');
-    u(`.${percentClass}`, entry).text(display);
+    u(`.${classPercent}`, entry.first()).text(display);
 }
 
 function hideEntry (model, entry)
 {
     if (model.value === .0)
     {
-        entry.addClass('invext-hidden');
+        entry.addClass(classHidden);
     }
     else
     {
-        entry.removeClass('invext-hidden');
+        entry.removeClass(classHidden);
+    }
+}
+
+/**
+ * This will apply color red to any number which is below zero.
+ * Note that it only checks the box returns rows
+ */
+function highlightNegative (model, entry)
+{
+    const elem = getEntryValueElem(entry);
+    if (model.value < .0)
+    {
+        elem.addClass(classNegative);
+    }
+    else
+    {
+        elem.removeClass(classNegative);
     }
 }
 
@@ -132,4 +156,9 @@ function forEachOverviewBlock (root, callback)
     callback(cards.nodes[0], 0);
     callback(cards.nodes[1], 1);
     u('.m-u-d-block', cards.nodes[2]).each((node, index) => callback(node, index + 2));
+}
+
+function getEntryValueElem (item)
+{
+    return u(item).children('span:nth-child(2), a:first-of-type');
 }
