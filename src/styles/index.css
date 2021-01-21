@@ -39,7 +39,7 @@ td.invext-details-warning {
     color: var(--invext-mintos-red) !important;
 }
 
-.invext-blog a:not([href="https://www.mintos.com/blog/"]):visited
+.invext-blog a:not([href^="https://www.mintos.com/blog/"]):visited
 {
     color: var(--invext-mintos-grey);
 }
