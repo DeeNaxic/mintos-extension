@@ -21,6 +21,7 @@ export const translations = {
     'Percent'         : 'Prozent',
     'Rating'          : 'Bewertung',
     'ReferenceId'     : 'Belegnr.',
+    'SwitchMetric'    : 'Veränderung',
     'TimeInGrace'     : 'Zeit in Schonfrist',
     'TransactionId'   : 'Transaktions-Nr.',
     'TransactionType' : 'Geschäftsvorgang',

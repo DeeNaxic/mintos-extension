@@ -5,13 +5,20 @@
  *  @licence >> GNU GPLv3
  */
 
-import {enhanceCardsModel, enhanceCardsDom, renderCardsModel, updateCardsModel} from "./cards";
+import {
+    enhanceCardsModel,
+    enhanceCardsDom,
+    renderCardsModel,
+    showSwitchMetricButton,
+    updateCardsModel,
+} from "./cards";
 import {grayOutVisitedNews} from "./news";
 
 export {
-    enhanceCardsModel,
     enhanceCardsDom,
+    enhanceCardsModel,
     grayOutVisitedNews,
-    updateCardsModel,
     renderCardsModel,
+    showSwitchMetricButton,
+    updateCardsModel,
 };

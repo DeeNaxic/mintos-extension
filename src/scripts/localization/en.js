@@ -21,6 +21,7 @@ export const translations = {
     'Percent'         : 'Percent',
     'Rating'          : 'Rating',
     'ReferenceId'     : 'Reference ID',
+    'SwitchMetric'    : 'Switch Metric',
     'TimeInGrace'     : 'Time in grace',
     'TransactionId'   : 'Transaction ID',
     'TransactionType' : 'Transaction Type',

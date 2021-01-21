@@ -21,6 +21,7 @@ export const translations = {
     'Percent'         : 'Procent',
     'Rating'          : 'Rating',
     'ReferenceId'     : 'ID zdrojové trans.',
+    'SwitchMetric'    : 'Přepnout částky/počty',
     'TimeInGrace'     : 'Celkem dní v povoleném odkladu',
     'TransactionId'   : 'ID transakce',
     'TransactionType' : 'Typ platby',

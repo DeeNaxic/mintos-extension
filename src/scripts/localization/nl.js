@@ -6,6 +6,7 @@
  */
 
 export const translations = {
+    'SwitchMetric'    : 'Switch Metric',
     
     // patterns used to extract data from page
     

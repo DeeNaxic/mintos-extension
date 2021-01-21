@@ -20,6 +20,7 @@ import {
     enhanceCardsModel,
     grayOutVisitedNews,
     renderCardsModel,
+    showSwitchMetricButton,
     updateCardsModel
 } from "../components/overview";
 
@@ -70,13 +71,18 @@ export async function handle ()
 }
 
 /**
- * Apply initial changes to DOM, without monitoring for live page updates
+ * Apply initial changes to DOM that don't need monitoring for live page updates
  */
 function enhanceDom (settings, nodes)
 {
     if (settings.OverviewGrayOutVisitedNews)
     {
         grayOutVisitedNews(nodes.blog);
+    }
+    
+    if (settings.OverviewShowButtonInstead)
+    {
+        showSwitchMetricButton(nodes.grid);
     }
     
     enhanceCardsDom(settings, nodes.grid);
@@ -129,62 +135,6 @@ chrome.storage.sync.get
                 return setTimeout(runtime, 100, settings);
             }
             
-            /*
-             *  This is a purely cosmetic change, which doesn't do anything. It replaces
-             *  the two raido button, for switching between displayed loans, to the type
-             *  of button used in the other two columns. It just hides the original ones
-             *  and then registers an event listener, on the new button, whitch switches
-             *  between clicking on either of the radio buttons in a very cruede fashion
-             */
-            if (settings.OverviewShowButtonInstead)
-            {
-                document.querySelectorAll('.radios label')[0].style.display = 'none';
-                document.querySelectorAll('.radios label')[1].style.display = 'none';
-                
-                var nodeOuter = document.createElement('div');
-                    nodeOuter.classList.add('btn-container');
-                    nodeOuter.classList.add('mod-pb');
-                    
-                var nodeInner = document.createElement('a');
-                    nodeInner.classList.add('btn');
-                    nodeInner.classList.add('btn-primary');
-                    nodeInner.innerText = localization('Switch');
-                    
-                    nodeOuter.appendChild(nodeInner);
-                    nodeInner.addEventListener('click', function ()
-                    {
-                        document.querySelector('.radios').querySelectorAll('label')[toggle == 1 ? (toggle = 0) : (toggle = 1)].click();
-                    });
-                    
-                document.querySelector('.radios').appendChild(nodeOuter);
-            }
-            
-            /*
-             *  This will add an inline style, of color red to any number which is below
-             *  zero. It does this by iterating all rows, in the returns box, and taking
-             *  the second cell in each of them, which is the value that hold the number
-             *  and then checks the value. Note that it only checks the box returns rows
-             */
-            if (settings.OverviewHighlightNegativeNumbers)
-            {
-                function $runHighlightNegativeNumbers ()
-                {
-                    boxReturns.querySelectorAll('tr').forEach(function (row)
-                    {
-                        if (toFloat(row.lastChild.innerText) < 0.00)
-                        {
-                            row.lastChild.style.color = 'red';
-                        }
-                        else
-                        {
-                            row.lastChild.style.color = '#555';
-                        }
-                    });
-                }
-                
-                callbacks.push($runHighlightNegativeNumbers); $runHighlightNegativeNumbers();
-            }
-
             /*
              *  Experimental
              */
@@ -267,16 +217,6 @@ chrome.storage.sync.get
         {
             var translations =
             {
-                'Switch' :
-                {
-                    'en' : 'Switch Metric',
-                    'de' : 'Veränderung',
-                    'pl' : 'Zmiana',
-                    'cs' : 'Přepnout částky/počty',
-                    'es' : '?',
-                    'lv' : '?',
-                    'ru' : '?'
-                },
                 '$CampaignText' :
                 {
                     'en' : 'Campaign Rewards',

@@ -21,6 +21,7 @@ export const translations = {
     'Percent'         : 'Procent',
     'Rating'          : 'Ocena',
     'ReferenceId'     : 'ID ref. trans.',
+    'SwitchMetric'    : 'Przełącz Widok',
     'TimeInGrace'     : 'Całkowity czas karencji',
     'TransactionId'   : 'Id. transakcji',
     'TransactionType' : 'Typ transakcji',

@@ -5,7 +5,9 @@
  *  @licence >> GNU GPLv3
  */
 
+import {html, render} from "lit-html";
 import u from 'umbrellajs';
+import {localization} from "../../localization";
 import {toFloat} from "../../common/util";
 
 const classPercent = 'invext-percent';
@@ -161,4 +163,37 @@ function forEachOverviewBlock (root, callback)
 function getEntryValueElem (item)
 {
     return u(item).children('span:nth-child(2), a:first-of-type');
+}
+
+/*
+ *  This is a purely cosmetic change, which doesn't do anything. It replaces
+ *  the two radio button, for switching between displayed loans, to the type
+ *  of button used in the other two columns. It just hides the original ones
+ *  and then registers an event listener, on the new button, witch switches
+ *  between clicking on either of the radio buttons.
+ */
+export function showSwitchMetricButton (root)
+{
+    const parent = u('.investment-card__radios', root);
+    parent.removeClass('m-u-margin-bottom--lg-4','m-u-margin-top-none');
+    
+    const radios = u('.investment-card__radios .m-form-radio', root);
+    radios.addClass(classHidden);
+    
+    
+    let toggle = 0;
+    
+    function switchMetric ()
+    {
+        u('input', parent.first()).nodes[toggle = (toggle + 1) % 2].click();
+    }
+    
+    const target = u('<div/>').first();
+    render(html`<a class="m-btn m-btn--block m-btn--no-min-width" @click=${switchMetric}>
+        <span class="m-btn__text m-u-fs-5 m-u-ta-center m-u-color-2--text" data-v-33540b76="">
+            ${localization('SwitchMetric')}
+        </span>
+    </a>`, target);
+    
+    parent.first().insertAdjacentElement('beforeend', target.children[0]);
 }
