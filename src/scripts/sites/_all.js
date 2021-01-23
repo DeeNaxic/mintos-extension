@@ -7,13 +7,11 @@
 
 import '../common/polyfills'
 import {localization} from '../localization/';
+import {debug} from "../common/util";
 
 const pathname = document.location.pathname;
 
-if (process.env.NODE_ENV !== 'production')
-{
-    console.info(`this page: ${pathname}`);
-}
+debug('this page:', pathname);
 
 function isLoanPage (pathname)
 {

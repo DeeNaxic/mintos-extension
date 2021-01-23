@@ -146,13 +146,16 @@ export const DomMonitorAggressive = (function ()
 
 function queryAllSelectors (selectors, from)
 {
-    const result = {};
+    const result = {
+        success : true,
+        nodes   : {},
+    };
     for (const [name, selector] of Object.entries(selectors))
     {
         const node = from.querySelector(selector);
         if (!node)
-            return null;
-        result[name] = node;
+            result.success = false;
+        result.nodes[name] = node;
     }
     return result;
 }
@@ -176,21 +179,21 @@ export function onNodesAvailable (selectors, from = undefined, timeout = 30000)
     let resolved = false;
     return new Promise((resolve, reject) =>
     {
-        const nodes = queryAllSelectors(selectors, from);
-        if (nodes)
+        const result = queryAllSelectors(selectors, from);
+        if (result.success)
         {
-            resolve(nodes);
+            resolve(result.nodes);
             return;
         }
         
         const mo = new MutationObserver(function (_)
         {
-            const nodes = queryAllSelectors(selectors, from);
-            if (nodes)
+            const result = queryAllSelectors(selectors, from);
+            if (result.success)
             {
                 resolved = true;
                 mo.disconnect();
-                resolve(nodes);
+                resolve(result.nodes);
             }
         });
         
@@ -207,6 +210,7 @@ export function onNodesAvailable (selectors, from = undefined, timeout = 30000)
             if (!resolved)
             {
                 mo.disconnect();
+                debug('Resolver result:', result);
                 reject(new Error(`Selectors didn't resolve within timeout of ${new Date() - start}ms`));
             }
         }
@@ -235,7 +239,7 @@ function doReportNodesAvailable (selectors)
 {
     let selectorMap = querySelectors(selectors);
     let stage = 0;
-    console.info(`stage ${stage}`, selectorMap);
+    debug(`stage ${stage}`, selectorMap);
     
     const observer = new MutationObserver(mutationHandler);
     
@@ -277,5 +281,14 @@ function doReportNodesAvailable (selectors)
  */
 export const reportNodesAvailable =
     process.env.NODE_ENV === 'production'
-        ? () => {}
+        ? noop
         : doReportNodesAvailable;
+
+function noop ()
+{
+}
+
+export const debug =
+     process.env.NODE_ENV === 'production'
+         ? noop
+         : console.debug;
