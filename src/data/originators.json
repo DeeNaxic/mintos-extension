@@ -3,10 +3,7 @@
         "_" : 41
     },
     "acema"              : {
-        "_" : 66
-    },
-    "aforti"             : {
-        "_" : -100
+        "_" : 59
     },
     "agrocredit"         : {
         "_" : 47
@@ -14,41 +11,26 @@
     "akulaku"            : {
         "_" : 57
     },
-    "alexcredit"         : {
-        "_" : 41
-    },
     "alfakredyt"         : {
-        "_" : 31
-    },
-    "bb finance group"   : {
-        "_" : 54
-    },
-    "capital service"    : {
-        "_" : 39
+        "_" : 24
     },
     "capitalia"          : {
         "_" : 36
     },
     "cashcredit"         : {
-        "_" : 53
-    },
-    "cashwagon"          : {
-        "_" : 42
+        "_" : 56
     },
     "creamfinance"       : {
-        "_" : 63
-    },
-    "credilikeme"        : {
-        "_" : 18
+        "_" : 61
     },
     "credissimo"         : {
         "_" : 68
     },
     "creditstar"         : {
-        "_" : 74
+        "_" : 72
     },
     "creditter"          : {
-        "_" : 22
+        "_" : 33
     },
     "credius"            : {
         "_" : 68
@@ -57,19 +39,19 @@
         "_" : 24
     },
     "debifo"             : {
-        "_" : 32
+        "_" : 22
     },
     "delfingroup"        : {
         "_" : 77
     },
     "dineo credito"      : {
-        "_" : 60
+        "_" : 57
     },
     "dinerito"           : {
-        "_" : 53
+        "_" : 49
     },
     "dozarplati"         : {
-        "_" : 45
+        "_" : 56
     },
     "dziesiatka finanse" : {
         "_" : 52
@@ -78,53 +60,48 @@
         "_" : 20
     },
     "ecofinance"         : {
-        "_" : 40
+        "_" : 34
     },
     "esto"               : {
         "_" : 62
     },
     "everest finanse"    : {
-        "_" : 53
+        "_" : 58
     },
     "evergreen"          : {
-        "_" : 51
+        "_" : 46
     },
     "expresscredit"      : {
         "_" : 22
     },
     "extra finance"      : {
-        "_" : 52
+        "_" : 47
+    },
+    "finclusion"         : {
+        "_" : 39
     },
     "finitera"           : {
         "Albania"   : 23,
-        "Macedonia" : 13
+        "Macedonia" : 31
     },
     "finko"              : {
-        "Georgia" : 14,
-        "Moldova" : 53,
-        "Ukraine" : 39
+        "_" : 16
     },
     "fireof"             : {
-        "_" : 43
-    },
-    "getbucks"           : {
-        "_" : 15
+        "_" : 29
     },
     "gfm"                : {
-        "_" : 43
+        "_" : 46
     },
     "hipocredit"         : {
         "_" : 41
     },
     "id finance"         : {
-        "Spain"  : 54,
-        "Mexico" : 8
+        "Spain"  : 52,
+        "Mexico" : 16
     },
     "idf eurasia"        : {
-        "_" : 63
-    },
-    "itf group"          : {
-        "_" : 50
+        "_" : 46
     },
     "iutecredit"         : {
         "_" : 77
@@ -133,58 +110,46 @@
         "_" : 47
     },
     "kredit pintar"      : {
-        "_" : 62
+        "_" : 57
     },
     "kredit24"           : {
         "_" : 34
     },
     "kviku"              : {
-        "_" : 44
-    },
-    "lf tech"            : {
-        "_" : 55
+        "_" : 53
     },
     "lime zaim"          : {
-        "_" : 56
+        "_" : 47
     },
     "mikro kapital"      : {
-        "Russia"  : 45,
-        "Romania" : 53,
-        "Belarus" : 63,
-        "Moldova" : 62
+        "Russia"  : 53,
+        "Romania" : 43,
+        "Belarus" : 54,
+        "Moldova" : 54
     },
     "mogo"               : {
-        "_" : 76
+        "_" : 53
     },
     "moneda"             : {
         "_" : 20
     },
-    "monego"             : {
-        "_" : 34
-    },
     "mozipo group"       : {
-        "_" : 31
-    },
-    "mwananchi"          : {
-        "_" : 54
+        "_" : 24
     },
     "novaloans"          : {
         "_" : 51
     },
-    "peachy"             : {
-        "_" : 22
-    },
     "pinjam yuk"         : {
-        "_" : 41
+        "_" : 32
     },
     "placet group"       : {
-        "_" : 74
+        "_" : 79
+    },
+    "podemos progresar"  : {
+        "_" : 47
     },
     "rapicredit"         : {
-        "_" : 45
-    },
-    "rapido finance"     : {
-        "_" : -99
+        "_" : 38
     },
     "revo technology"    : {
         "_" : 59
@@ -193,27 +158,27 @@
         "_" : 38
     },
     "stik credit"        : {
-        "_" : 48
+        "_" : 51
     },
     "sun finance"        : {
-        "Denmark"    : 30,
-        "Poland"     : 22,
+        "Denmark"    : 46,
+        "Poland"     : 41,
         "Kazakhstan" : 13,
-        "Latvia"     : 28,
-        "Mexico"     : 12,
+        "Latvia"     : 55,
+        "Mexico"     : 9,
         "Vietnam"    : 7
     },
     "swiss capital kz"   : {
         "_" : 37
     },
     "tascredit"          : {
-        "_" : 45
+        "_" : 53
     },
     "watu credit"        : {
-        "_" : 61
+        "_" : 65
     },
     "wowwo"              : {
-        "_" : 70
+        "_" : 72
     },
     "zenka"              : {
         "_" : 46

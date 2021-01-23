@@ -14,7 +14,7 @@ async function update ()
     {
         input.push({
             originator : $('td:nth-of-type(1)', this).data('original-value'),
-            rating     : $('td:nth-of-type(7)', this).data('original-value'),
+            rating     : $('td:nth-of-type(8)', this).data('original-value'),
         })
     });
     
@@ -139,6 +139,7 @@ const originatorNames = {
     'e-cash'             : 'e cash',
     'stikcredit'         : 'stik credit',
     'swiss capital'      : 'swiss capital kz',
+    'finko (kiva)'       : 'finko',
 };
 
 function fixOriginator (entry)
