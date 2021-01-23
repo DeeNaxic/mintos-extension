@@ -6,44 +6,52 @@
  */
 
 import {html, render} from "lit-html";
-import {localization} from "../localization";
+import {localization} from "../../localization";
 import u from 'umbrellajs';
-
-const ratingCodes = ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D'];
 
 export function renderRatings (model, node)
 {
-    function mintosRating (ratingStr)
-    {
-        const num = ratingCodes.indexOf(ratingStr) + 1;
-        return rating(num, ratingStr);
-    }
+    // We'll find this node a new parent
+    const mintosRating = u('.score-wrapper', node).first();
     
     function exploreP2PRating (ratingNum)
     {
-        const str = !Number.isNaN(ratingNum) ? `${ratingNum} / 100` : null;
-        return rating(10 - Math.ceil(ratingNum / 10) + 1, str);
+        if (ratingNum)
+        {
+            return rating(Math.ceil(ratingNum / 10), ratingNum);
+        }
+        else
+        {
+            return rating(1, '-');
+        }
     }
     
     function rating (ratingNum, ratingStr)
     {
-        if (Number.isNaN(ratingNum) || ratingNum === -1)
-            return '-';
-        else
-            return html`<span class="lo-rating lo-rating-${ratingNum}">${ratingStr}</span>`;
+        return html`
+<div class="score-wrapper m-u-d-flex m-u-w-fc mw-u-height-24 mw-u-o-hidden mw-u-br-4">
+    <div
+        id="invext-explorep2p-rating"
+        class="score-value m-u-w-full m-u-fs-6 m-u-jc-center mw-u-va-center m-u-padding-x-3 mw-u-width-40 mintos-score-color-${ratingNum}"
+        >
+        ${ratingStr}
+    </div>
+</div>`
     }
-    
-    u('span.lo-rating', node).remove();
     
     render(html`<div id="invext-lo-ratings" class=${node.classList}>
     ${[...node.children]}
-    ${createOriginatorRow("Mintos' " + localization('Rating'), mintosRating(model.mintosRating))}
+    ${createOriginatorRow("Mintos " + localization('Rating'), mintosRating)}
     ${createOriginatorRow(html`
-ExploreP2P's <a href="https://explorep2p.com/mintos-lender-ratings/" target="_blank">
-${localization('Rating')}
-</a>`, exploreP2PRating(model.explorep2pRating))}
-</div>                    
+        <a href="https://explorep2p.com/mintos-lender-ratings/"
+            target="_blank">ExploreP2P</a>'s ${localization('Rating')}`,
+        exploreP2PRating(model.explorep2pRating || 0))}
+</div>
 `, node);
+    
+    // need data attribute for CSS to apply to our elements
+    Object.assign(u('#invext-explorep2p-rating').first().dataset, mintosRating.dataset)
+    
     return node;
 }
 

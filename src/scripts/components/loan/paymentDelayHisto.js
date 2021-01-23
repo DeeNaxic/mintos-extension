@@ -1,5 +1,5 @@
 import {html, render} from 'lit-html';
-import chart from './chart';
+import chart from '../chart';
 
 const chartOptions = {
     animation                   : {

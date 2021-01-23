@@ -6,7 +6,7 @@
  */
 
 import {html, render} from "lit-html";
-import {localization} from "../localization";
+import {localization} from "../../localization";
 
 export function loanInvBreakdownLegend (model, node)
 {

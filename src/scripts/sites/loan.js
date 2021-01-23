@@ -15,10 +15,12 @@ import {
     toDays,
     toFloat,
 } from '../common/util';
-import {loanInvBreakdownLegend} from "../components/loanInvBreakdownLegend";
-import {renderRatings} from "../components/loanLoRatings";
-import {renderExtraDetails} from "../components/loanDetails";
-import {latePaymentHistogramChart} from "../components/paymentDelayHisto";
+import {
+    latePaymentHistogramChart,
+    loanInvBreakdownLegend,
+    renderExtraDetails,
+    renderRatings,
+} from "../components/loan";
 import {localization} from "../localization";
 import u from 'umbrellajs';
 
