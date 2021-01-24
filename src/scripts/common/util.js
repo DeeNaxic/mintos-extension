@@ -292,3 +292,5 @@ export const debug =
      process.env.NODE_ENV === 'production'
          ? noop
          : console.debug;
+
+export const mintosDateFormat = 'DD.MM.YYYY';

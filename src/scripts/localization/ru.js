@@ -6,6 +6,7 @@
  */
 
 export const translations = {
+    'DaysToNext'      : 'Days To Next Payment',
     'SwitchMetric'    : 'Switch Metric',
     
     // patterns used to extract data from page
@@ -16,10 +17,12 @@ export const translations = {
     '$Finished'            : 'Погашен',
     '$FinishedPrematurely' : 'Преждевременно закончено',
     '$Late'                : 'Задерживается',
+    '$NextPayment'         : 'Дата следующего платежа',
     '$Occupation'          : 'Occupation',
     '$Paid'                : 'Выплачено',
     '$PartiallyPaid'       : 'Частично оплачено',
     '$PaymentDate'         : 'Число',
     '$Scheduled'           : 'Запланировано',
+    '$Term'                : 'Срок',
     '$TransactionDetails'  : /.?/,                       // TODO translate
 };

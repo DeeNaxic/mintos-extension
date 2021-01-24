@@ -7,9 +7,13 @@
 
 /* Mintos colors */
 :root {
+    --invext-mintos-red-coords: 237, 67, 0;
+
     --invext-mintos-green: #78c8c7;
-    --invext-mintos-red: #ed4300;
+    --invext-mintos-red: rgb(var(--invext-mintos-red-coords));
     --invext-mintos-grey: #888;
+
+    --invext-mintos-red-background: rgb(var(--invext-mintos-red-coords), .3);
 }
 
 div.invext-chart-container {
@@ -39,11 +43,14 @@ td.invext-details-warning {
     color: var(--invext-mintos-red) !important;
 }
 
-.invext-blog a:visited
-{
+.invext-blog a:visited {
     color: var(--invext-mintos-grey);
 }
 
 .invext-warning-negative {
     color: var(--invext-mintos-red);
+}
+
+.invext-highlight-late {
+    background-color: var(--invext-mintos-red-background);
 }

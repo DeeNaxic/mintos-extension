@@ -7,11 +7,12 @@
 
 export const translations = {
     'Age'             : 'Vysoký věk',
-    'all-time'         : 'Kompletní historie',
+    'all-time'        : 'Kompletní historie',
     'Amount'          : 'Částka',
     'Country'         : 'Stát',
     'Days'            : 'dní',
     'DaysLate'        : 'dní v prodlení',
+    'DaysToNext'      : 'Dní do další splátky',
     'LoanId'          : 'ID půjčky',
     'Name'            : 'Podíly investorů',
     'NextPayment'     : 'Další splátka',
@@ -37,11 +38,13 @@ export const translations = {
     '$Finished'            : 'Ukončené',
     '$FinishedPrematurely' : 'Předčasně ukončeno',
     '$Late'                : 'Late',
+    '$NextPayment'         : 'Datum  další splátky',
     '$Occupation'          : 'Zaměstnání',
     '$Paid'                : 'Paid',
     '$PartiallyPaid'       : 'Částečně zaplaceno',
     '$PathOverview'        : 'prehled-uctu',
     '$PaymentDate'         : 'Datum platby',
     '$Scheduled'           : 'Naplánované',
+    '$Term'                : 'Doba splácení',
     '$TransactionDetails'  : /[-–] (\D+)(?: (-?\d+).)?$/u,
 };

@@ -30,6 +30,10 @@ function isLoanPage (pathname)
     {
         moduleFuture = import('./loan');
     }
+    else if (/^\/webapp\/..\/[\w\-]+\/current-investments/.test(pathname))
+    {
+        moduleFuture = import('./investmentsCurrent');
+    }
     else if (pathname.includes(localization('$PathOverview')))
     {
         moduleFuture = import('./overview');

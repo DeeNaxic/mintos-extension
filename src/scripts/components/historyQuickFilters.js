@@ -2,6 +2,7 @@ import u from 'umbrellajs'
 import {localization} from "../localization";
 import {html, render} from "lit-html";
 import moment from "moment";
+import {mintosDateFormat} from "../common/util";
 
 const KEY_ALL_TIME = 'all-time';
 
@@ -132,8 +133,8 @@ function onClick (event)
     }
     
     const dates = filterDates[elem.data('value')];
-    u('#period-from').first().value = dates[0].format('DD.MM.YYYY');
-    u('#period-to').first().value = dates[1].format('DD.MM.YYYY');
+    u('#period-from').first().value = dates[0].format(mintosDateFormat);
+    u('#period-to').first().value = dates[1].format(mintosDateFormat);
     u('#filter-button').trigger('click');
 }
 

@@ -7,11 +7,12 @@
 
 export const translations = {
     'Age'             : 'Wysoki wiek',
-    'all-time'         : 'Od początku',
+    'all-time'        : 'Od początku',
     'Amount'          : 'Ilość',
     'Country'         : 'Kraj',
     'Days'            : 'dni',
     'DaysLate'        : 'Spóźnione dni',
+    'DaysToNext'      : 'Dni do następnej płatności',
     'LoanId'          : 'Id. pożyczki',
     'Name'            : 'Imię',
     'NextPayment'     : 'Następna opłata',
@@ -37,11 +38,13 @@ export const translations = {
     '$Finished'            : 'Zakończony',
     '$FinishedPrematurely' : 'Status Zokończona przed czasem',
     '$Late'                : 'Opóźnienie',
+    '$NextPayment'         : 'Data następnej płatności',
     '$Occupation'          : 'Zawód',
     '$Paid'                : 'Zapłacono',
     '$PartiallyPaid'       : 'Częściowo zapłacone',
     '$PathOverview'        : 'przeglad',
     '$PaymentDate'         : 'Data płatności',
     '$Scheduled'           : 'Zaplanowano',
+    '$Term'                : 'Okres',
     '$TransactionDetails'  : /[-–] (\D+)(?: (-?\d+).)?$/u,
 };

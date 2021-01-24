@@ -69,19 +69,6 @@
         {
             "matches"   :
             [
-                "https://www.mintos.com/en/my-investments/current-investments/*",
-                "https://www.mintos.com/de/meine-investitionen/current-investments-de/*",
-                "https://www.mintos.com/pl/moje-inwestycje/current-investments-pl/*",
-                "https://www.mintos.com/cs/moje-investice/current-investments-cs/*"
-            ],
-            "js"        :
-            [
-                "scripts/sites/investmentsCurrent.js"
-            ]
-        },
-        {
-            "matches"   :
-            [
                 "https://www.mintos.com/en/invest-en/auto-invest/*",
                 "https://www.mintos.com/de/investieren-de/auto-invest-de/*",
                 "https://www.mintos.com/pl/inwestuj-pl/auto-invest-pl/*",
