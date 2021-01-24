@@ -1,4 +1,4 @@
-import {localization} from '../localization/index.js';
+import {localization} from '../common/localization/index.js';
 
 export function parseTransactionDetails (text, lang = null)
 {

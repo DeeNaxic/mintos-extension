@@ -8,7 +8,7 @@
 import {assert, chrome, DomMonitorAggressive, reportNodesAvailable} from '../common/util';
 import {extendQuickFilters} from "../components/historyQuickFilters";
 import u from 'umbrellajs';
-import {localization} from "../localization";
+import {localization} from "../common/localization";
 import {parseTransactionDetails} from "../components/accountHistoryDetails";
 
 (async function ()

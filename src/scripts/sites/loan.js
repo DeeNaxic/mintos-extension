@@ -21,7 +21,7 @@ import {
     renderExtraDetails,
     renderRatings,
 } from "../components/loan";
-import {localization} from "../localization";
+import {localization} from "../common/localization";
 import u from 'umbrellajs';
 
 export async function handle ()

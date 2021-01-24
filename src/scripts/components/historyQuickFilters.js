@@ -1,5 +1,5 @@
 import u from 'umbrellajs'
-import {localization} from "../localization";
+import {localization} from "../common/localization";
 import {html, render} from "lit-html";
 import moment from "moment";
 import {mintosDateFormat} from "../common/util";

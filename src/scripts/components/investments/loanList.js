@@ -1,4 +1,4 @@
-import {localization} from "../../localization";
+import {localization} from "../../common/localization";
 import u from 'umbrellajs';
 import {html, render} from "lit-html";
 

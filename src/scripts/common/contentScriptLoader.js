@@ -5,9 +5,9 @@
  *  @licence >> GNU GPLv3
  */
 
-import '../common/polyfills'
-import {localization} from '../localization/';
-import {debug} from "../common/util";
+import './polyfills'
+import {localization} from './localization';
+import {debug} from "./util";
 
 const pathname = document.location.pathname;
 
@@ -28,15 +28,15 @@ function isLoanPage (pathname)
     let moduleFuture;
     if (isLoanPage(pathname))
     {
-        moduleFuture = import('./loan');
+        moduleFuture = import('../sites/loan');
     }
     else if (/^\/webapp\/..\/[\w\-]+\/current-investments/.test(pathname))
     {
-        moduleFuture = import('./investmentsCurrent');
+        moduleFuture = import('../sites/investmentsCurrent');
     }
     else if (pathname.includes(localization('$PathOverview')))
     {
-        moduleFuture = import('./overview');
+        moduleFuture = import('../sites/overview');
     }
     
     

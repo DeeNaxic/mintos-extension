@@ -45,7 +45,7 @@
             ],
             "js"        :
             [
-                "scripts/sites/_all.js"
+                "scripts/common/contentScriptLoader.js"
             ],
             "css"       :
             [

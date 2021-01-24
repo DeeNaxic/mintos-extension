@@ -23,7 +23,7 @@ import {
     enhanceTableDom,
     renderModelLoans,
 } from "../components/investments";
-import {localization} from "../localization";
+import {localization} from "../common/localization";
 
 const model = {
     loans : [],

@@ -7,7 +7,7 @@
 
 import {html, render} from "lit-html";
 import u from 'umbrellajs';
-import {localization} from "../../localization";
+import {localization} from "../../common/localization";
 import {toFloat} from "../../common/util";
 
 const classPercent = 'invext-percent';

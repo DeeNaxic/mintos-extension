@@ -7,13 +7,13 @@
 
 // comment out incomplete translations
 
-import {translations as cs} from '../localization/cs.js';
-import {translations as de} from '../localization/de.js';
-import {translations as en} from '../localization/en.js';
+import {translations as cs} from './/cs.js';
+import {translations as de} from './/de.js';
+import {translations as en} from './/en.js';
 // import {translations as es} from '../localization/es.js';
 // import {translations as lv} from '../localization/lv.js';
 // import {translations as nl} from '../localization/nl.js';
-import {translations as pl} from '../localization/pl.js';
+import {translations as pl} from './/pl.js';
 // import {translations as ru} from '../localization/ru.js';
 
 const translations = {

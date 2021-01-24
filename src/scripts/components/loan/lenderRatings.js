@@ -6,7 +6,7 @@
  */
 
 import {html, render} from "lit-html";
-import {localization} from "../../localization";
+import {localization} from "../../common/localization";
 import u from 'umbrellajs';
 
 export function renderRatings (model, node)
