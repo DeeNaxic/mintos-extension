@@ -38,7 +38,7 @@ function renderLoanModel (settings, model, row)
 function renderModelPaymentDays (model, row)
 {
     const cellNode = u(`td div[data-m-label="${localization('$NextPayment')}"]`,row);
-    const nextPaymentDays = model.nextPaymentDays
+    const nextPaymentDays = Number.isInteger(model.nextPaymentDays)
         ? `${model.nextPaymentDays} ${localization('Days')}`
         : '';
     const oldDaysNode = cellNode.children('span:first-of-type');
