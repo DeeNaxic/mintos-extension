@@ -38,7 +38,7 @@ export const translations = {
     '$Finished'            : 'Zakończony',
     '$FinishedPrematurely' : 'Status Zokończona przed czasem',
     '$Late'                : 'Opóźnienie',
-    '$NextPayment'         : 'Data następnej płatności',
+    '$NextPayment'         : 'Data  następnej  płatności',
     '$Occupation'          : 'Zawód',
     '$Paid'                : 'Zapłacono',
     '$PartiallyPaid'       : 'Częściowo zapłacone',

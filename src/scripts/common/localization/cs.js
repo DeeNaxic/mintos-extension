@@ -38,7 +38,7 @@ export const translations = {
     '$Finished'            : 'Ukončené',
     '$FinishedPrematurely' : 'Předčasně ukončeno',
     '$Late'                : 'Late',
-    '$NextPayment'         : 'Datum  další splátky',
+    '$NextPayment'         : 'Datum   další splátky',
     '$Occupation'          : 'Zaměstnání',
     '$Paid'                : 'Paid',
     '$PartiallyPaid'       : 'Částečně zaplaceno',
