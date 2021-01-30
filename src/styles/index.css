@@ -13,7 +13,7 @@
     --invext-mintos-red: rgb(var(--invext-mintos-red-coords));
     --invext-mintos-grey: #888;
 
-    --invext-mintos-red-background: rgb(var(--invext-mintos-red-coords), .3);
+    --invext-mintos-red-background: rgb(var(--invext-mintos-red-coords), .2);
 }
 
 div.invext-chart-container {
@@ -53,4 +53,9 @@ td.invext-details-warning {
 
 .invext-highlight-late {
     background-color: var(--invext-mintos-red-background);
+}
+
+.invext-value-positive
+{
+    color: var(--invext-mintos-green);
 }

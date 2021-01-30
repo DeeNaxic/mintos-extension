@@ -86,6 +86,11 @@ function updateLoansModel (table, model)
 
 function createLoanModel (row)
 {
+    function getPercentage (input)
+    {
+        return input ? parseFloat(/(-?\d+\.\d+)%/g.exec(input)[0]) : undefined;
+    }
+    
     return {
         nextPaymentDate : u(`td div[data-m-label="${localization('$NextPayment')}"] > span:first-of-type`, row)
             .text()
@@ -94,6 +99,7 @@ function createLoanModel (row)
             .text()
             .trim()
             .indexOf(localization('$Late')) > -1,
+        sellPremiumPct  : getPercentage(u('td.actions span.mw-u-popover:first-child span.ttip span', row).text()),
     };
 }
 
@@ -109,7 +115,6 @@ function enhanceModel (model)
         }
     }
     model.loans.forEach(enhanceLoanModel);
-    
 }
 
 
@@ -163,58 +168,6 @@ chrome.storage.sync.get
                 }
                 
                 return window.location.pathname + '?' + results.join('&') + '&' + key + '=' + target;
-            }
-            
-            /*
-             *  This adds a percentage counter after each note, that is for sale showing
-             *  the added premium as a + number or discount as some negative number. The
-             *  original number is still shown, but it becomes easier to see which notes
-             *  have been set on sale with a premium / discount, no change is also shown
-             */
-            if (settings.InvestmentsShowPremiumDiscount)
-            {
-                function $getPercentage (input) 
-                {
-                    return parseFloat(/(-?\d+\.\d+)%/g.exec(input)[0]);
-                }
-                
-                DomMonitor(dataTable, function (mutations)
-                {
-                    for (var cells = tbody.querySelectorAll('td.placeholder'), i = 0; i < cells.length; i++)
-                    {
-                        cells[i].parentElement.removeChild(cells[i]);
-                    }
-                    
-                    for (var rows = tbody.querySelectorAll('tr:not(.total-row)'), i = 0; i < rows.length; i++)
-                    {
-                        var cell    = rows[i].lastElementChild;
-                        var span    = cell.querySelectorAll('span')[1];
-                        
-                        if (span == undefined)
-                        {
-                            continue;
-                        }
-                        
-                        if (span.getAttribute('data-tooltip') == null)
-                        {
-                            var e = document.createElement('td');
-                                e.classList.add('placeholder')
-                                
-                            rows[i].appendChild(e);
-                            
-                            continue;
-                        }
-                        
-                        var percent = $getPercentage(span.getAttribute('data-tooltip'));
-                        
-                        if (span.hasAttribute('data-value') == false)
-                        {
-                            span.setAttribute('data-value', span.innerText);
-                        }
-                        
-                        span.innerHTML = span.getAttribute('data-value') + ' <span style="color:' + (percent < 0.0 ? 'green' : (percent > 0.0 ? 'red' : 'black')) + ';">' + (percent < 0.0 ? ' - ' : ' + ') + Math.abs(percent).toFixed(1) + '%</span>';
-                    }
-                });
             }
             
             /*

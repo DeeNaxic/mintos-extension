@@ -25,8 +25,18 @@ export function renderModelLoans (settings, model, table)
 
 function renderLoanModel (settings, model, row)
 {
-    renderModelPaymentDays(model, row);
-    renderModelLate(model, row);
+    if (settings.InvestmentsShowDaysToNextPayment)
+    {
+        renderModelPaymentDays(model, row);
+    }
+    if (settings.InvestmentsHighlightLateLoans)
+    {
+        renderModelLate(model, row);
+    }
+    if (settings.InvestmentsShowPremiumDiscount)
+    {
+        renderSellPremium(model, row);
+    }
 }
 
 /*
@@ -54,6 +64,32 @@ function renderModelPaymentDays (model, row)
                       class="invext-value">${nextPaymentDays}</span>`, renderTarget);
     
     oldDaysNode.addClass('invext-hidden');
+}
+
+/*
+ *  This adds a percentage counter after each note, that is for sale showing
+ *  the added premium as a + number or discount as some negative number. The
+ *  original number is still shown, but it becomes easier to see which notes
+ *  have been set on sale with a premium / discount, no change is also shown
+ */
+function renderSellPremium (model, row)
+{
+    const v = model.sellPremiumPct;
+    if (v === undefined)
+    {
+        return;
+    }
+    let target = u('span.invext-sell-premium', row);
+    if (target.length === 0)
+    {
+        const sibling = u('span.purchase-preview', row).first();
+        target = u('<span class="invext-sell-premium"/>').first();
+        sibling.insertAdjacentElement('beforeend', target);
+    }
+    
+    const className = v < 0 ? 'invext-warn-negative' : (v > 0 ? 'invext-value-positive' : '');
+    const sign = v >= 0 ? '+' : '-';
+    render(html`<span class="${className}">${sign} ${v}%</span>`, target);
 }
 
 /*
