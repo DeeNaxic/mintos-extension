@@ -59,3 +59,8 @@ td.invext-details-warning {
 {
     color: var(--invext-mintos-green);
 }
+
+/* go around mintos css for our injected link */
+.loan-id-col .invext-target a {
+    padding-left: 0;
+}

@@ -10,10 +10,8 @@ import './investments';
 import moment from "moment";
 import u from 'umbrellajs';
 import {
-    assert,
     chrome,
     debug,
-    DomMonitor,
     DomMonitorAggressive,
     mintosDateFormat,
     onNodesAvailable,
@@ -26,7 +24,8 @@ import {
 import {localization} from "../common/localization";
 
 const model = {
-    loans : [],
+    loans   : [],
+    pledges : {},
 };
 
 export async function handle ()
@@ -35,6 +34,7 @@ export async function handle ()
         '.table-wrapper .loan-table',
         '.table-wrapper .loan-table thead',
         '.table-wrapper .loan-table tbody',
+        '#sel-pledge',
     ]);
     
     const settings = await chrome.storage.sync.get(
@@ -49,16 +49,17 @@ export async function handle ()
     try
     {
         const {
-                  table,
+                  pledges,
+                  loans,
               } = await onNodesAvailable({
-            table : '.table-wrapper .loan-table',
+            pledges : '#sel-pledge',
+            loans   : '.table-wrapper .loan-table',
         })
-        
-        enhanceDom(settings, {table});
-        
-        updatePage(settings, {table});
-        
-        DomMonitorAggressive(table, () => updatePage(settings, {table}));
+    
+        createStaticModel({pledges}, model);
+        enhanceDom(settings, {loans});
+        updatePage(settings, {loans});
+        DomMonitorAggressive(loans, () => updatePage(settings, {loans}));
     } catch (x)
     {
         console.error(x);
@@ -67,15 +68,28 @@ export async function handle ()
 
 function enhanceDom (settings, nodes)
 {
-    enhanceTableDom(settings, nodes.table);
+    enhanceTableDom(settings, nodes.loans);
 }
 
 function updatePage (settings, nodes)
 {
-    updateLoansModel(nodes.table, model);
+    updateLoansModel(nodes.loans, model);
     enhanceModel(model);
     debug(model);
-    renderModelLoans(settings, model, nodes.table);
+    renderModelLoans(settings, model, nodes.loans);
+}
+
+/**
+ * Update the part of the model that doesn't change over page updates
+ * @param nodes a map of root nodes to read model from
+ * @param model the page model
+ */
+function createStaticModel (nodes, model)
+{
+    u('.choice-item', nodes.pledges)
+        .each(inputNode =>
+            model.pledges[u('label span', inputNode).text()]
+                = createLink(window.location.href, 'pledge_groups[]', u('input', inputNode).attr('value')));
 }
 
 function updateLoansModel (table, model)
@@ -92,13 +106,14 @@ function createLoanModel (row)
     }
     
     return {
-        nextPaymentDate : u(`td div[data-m-label="${localization('$NextPayment')}"] > span:first-of-type`, row)
-            .text()
-            .trim(),
         late            : u(`div[data-m-label="${localization('$Term')}"] > span > span:first-child`, row)
             .text()
             .trim()
             .indexOf(localization('$Late')) > -1,
+        loanType        : u('td.loan-id-col div.m-loan-type > span', row).text(),
+        nextPaymentDate : u(`td div[data-m-label="${localization('$NextPayment')}"] > span:first-of-type`, row)
+            .text()
+            .trim(),
         sellPremiumPct  : getPercentage(u('td.actions span.mw-u-popover:first-child span.ttip span', row).text()),
     };
 }
@@ -117,90 +132,17 @@ function enhanceModel (model)
     model.loans.forEach(enhanceLoanModel);
 }
 
+/*
+ *  This takes the current window location, all query string parameters that
+ *  match the given key, and appends the key with the value argument. This
+ *  means that any existing query parameters are kept intact, such that, the
+ *  final path returned, always have the same path with the new key appended
+ */
+function createLink (href, key, value)
+{
+    const url = new URL(href);
+    url.searchParams.delete(key);
+    url.searchParams.append(key, value);
+    return url;
+}
 
-chrome.storage.sync.get
-(
-    {
-        'InvestmentsShowDaysToNextPayment'  : true,
-        'InvestmentsHighlightLateLoans'     : true,
-        'InvestmentsShowPremiumDiscount'    : true,
-        'InvestmentsUseLoanTypeLinks'       : false
-    },
-    
-    function (settings)
-    {
-        function runtime (settings)
-        {
-            /*
-             *  This try catch is meant to handle the cases, where Mintos have not fully
-             *  loaded the website yet. As a result, some things might not have appeared
-             *  on the website. We try to get everything and if anything turns out to be
-             *  empty (null or undefined), we stop further execution and reload the code
-             *  in 0.1 seconds using a timeout. This is done until the page successfully
-             *  loads, and has everything assigned, at which point the runtime continues
-             */
-            try
-            {
-                var dataTable       = assert(document.querySelector('#investor-investments-table'));
-                var thead           = assert(dataTable.querySelector('thead'));
-                var tbody           = assert(dataTable.querySelector('tbody'));
-            }
-            catch
-            {
-                return setTimeout(runtime, 100, settings);
-            }
-            
-            /*
-             *  This takes the current query string, splits it up into components and it
-             *  then iterates through all the key, value pairs. If there is any existing
-             *  keys, which matches the one we are trying to insert, it is removed. This
-             *  means that any existing query parameters are kept intact, such that, the
-             *  final path returned, always have the same path with the new key appended
-             */
-            function createLink (key, target)
-            {
-                for (var queries = window.location.search.substr(1).split('&'), results = [], i = 0; i < queries.length; i++)
-                {
-                    if (queries[i].toLowerCase().startsWith(key.toLowerCase()) == false)
-                    {
-                        results.push(queries[i]);
-                    }
-                }
-                
-                return window.location.pathname + '?' + results.join('&') + '&' + key + '=' + target;
-            }
-            
-            /*
-             *  This registers a DomMonitor which listens for changes, in the data table
-             *  and on any change including initially, it runs this code. It iterates on
-             *  all rows in the investment table and inserts on the loan type cells, the
-             *  link, to the current page, with the same query parameters, but filtering
-             *  on the selected loan type only. This's done simply by reloading the page
-             */
-            if (settings.InvestmentsUseLoanTypeLinks)
-            {
-                DomMonitor(dataTable, function (mutations)
-                {
-                    for (var data = {}, lines = document.querySelectorAll('#sel-pledge-groups option'), i = 0; i < lines.length; i++)
-                    {
-                        data[lines[i].innerText] = lines[i].value;
-                    }
-                    
-                    for (var rows = tbody.querySelectorAll('tr:not(.total-row)'), i = 0; i < rows.length; i++)
-                    {
-                        var node              = rows[i].querySelector('.m-loan-id span');
-                            node.style.color  = '#3f85f4';
-                            node.style.cursor = 'pointer';
-                            
-                            node.onclick = function (e)
-                            {
-                                window.location.href = createLink('pledge_groups[]', data[e.target.innerText]);
-                            }
-                    }
-                });
-            }
-        }
-        
-        runtime(settings);
-    }
-);

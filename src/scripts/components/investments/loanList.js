@@ -20,22 +20,26 @@ function changeNextPaymentHeader (thead)
 export function renderModelLoans (settings, model, table)
 {
     u('tr:not(.total-row,.tooltip-row)', table)
-        .each((row, idx) => renderLoanModel(settings, model.loans[idx], row));
+        .each((row, idx) => renderLoanModel(settings, model, model.loans[idx], row));
 }
 
-function renderLoanModel (settings, model, row)
+function renderLoanModel (settings, model, rowModel, row)
 {
     if (settings.InvestmentsShowDaysToNextPayment)
     {
-        renderModelPaymentDays(model, row);
+        renderModelPaymentDays(rowModel, row);
     }
     if (settings.InvestmentsHighlightLateLoans)
     {
-        renderModelLate(model, row);
+        renderModelLate(rowModel, row);
     }
     if (settings.InvestmentsShowPremiumDiscount)
     {
-        renderSellPremium(model, row);
+        renderSellPremium(rowModel, row);
+    }
+    if (settings.InvestmentsUseLoanTypeLinks)
+    {
+        renderLoanTypeLink(model, rowModel, row);
     }
 }
 
@@ -102,6 +106,26 @@ function renderModelLate (model, row)
     {
         u(row).addClass('invext-highlight-late');
     }
+}
+
+/*
+ *  This makes the loan type a link that enables filtering loans by loan type.
+ *  Clicking it shows only loans that are the same type as the one that was clicked.
+ */
+function renderLoanTypeLink (model, loanModel, rowNode)
+{
+    const targetCell = u('.loan-id-col', rowNode).first();
+    let target = u('span.invext-target', targetCell).first();
+    
+    if (!target)
+    {
+        const targetSibling = u('.m-loan-type > span', targetCell);
+        target = u('<span class="invext-target"/>').first();
+        targetSibling.first().insertAdjacentElement('beforebegin', target);
+        targetSibling.addClass('invext-hidden');
+    }
+    
+    render(html`<a href="${model.pledges[loanModel.loanType]}">${loanModel.loanType}</a>`, target);
 }
 
 function columnHeader (title, tooltipText)
