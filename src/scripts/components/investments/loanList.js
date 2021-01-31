@@ -37,9 +37,12 @@ function renderLoanModel (settings, model, rowModel, row)
     {
         renderSellPremium(rowModel, row);
     }
-    if (settings.InvestmentsUseLoanTypeLinks)
+    if (settings.InvestmentsUseLoanTypeLinks
+        || settings.InvestmentsLoanTypeIcon
+        || settings.InvestmentsCountryCode
+    )
     {
-        renderLoanTypeLink(model, rowModel, row);
+        renderIdColumn(settings, model, rowModel, row);
     }
 }
 
@@ -112,20 +115,53 @@ function renderModelLate (model, row)
  *  This makes the loan type a link that enables filtering loans by loan type.
  *  Clicking it shows only loans that are the same type as the one that was clicked.
  */
-function renderLoanTypeLink (model, loanModel, rowNode)
+function renderIdColumn (settings, model, loanModel, rowNode)
 {
-    const targetCell = u('.loan-id-col', rowNode).first();
-    let target = u('span.invext-target', targetCell).first();
-    
-    if (!target)
+    function loanTypeIcon ()
     {
-        const targetSibling = u('.m-loan-type > span', targetCell);
-        target = u('<span class="invext-target"/>').first();
-        targetSibling.first().insertAdjacentElement('beforebegin', target);
-        targetSibling.addClass('invext-hidden');
+        const id = model.pledges[loanModel.loanType].id;
+        return html`<img src="https://www.mintos.com/webapp/assets/images/icons/loan_types/loan_type_${id}.svg"
+                         .alt=${loanModel.loanType}/>`;
     }
     
-    render(html`<a href="${model.pledges[loanModel.loanType]}">${loanModel.loanType}</a>`, target);
+    const targetCell = u('.loan-id-col', rowNode).first();
+    const target = u('.m-loan-type', targetCell);
+    
+    const oldLoanTypeNode = target.children('span');
+    if (!oldLoanTypeNode.hasClass('invext-hidden'))
+    {
+        oldLoanTypeNode.addClass('invext-hidden');
+    }
+    
+    const contents = [oldLoanTypeNode.first()];
+    
+    if (settings.InvestmentsLoanTypeIcon)
+    {
+        // we made room with replacing loan type with icon, so move the flag too.
+        contents.push(u('.id-wrapper img', targetCell).first());
+    }
+    
+    if (settings.InvestmentsCountryCode)
+    {
+        contents.push(html`
+            <div class="invext-country-code" title="${loanModel.country.name}">${loanModel.country.code}</div>`);
+    }
+    
+    const loanTypeContent = settings.InvestmentsLoanTypeIcon ? loanTypeIcon() : loanModel.loanType;
+    
+    if (settings.InvestmentsUseLoanTypeLinks)
+    {
+        contents.push(html`<a class="invext-loan-type"
+                              href="${model.pledges[loanModel.loanType].href}">${loanTypeContent}</a>`);
+    }
+    else
+    {
+        contents.push(html`<div class="invext-loan-type">${loanTypeContent}</div>`);
+    }
+    
+    contents.push(u('.contract-wrapper', rowNode).first())
+    
+    render(html`${contents}`, target.first());
 }
 
 function columnHeader (title, tooltipText)

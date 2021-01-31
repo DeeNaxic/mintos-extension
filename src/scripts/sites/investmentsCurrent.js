@@ -5,8 +5,6 @@
  *  @licence >> GNU GPLv3
  */
 
-import './investments';
-
 import moment from "moment";
 import u from 'umbrellajs';
 import {
@@ -39,8 +37,10 @@ export async function handle ()
     
     const settings = await chrome.storage.sync.get(
         {
-            InvestmentsShowDaysToNextPayment : true,
+            InvestmentsCountryCode           : true,
             InvestmentsHighlightLateLoans    : true,
+            InvestmentsLoanTypeIcon          : true,
+            InvestmentsShowDaysToNextPayment : true,
             InvestmentsShowPremiumDiscount   : true,
             InvestmentsUseLoanTypeLinks      : false
         }
@@ -88,8 +88,15 @@ function createStaticModel (nodes, model)
 {
     u('.choice-item', nodes.pledges)
         .each(inputNode =>
-            model.pledges[u('label span', inputNode).text()]
-                = createLink(window.location.href, 'pledge_groups[]', u('input', inputNode).attr('value')));
+            {
+                const id = Number.parseInt(u('input', inputNode).attr('value'));
+                model.pledges[u('label span', inputNode).text()] =
+                    {
+                        id,
+                        href : createLink(window.location.href, 'pledge_groups[]', id),
+                    }
+            }
+        );
 }
 
 function updateLoansModel (table, model)
@@ -100,21 +107,30 @@ function updateLoansModel (table, model)
 
 function createLoanModel (row)
 {
-    function getPercentage (input)
-    {
-        return input ? parseFloat(/(-?\d+\.\d+)%/g.exec(input)[0]) : undefined;
-    }
+    const imgNode = u('td.loan-id-col .id-wrapper img', row);
+    const countryCode = /\/([A-Z]{2})\./.exec(imgNode.attr('src'))[1];
+    const countryName = imgNode.attr('title');
+    const late = u(`div[data-m-label="${localization('$Term')}"] > span > span:first-child`, row)
+        .text()
+        .trim()
+        .indexOf(localization('$Late')) > -1;
+    const loanType = u('td.loan-id-col div.m-loan-type > span', row).text();
+    const nextPaymentDate = u(`td div[data-m-label="${localization('$NextPayment')}"] > span:first-of-type`, row)
+        .text()
+        .trim();
+    const percentText = u('td.actions span.mw-u-popover:first-child span.ttip span', row).text();
+    const sellPremiumPct = percentText ? parseFloat(/(-?\d+\.\d+)%/g.exec(percentText)[1]) : undefined;
     
     return {
-        late            : u(`div[data-m-label="${localization('$Term')}"] > span > span:first-child`, row)
-            .text()
-            .trim()
-            .indexOf(localization('$Late')) > -1,
-        loanType        : u('td.loan-id-col div.m-loan-type > span', row).text(),
-        nextPaymentDate : u(`td div[data-m-label="${localization('$NextPayment')}"] > span:first-of-type`, row)
-            .text()
-            .trim(),
-        sellPremiumPct  : getPercentage(u('td.actions span.mw-u-popover:first-child span.ttip span', row).text()),
+        country :
+            {
+                code : countryCode,
+                name : countryName,
+            },
+        late,
+        loanType,
+        nextPaymentDate,
+        sellPremiumPct,
     };
 }
 

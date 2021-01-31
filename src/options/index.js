@@ -16,8 +16,9 @@ chrome.storage.sync.get(
     'OverviewBreakdownRewards'          : true,
     
     // investments.js
+    'InvestmentsCountryCode'            : true,
+    'InvestmentsLoanTypeIcon'           : true,
     'InvestmentsUseLoanTypeLinks'       : false,
-    'InvestmentsShowCountryColumn'      : true,
     
     // investmentsCurrent.js
     'InvestmentsShowDaysToNextPayment'  : true,

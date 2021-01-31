@@ -55,12 +55,25 @@ td.invext-details-warning {
     background-color: var(--invext-mintos-red-background);
 }
 
-.invext-value-positive
-{
+.invext-value-positive {
     color: var(--invext-mintos-green);
 }
 
-/* go around mintos css for our injected link */
-.loan-id-col .invext-target a {
-    padding-left: 0;
+.invext-loan-type {
+    display: block;
+    padding: 7px 7px 4px 0;
+}
+
+.invext-loan-type img {
+    position: unset !important;
+    height: 1.8rem;
+    padding: 0!important;
+}
+
+a.invext-loan-type {
+    padding: 0 !important;
+}
+
+.invext-country-code {
+    padding: 7px 7px 4px 0;
 }
