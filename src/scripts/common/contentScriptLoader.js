@@ -38,6 +38,10 @@ function isLoanPage (pathname)
     {
         moduleFuture = import('../sites/overview');
     }
+    else if (pathname.includes(localization('$PathStatement' )))
+    {
+        moduleFuture = import('../sites/accountStatement');
+    }
     
     
     if (moduleFuture !== undefined)

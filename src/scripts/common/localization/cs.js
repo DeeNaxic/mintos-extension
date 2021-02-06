@@ -31,6 +31,7 @@ export const translations = {
     
     // patterns used to extract data from page
     
+    '$Balance'             : 'Balance',
     '$Borrower'            : 'Dlužník',
     '$BorrowerPattern'     : /(?:žena|muž) (\d+)/i,
     '$Date'                : 'Date',
@@ -43,6 +44,7 @@ export const translations = {
     '$Paid'                : 'Paid',
     '$PartiallyPaid'       : 'Částečně zaplaceno',
     '$PathOverview'        : 'prehled-uctu',
+    '$PathStatement'       : 'vypis-z-uctu',
     '$PaymentDate'         : 'Datum platby',
     '$Scheduled'           : 'Naplánované',
     '$Term'                : 'Doba splácení',

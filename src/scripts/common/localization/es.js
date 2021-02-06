@@ -11,6 +11,7 @@ export const translations = {
     
     // patterns used to extract data from page
     
+    '$Balance'             : 'Balance',
     '$Borrower'            : 'Prestatario',
     '$Date'                : 'Fecha',
     '$Default'             : '?',
@@ -21,6 +22,7 @@ export const translations = {
     '$Occupation'          : 'Occupation',
     '$Paid'                : 'Pagado',
     '$PartiallyPaid'       : 'Parcialmente pagado',
+    '$PathStatement'       : 'account-statement-es',
     '$PaymentDate'         : 'Fecha del pago',
     '$Scheduled'           : 'Scheduled',
     '$Term'                : 'Período de vencimiento',

@@ -31,6 +31,7 @@ export const translations = {
     
     // patterns used to extract data from page
     
+    '$Balance'             : 'Saldo',
     '$Borrower'            : 'Pożyczkobiorca',
     '$BorrowerPattern'     : /(?:mężczyzna|kobieta) (\d+)/i,
     '$Date'                : 'Data',
@@ -43,6 +44,7 @@ export const translations = {
     '$Paid'                : 'Zapłacono',
     '$PartiallyPaid'       : 'Częściowo zapłacone',
     '$PathOverview'        : 'przeglad',
+    '$PathStatement'       : 'wyciag-z-konta',
     '$PaymentDate'         : 'Data płatności',
     '$Scheduled'           : 'Zaplanowano',
     '$Term'                : 'Okres',

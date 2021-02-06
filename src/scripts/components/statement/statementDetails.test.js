@@ -1,4 +1,11 @@
-import {parseTransactionDetails} from "./accountHistoryDetails.js";
+/*
+ *  @project >> Investment.Extensions: Mintos
+ *  @authors >> Raphael Krupinski
+ *  @contact >> investment.extensions@gmail.com
+ *  @licence >> GNU GPLv3
+ */
+
+import {parseTransactionDetails} from "./statementDetails.js";
 import test from 'ava';
 
 function testParse (t, text, lang)

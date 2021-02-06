@@ -78,19 +78,6 @@
             [
                 "scripts/sites/autoInvest.js"
             ]
-        },
-        {
-            "matches"   :
-            [
-                "https://www.mintos.com/en/account-statement/*",
-                "https://www.mintos.com/de/kontoauszug/*",
-                "https://www.mintos.com/pl/wyciag-z-konta/*",
-                "https://www.mintos.com/cs/vypis-z-uctu/*"
-            ],
-            "js"        :
-            [
-                "scripts/sites/accountStatement.js"
-            ]
         }
     ]
 }

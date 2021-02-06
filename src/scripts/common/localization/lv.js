@@ -11,6 +11,7 @@ export const translations = {
 
     // patterns used to extract data from page
     
+    '$Balance'             : 'Atlikums',
     '$Borrower'            : 'Aizņēmējs',
     '$Date'                : 'Datums',
     '$Default'             : '?',
@@ -21,6 +22,7 @@ export const translations = {
     '$Occupation'          : 'Nodarbošanās',
     '$Paid'                : 'Samaksāts',
     '$PartiallyPaid'       : 'Daļēji apmaksāts',
+    '$PathStatement'       : 'konta-parskats',
     '$PaymentDate'         : 'Maksājuma datums',
     '$Scheduled'           : 'Plānots',
     '$Term'                : 'Termiņš',

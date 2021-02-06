@@ -6,7 +6,8 @@
  */
 
 /* Mintos colors */
-:root {
+:root
+{
     --invext-mintos-red-coords: 237, 67, 0;
 
     --invext-mintos-green: #78c8c7;
@@ -16,64 +17,108 @@
     --invext-mintos-red-background: rgb(var(--invext-mintos-red-coords), .2);
 }
 
-div.invext-chart-container {
+div.invext-chart-container
+{
     position: relative;
     height: 50%;
     width: 50%;
 }
 
-.invext-chart-container canvas {
+.invext-chart-container canvas
+{
     height: 100%;
     width: 100%;
 }
 
-#payment-histogram .bar-on-time {
+#payment-histogram .bar-on-time
+{
     background-color: var(--invext-mintos-green);
 }
 
-#payment-histogram .bar-late {
+#payment-histogram .bar-late
+{
     background-color: var(--invext-mintos-red);
 }
 
-.invext-hidden {
+.invext-hidden
+{
     display: none !important;
 }
 
-td.invext-details-warning {
+td.invext-details-warning
+{
     color: var(--invext-mintos-red) !important;
 }
 
-.invext-blog a:visited {
+.invext-blog a:visited
+{
     color: var(--invext-mintos-grey);
 }
 
-.invext-warning-negative {
+.invext-warning-negative
+{
     color: var(--invext-mintos-red);
 }
 
-.invext-highlight-late {
+.invext-highlight-late
+{
     background-color: var(--invext-mintos-red-background);
 }
 
-.invext-value-positive {
+.invext-value-positive
+{
     color: var(--invext-mintos-green);
 }
 
-.invext-loan-type {
+.invext-loan-type
+{
     display: block;
     padding: 7px 7px 4px 0;
 }
 
-.invext-loan-type img {
+.invext-loan-type img
+{
     position: unset !important;
     height: 1.8rem;
-    padding: 0!important;
-}
-
-a.invext-loan-type {
     padding: 0 !important;
 }
 
-.invext-country-code {
+a.invext-loan-type
+{
+    padding: 0 !important;
+}
+
+.invext-country-code
+{
     padding: 7px 7px 4px 0;
+}
+
+.invext-statement th
+{
+    white-space: nowrap;
+    font-size: 1.6rem !important;
+    text-align: left;
+}
+
+.invext-statement td
+{
+    white-space: nowrap;
+    text-align: right;
+}
+
+.invext-statement td:nth-child(5)
+{
+    text-align: left !important;
+    white-space: break-spaces;
+    width: 100%;
+}
+
+.invext-statement td:nth-child(2), .invext-statement th:nth-child(2)
+{
+    display: none !important;
+}
+
+.invext-statement td, .invext-statement th
+{
+    padding: .8rem .2rem;
 }

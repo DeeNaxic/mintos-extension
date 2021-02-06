@@ -1,8 +1,15 @@
+/*
+ *  @project >> Investment.Extensions: Mintos
+ *  @authors >> Raphael Krupinski
+ *  @contact >> investment.extensions@gmail.com
+ *  @licence >> GNU GPLv3
+ */
+
 import u from 'umbrellajs'
-import {localization} from "../common/localization";
+import {localization} from "../../common/localization";
 import {html, render} from "lit-html";
 import moment from "moment";
-import {mintosDateFormat} from "../common/util";
+import {mintosDateFormat} from "../../common/util";
 
 const KEY_ALL_TIME = 'all-time';
 

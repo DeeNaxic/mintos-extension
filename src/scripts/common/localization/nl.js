@@ -11,9 +11,11 @@ export const translations = {
     
     // patterns used to extract data from page
     
+    '$Balance'             : 'Saldo',
     '$Late'                : 'Laat',
     '$NextPayment'         : 'Next Payment Date',
     '$PartiallyPaid'       : 'Gedeeltelijk betaald',
+    '$PathStatement'       : 'account-overzicht',
     '$Term'                : 'Term',
     '$TransactionDetails'  : /.?/u,                  // TODO translate
 };

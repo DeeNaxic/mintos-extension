@@ -31,6 +31,7 @@ export const translations = {
     
     // patterns used to extract data from page
     
+    '$Balance'             : 'Balance',
     '$Borrower'            : 'Borrower',
     '$BorrowerPattern'     : /(?:female|male), (\d+) y/i,
     '$Date'                : 'Date',
@@ -43,6 +44,7 @@ export const translations = {
     '$Paid'                : 'Paid',
     '$PartiallyPaid'       : 'Partially paid',
     '$PathOverview'        : 'overview',
+    '$PathStatement'       : 'account-statement',
     '$PaymentDate'         : 'Payment Date',
     '$Scheduled'           : 'Scheduled',
     '$Term'                : 'Term',
