@@ -1,3 +1,10 @@
+/*
+ *  @project >> Investment.Extensions: Mintos
+ *  @authors >> Raphael Krupinski
+ *  @contact >> investment.extensions@gmail.com
+ *  @licence >> GNU GPLv3
+ */
+
 import {localization} from "../../common/localization";
 import u from 'umbrellajs';
 import {html, render} from "lit-html";
@@ -121,7 +128,10 @@ function renderIdColumn (settings, model, loanModel, rowNode)
     {
         const id = model.pledges[loanModel.loanType].id;
         return html`<img src="https://www.mintos.com/webapp/assets/images/icons/loan_types/loan_type_${id}.svg"
-                         .alt=${loanModel.loanType}/>`;
+     .alt=${loanModel.loanType}
+     .title=${loanModel.loanType}
+/>
+`;
     }
     
     const targetCell = u('.loan-id-col', rowNode).first();
@@ -162,24 +172,4 @@ function renderIdColumn (settings, model, loanModel, rowNode)
     contents.push(u('.contract-wrapper', rowNode).first())
     
     render(html`${contents}`, target.first());
-}
-
-function columnHeader (title, tooltipText)
-{
-    const tooltip = !tooltipText ? ''
-        : html`<br data-v-f9d344dc="">
-            <span data-v-f9d344dc="" class="mw-u-popover mw-u-popover-dark--container mw-u-popover-visible">
-        <span style="display: none;">
-            <span class="popper ttip bottom mw-u-popover-dark" style="position: absolute;">
-                <span>${tooltipText}</span>
-            </span>
-        </span>
-        <i class="fas fa-info-circle tooltip-color-gray"></i>
-    </span>`;
-    
-    return html`
-        <th class="m-u-ta-center" data-v-f9d344dc="">
-            <span data-v-f9d344dc="">${title}</span>
-            ${tooltip}
-        </th>`
 }
