@@ -63,6 +63,30 @@ export function insertElementBefore (element, node)
     node.parentNode.insertBefore(element, node);
 }
 
+/**
+ * Just like Element.insertAdjacentElement() but adds an array of elements
+ */
+export function insertAdjacentElements (target, position, elems)
+{
+    // this make the function avoid adding elements backwards
+    if (position.indexOf('after') === 0)
+    {
+        let elem = target;
+        elems.each(e =>
+        {
+            elem.insertAdjacentElement(position, e);
+            elem = e;
+        });
+    }
+    else
+    {
+        elems.each(e =>
+        {
+            elem.insertAdjacentElement(position, e);
+        });
+    }
+}
+
 export function getElementByAttribute (elements, attribute, value)
 {
     for (var i = 0; i < elements.length; i++)

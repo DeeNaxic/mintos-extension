@@ -28,7 +28,8 @@ const model = {
 export async function handle ()
 {
     reportNodesAvailable([
-        '.mw-u-general-table']);
+        '.mw-u-general-table',
+    ]);
     
     const settings = await chrome.storage.sync.get({
         'AccountOverviewUseFourDecimals'   : false,
@@ -47,37 +48,6 @@ export async function handle ()
     DomMonitorAggressive(nodes.statement, () => updatePage(settings, model, nodes));
 }
 
-        function runtime (settings)
-        {
-            /*
-             *  This replaces the default two digit representation with four digits. The
-             *  problem with the default implementation is, that it might show a gain of
-             *  '0.00' which can be confusing. Mintos solved this by including the value
-             *  in the hover-text. This is also where the actual text value is gotten of
-             */
-            if (settings.AccountOverviewUseFourDecimals)
-            {
-                enhancers.push(() =>
-                    dataSummary.querySelectorAll('.mod-pointer').forEach(function (row)
-                    {
-                        row.innerText           = row.getAttribute('data-tooltip').replace(/([^/.])\.(\d{4}).*/g, '$1.$2');
-                    }
-                    ));
-        
-                dataTableRowEnhancers.push(
-                    function (row)
-                    {
-                        var turnover            = row.querySelector('.turnover span');
-                            turnover.innerText  = turnover .title.replace(/([^/.])\.(\d{4}).*/g, '$1.$2');
-                        
-                        // Remainder column is not present when searching by transaction type
-                        var remainder           = row.querySelector('.remainder span');
-                        if (remainder)
-                            remainder.innerText = remainder.title.replace(/([^/.])\.(\d{4}).*/g, '$1.$2');
-                    });
-            }
-        }
-
 function updatePage (settings, model, nodes)
 {
     updateModel(nodes, model);
@@ -89,16 +59,29 @@ function updateModel (nodes, model)
 {
     const hasBalance = model.columns.hasBalance = u('thead tr', nodes.statement)
         .nodes
-        .map(node => node.innerText.indexOf(localization('$Balance')) > -1).includes(true);
+        .map(node => node.innerText.indexOf(localization('$Balance')) > -1)
+        .includes(true);
     
     const turnoverColIdx = hasBalance ? 2 : 1
-    const balanceColIdx = hasBalance ? 1 : undefined;
+    
+    function readValue (node)
+    {
+        const tooltip = u('span.ttip span', node);
+        if (tooltip.first())
+        {
+            return Number.parseFloat(tooltip.text());
+        }
+        else
+        {
+            return Number.parseFloat(u('span > span', node).data('invext-value'));
+        }
+    }
     
     function parseRow (rowNode)
     {
-        const turnover = Number.parseFloat(u(`td:nth-last-child(${turnoverColIdx}) span.ttip span`, rowNode).text());
+        const turnover = readValue(u(`td:nth-last-child(${turnoverColIdx})`, rowNode).first());
         const balance = hasBalance
-            ? Number.parseFloat(u(`td:nth-last-child(${balanceColIdx}) span.ttip span`, rowNode).text())
+            ? readValue(u(`td:last-child`, rowNode).first())
             : undefined;
         return {
             turnover,
@@ -112,7 +95,7 @@ function updateModel (nodes, model)
 }
 
 function render(settings, model, nodes){
-    if (settings.AccountOverviewSplitDetailsTable)
+    if (settings.AccountOverviewSplitDetailsTable || settings.AccountOverviewUseFourDecimals)
     {
         renderStatementTable(settings, model, nodes);
     }

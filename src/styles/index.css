@@ -93,7 +93,7 @@ a.invext-loan-type
     padding: 7px 7px 4px 0;
 }
 
-.invext-statement th
+.invext-statement-split th
 {
     white-space: nowrap;
     font-size: 1.6rem !important;
@@ -104,16 +104,17 @@ a.invext-loan-type
 {
     white-space: nowrap;
     text-align: right;
+    font-size: 1.4rem !important;
 }
 
-.invext-statement td:nth-child(5)
+.invext-statement-split td:nth-child(5)
 {
     text-align: left !important;
     white-space: break-spaces;
     width: 100%;
 }
 
-.invext-statement td:nth-child(2), .invext-statement th:nth-child(2)
+.invext-statement-split td:nth-child(2), .invext-statement-split th:nth-child(2)
 {
     display: none !important;
 }
