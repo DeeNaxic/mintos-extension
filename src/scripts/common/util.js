@@ -69,7 +69,7 @@ export function insertElementBefore (element, node)
 export function insertAdjacentElements (target, position, elems)
 {
     // this make the function avoid adding elements backwards
-    if (position.indexOf('after') === 0)
+    if (position.startsWith('after'))
     {
         let elem = target;
         elems.each(e =>
@@ -82,7 +82,7 @@ export function insertAdjacentElements (target, position, elems)
     {
         elems.each(e =>
         {
-            elem.insertAdjacentElement(position, e);
+            target.insertAdjacentElement(position, e);
         });
     }
 }

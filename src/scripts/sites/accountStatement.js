@@ -59,7 +59,7 @@ function updateModel (nodes, model)
 {
     const hasBalance = model.columns.hasBalance = u('thead tr', nodes.statement)
         .nodes
-        .map(node => node.innerText.indexOf(localization('$Balance')) > -1)
+        .map(node => node.innerText.includes(localization('$Balance')))
         .includes(true);
     
     const turnoverColIdx = hasBalance ? 2 : 1
