@@ -16,7 +16,7 @@
         "country-list"                   : "^2.2.0",
         "node-fetch"                     : "^2.6.1",
         "rollup"                         : "^1.32.1",
-        "rollup-plugin-chrome-extension" : "^3.5.2",
+        "rollup-plugin-chrome-extension" : "^3.4.0",
         "rollup-plugin-copy"             : "^3.3.0",
         "rollup-plugin-delete"           : "^1.2.0",
         "rollup-plugin-progress"         : "^1.1.2",
@@ -34,6 +34,6 @@
     },
     "type"            : "module",
     "engines"         : {
-        "node" : ">=13 <15"
+        "node" : "=14"
     }
 }
