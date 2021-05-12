@@ -28,7 +28,7 @@
         "update": "node tools/update_ratings.js"
     },
     "dependencies": {
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "lit-html": "^1.2.1",
         "moment": "^2.24.0"
     },
